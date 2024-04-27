@@ -64,14 +64,84 @@ public function loginAdmin(Request $request)
 }
 
 
+// FOR STUDENT
+
+public function showStudentLoginForm (){
+    return view('auth.student.login');
+}
+
+public function showStudentDashboard (){
+    return view('dashboard.student.dashboard');
+}
+
+public function loginStudent(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (Auth::guard('student')->attempt($credentials)) {
+        $request->session()->regenerate();
+
+        return redirect()->route('student.dashboard');
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials']);
+}
+
+// FOR PROFESSOR
+
+public function showProfessorLoginForm (){
+    return view('auth.professor.login');
+}
+
+public function showProfessorDashboard (){
+    return view('dashboard.professor.dashboard');
+}
+
+public function loginProfessor(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (Auth::guard('professor')->attempt($credentials)) {
+        $request->session()->regenerate();
+
+        return redirect()->route('professor.dashboard');
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials']);
+}
 
 
+//FOR COORDINATOR
 
+public function showCoordinatorLoginForm (){
+    return view('auth.coordinator.login');
+}
 
+public function showCoordinatorDashboard (){
+    return view('dashboard.coordinator.dashboard');
+}
 
+public function loginCoordinator(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
+    if (Auth::guard('coordinator')->attempt($credentials)) {
+        $request->session()->regenerate();
 
+        return redirect()->route('coordinator.dashboard');
+    }
 
+    return back()->withErrors(['email' => 'Invalid credentials']);
+}
 
 
 
@@ -81,7 +151,7 @@ public function loginAdmin(Request $request)
   public function logout(Request $request)
   {
 
-     $guards = ['web', 'admin'];
+     $guards = ['web', 'admin','student','professor'];
 
      foreach ($guards as $guard) {
          if (Auth::guard($guard)->check()) {

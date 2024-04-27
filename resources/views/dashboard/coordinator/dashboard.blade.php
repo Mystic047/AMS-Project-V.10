@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>coordinator Dashboard</h1>
+    <h1>Coordinator Dashboard</h1>
+
+    @if(Auth::guard('coordinator')->check())
+    <p>Welcome as coordinator name  : , {{ Auth::guard('coordinator')->user()->name }}</p>
+    <p>Login by Email , {{ Auth::guard('coordinator')->user()->email }} </p>
+@else
+    <p>Welcome, Guest</p>
+@endif
+
+<form method="POST" action="{{ route('login.logout') }}">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
+
 </body>
 </html>

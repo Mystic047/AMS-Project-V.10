@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\customAuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\customAuthController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::controller(customAuthController::class)->group(function () {
     //User
@@ -20,11 +20,25 @@ Route::controller(customAuthController::class)->group(function () {
     Route::get('/logininfo', 'showLoginInfo')->name('login.showinfo');
     Route::post('/logintesting', 'login')->name('login.login');
 
-
     //Admin
     Route::get('/admin/dashboard', 'showAdminDashboard')->name('admin.dashboard');
     Route::get('/admin/login/form', 'showAdminLoginForm')->name('admin.show');
     Route::post('/admin/login', 'loginAdmin')->name('admin.login');
+
+    //Student
+    Route::get('/student/dashboard', 'showStudentDashboard')->name('student.dashboard');
+    Route::get('/student/login/form', 'showStudentLoginForm')->name('student.show');
+    Route::post('/student/login', 'loginStudent')->name('student.login');
+
+    //Professor
+    Route::get('/professor/dashboard', 'showProfessorDashboard')->name('professor.dashboard');
+    Route::get('/professor/login/form', 'showProfessorLoginForm')->name('professor.show');
+    Route::post('/professor/login', 'loginProfessor')->name('professor.login');
+
+    //Coordinator
+    Route::get('/coordinator/dashboard', 'showCoordinatorDashboard')->name('coordinator.dashboard');
+    Route::get('/coordinator/login/form', 'showCoordinatorLoginForm')->name('coordinator.show');
+    Route::post('/coordinator/login', 'loginCoordinator')->name('coordinator.login');
 
     //logout All user
     Route::post('/logout', 'logout')->name('login.logout');
@@ -35,8 +49,6 @@ Route::controller(customAuthController::class)->group(function () {
 // Route::get('/admin/dashboard', [customAuthController::class,'showAdminDashboard'])->name('admin.dashboard');
 // Route::get('/admin/login', [customAuthController::class,'showAdminLoginForm'])->name('admin.login');
 // Route::get('/admin/login', [customAuthController::class,'loginAdmin']);
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,7 +74,6 @@ Route::get('/dashboard', function () {
 Route::get('/ActivityCoordinatorsCreate', function () {
     return view('/admin/createView/activitycoordinatorsCreate');
 });
-
 
 Route::get('/createStuUser', function () {
     return view('/admin/user/createStu');
@@ -97,7 +108,6 @@ Route::get('/AdminCreate', function () {
     return view('/admin/createView/admincreate');
 });
 
-
 ///////////////////Edit
 Route::get('/AdminEdit', function () {
     return view('/admin/editView/adminEdit');
@@ -120,7 +130,6 @@ Route::get('/FacultyEdit', function () {
 Route::get('/Adminlogin', function () {
     return view('/adminlogin');
 });
-
 
 ///เทสเล่น
 Route::get('/Profile', function () {

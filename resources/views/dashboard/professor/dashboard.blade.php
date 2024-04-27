@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>professor Dashboard</h1>
+    <h1>Professor Dashboard</h1>
+
+    @if(Auth::guard('professor')->check())
+    <p>Welcome as professor name  : , {{ Auth::guard('professor')->user()->name }}</p>
+    <p>Login by Email , {{ Auth::guard('professor')->user()->email }} </p>
+@else
+    <p>Welcome, Guest</p>
+@endif
+
+<form method="POST" action="{{ route('login.logout') }}">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
+
 </body>
 </html>

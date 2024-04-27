@@ -39,11 +39,11 @@
                                                             ใส้ logo
                                                         </a>
                                                     </div>
-                                                    <h4 class="text-center">Welcome back you've been missed!</h4>
+                                                    <h4 class="text-center">Coordinator Login Form!</h4>
                                                 </div>
                                             </div>
                                         </div>
-                                        <form action="{{ route('admin.login') }}" method="POST">
+                                        <form action="{{ route('coordinator.login') }}" method="POST">
                                             <!-- Specify method="POST" -->
 
                                             @csrf <!-- Add CSRF token for security -->
@@ -83,7 +83,7 @@
                                                 </div>
                                             </div>
                                             <br>
-                                            
+
                                             @if (session('success'))
                                                 <div class="alert alert-success">
                                                     <li>{{ session('success') }}</li>
