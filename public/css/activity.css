@@ -1,0 +1,84 @@
+*{
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+.statistic-counter {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+
+  .statistic-counter .number {
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .statistic-counter .label {
+    font-size: 18px;
+  }
+
+  .info-section, .stat-section {
+    margin-bottom: 15px;
+  }
+
+  .info-item, .stat-item {
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+
+  .info-value, .stat-value {
+    font-weight: bold;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  .info-item, .stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+  }
+
+  .info-value, .stat-value {
+    text-align: right;
+  }
+  .card {
+    border: none; /* ลบเส้นขอบ */
+     border-radius: 50px;
+    /* เพิ่มเงาเล็กน้อย */
+}
+    .widget-heading {
+        font-size: 1.2rem; /* Larger font size for the heading */
+        color: #333; /* Adjust text color as needed */
+        margin-bottom: 1rem; /* Space below the heading */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center the heading and icon */
+    }
+
+    .fa-users {
+        margin-right: 0.5rem; /* Space between the icon and text */
+    }
+
+    .counter-content {
+        background: #FFF; /* Background color for the counters */
+        border-radius: 1px; /* Rounded corners for the counters */
+        display: inline-block;
+    }
+
+    .s-counter {
+        font-size: 2.5rem; /* Larger font size for the counter number */
+        /* Color of the counter number */
+    }
+
+    .s-counter-text {
+        color: #333333; /* Text color for the counter label */
+        font-weight: bold;
+    }
+
+    body {
+        background-color: #f5f5f5; /* Set background color */
+    }
+
+ 

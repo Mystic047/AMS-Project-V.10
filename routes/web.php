@@ -41,3 +41,100 @@ Route::controller(customAuthController::class)->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::get('/fileupload', function () {
+    return view('fileupload');
+});
+Route::get('/activity', function () {
+    return view('activity');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/filedowload', function () {
+    return view('filedowload');
+});
+Route::get('/dashboard', function () {
+    return view('/admin/dashboard');
+});
+Route::get('/ActivityCoordinatorsCreate', function () {
+    return view('/admin/createView/activitycoordinatorsCreate');
+});
+
+
+Route::get('/createStuUser', function () {
+    return view('/admin/user/createStu');
+});
+
+Route::get('/ProfessorCreate', function () {
+    return view('/admin/createView/professorCreate');
+});
+
+Route::get('/ActivitycoordinatorsManagement', function () {
+    return view('/admin/managementView/activitycoordinatorsManage');
+});
+Route::get('/FacultyManagement', function () {
+    return view('/admin/managementView/faculty-areaManage');
+});
+Route::get('/FacultyCreate', function () {
+    return view('/admin/createView/facultyCreate');
+});
+Route::get('/AreaCreate', function () {
+    return view('/admin/createView/areaCreate');
+});
+Route::get('/StudentManagement', function () {
+    return view('/admin/managementView/studentManage');
+});
+Route::get('/AdminManagement', function () {
+    return view('/admin/managementView/adminManage');
+});
+Route::get('/ProfessorManagement', function () {
+    return view('/admin/managementView/professorManage');
+});
+Route::get('/AdminCreate', function () {
+    return view('/admin/createView/admincreate');
+});
+
+
+///////////////////Edit
+Route::get('/AdminEdit', function () {
+    return view('/admin/editView/adminEdit');
+});
+Route::get('/StudentEdit', function () {
+    return view('/admin/editView/studentEdit');
+});
+Route::get('/ProfessorEdit', function () {
+    return view('/admin/editView/professorEdit');
+});
+Route::get('/ActivityCoordinatorsEdit', function () {
+    return view('/admin/editView/activitycoordinatorsEdit');
+});
+Route::get('/AreaEdit', function () {
+    return view('/admin/editView/areaEdit');
+});
+Route::get('/FacultyEdit', function () {
+    return view('/admin/editView/facultyEdit');
+});
+Route::get('/Adminlogin', function () {
+    return view('/adminlogin');
+});
+
+
+///เทสเล่น
+Route::get('/Profile', function () {
+    return view('/profiles');
+});
+Route::get('/ActivityCreate', function () {
+    return view('/activitycreate');
+});
+Route::get('/ActivityView', function () {
+    return view('/activityview');
+});
+Route::get('/NewManage', function () {
+    return view('/admin/managementView/newManage');
+});
+Route::get('/New', function () {
+    return view('new');
+});
