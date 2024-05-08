@@ -1,6 +1,8 @@
 <?php
-
 use App\Http\Controllers\Auth\customAuthController;
+use App\Http\Controllers\coordinatorController;
+use App\Http\Controllers\professorController;
+use App\Http\Controllers\studentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(customAuthController::class)->group(function () {
     //User
-    Route::get('/testlogin', 'showLoginForm')->name('login.show');
-    Route::get('/logininfo', 'showLoginInfo')->name('login.showinfo');
-    Route::post('/logintesting', 'login')->name('login.login');
+    // Route::get('/testlogin', 'showLoginForm')->name('login.show');
+    // Route::get('/logininfo', 'showLoginInfo')->name('login.showinfo');
+    // Route::post('/logintesting', 'login')->name('login.login');
 
     //Admin
     Route::get('/admin/dashboard', 'showAdminDashboard')->name('admin.dashboard');
@@ -40,9 +42,55 @@ Route::controller(customAuthController::class)->group(function () {
     Route::get('/coordinator/login/form', 'showCoordinatorLoginForm')->name('coordinator.show');
     Route::post('/coordinator/login', 'loginCoordinator')->name('coordinator.login');
 
+    //Login 3 user
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login.show');
+
+    //login admin
+    Route::get('/admin/login', function () {
+        return view('/adminlogin');
+    });
+    
+    Route::post('/login/generic', 'loginGeneric')->name('login.generic');
     //logout All user
     Route::post('/logout', 'logout')->name('login.logout');
 });
+
+//Student Management
+Route::controller(studentController::class)->group(function () {
+    //show manage Student page
+    Route::get('/manageStudent', 'showManageView')->name('student.manage');
+
+    //Create Student
+    Route::get('/createFormStudent', 'showCreateView')->name('student.showCreate');
+    Route::post('/createStudent', 'create')->name('student.create');
+
+});
+
+//Professor Management
+Route::controller(professorController::class)->group(function () {
+    //show manage Professor page
+    Route::get('/manageProfessor', 'showManageView')->name('professor.manage');
+
+    //Create Professor
+    Route::get('/createFormProfessor', 'showCreateView')->name('professor.showCreate');
+    Route::post('/createProfessor', 'create')->name('professor.create');
+});
+
+//Coordinator Management
+Route::controller(coordinatorController::class)->group(function () {
+    //show manage Professor page
+    Route::get('/manageCoordinator', 'showManageView')->name('coordinator.manage');
+
+    //Create Professor
+    Route::get('/createFormCoordinator', 'showCreateView')->name('coordinator.showCreate');
+    Route::post('/createCoordinator', 'create')->name('coordinator.create');
+});
+
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
 // Route::get('/testlogin', [customAuthController::class, 'showLoginForm'])->name('login.show');
 
@@ -52,7 +100,8 @@ Route::controller(customAuthController::class)->group(function () {
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome.home');
+
 Route::get('/profile', function () {
     return view('profile');
 });
@@ -62,9 +111,7 @@ Route::get('/fileupload', function () {
 Route::get('/activity', function () {
     return view('activity');
 });
-Route::get('/login', function () {
-    return view('login');
-});
+
 Route::get('/filedowload', function () {
     return view('filedowload');
 });
@@ -127,9 +174,7 @@ Route::get('/AreaEdit', function () {
 Route::get('/FacultyEdit', function () {
     return view('/admin/editView/facultyEdit');
 });
-Route::get('/Adminlogin', function () {
-    return view('/adminlogin');
-});
+
 
 ///เทสเล่น
 Route::get('/Profile', function () {

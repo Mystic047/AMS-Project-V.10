@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
 class customAuthController extends Controller
 {
 //FOR USER
@@ -44,7 +44,7 @@ public function showAdminLoginForm (){
 }
 
 public function showAdminDashboard (){
-    return view('dashboard.admin.dashboard');
+    return view('admin.dashboard');
 }
 
 public function loginAdmin(Request $request)
@@ -81,10 +81,12 @@ public function loginStudent(Request $request)
         'password' => 'required',
     ]);
 
+    Log::debug($credentials);
+
     if (Auth::guard('student')->attempt($credentials)) {
         $request->session()->regenerate();
 
-        return redirect()->route('student.dashboard');
+        return redirect()->route('welcome.home');
     }
 
     return back()->withErrors(['email' => 'Invalid credentials']);
@@ -144,6 +146,34 @@ public function loginCoordinator(Request $request)
 }
 
 
+
+// login 3 user 
+public function loginGeneric(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+
+    $guard = $request->role ;
+
+    if (Auth::guard($guard)->attempt($credentials)) {
+        $request->session()->regenerate();
+
+        // Redirect based on role
+        switch ($guard) {
+            case 'student':
+                return redirect()->route('welcome.home');
+            case 'professor':
+                return redirect()->route('welcome.home');
+            case 'coordinator':
+                return redirect()->route('welcome.home');
+        }
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials']);
+}
 
 
 
