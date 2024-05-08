@@ -57,7 +57,6 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="https://img2.pic.in.th/pic/sci-logo-1-removebg-preview.png" alt="Navbar Logo">
-
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,11 +64,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <!-- เพิ่มปุ่ม Login -->
+                        <!-- Login Buttons -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{{ ('login') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
-                            <a href="{{ ('Adminlogin') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
-                          </div>
+                            <a href="{{ route('login.show') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
+                            <a href="{{ url('Adminlogin') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -81,15 +80,16 @@
                         class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center w-100">
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{'/'}}"><i
-                                        class="fas fa-home"></i>
-                                    หน้าแรก</a>
+                                <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i
+                                        class="fas fa-home"></i> หน้าแรก</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'New'}}"><i class="fas fa-newspaper"></i> ข่าวสาร</a>
+                                <a class="nav-link" href="{{ url('New') }}"><i class="fas fa-newspaper"></i>
+                                    ข่าวสาร</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'filedowload'}}"><i class="fas fa-file-download"></i>
+                                <a class="nav-link" href="{{ url('filedownload') }}"><i
+                                        class="fas fa-file-download"></i>
                                     เอกสารดาวน์โหลด</a>
                             </li>
                             <li class="nav-item">
@@ -104,7 +104,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
-                                    <li><a class="dropdown-item" href="{{'ActivityView'}}"><i class="fas fa-pen-square"></i>
+                                    <li><a class="dropdown-item" href="{{ url('ActivityView') }}"><i
+                                                class="fas fa-pen-square"></i>
                                             สมัครกิจกรรม</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -115,32 +116,51 @@
                             </li>
                         </ul>
 
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i> โปรไฟล์
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{'Profile'}}"><i class="fas fa-cog"></i>
-                                            แก้ไขข้อมูล</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-pen-square"></i>
-                                            สมัครกิจกรรม</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-door-closed"></i>
-                                            ล๊อคเอ้า</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        @php
+                            $user = getAuthenticatedUser();
+                        @endphp
+
+                        @if ($user)
+                            <ul class="navbar-nav mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user"></i> {{ $user->firstname }}'s Profile
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
+                                                    class="fas fa-cog"></i>
+                                                แก้ไขข้อมูล</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-pen-square"></i>
+                                                สมัครกิจกรรม</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <!-- Logout Form -->
+                                            <form action="{{ route('login.logout') }}" method="POST"
+                                                style="display: none;" id="logout-form">
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="#"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-door-closed"></i> ล๊อคเอ้า
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        @else
+                            <p>Welcome, Guest</p>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
         </nav>
-
     </nav>
+
     <!-- ส่วนบนของ Navbar -->
 
     <!-- ส่วนล่างของ Navbar -->
