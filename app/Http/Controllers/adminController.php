@@ -3,33 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Log;
-use App\Models\Professor;
-
-class professorController extends Controller
+class adminController extends Controller
 {
     public function showManageView()
     {
-        $professors = Professor::all();
-        return view('/admin/managementView/professorManage' , compact('professors'));
+        $admins = Admin::all();
+        return view('/admin/managementView/adminManage' , compact('admins'));
     }
 
     public function showCreateView()
     {
-        return view('/admin/createView/professorCreate');
+        return view('/admin/createView/adminCreate');
     }
 
-    
     public function showEditView($id)
     {
-        $professors = Professor::find($id);
-        return view('/admin/editView/professorEdit', compact('professors')); 
+        $admins = Admin::find($id);
+
+        return view('/admin/editView/adminEdit', compact('admins'));
     }
+
 
     public function create(Request $request)
     {
         $request->validate([
-            // 'professors_id' => 'required|unique:professors,professors_id',
+            // 'admin_id' => 
             'email' => 'nullable|string',
             'password' => 'required|min:8',
             'firstname' => 'nullable|string',
@@ -42,12 +42,12 @@ class professorController extends Controller
 
         Log::debug($request->all());
 
-        $professor = new Professor;
-        $professor->fill($request->all());
+        $admin = new Admin;
+        $admin->fill($request->all());
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) { 
-            $professor->professors_id = $emailPrefix;
+            $admin->admin_id = $emailPrefix;
         } else {
             
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
@@ -56,16 +56,17 @@ class professorController extends Controller
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $professor->profile_picture = str_replace('public/', '', $path); 
+            $path = $file->storeAs('public/profile_pictures/admin_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
+            $admin->profile_picture = str_replace('public/', '', $path);  // Save the path in the database
         }
-        $professor->save();
+        $admin->save();
 
-        return redirect()->route('professor.manage')->with('success', 'Professor added successfully!');
+        return redirect()->route('admin.manage')->with('success', 'Admin added successfully!');
     }
 
+    
     public function destroy($id){
-        $professor = Professor::find($id)->delete();
-        return back()->with('deleted', 'Professor deleted successfully!');
+        $admin = Admin::find($id)->delete();
+        return back()->with('deleted', 'Admin deleted success mfully!');
     }
 }

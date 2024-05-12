@@ -22,7 +22,7 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" action="{{route('')}}">
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Area</label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="">
