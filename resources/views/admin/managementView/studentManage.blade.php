@@ -106,99 +106,44 @@
 
                 <!-- User table -->
                 <table class="table table-bordered">
-                    <thead class="table table-sm">
-                        <tr>
-                            <th scope="col" class="col-3">รหัส</th>
-                            <th scope="col" class="col-4">ชื่อ</th>
-                            <th scope="col" class="col-3">สาขา</th>
-                            <th scope="col" class="col-2">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Repeat this block for each user -->
-                        <tr>
-                            <td class="col-3">Admin</td>
-                            <td class="col-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                    <div>John Doe ดึงรูปจากพาทที่เก็บ + ชื่อ</div>
-                                </div>
-                            </td>
-                            <td>22/03/2022</td>
-                            <td  class="col-3">
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
+                  <thead class="table-sm">
+                      <tr>
+                          <th scope="col" class="col-3">รหัส</th>
+                          <th scope="col" class="col-4">ชื่อ</th>
+                          <th scope="col" class="col-3">สาขา</th>
+                          <th scope="col" class="col-2">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach ($students as $student)
+                      <tr>
+                          <td class="col-3">{{ $student->students_id }}</td>
+                          <td class="col-4">
+                              <div class="d-flex align-items-center">
+                                   <img src="{{ asset('storage/'.$student->profile_picture) }}" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                                  <div>{{ $student->firstname }} {{ $student->lastname }}</div> 
+                              </div>
+                          </td>
+                          <td class="col-3">{{ $student->faculty_id }}</td> <!-- Assuming faculty relation exists -->
+                          <td class="col-2">
+                            {{-- <button class="btn btn-warning btn-sm" onclick="window.location.href = '{{ route('student.edit', $student->id) }}'"> --}}
+                              <button class="btn btn-warning btn-sm" onclick="window.location.href = ''">
+                                  <i class="fas fa-pencil-alt"></i> Edit
+                              </button>
+                              {{-- <form action="{{ route('student.destroy', $student->id) }}" method="post" style="display: inline;"> --}}
+                              <form action="" method="post" style="display: inline;">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button class="btn btn-danger btn-sm" type="submit">
+                                      <i class="fas fa-trash"></i> Delete
                                   </button>
-                                  <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                  </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-3">Admin</td>
-                            <td class="col-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                    <div>John Doe ดึงรูปจากพาทที่เก็บ + ชื่อ</div>
-                                </div>
-                            </td>
-                            <td>22/03/2022</td>
-                            <td  class="col-3">
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                  </button>
-                                  <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                  </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-3">Admin</td>
-                            <td class="col-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                    <div>John Doe ดึงรูปจากพาทที่เก็บ + ชื่อ</div>
-                                </div>
-                            </td>
-                            <td>22/03/2022</td>
-                            <td  class="col-3">
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                  </button>
-                                  <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                  </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-3">Admin</td>
-                            <td class="col-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                    <div>John Doe ดึงรูปจากพาทที่เก็บ + ชื่อ</div>
-                                </div>
-                            </td>
-                            <td>22/03/2022</td>
-                            <td  class="col-3">
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                  </button>
-                                  <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                  </button>
-                            </td>
-                        </tr>
-                        <!-- End user block -->
-                    </tbody>
-                </table>
+                              </form>
+                          </td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+              
             </div>
         </div>
     </div>

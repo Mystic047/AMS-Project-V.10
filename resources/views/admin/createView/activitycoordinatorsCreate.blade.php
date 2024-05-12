@@ -24,10 +24,10 @@
             <div class="card-body">
                 <form class="row g-3" action="{{route('coordinator.create')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <label for="inputAddress" class="form-label">ID</label>
                         <input type="text" name='ac_id' class="form-control" id="inputAddress" placeholder="ถ้า Auto ก็เอาออก">
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
                         <input type="email" name='email' class="form-control" id="inputEmail4">

@@ -20,9 +20,9 @@
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>จัดการข้อมูลผู้ใช้</span></a>
             <ul class="dropdown-menu">
                 <li><a class="nav-link" href=" {{route('student.manage')}} ">ข้อมูลนักศึกษา</a></li>
-                <li><a class="nav-link" href=" {{ 'ActivitycoordinatorsManagement' }} ">ข้อมูลฝ่ายกิจกรรม</a></li>
+                <li><a class="nav-link" href=" {{route('coordinator.manage') }} ">ข้อมูลฝ่ายกิจกรรม</a></li>
                 <li><a class="nav-link" href=" {{route('professor.manage')}} ">ข้อมูลอาจารย์</a></li>
-                <li><a class="nav-link" href=" {{'AdminManagement'}}">ข้อมูลผู้ดูแล</a></li>
+                <li><a class="nav-link" href=" {{route('admin.manage')}}">ข้อมูลผู้ดูแล</a></li>
             </ul>
           </li>
         <li class="dropdown active">

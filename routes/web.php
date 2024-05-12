@@ -1,9 +1,10 @@
 <?php
-use App\Http\Controllers\Auth\customAuthController;
-use App\Http\Controllers\coordinatorController;
-use App\Http\Controllers\professorController;
-use App\Http\Controllers\studentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\studentController;
+use App\Http\Controllers\professorController;
+use App\Http\Controllers\coordinatorController;
+use App\Http\Controllers\Auth\customAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,17 @@ Route::controller(coordinatorController::class)->group(function () {
     //Create Professor
     Route::get('/createFormCoordinator', 'showCreateView')->name('coordinator.showCreate');
     Route::post('/createCoordinator', 'create')->name('coordinator.create');
+});
+
+// Admin Management 
+Route::controller(adminController::class)->group(function () {
+    //show manage Professor page
+    Route::get('/manageAdmin', 'showManageView')->name('admin.manage');
+
+    //Create Professor
+    Route::get('/createFormAdmin', 'showCreateView')->name('admin.showCreate');
+
+    Route::post('/createAdmin', 'create')->name('admin.create');
 });
 
 // Route::get('/login', function () {

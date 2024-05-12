@@ -10,12 +10,15 @@ class studentController extends Controller
 {
     public function showManageView()
     {
-        return view('/admin/managementView/studentManage');
+        $students = Student::all();
+        return view('/admin/managementView/studentManage', compact('students'));
     }
 
     public function showCreateView()
     {
-        return view('/admin/createView/studentCreate');
+       
+
+        return view('/admin/createView/studentCreate' );
     }
 
     public function create(Request $request)
@@ -29,7 +32,7 @@ class studentController extends Controller
             'nickname' => 'required|nullable|string',
             'faculty_id' => 'required|nullable|string',
             'area_id' => 'required|nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]
         );
 
@@ -38,12 +41,21 @@ class studentController extends Controller
         $student = new Student;
         $student->fill($request->all());
 
+        $emailPrefix = explode('@', $request->email)[0];
+        if (ctype_digit($emailPrefix)) {  
+            $student->students_id = $emailPrefix;
+        } else {
+            
+            return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
+        }
+
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/student_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $student->profile_picture = $path; // Corrected variable
+            $path = $file->storeAs('public/profile_pictures/student_profiles', $filename); 
+            $student->profile_picture = str_replace('public/', '', $path); 
         }
+        
 
 
         $student->save();

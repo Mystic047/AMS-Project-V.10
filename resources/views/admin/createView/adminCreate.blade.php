@@ -22,40 +22,41 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3">
-                    <div class="col-12">
+                <form class="row g-3" action="{{route('admin.create')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    {{-- <div class="col-12">
                         <label for="inputAddress" class="form-label">ID</label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="ถ้า Auto ก็เอาออก">
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <input type="email" name='email' class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4">
+                        <input type="password" name='password' class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-md-5">
                         <label for="inputEmail4" class="form-label">Firstname</label>
-                        <input type="text" class="form-control" id="inputEmail4">
+                        <input type="text" name='firstname' class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-5">
                         <label for="inputPassword4" class="form-label">Lastname</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" name='lastname' class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-md-2">
                         <label for="inputPassword4" class="form-label">Nickname</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" name='nickname' class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">faculty_id</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <label for="inputAddress" class="form-label">faculty id</label>
+                        <input type="text" name='faculty_id' class="form-control" id="inputAddress" placeholder="1234 Main St">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputCity" class="form-label">area_id</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <label for="inputCity" class="form-label">area id</label>
+                        <input type="text" name='area_id' class="form-control" id="inputCity">
                     </div>
-                    <div class="col-md-6">
+                    <div>
                         <label for="profile_picture">Profile Picture:</label><br>
                         <input type="file" id="profile_picture" name="profile_picture"><br><br>
                     </div>
