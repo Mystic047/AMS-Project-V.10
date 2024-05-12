@@ -18,6 +18,14 @@ class adminController extends Controller
         return view('/admin/createView/adminCreate');
     }
 
+    public function showEditView($id)
+    {
+        $admins = Admin::find($id);
+
+        return view('/admin/editView/adminEdit', compact('admins'));
+    }
+
+
     public function create(Request $request)
     {
         $request->validate([
@@ -54,5 +62,11 @@ class adminController extends Controller
         $admin->save();
 
         return redirect()->route('admin.manage')->with('success', 'Admin added successfully!');
+    }
+
+    
+    public function destroy($id){
+        $admin = Admin::find($id)->delete();
+        return back()->with('deleted', 'Admin deleted success mfully!');
     }
 }

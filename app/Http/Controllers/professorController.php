@@ -19,6 +19,13 @@ class professorController extends Controller
         return view('/admin/createView/professorCreate');
     }
 
+    
+    public function showEditView($id)
+    {
+        $professors = Professor::find($id);
+        return view('/admin/editView/professorEdit', compact('professors')); 
+    }
+
     public function create(Request $request)
     {
         $request->validate([
@@ -57,4 +64,8 @@ class professorController extends Controller
         return redirect()->route('professor.manage')->with('success', 'Professor added successfully!');
     }
 
+    public function destroy($id){
+        $professor = Professor::find($id)->delete();
+        return back()->with('deleted', 'Professor deleted successfully!');
+    }
 }

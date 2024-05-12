@@ -126,19 +126,20 @@
                           </td>
                           <td class="col-3">{{ $coordinator->faculty_id }}</td> <!-- Assuming faculty relation exists -->
                           <td class="col-2">
-                            {{-- <button class="btn btn-warning btn-sm" onclick="window.location.href = '{{ route('student.edit', $student->id) }}'"> --}}
-                              <button class="btn btn-warning btn-sm" onclick="window.location.href = ''">
-                                  <i class="fas fa-pencil-alt"></i> Edit
-                              </button>
-                              {{-- <form action="{{ route('student.destroy', $student->id) }}" method="post" style="display: inline;"> --}}
-                              <form action="" method="post" style="display: inline;">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button class="btn btn-danger btn-sm" type="submit">
-                                      <i class="fas fa-trash"></i> Delete
-                                  </button>
-                              </form>
-                          </td>
+                            <form action="{{ route('coordinator.edit', $coordinator->coordinators_id) }}" method="get" style="display: inline;">
+                                <button class="btn btn-warning btn-sm" type="submit">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </button>
+                            </form>
+                            <form action="{{ route('coordinator.delete', $coordinator->coordinators_id) }}" method="post" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                        
                       </tr>
                       @endforeach
                   </tbody>

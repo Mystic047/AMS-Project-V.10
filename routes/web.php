@@ -67,6 +67,10 @@ Route::controller(studentController::class)->group(function () {
     Route::get('/createFormStudent', 'showCreateView')->name('student.showCreate');
     Route::post('/createStudent', 'create')->name('student.create');
 
+    Route::get('/editFromStudent/{id}', 'showEditView')->name('student.edit');
+
+    Route::delete('/deleteStudent/{id}', 'destroy')->name('student.delete');
+
 });
 
 //Professor Management
@@ -77,6 +81,11 @@ Route::controller(professorController::class)->group(function () {
     //Create Professor
     Route::get('/createFormProfessor', 'showCreateView')->name('professor.showCreate');
     Route::post('/createProfessor', 'create')->name('professor.create');
+
+    Route::get('/editFromProfessor/{id}', 'showEditView')->name('professor.edit');
+
+    Route::delete('/deleteProfessor/{id}', 'destroy')->name('professor.delete');
+
 });
 
 //Coordinator Management
@@ -87,6 +96,10 @@ Route::controller(coordinatorController::class)->group(function () {
     //Create Professor
     Route::get('/createFormCoordinator', 'showCreateView')->name('coordinator.showCreate');
     Route::post('/createCoordinator', 'create')->name('coordinator.create');
+
+    Route::get('/editFromCoordinator/{id}', 'showEditView')->name('coordinator.edit');
+    Route::put('/updateCoordinator/{id}', 'update')->name('coordinator.update');
+    Route::delete('/deleteCoordinator/{id}', 'destroy')->name('coordinator.delete');
 });
 
 // Admin Management 
@@ -96,8 +109,11 @@ Route::controller(adminController::class)->group(function () {
 
     //Create Professor
     Route::get('/createFormAdmin', 'showCreateView')->name('admin.showCreate');
-
     Route::post('/createAdmin', 'create')->name('admin.create');
+
+    Route::get('/editFromAdmin/{id}', 'showEditView')->name('admin.edit');
+
+    Route::delete('/deleteAdmin/{id}', 'destroy')->name('admin.delete');
 });
 
 // Route::get('/login', function () {

@@ -131,7 +131,7 @@
                                   <i class="fas fa-pencil-alt"></i> Edit
                               </button>
                               {{-- <form action="{{ route('student.destroy', $student->id) }}" method="post" style="display: inline;"> --}}
-                              <form action="" method="post" style="display: inline;">
+                              <form action="{{route('professor.delete' , $professor->professors_id)}}" method="post" style="display: inline;">
                                   @csrf
                                   @method('DELETE')
                                   <button class="btn btn-danger btn-sm" type="submit">

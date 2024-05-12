@@ -16,9 +16,13 @@ class studentController extends Controller
 
     public function showCreateView()
     {
-       
-
         return view('/admin/createView/studentCreate' );
+    }
+
+    public function showEditView($id)
+    {
+        $students = Student::find($id);
+        return view('/admin/editView/studentEdit' , compact('students'));
     }
 
     public function create(Request $request)
@@ -26,7 +30,7 @@ class studentController extends Controller
         $request->validate([
             // 'students_id' => 'required|unique:students,students_id',
             'email' => 'required|nullable|string',
-            'password' => 'required|min:4',  //need to change later to min 8
+            'password' => 'nullable|min:4',  //need to change later to min 8
             'firstname' => 'required|nullable|string',
             'lastname' => 'required|nullable|string',
             'nickname' => 'required|nullable|string',
@@ -61,5 +65,12 @@ class studentController extends Controller
         $student->save();
 
         return redirect()->route('student.manage')->with('success', 'Students added successfully!');
+    }
+
+    
+
+    public function destroy($id){
+        $student = Student::find($id)->delete();
+        return back()->with('deleted', 'Student deleted successfully!');
     }
 }
