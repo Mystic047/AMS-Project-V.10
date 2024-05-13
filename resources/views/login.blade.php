@@ -61,14 +61,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <h6>Role</h6> <!-- Role selection -->
+                                                    <h6>สถานะ</h6> <!-- Role selection -->
                                                     <div class="form-floating mb-3">
                                                         <select class="form-select" name="role" id="role"
                                                             required>
                                                             <option value="">Select your role</option>
-                                                            <option value="student">Student</option>
-                                                            <option value="professor">Professor</option>
-                                                            <option value="coordinator">Coordinator</option>
+                                                            <option value="student">นักศึกษา</option>
+                                                            <option value="professor">อาจารย์</option>
+                                                            <option value="coordinator">เจ้าหน้าที่คณะ</option>
                                                         </select>
                                                         <label for="role" class="form-label">Role</label>
                                                     </div>

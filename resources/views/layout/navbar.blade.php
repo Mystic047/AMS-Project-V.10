@@ -88,7 +88,7 @@
                                     ข่าวสาร</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('filedownload') }}"><i
+                                <a class="nav-link" href="{{ url('filedowload') }}"><i
                                         class="fas fa-file-download"></i>
                                     เอกสารดาวน์โหลด</a>
                             </li>

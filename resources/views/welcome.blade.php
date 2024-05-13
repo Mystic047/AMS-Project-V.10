@@ -132,12 +132,12 @@
     </div>
     <div class="col-md-4">
         <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card 3</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
+            <div class="card-body">
+              <h5 class="card-title">Facebook Plugin</h5><br>
+              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fscistudentsbru&tabs=timeline&width=450&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
         </div>
-      </div>
+    </div>
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
