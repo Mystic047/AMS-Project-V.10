@@ -23,7 +23,7 @@
         <div class="container">
             <div class="card my-5">
                 <div class="card-body">
-                    <form class="row g-3" action="{{ route('coordinator.update', $coordinators->coordinators_id) }}" method="POST">
+                    <form class="row g-3" action="{{ route('coordinator.update', $coordinators->coordinators_id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="col-12">
@@ -33,6 +33,10 @@
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Email</label>
                             <input type="email" class="form-control" id="inputEmail4"  name="email"value="{{ $coordinators->email }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword4" name="password"value="">
                         </div>
                         <div class="col-md-5">
                             <label for="inputEmail4" class="form-label">Firstname</label>
@@ -53,6 +57,10 @@
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">area_id</label>
                             <input type="text" class="form-control" id="inputCity"  name="area_id" value="{{ $coordinators->area_id }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="profile_picture">Profile Picture:</label><br>
+                            <input type="file" name='profile_picture' id="profile_picture">
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary mx-1 float-end">Save</button>

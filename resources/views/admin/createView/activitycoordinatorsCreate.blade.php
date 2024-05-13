@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="profile_picture">Profile Picture:</label><br>
-                        <input type="file" name='profile_picture'  id="profile_picture" name="profile_picture"><br><br>
+                        <input type="file" name='profile_picture' id="profile_picture">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>
