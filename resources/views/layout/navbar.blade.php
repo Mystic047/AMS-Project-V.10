@@ -132,7 +132,7 @@
                                                     class="fas fa-cog"></i>
                                                 แก้ไขข้อมูล</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fas fa-pen-square"></i>
-                                                สมัครกิจกรรม</a></li>
+                                                ประวัติการเข้าร่วม</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
