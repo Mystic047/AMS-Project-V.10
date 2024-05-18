@@ -64,7 +64,48 @@ class adminController extends Controller
         return redirect()->route('admin.manage')->with('success', 'Admin added successfully!');
     }
 
-    
+    public function update(Request $request, $id)
+    {
+        $admin = Admin::findOrFail($id);
+
+        $request->validate([
+            'email' => 'nullable|string',
+            'password' => 'nullable|string',
+            'firstname' => 'nullable|string',
+            'lastname' => 'nullable|string',
+            'nickname' => 'nullable|string',
+            'faculty_id' => 'nullable|string',
+            'area_id' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        Log::debug($request->all());
+
+        if (empty($request->password)) {
+            $admin->fill($request->except(['password']));
+        } else {
+            $admin->fill($request->all());
+            $admin->password = $request->password;
+        }
+
+        $emailPrefix = explode('@', $request->email)[0];
+        if (ctype_digit($emailPrefix)) {
+            $admin->admin_id = $emailPrefix;
+        } else {
+            return back()->withErrors(['email' => 'The admin ID must be numeric'])->withInput();
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/profile_pictures/admin_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
+            $admin->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+        }
+
+        $admin->save();
+        return redirect()->route('admin.manage')->with('success', 'admin updated successfully!');
+    }
+
     public function destroy($id){
         $admin = Admin::find($id)->delete();
         return back()->with('deleted', 'Admin deleted success mfully!');
