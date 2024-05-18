@@ -22,48 +22,47 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" action="{{ route('admin.update', $admins->admin_id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="ถ้า Auto ก็เอาออก">
+                        <input type="text" class="form-control" id="inputAddress" name="coordinators_id" placeholder="ถ้า Auto ก็เอาออก" value="{{ $admins->admin_id }}">
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <input type="email" class="form-control" id="inputEmail4"  name="email"value="{{ $admins->email }}">
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4">
+                        <input type="password" class="form-control" id="inputPassword4" name="password"value="">
                     </div>
                     <div class="col-md-5">
                         <label for="inputEmail4" class="form-label">Firstname</label>
-                        <input type="text" class="form-control" id="inputEmail4">
+                        <input type="text" class="form-control" id="inputEmail4" name="firstname" value="{{ $admins->firstname }}">
                     </div>
                     <div class="col-md-5">
                         <label for="inputPassword4" class="form-label">Lastname</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" class="form-control" id="inputPassword4" name="lastname"  value="{{ $admins->lastname }}">
                     </div>
                     <div class="col-md-2">
                         <label for="inputPassword4" class="form-label">Nickname</label>
-                        <input type="text" class="form-control" id="inputPassword4">
+                        <input type="text" class="form-control" id="inputPassword4"  name="nickname" value="{{ $admins->nickname }}">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">faculty_id</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <input type="text" class="form-control" id="inputAddress" name="faculty_id" value="{{ $admins->faculty_id }}">
                     </div>
                     <div class="col-md-6">
                         <label for="inputCity" class="form-label">area_id</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input type="text" class="form-control" id="inputCity"  name="area_id" value="{{ $admins->area_id }}">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputState" class="form-label">ถ้าไม่มีรูปก็เอาออก</label>
-                        <div>
-                            <input class="form-control " id="formFileLg" type="file" >
-                        </div>
+                        <label for="profile_picture">Profile Picture:</label><br>
+                        <input type="file" name='profile_picture' id="profile_picture">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mx-1 float-end">Save</button>
-                        <button type="submit" class="btn btn-danger mx-1 float-end">Delete</button>
                     </div>
                 </form>
             </div>

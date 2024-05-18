@@ -64,6 +64,48 @@ class professorController extends Controller
         return redirect()->route('professor.manage')->with('success', 'Professor added successfully!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $professor = Professor::findOrFail($id);
+
+        $request->validate([
+            'email' => 'nullable|string',
+            'password' => 'nullable|string',
+            'firstname' => 'nullable|string',
+            'lastname' => 'nullable|string',
+            'nickname' => 'nullable|string',
+            'faculty_id' => 'nullable|string',
+            'area_id' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        Log::debug($request->all());
+
+        if (empty($request->password)) {
+            $professor->fill($request->except(['password']));
+        } else {
+            $professor->fill($request->all());
+            $professor->password = $request->password;
+        }
+
+        $emailPrefix = explode('@', $request->email)[0];
+        if (ctype_digit($emailPrefix)) {
+            $professor->professors_id = $emailPrefix;
+        } else {
+            return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
+            $professor->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+        }
+
+        $professor->save();
+        return redirect()->route('professor.manage')->with('success', 'professor updated successfully!');
+    }
+
     public function destroy($id){
         $professor = Professor::find($id)->delete();
         return back()->with('deleted', 'Professor deleted successfully!');

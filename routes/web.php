@@ -68,6 +68,7 @@ Route::controller(studentController::class)->group(function () {
     Route::post('/createStudent', 'create')->name('student.create');
 
     Route::get('/editFromStudent/{id}', 'showEditView')->name('student.edit');
+    Route::put('/updateStudent/{id}', 'update')->name('student.update');
 
     Route::delete('/deleteStudent/{id}', 'destroy')->name('student.delete');
 
@@ -83,7 +84,7 @@ Route::controller(professorController::class)->group(function () {
     Route::post('/createProfessor', 'create')->name('professor.create');
 
     Route::get('/editFromProfessor/{id}', 'showEditView')->name('professor.edit');
-
+    Route::put('/updateProfessor/{id}', 'update')->name('professor.update');
     Route::delete('/deleteProfessor/{id}', 'destroy')->name('professor.delete');
 
 });
@@ -112,7 +113,7 @@ Route::controller(adminController::class)->group(function () {
     Route::post('/createAdmin', 'create')->name('admin.create');
 
     Route::get('/editFromAdmin/{id}', 'showEditView')->name('admin.edit');
-
+    Route::put('/updateAdmin/{id}', 'update')->name('admin.update');
     Route::delete('/deleteAdmin/{id}', 'destroy')->name('admin.delete');
 });
 
