@@ -51,7 +51,7 @@ Route::controller(customAuthController::class)->group(function () {
     //login admin
     Route::get('/admin/login', function () {
         return view('/adminlogin');
-    });
+    })->name('adminlogin.show');
     
     Route::post('/login/generic', 'loginGeneric')->name('login.generic');
     //logout All user
@@ -117,6 +117,14 @@ Route::controller(adminController::class)->group(function () {
     Route::delete('/deleteAdmin/{id}', 'destroy')->name('admin.delete');
 });
 
+
+Route::middleware(['role:student'])->group(function () {
+    Route::get('/TESTM', function () {
+        return view('TESTM');
+    });
+});
+
+
 // Route::get('/login', function () {
 //     return view('login');
 // });
@@ -137,6 +145,7 @@ Route::get('/profile', function () {
 Route::get('/fileupload', function () {
     return view('fileupload');
 });
+
 Route::get('/activity', function () {
     return view('activity');
 });

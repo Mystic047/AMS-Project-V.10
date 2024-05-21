@@ -67,7 +67,7 @@
                         <!-- Login Buttons -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{{ route('login.show') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
-                            <a href="{{ url('Adminlogin') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
+                            <a href="{{ route('adminlogin.show') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
                         </div>
                     </ul>
                 </div>
