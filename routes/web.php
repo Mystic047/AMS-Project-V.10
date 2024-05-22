@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\professorController;
 use App\Http\Controllers\coordinatorController;
+use App\Http\Controllers\testRelationController;
 use App\Http\Controllers\Auth\customAuthController;
 
 /*
@@ -16,6 +17,8 @@ use App\Http\Controllers\Auth\customAuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
+
+ Route::get('/testRelation', [testRelationController::class , 'indexAction'])->name('testRelation');
 
 Route::controller(customAuthController::class)->group(function () {
     //User
