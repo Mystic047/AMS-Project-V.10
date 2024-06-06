@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar with Logo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* เพิ่มขนาดภาพให้มีขนาดพอดีกับ Navbar */
         .navbar-brand img {
@@ -25,7 +27,6 @@
             background-color: white;
             /* สีพื้นหลังส่วนล่าง */
         }
-
 
         /* ปรับระยะห่างระหว่างไอคอนและข้อความในเมนู Navbar */
         .nav-link i {
@@ -48,12 +49,11 @@
             /* เปลี่ยนสีของตัวหนังสือเป็นสีดำเมื่อมีการชี้ */
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav class="sticky-top">
-        <nav class="navbar navbar-expand-lg top-navbar ">
+        <nav class="navbar navbar-expand-lg top-navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="https://img2.pic.in.th/pic/sci-logo-1-removebg-preview.png" alt="Navbar Logo">
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg bottom-navbar ">
+        <nav class="navbar navbar-expand-lg bottom-navbar">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div
@@ -89,24 +89,22 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('filedowload') }}"><i
-                                        class="fas fa-file-download"></i>
-                                    เอกสารดาวน์โหลด</a>
+                                        class="fas fa-file-download"></i> เอกสารดาวน์โหลด</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-bell"></i>
-                                    รับการแจ้งเตือนกิจกรรมใหม่</a>
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                    <i class="fas fa-bell"></i> รับการแจ้งเตือนกิจกรรมใหม่</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <i class="fas fa-calendar"></i> งานกิจกรรม
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
                                     <li><a class="dropdown-item" href="{{ url('ActivityView') }}"><i
-                                                class="fas fa-pen-square"></i>
-                                            สมัครกิจกรรม</a></li>
+                                                class="fas fa-pen-square"></i> สมัครกิจกรรม</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -123,14 +121,13 @@
                         @if ($user)
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
                                         <i class="fas fa-user"></i> {{ $user->firstname }}'s Profile
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
-                                                    class="fas fa-cog"></i>
-                                                แก้ไขข้อมูล</a></li>
+                                                    class="fas fa-cog"></i> แก้ไขข้อมูล</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fas fa-pen-square"></i>
                                                 ประวัติการเข้าร่วม</a></li>
                                         <li>
@@ -154,17 +151,33 @@
                             <p>Welcome, Guest</p>
                         @endif
 
-
                     </div>
                 </div>
             </div>
         </nav>
     </nav>
 
-    <!-- ส่วนบนของ Navbar -->
+    <!-- Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Qrcode กลุ่มแจ้งเตือนกิจกรรมใหม่ </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ asset('storage/pictures/Qrcode.png') }}" class="img-fluid mx-auto d-block" alt="กิจกรรมใหม่" style="width: 200px; height: 200px;">                    <p class="mt-2">ชื่อกลุ่มไลน์</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- ส่วนล่างของ Navbar -->
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
