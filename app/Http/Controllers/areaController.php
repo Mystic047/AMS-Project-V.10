@@ -7,7 +7,7 @@ use App\Models\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class facultyController extends Controller
+class areaController extends Controller
 {
     public function showManageView()
     {
@@ -19,53 +19,54 @@ class facultyController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/facultyCreate' );
+        return view('/admin/createView/areaCreate' );
     }
 
     public function showEditView($id)
     {
-        $facultys = Faculty::find($id);
-        return view('/admin/editView/facultyEdit' , compact('facultys'));
+        $areas = Area::find($id);
+        return view('/admin/editView/areaEdit' , compact('areas'));
     }
 
     public function create(Request $request)
     {
         $request->validate([
+            'area_id' => 'required|string',
+            'areaName' => 'required|string',  
             'faculty_id' => 'required|string',
-            'facultyName' => 'required|string',  
         ]
         );
+
         Log::debug($request->all());
 
-        $facultys = new Faculty;
-        $facultys->fill($request->all());
+        $area = new Area;
+        $area->fill($request->all());
 
     
-        $facultys->save();
+        $area->save();
 
-        return redirect()->route('faculty.manage')->with('success', 'faculty added successfully!');
+        return redirect()->route('area.manage')->with('success', 'Areas added successfully!');
     }
 
     public function update(Request $request, $id)
     {
-        $facultys = Faculty::findOrFail($id);
+        $area = Area::findOrFail($id);
 
         $request->validate([
+            'area_id' => 'required|string',
+            'areaName' => 'required|string',  
             'faculty_id' => 'required|string',
-            'facultyName' => 'required|string',  
         ]);
 
-        $facultys->fill($request->all());
-
         Log::debug($request->all());
+        $area->fill($request->all());
 
-
-        $facultys->save();
-        return redirect()->route('faculty.manage')->with('success', 'faculty updated successfully!');
+        $area->save();
+        return redirect()->route('area.manage')->with('success', 'Areas updated successfully!');
     }
 
     public function destroy($id){
-        $request = Faculty::find($id)->delete();
-        return back()->with('deleted', 'faculty deleted successfully!');
+        $area = Area::find($id)->delete();
+        return back()->with('deleted', 'Area deleted successfully!');
     }
 }

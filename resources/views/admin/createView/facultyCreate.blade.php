@@ -22,14 +22,15 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" action="{{route('faculty.create')}}" method="POST">
+                    @csrf
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Fac</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="faculty_id" name="faculty_id" placeholder="">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Fac Name</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>
