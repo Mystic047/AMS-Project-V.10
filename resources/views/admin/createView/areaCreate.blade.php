@@ -22,18 +22,19 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('')}}">
+                <form class="row g-3" action="{{route('area.create')}}" method="POST">
+                    @csrf
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Area</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="area_id" name="area_id" placeholder="">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Area Name</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="areaName" name="areaName" placeholder="">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Faculty</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="faculty_id"  name="faculty_id" placeholder="">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>

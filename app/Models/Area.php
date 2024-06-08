@@ -11,6 +11,11 @@ class Area extends Model
     use HasFactory;
     protected $table = 'areas';
     protected $primaryKey = 'area_id';
+    protected $fillable = [
+        'area_id',
+        'areaName',
+        'faculty_id',
+    ];
     public function faculty()
     {
         return $this->belongsTo(Faculty::class, 'faculty_id');

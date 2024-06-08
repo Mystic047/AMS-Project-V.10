@@ -11,6 +11,10 @@ class Faculty extends Model
     use HasFactory;
     protected $table = 'faculties';
     protected $primaryKey = 'faculty_id';
+    protected $fillable = [
+        'faculty_id',
+        'facultyName',
+    ];
     public function areas()
     {
         return $this->hasMany(Area::class, 'faculty_id');
