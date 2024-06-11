@@ -92,6 +92,7 @@ Route::controller(professorController::class)->group(function () {
     Route::get('/editFromProfessor/{id}', 'showEditView')->name('professor.edit');
     Route::put('/updateProfessor/{id}', 'update')->name('professor.update');
     Route::delete('/deleteProfessor/{id}', 'destroy')->name('professor.delete');
+    Route::get('/searchProfessor', 'search')->name('professor.search');
 
 });
 

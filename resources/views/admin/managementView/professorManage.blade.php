@@ -101,12 +101,12 @@
             <div class="card-body">
                 <!-- Search bar and Create button -->
                 <div class="search-bar">
-                    <div class="search-box">
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </div>
-                    <a href="{{ route('professor.showCreate') }}" class="btn btn-primary">Add New</a>
+                    <form action="{{ route('professor.search') }}" method="GET" class="d-flex w-100 me-3">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search..." value="{{ request()->input('query') }}">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                    <a href="{{ route('professor.showCreate') }}" class="btn btn-primary ms-3">Create</a>
                 </div>
-
                 <!-- User table -->
                 <table class="table table-bordered">
                     <thead class="table-sm">
