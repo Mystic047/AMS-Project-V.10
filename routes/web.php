@@ -229,6 +229,12 @@ Route::get('/ProfessorManagement', function () {
 Route::get('/AdminCreate', function () {
     return view('/admin/createView/admincreate');
 });
+Route::get('/NewCreate', function () {
+    return view('/admin/createView/newCreate');
+});
+Route::get('/FileCreate', function () {
+    return view('/admin/createView/fileCreate');
+});
 
 ///////////////////Edit
 Route::get('/AdminEdit', function () {
@@ -248,6 +254,14 @@ Route::get('/AreaEdit', function () {
 });
 Route::get('/FacultyEdit', function () {
     return view('/admin/editView/facultyEdit');
+});
+Route::get('/NewEdit', function () {
+    return view('/admin/editView/newEdit');
+});
+
+
+Route::get('/FileManagement', function () {
+    return view('/admin/managementView/fileManage');
 });
 
 
