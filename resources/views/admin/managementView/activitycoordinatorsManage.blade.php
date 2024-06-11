@@ -98,12 +98,12 @@
             <div class="card-body">
                 <!-- Search bar and Create button -->
                 <div class="search-bar">
-                    <div class="search-box">
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </div>
-                    <a href="{{ route('coordinator.showCreate') }}" class="btn btn-primary">Create</a>
+                    <form action="{{ route('coordinator.search') }}" method="GET" class="d-flex w-100 me-3">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search..." value="{{ request()->input('query') }}">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                    <a href="{{ route('coordinator.showCreate') }}" class="btn btn-primary ms-3">Create</a>
                 </div>
-
                 <!-- User table -->
                 <table class="table table-bordered">
                   <thead class="table-sm">
@@ -121,7 +121,7 @@
                           <td class="col-4">
                               <div class="d-flex align-items-center">
                                    <img src="{{ asset('storage/'.$coordinator->profile_picture) }}" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                  <div>{{ $coordinator->firstname }} {{ $coordinator->lastname }}</div> 
+                                  <div>{{ $coordinator->firstname }} {{ $coordinator->lastname }}</div>
                               </div>
                           </td>
                           <td class="col-3">{{ $coordinator->faculty_id }}</td> <!-- Assuming faculty relation exists -->
@@ -139,7 +139,6 @@
                                 </button>
                             </form>
                         </td>
-                        
                       </tr>
                       @endforeach
                   </tbody>

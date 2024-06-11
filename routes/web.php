@@ -57,7 +57,7 @@ Route::controller(customAuthController::class)->group(function () {
     Route::get('/admin/login', function () {
         return view('/adminlogin');
     })->name('adminlogin.show');
-    
+
     Route::post('/login/generic', 'loginGeneric')->name('login.generic');
     //logout All user
     Route::post('/logout', 'logout')->name('login.logout');
@@ -106,9 +106,11 @@ Route::controller(coordinatorController::class)->group(function () {
     Route::get('/editFromCoordinator/{id}', 'showEditView')->name('coordinator.edit');
     Route::put('/updateCoordinator/{id}', 'update')->name('coordinator.update');
     Route::delete('/deleteCoordinator/{id}', 'destroy')->name('coordinator.delete');
+    Route::get('/searchCoordinator', 'search')->name('coordinator.search');
+
 });
 
-// Admin Management 
+// Admin Management
 Route::controller(adminController::class)->group(function () {
     //show manage Professor page
     Route::get('/manageAdmin', 'showManageView')->name('admin.manage');
