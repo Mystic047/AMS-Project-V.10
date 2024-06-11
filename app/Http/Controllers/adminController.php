@@ -29,7 +29,7 @@ class adminController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            // 'admin_id' => 
+            // 'admin_id' =>
             'email' => 'nullable|string',
             'password' => 'required|min:8',
             'firstname' => 'nullable|string',
@@ -46,10 +46,10 @@ class adminController extends Controller
         $admin->fill($request->all());
 
         $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) { 
+        if (ctype_digit($emailPrefix)) {
             $admin->admin_id = $emailPrefix;
         } else {
-            
+
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
         }
 
@@ -109,5 +109,18 @@ class adminController extends Controller
     public function destroy($id){
         $admin = Admin::find($id)->delete();
         return back()->with('deleted', 'Admin deleted success mfully!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Search for coordinators by firstname, lastname, or faculty_id
+        $admins = Admin::where('firstname', 'LIKE', "%{$query}%")
+            ->orWhere('lastname', 'LIKE', "%{$query}%")
+            ->orWhere('admin_id', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('/admin/managementView/adminManage', compact('admins'));
     }
 }

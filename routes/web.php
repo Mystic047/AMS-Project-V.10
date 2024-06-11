@@ -124,6 +124,8 @@ Route::controller(adminController::class)->group(function () {
     Route::get('/editFromAdmin/{id}', 'showEditView')->name('admin.edit');
     Route::put('/updateAdmin/{id}', 'update')->name('admin.update');
     Route::delete('/deleteAdmin/{id}', 'destroy')->name('admin.delete');
+    Route::get('/searchAdmin', 'search')->name('admin.search');
+
 });
 
 
