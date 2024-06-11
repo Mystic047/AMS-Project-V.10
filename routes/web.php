@@ -57,7 +57,7 @@ Route::controller(customAuthController::class)->group(function () {
     Route::get('/admin/login', function () {
         return view('/adminlogin');
     })->name('adminlogin.show');
-    
+
     Route::post('/login/generic', 'loginGeneric')->name('login.generic');
     //logout All user
     Route::post('/logout', 'logout')->name('login.logout');
@@ -76,6 +76,7 @@ Route::controller(studentController::class)->group(function () {
     Route::put('/updateStudent/{id}', 'update')->name('student.update');
 
     Route::delete('/deleteStudent/{id}', 'destroy')->name('student.delete');
+    Route::get('/searchStudent', 'search')->name('student.search');
 
 });
 
@@ -91,6 +92,7 @@ Route::controller(professorController::class)->group(function () {
     Route::get('/editFromProfessor/{id}', 'showEditView')->name('professor.edit');
     Route::put('/updateProfessor/{id}', 'update')->name('professor.update');
     Route::delete('/deleteProfessor/{id}', 'destroy')->name('professor.delete');
+    Route::get('/searchProfessor', 'search')->name('professor.search');
 
 });
 
@@ -106,9 +108,11 @@ Route::controller(coordinatorController::class)->group(function () {
     Route::get('/editFromCoordinator/{id}', 'showEditView')->name('coordinator.edit');
     Route::put('/updateCoordinator/{id}', 'update')->name('coordinator.update');
     Route::delete('/deleteCoordinator/{id}', 'destroy')->name('coordinator.delete');
+    Route::get('/searchCoordinator', 'search')->name('coordinator.search');
+
 });
 
-// Admin Management 
+// Admin Management
 Route::controller(adminController::class)->group(function () {
     //show manage Professor page
     Route::get('/manageAdmin', 'showManageView')->name('admin.manage');
@@ -120,6 +124,8 @@ Route::controller(adminController::class)->group(function () {
     Route::get('/editFromAdmin/{id}', 'showEditView')->name('admin.edit');
     Route::put('/updateAdmin/{id}', 'update')->name('admin.update');
     Route::delete('/deleteAdmin/{id}', 'destroy')->name('admin.delete');
+    Route::get('/searchAdmin', 'search')->name('admin.search');
+
 });
 
 

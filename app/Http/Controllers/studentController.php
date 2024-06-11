@@ -36,7 +36,7 @@ class studentController extends Controller
             'nickname' => 'required|nullable|string',
             'faculty_id' => 'required|nullable|string',
             'area_id' => 'required|nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
         );
 
@@ -46,20 +46,20 @@ class studentController extends Controller
         $student->fill($request->all());
 
         $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) {  
+        if (ctype_digit($emailPrefix)) {
             $student->students_id = $emailPrefix;
         } else {
-            
+
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
         }
 
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/student_profiles', $filename); 
-            $student->profile_picture = str_replace('public/', '', $path); 
+            $path = $file->storeAs('public/profile_pictures/student_profiles', $filename);
+            $student->profile_picture = str_replace('public/', '', $path);
         }
-        
+
 
 
         $student->save();
@@ -113,4 +113,18 @@ class studentController extends Controller
         $student = Student::find($id)->delete();
         return back()->with('deleted', 'Student deleted successfully!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Search for coordinators by firstname, lastname, or faculty_id
+        $students = Student::where('firstname', 'LIKE', "%{$query}%")
+            ->orWhere('lastname', 'LIKE', "%{$query}%")
+            ->orWhere('students_id', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('/admin/managementView/studentManage', compact('students'));
+    }
+
 }

@@ -110,4 +110,17 @@ class coordinatorController extends Controller
         return back()->with('deleted', 'Coordinator deleted successfully!');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Search for coordinators by firstname, lastname, or faculty_id
+        $coordinators = Coordinator::where('firstname', 'LIKE', "%{$query}%")
+            ->orWhere('lastname', 'LIKE', "%{$query}%")
+            ->orWhere('coordinators_id', 'LIKE', "%{$query}%")
+            ->get();
+
+
+        return view('/admin/managementView/activitycoordinatorsManage', compact('coordinators'));
+    }
 }
