@@ -76,6 +76,7 @@ Route::controller(studentController::class)->group(function () {
     Route::put('/updateStudent/{id}', 'update')->name('student.update');
 
     Route::delete('/deleteStudent/{id}', 'destroy')->name('student.delete');
+    Route::get('/searchStudent', 'search')->name('student.search');
 
 });
 
