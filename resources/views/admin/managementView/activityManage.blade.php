@@ -29,13 +29,12 @@
     <body style="background-color:#f5f5f5;">
         <section class="section">
             <div class="section-header">
-                <h1>จัดการข้อมูลข่าวสาร ประชาสัมพันธ์</h1>
+                <h1>จัดการข้อมูลกิจกรรม</h1>
             </div>
         </section>
         <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
-                    <p>จัดการข้อมูลข่าวสาร ประชาสัมพันธ์</p>
                     <!-- Search bar and Create button -->
                     <div class="search-bar">
                         <div class="search-box">
