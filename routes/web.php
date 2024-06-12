@@ -152,3 +152,14 @@ Route::get('/NewManage', function () {
 Route::get('/New', function () {
     return view('new');
 });
+
+
+Route::get('/ActivityManagement', function () {
+    return view('admin/managementView/activityManage');
+});
+Route::get('/ActivityCreate', function () {
+    return view('admin/createView/activityCreate');
+});
+Route::get('/ActivityEdit', function () {
+    return view('admin/editView/activityEdit');
+});
