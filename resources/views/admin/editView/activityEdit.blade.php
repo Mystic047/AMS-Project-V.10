@@ -27,15 +27,11 @@
                         <label for="inputAddress" class="form-label">ID</label>
                         <input type="text" name='students_id'class="form-control" id="inputAddress" placeholder="ถ้า Auto ก็เอาออก">
                     </div>  --}}
-                    <div class="col-md-2">
+                    <div class="col-md-6">
                         <label for="email" class="form-label">รหัสกิจกรรม</label>
                         <input type="email" name='email' class="form-control" id="inputEmail4">
                     </div>
-                    <div class="col-md-5">
-                        <label for="password" class="form-label">ชื่อกิจกรรม</label>
-                        <input type="password" name='password' class="form-control" id="password">
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <label for="password" class="form-label">ชื่อกิจกรรม</label>
                         <input type="password" name='password' class="form-control" id="password">
                     </div>
