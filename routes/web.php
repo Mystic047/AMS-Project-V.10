@@ -8,7 +8,8 @@ require base_path('routes/admins.php');
 require base_path('routes/professors.php');
 require base_path('routes/coordinators.php');
 require base_path('routes/students.php');
-require base_path('routes/areas.php');
+require base_path('routes/faculty-areas.php');
+require base_path('routes/activity.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -157,6 +158,7 @@ Route::get('/New', function () {
 Route::get('/ActivityManagement', function () {
     return view('admin/managementView/activityManage');
 });
+
 Route::get('/ActivityCreate', function () {
     return view('admin/createView/activityCreate');
 });
