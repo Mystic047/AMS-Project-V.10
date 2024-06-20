@@ -28,7 +28,7 @@
         <li class="dropdown active">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-table"></i><span>จัดการข้อมูลทั่วไป</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href=" {{'FacultyManagement'}} ">จัดการข้อมูลสาขา</a></li>
+                <li><a class="nav-link" href=" {{route('area.manage')}} ">จัดการข้อมูลสาขา</a></li>
                 <li><a class="nav-link" href=" {{'ActivityManagement'}} ">จัดการข้อมูลกิจกรรม</a></li>
                 <li><a class="nav-link" href=" {{'FileManagement'}} ">จัดการข้อมูลเอกสาร</a></li>
             </ul>
