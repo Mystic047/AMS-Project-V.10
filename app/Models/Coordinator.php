@@ -13,7 +13,7 @@ class Coordinator extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['coordinators_id', 'email', 'password', 'nickname', 'firstname', 'lastname', 'faculty_id','area_id' ,'profile_picture'];
+    protected $fillable = ['coordinators_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id' ,'profile_picture'];
     protected $primaryKey = 'coordinators_id';
 
     protected $hidden = [

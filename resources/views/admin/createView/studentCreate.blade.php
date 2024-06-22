@@ -48,10 +48,6 @@
                         <label for="text" class="form-label">Nickname</label>
                         <input type="text" name='nickname' class="form-control" id="nickname">
                     </div>
-                    <div class="col-12">
-                        <label for="text" class="form-label">faculty id</label>
-                        <input type="text" name='faculty_id' class="form-control" id="faculty_id" placeholder="1234 Main St">
-                    </div>
                     <div class="col-md-6">
                         <label for="text" class="form-label">area id</label>
                         <input type="text" name='area_id' class="form-control" id="area_id">
