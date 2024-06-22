@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('details');
             $table->string('image_path');
-            $table->string('admin_id');
+            $table->integer('created_by');
+            $table->string('created_by_role');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('fileName');
             $table->string('templagePath');
             $table->string('activity_type_id'); //still not having the talble
-            $table->string('admin_id');
+            $table->integer('admin_id');
             $table->timestamps();
         });
     }

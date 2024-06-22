@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('file_id');
             $table->string('fileName');
             $table->string('file_path');
-            $table->string('professor_id');
-            $table->string('admin_id');
-
+            $table->integer('created_by');
+            $table->string('created_by_role');
+            $table->timestamps();
         });
     }
 
