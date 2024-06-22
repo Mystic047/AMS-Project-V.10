@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('nickname');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('faculty_id');
-            $table->string('area_id');
+            $table->integer('area_id');
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();

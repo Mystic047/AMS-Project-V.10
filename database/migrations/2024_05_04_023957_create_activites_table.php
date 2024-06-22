@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('activity_type');
             $table->date('activity_date');
             $table->string('activity_responsible_branch');
-            $table->decimal('latitude', 10, 7);
-            $table->decimal('longitude', 11, 7);
             $table->string('activity_hour_earned');
             $table->string('activity_register_limit');
             $table->string('activity_detail');
             $table->string('assessment_link');
             $table->string('picture')->nullable();
-            $table->string('created_by');
+            $table->string('responsible_person')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->string('created_by_role')->nullable();
             $table->timestamps();
         });
         
