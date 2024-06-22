@@ -34,7 +34,6 @@ class studentController extends Controller
             'firstname' => 'required|nullable|string',
             'lastname' => 'required|nullable|string',
             'nickname' => 'required|nullable|string',
-            'faculty_id' => 'required|nullable|string',
             'area_id' => 'required|nullable|string',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]
@@ -77,7 +76,6 @@ class studentController extends Controller
             'firstname' => 'nullable|string',
             'lastname' => 'nullable|string',
             'nickname' => 'nullable|string',
-            'faculty_id' => 'nullable|string',
             'area_id' => 'nullable|string',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

@@ -131,7 +131,7 @@
                                         <div>{{ $student->firstname }} {{ $student->lastname }}</div>
                                     </div>
                                 </td>
-                                <td class="col-3">{{ $student->faculty_id }}</td> <!-- Assuming faculty relation exists -->
+                                <td class="col-3">{{ $student->area_id }}</td> <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
                                     <form action="{{ route('student.edit', $student->students_id) }}"
                                         method="get" style="display: inline;">

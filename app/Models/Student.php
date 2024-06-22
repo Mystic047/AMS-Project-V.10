@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
-    protected $fillable = ['students_id', 'email', 'password', 'nickname', 'firstname', 'lastname', 'faculty_id','area_id','profile_picture'];
+    protected $fillable = ['students_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id','profile_picture'];
     
     protected $primaryKey = 'students_id';
 

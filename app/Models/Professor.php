@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Professor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $fillable = ['professors_id', 'email', 'password', 'nickname', 'firstname', 'lastname', 'faculty_id','area_id' ,'profile_picture'];
+    protected $fillable = ['professors_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id' ,'profile_picture'];
     protected $primaryKey = 'professors_id';
     
     public function faculty()
