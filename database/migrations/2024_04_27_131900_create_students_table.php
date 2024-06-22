@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nickname');
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('faculty_id');
             $table->integer('area_id');
             $table->string('accumulated_hours')->nullable();
             $table->string('profile_picture')->nullable();
