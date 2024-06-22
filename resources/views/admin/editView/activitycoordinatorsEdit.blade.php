@@ -50,10 +50,10 @@
                             <label for="inputPassword4" class="form-label">Nickname</label>
                             <input type="text" class="form-control" id="inputPassword4"  name="nickname" value="{{ $coordinators->nickname }}">
                         </div>
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <label for="inputAddress" class="form-label">faculty_id</label>
                             <input type="text" class="form-control" id="inputAddress" name="faculty_id" value="{{ $coordinators->faculty_id }}">
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">area_id</label>
                             <input type="text" class="form-control" id="inputCity"  name="area_id" value="{{ $coordinators->area_id }}">
