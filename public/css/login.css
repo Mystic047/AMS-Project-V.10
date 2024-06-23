@@ -1,0 +1,57 @@
+body {
+    background-image: url('https://t4.ftcdn.net/jpg/03/78/52/01/360_F_378520139_URuI6nqJ1bNWb7AaMxhl9aeNMzUtMlvg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.custom-bg {
+    background-image: url('https://t4.ftcdn.net/jpg/03/78/52/01/360_F_378520139_URuI6nqJ1bNWb7AaMxhl9aeNMzUtMlvg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.custom-bg {
+    background-image: url('https://t4.ftcdn.net/jpg/03/78/52/01/360_F_378520139_URuI6nqJ1bNWb7AaMxhl9aeNMzUtMlvg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8); /* สีพื้นหลังของการ์ด */
+    border: none;
+    border-radius: 15px; /* กำหนดรูปแบบของขอบในการ์ด */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับการ์ด */
+}
+
+h4 {
+    color: #4527A0; /* สีของข้อความหัวเรื่อง */
+}
+
+.form-floating input,
+.form-floating select {
+    background-color: rgba(255, 255, 255, 0.8); /* สีพื้นหลังของ input และ select */
+    border: 1px solid #4527A0; /* สีขอบของ input และ select */
+    color: #0d0c12; /* สีของตัวอักษรของ input และ select */
+}
+
+.form-floating label {
+    color: #4527A0; /* สีของตัวอักษรของ label */
+}
+
+.btn-dark {
+    background-color: #4527A0; /* สีพื้นหลังของปุ่มเข้าสู่ระบบ */
+    border-color: #FFEB3B; /* สีขอบของปุ่มเข้าสู่ระบบ */
+    color: #FFEB3B; /* สีของตัวอักษรบนปุ่ม */
+}
+
+.form-check-input[type="checkbox"] {
+    background-color: #FFEB3B; /* สีพื้นหลังของช่องเลือก */
+    border-color: #FFEB3B; /* สีขอบของช่องเลือก */
+}
+
+.form-check-input[type="checkbox"]:checked {
+    background-color: #4527A0; /* สีพื้นหลังของช่องเลือกเมื่อถูกเลือก */
+    border-color: #4527A0; /* สีขอบของช่องเลือกเมื่อถูกเลือก */
+}
+
+.form-check-label {
+    color: #4527A0; /* สีของตัวอักษรของ label ของช่องเลือก */
+}

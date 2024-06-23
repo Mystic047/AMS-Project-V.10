@@ -141,7 +141,7 @@
                                         style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" type="submit">
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </form>
@@ -156,6 +156,24 @@
 
         <!-- Bootstrap JS Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function confirmDelete(button) {
+                Swal.fire({
+                    title: 'ต้องการลบข้อมูลนี้?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        button.closest('form').submit();
+                    }
+                });
+            }
+        </script>
     </body>
 @endsection
 
