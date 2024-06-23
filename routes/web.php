@@ -155,9 +155,9 @@ Route::get('/New', function () {
 });
 
 
-Route::get('/ActivityManagement', function () {
-    return view('admin/managementView/activityManage');
-});
+// Route::get('/ActivityManagement', function () {
+//     return view('admin/managementView/activityManage');
+// });
 
 Route::get('/ActivityCreate', function () {
     return view('admin/createView/activityCreate');
