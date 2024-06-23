@@ -36,14 +36,12 @@ class activityController extends Controller
             'activity_type' => 'required|string',
             'activity_date' => 'required|date',
             'activity_responsible_branch' => 'required|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
             'activity_hour_earned' => 'required|string',
             'activity_register_limit' => 'required|string',
             'activity_detail' => 'required|string',
             'assessment_link' => 'required|url',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'created_by' => 'required|string',
+            'responsible_person' => 'required|string',
         ]);
         
     
@@ -79,49 +77,45 @@ class activityController extends Controller
 
     public function update(Request $request, $id)
     {
-        $admin = Admin::findOrFail($id);
-
-        $request->validate([
-            'email' => 'nullable|string',
-            'password' => 'nullable|string',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'faculty_id' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        $activity = Activities::findOrFail($id);
+    
+        $validatedData = $request->validate([
+            'activity_id' => 'required|string',
+            'activity_name' => 'required|string',
+            'activity_type' => 'required|string',
+            'activity_date' => 'required|date',
+            'activity_responsible_branch' => 'required|string',
+            'activity_hour_earned' => 'required|string',
+            'activity_register_limit' => 'required|string',
+            'activity_detail' => 'required|string',
+            'assessment_link' => 'required|url',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'responsible_person' => 'required|string',
         ]);
-
-        Log::debug($request->all());
-
-        if (empty($request->password)) {
-            $admin->fill($request->except(['password']));
-        } else {
-            $admin->fill($request->all());
-            $admin->password = $request->password;
-        }
-
-        $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) {
-            $admin->admin_id = $emailPrefix;
-        } else {
-            return back()->withErrors(['email' => 'The admin ID must be numeric'])->withInput();
-        }
-
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+    
+        Log::info('Validation passed.', $validatedData);
+    
+      
+        $activity->fill($validatedData);
+    
+        // Handle the picture upload
+        if ($request->hasFile('picture')) {
+            $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/admin_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $admin->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+            $path = $file->storeAs('public/activity_pictures', $filename);
+            $activity->picture = str_replace('public/', '', $path);
         }
-
-        $admin->save();
-        return redirect()->route('admin.manage')->with('success', 'admin updated successfully!');
+    
+        // Save the updated activity
+        $activity->save();
+    
+        return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
     }
+    
 
     public function destroy($id){
-        $admin = Admin::find($id)->delete();
-        return back()->with('deleted', 'Admin deleted success mfully!');
+        $activity = Activities::find($id)->delete();
+        return back()->with('deleted', 'Activity deleted success fully!');
     }
 
     public function search(Request $request)
@@ -129,11 +123,11 @@ class activityController extends Controller
         $query = $request->input('query');
 
         // Search for coordinators by firstname, lastname, or faculty_id
-        $admins = Admin::where('firstname', 'LIKE', "%{$query}%")
+        $activity = Activities::where('firstname', 'LIKE', "%{$query}%")
             ->orWhere('lastname', 'LIKE', "%{$query}%")
             ->orWhere('admin_id', 'LIKE', "%{$query}%")
             ->get();
 
-        return view('/admin/managementView/adminManage', compact('admins'));
+        return view('/admin/managementView/adminManage', compact('activity'));
     }
 }

@@ -21,6 +21,7 @@ class Activities extends Model
         'activity_register_limit', 
         'activity_detail', 
         'assessment_link', 
+        'responsible_person',
         'picture', 
         'created_by'
     ];
