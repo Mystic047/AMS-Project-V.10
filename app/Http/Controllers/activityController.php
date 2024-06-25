@@ -26,6 +26,14 @@ class activityController extends Controller
     }
 
 
+    public function showInfo($id)
+    {
+        $activities = Activities::find($id);
+
+        return view('/admin/editView/activityEdit', compact('activities'));
+    }
+
+
     public function create(Request $request)
     {
         Log::info('Request received for creating activity.', $request->all());
@@ -40,6 +48,7 @@ class activityController extends Controller
             'activity_register_limit' => 'required|string',
             'activity_detail' => 'required|string',
             'assessment_link' => 'required|url',
+            'activity_location' => 'required|string',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsible_person' => 'required|string',
         ]);
@@ -88,6 +97,7 @@ class activityController extends Controller
             'activity_hour_earned' => 'required|string',
             'activity_register_limit' => 'required|string',
             'activity_detail' => 'required|string',
+            'activity_location' => 'required|string',
             'assessment_link' => 'required|url',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsible_person' => 'required|string',
