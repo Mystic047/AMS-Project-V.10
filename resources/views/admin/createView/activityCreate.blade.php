@@ -33,9 +33,14 @@
                         <input type="text" name="activity_name" class="form-control" id="activity_name">
                     </div>
                     <div class="col-md-6">
+                        <label for="activity_location" class="form-label">สถานที่</label>
+                        <input type="text" name="activity_location" class="form-control" id="activity_location">
+                    </div>
+                    <div class="col-md-6">
                         <label for="activity_type" class="form-label">ประเภทกิจกรรม</label>
                         <input type="text" name="activity_type" class="form-control" id="activity_type">
                     </div>
+
                     <div class="col-md-6">
                         <label for="activity_date" class="form-label">วันที่จัด</label>
                         <input type="date" name="activity_date" class="form-control" id="activity_date">
@@ -43,14 +48,6 @@
                     <div class="col-md-6">
                         <label for="activity_responsible_branch" class="form-label">สาขาที่รับผิดชอบ</label>
                         <input type="text" name="activity_responsible_branch" class="form-control" id="activity_responsible_branch">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="latitude" class="form-label">ละติจูด</label>
-                        <input type="text" name="latitude" class="form-control" id="latitude">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="longitude" class="form-label">ลองจิจูด</label>
-                        <input type="text" name="longitude" class="form-control" id="longitude">
                     </div>
                     <div class="col-md-6">
                         <label for="activity_hour_earned" class="form-label">ชั่วโมงที่ได้รับ</label>
@@ -72,9 +69,9 @@
                         <label for="picture" class="form-label">รูปภาพ</label>
                         <input type="file" id="picture" name="picture" class="form-control">
                     </div>
-                    <div class="col-md-6">
-                        <label for="created_by" class="form-label">สร้างโดย</label>
-                        <input type="text" name="created_by" class="form-control" id="created_by">
+                    <div class="col-md-6"> 
+                        <label for="responsible_person" class="form-label">ผู้รับผิดชอบ</label>
+                        <input type="text" name="responsible_person" class="form-control" id="responsible_person">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary float-end">Create</button>

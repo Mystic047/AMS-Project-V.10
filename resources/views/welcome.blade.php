@@ -46,61 +46,39 @@
             <div class="table-responsive">
               <table class="table table-bordered table-hover mb-4">
                 <colgroup>
-                  <col style="width: 20%;">
-                  <col style="width: 40%;">
-                  <col style="width: 40%;">
+                    <col style="width: 10%;">
+                    <col style="width: 20%;">
+                    <col style="width: 15%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 15%;">
                 </colgroup>
                 <thead class="table-light">
-                  <tr>
-                    <th class="text-center">ข้อมูล</th>
-                    <th class="text-center">ชื่อกิจกรรม</th>
-                    <th class="text-center">การรับสมัคร</th>
-                  </tr>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">ชื่อกิจกรรม</th>
+                        <th class="text-center">ประเภทกิจกรรม</th>
+                        <th class="text-center">สถานที่</th>
+                        <th class="text-center">การรับสมัคร</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>สถานะเปิดปิด</td>
-                    <td>ชื่อกิจจัดโดย .... <br>
-                      สถานที่ ......
-                    </td>
-                    <td>รับสมัครวันที่ .... จำนวนที่รับ ......
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>สถานะเปิดปิด</td>
-                    <td>ชื่อกิจจัดโดย .... <br>
-                      สถานที่ ......
-                    </td>
-                    <td>รับสมัครวันที่ .... จำนวนที่รับ ......
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>สถานะเปิดปิด</td>
-                    <td>ชื่อกิจจัดโดย .... <br>
-                      สถานที่ ......
-                    </td>
-                    <td>รับสมัครวันที่ .... จำนวนที่รับ ......
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>สถานะเปิดปิด</td>
-                    <td>ชื่อกิจจัดโดย .... <br>
-                      สถานที่ ......
-                    </td>
-                    <td>รับสมัครวันที่ .... จำนวนที่รับ ......
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>สถานะเปิดปิด</td>
-                    <td>ชื่อกิจจัดโดย .... <br>
-                      สถานที่ ......
-                    </td>
-                    <td>รับสมัครวันที่ .... จำนวนที่รับ ......
-                    </td>
-                  </tr>
-
+                    @foreach($activities as $activity)
+                        <tr>
+                            <td class="text-center">{{ $activity->activity_id }}</td>
+                            <td class="text-center">{{ $activity->activity_name }}</td>
+                            <td class="text-center">{{ $activity->activity_type }}</td>
+                            <td class="text-center">{{ $activity->activity_location }}</td>
+                            <td class="text-center">รับสมัครวันที่: {{ $activity->activity_date }}<br>จำนวนที่รับ: {{ $activity->activity_register_limit }}</td>
+                            <td class="text-center">
+                              <button class="btn btn-primary" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
-              </table>
+            </table>
+        </body>
             </div>
           </div>
         </div>
