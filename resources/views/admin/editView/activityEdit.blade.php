@@ -32,6 +32,11 @@
                     </div>
                     
                     <div class="mb-3">
+                        <label for="activity_location" class="form-label">Activity Location</label>
+                        <input type="text" class="form-control" id="activity_location" name="activity_location" value="{{ $activities->activity_location }}" required>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="activity_name" class="form-label">Activity Name</label>
                         <input type="text" class="form-control" id="activity_name" name="activity_name" value="{{ $activities->activity_name }}" required>
                     </div>

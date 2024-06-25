@@ -22,6 +22,7 @@ class Activities extends Model
         'activity_detail', 
         'assessment_link', 
         'responsible_person',
+        'activity_location',
         'picture', 
         'created_by'
     ];

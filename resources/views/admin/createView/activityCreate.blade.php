@@ -33,9 +33,14 @@
                         <input type="text" name="activity_name" class="form-control" id="activity_name">
                     </div>
                     <div class="col-md-6">
+                        <label for="activity_location" class="form-label">สถานที่</label>
+                        <input type="text" name="activity_location" class="form-control" id="activity_location">
+                    </div>
+                    <div class="col-md-6">
                         <label for="activity_type" class="form-label">ประเภทกิจกรรม</label>
                         <input type="text" name="activity_type" class="form-control" id="activity_type">
                     </div>
+
                     <div class="col-md-6">
                         <label for="activity_date" class="form-label">วันที่จัด</label>
                         <input type="date" name="activity_date" class="form-control" id="activity_date">

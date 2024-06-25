@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\testRelationController;
 use App\Http\Controllers\Auth\customAuthController;
 
@@ -46,9 +47,10 @@ Route::middleware(['role:student'])->group(function () {
 // Route::get('/admin/login', [customAuthController::class,'showAdminLoginForm'])->name('admin.login');
 // Route::get('/admin/login', [customAuthController::class,'loginAdmin']);
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome.home');
+Route::get('/', [homeController::class , 'showHomeView'])->name('welcome.home');
+Route::get('/activity-info/{id}', [homeController::class , 'showInfoView'])->name('activity.info');
+
+
 
 Route::get('/profile', function () {
     return view('profile');

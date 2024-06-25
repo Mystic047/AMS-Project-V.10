@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('activity_register_limit');
             $table->string('activity_detail');
             $table->string('assessment_link');
+            $table->string('activity_location');
             $table->string('picture')->nullable();
             $table->string('responsible_person')->nullable();
             $table->integer('created_by')->nullable();
