@@ -9,10 +9,6 @@ class ActivitiesSubmit extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'activity_id', 
-        'students_id', 
-    ];
-
+    protected $fillable = ['activity_id', 'students_id'];
     protected $primaryKey = 'activitySubmitId';
 }

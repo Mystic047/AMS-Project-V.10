@@ -189,8 +189,31 @@
                                         </div>
                                     </div>
                                     <br />
-                                    <button type="button"
-                                        class="btn btn-outline-info">เช็คลงให้ล๊อคอินก่อนลงชื่อใช้งาน</button>
+                                    {{-- <button type="button"
+                                        class="btn btn-outline-info">เช็คลงให้ล๊อคอินก่อนลงชื่อใช้งาน
+                                    </button> --}}
+                                    @php
+                                    $user = getAuthenticatedUser();
+                                    @endphp
+
+                                    <div>
+                                        {{$user->students_id}}
+                                    </div>
+                                    <div>
+                                        {{$activity->activity_id}}
+                                    </div>
+                                    
+                                    <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="students_id" value="{{ $user ? $user->students_id : '' }}">
+                                        <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
+                                        <button class="btn btn-success btn-sm" type="submit">
+                                            <i class="fas fa-pencil-alt"></i> Submit
+                                        </button>
+                                    </form>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
