@@ -116,49 +116,35 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="tab-pane fade" id="border-profile" role="tabpanel"
-                                        aria-labelledby="border-profile-tab">
+                                    <div class="tab-pane fade" id="border-profile" role="tabpanel" aria-labelledby="border-profile-tab">
                                         <h4 class="mb-4"><i class="fas fa-user"></i> รายชื่อผู้สมัคร</h4>
                                         <table class="table">
                                             <thead>
-                                                <tr class="table-light">
-                                                    <th>ลำดับ</th>
-                                                    <th>รหัสนักศึกษา</th>
+                                                <tr>
+                                                    <th>รหัส</th>
                                                     <th>ชื่อ</th>
-                                                    <th>สาขา</th>
-                                                    <th>สถานะ</th>
+                                                    <th>นามสกุล</th>
+                                                    <th>อีเมล</th>
+                                                    <th>ชื่อเล่น</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>640112418053</td>
-                                                    <td>ชื่อ นามสกุล</td>
-                                                    <td>คณะวิทยาศาสตร์</td>
-                                                    <td>รอการยืนยัน</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>640112418053</td>
-                                                    <td>ชื่อ นามสกุล</td>
-                                                    <td>คณะวิทยาศาสตร์</td>
-                                                    <td>รอการยืนยัน</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>640112418053</td>
-                                                    <td>ชื่อ นามสกุล</td>
-                                                    <td>คณะวิทยาศาสตร์</td>
-                                                    <td>รอการยืนยัน</td>
-                                                </tr>
-                                                <!-- Add more rows as needed -->
+                                                @foreach($activitiesSubmits as $submit)
+                                                    <tr>
+                                                        <td>{{ $submit->student->students_id }}</td>
+                                                        <td>{{ $submit->student->firstname }}</td>
+                                                        <td>{{ $submit->student->lastname }}</td>
+                                                        <td>{{ $submit->student->email }}</td>
+                                                        <td>{{ $submit->student->nickname }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <div class="text-end">
-                                            <button type="button"
-                                                class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</button>
+                                            <button type="button" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</button>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
                             </div>
@@ -189,8 +175,32 @@
                                         </div>
                                     </div>
                                     <br />
-                                    <button type="button"
-                                        class="btn btn-outline-info">เช็คลงให้ล๊อคอินก่อนลงชื่อใช้งาน</button>
+                                    {{-- <button type="button"
+                                        class="btn btn-outline-info">เช็คลงให้ล๊อคอินก่อนลงชื่อใช้งาน
+                                    </button> --}}
+                                    @php
+                                    $user = getAuthenticatedUser();
+                                    @endphp
+
+                                    
+                                    <div>
+                                        Student ID : {{$user->students_id}}
+                                    </div>
+                                    <div>
+                                        Activity ID : {{$activity->activity_id}}
+                                    </div>
+                                    
+                                    <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="students_id" value="{{ $user ? $user->students_id : '' }}">
+                                        <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
+                                        <button class="btn btn-success btn-sm" type="submit">
+                                            <i class="fas fa-pencil-alt"></i> Submit
+                                        </button>
+                                    </form>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

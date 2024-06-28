@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activities;
 use Illuminate\Http\Request;
+use App\Models\ActivitiesSubmit;
 
 class homeController extends Controller
 {
@@ -16,6 +17,9 @@ class homeController extends Controller
     public function showInfoView($id)
     {
         $activity = Activities::find($id);
-        return view('/activityTest' , compact('activity'));
+        $activitiesSubmits = ActivitiesSubmit::with(['student'])
+        ->where('activity_id', $id)
+        ->get();
+        return view('/activityTest' , compact('activity' , 'activitiesSubmits'));
     }
 }

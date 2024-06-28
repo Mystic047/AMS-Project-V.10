@@ -2,34 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\ActivitiesSubmit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class activitySubmitController extends Controller
 {
-    //
-    
     public function submit(Request $request)
     {
-        $request->validate([
-            'activity_id' => 'required|exists:activities,id',
+        Log::info('Received activity submission:', $request->all());
+    
+        $validatedData = $request->validate([
+            'activity_id' => 'required|exists:activities,activity_id',
+            'students_id' => 'required|integer|exists:students,students_id',
         ]);
-
-        $user = getAuthenticatedUser();
-        if (!$user) {
-            return redirect()->back()->withErrors('No authenticated user found.');
+    
+        // Use firstOrCreate to either find an existing record or create a new one
+        $activitiesSubmit = ActivitiesSubmit::firstOrCreate([
+            'activity_id' => $validatedData['activity_id'],
+            'students_id' => $validatedData['students_id']
+        ]);
+    
+        if ($activitiesSubmit->wasRecentlyCreated) {
+            return redirect()->back()->with('success', 'Activity submitted successfully.');
+        } else {
+            return redirect()->back()->with('info', 'Activity submission already exists.');
         }
-
-        $user_id = $user->id;
-
-        ActivitiesSubmit::create([
-            'activity_id' => $request->input('activity_id'),
-            'student_id' => $user_id, 
-        ]);
-
-        return redirect()->back()->with('success', 'Activity submitted successfully.');
     }
-
-
-
+    
 }

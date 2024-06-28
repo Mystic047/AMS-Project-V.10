@@ -11,6 +11,7 @@ require base_path('routes/coordinators.php');
 require base_path('routes/students.php');
 require base_path('routes/faculty-areas.php');
 require base_path('routes/activity.php');
+require base_path('routes/activitySubmit.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
