@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('activities_submits', function (Blueprint $table) {
             $table->id('activitySubmitId');
             $table->bigInteger('students_id');
-            $table->bigInteger('activity_id');
+            $table->string('activity_id');
             $table->timestamps();
         });
     }
