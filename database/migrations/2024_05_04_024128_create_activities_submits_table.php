@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('activities_submits', function (Blueprint $table) {
             $table->id('activitySubmitId');
             $table->bigInteger('students_id');
-            $table->string('activity_id');
+            $table->string('activity_id');      
+            $table->string('status_check_in_morning')->nullable();;
+            $table->string('status_check_in_afternoon')->nullable();;
+            $table->string('status')->default('ยังไม่เข้าร่วมกิจกรรม');
             $table->timestamps();
         });
     }

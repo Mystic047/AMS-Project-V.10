@@ -46,12 +46,6 @@
             <h5 class="card-title">กิจกรรมที่เปิดรับสมัคร</h5>
             <div class="table-responsive">
               <table class="table table-bordered table-hover mb-4">
-                {{-- <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 30%;">
-                    <col style="width: 15%;">
-                    <col style="width: 15%;">
-                </colgroup> --}}
                 <thead class="table-light">
                     <tr>
                         <th class="text-center">สถานะ</th>
@@ -63,22 +57,35 @@
                 <tbody>
                     @foreach($activities as $activity)
                         <tr>
-                            <td class="text-center">{{ $activity->activity_name }}</td>
+                            <td class="text-center">
+                                @if($activity->registration_status == 'open')
+                                    <span class="badge bg-success">เปิด</span>
+                                @else
+                                    <span class="badge bg-danger">ปิด</span>
+                                @endif
+                            </td>
                             <td>
                                 <i class="fa-solid fa-house"></i> กิจกรรม: <span style="color: blue;">{{ $activity->activity_name }}</span>
                                 <br><i class="fa-solid fa-list"></i> จัดโดย: {{ $activity->activity_responsible_branch }}
                                 &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่: {{ $activity->activity_location }}
                                 <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ: {{ $activity->activity_hour_earned }} ชั่วโมง
                             </td>
-                            <td class="text-center"><i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->activity_date }}<br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->activity_register_limit }}</span>
+                            <td class="text-center">
+                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->activity_date }}
+                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->activity_register_limit }}</span>
                             </td>
                             <td class="text-center">
-                              <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
+                                @if($activity->registration_status == 'open')
+                                    <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
+                                @else
+                                    <button class="btn btn-secondary" disabled>ดูข้อมูล</button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
         </body>
             </div>
           </div>

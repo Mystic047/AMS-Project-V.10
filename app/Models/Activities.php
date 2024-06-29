@@ -26,12 +26,27 @@ class Activities extends Model
         'activity_location',
         'picture',
         'created_by',
+        'created_by_role',
+        'morning_enrollment_key',
+        'afternoon_enrollment_key',
+        'is_open',
     ];
 
     public function activitySubmits()
     {
         return $this->hasMany(ActivitiesSubmit::class, 'activity_id', 'activity_id');
     }
+    
+     public function isRegistrationOpen()
+    {
+         return $this->is_open && $this->activity_date >= now()->toDateString();
+    }
+    
+    // public function isRegistrationOpen()
+    // {
+    //     return $this->activity_date >= now()->toDateString();
+    // }
+
 
     protected $primaryKey = 'activity_id';
     public $incrementing = false;

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ActivitiesSubmit;
+use App\Models\Activities;
 use Illuminate\Http\Request;
+use App\Models\ActivitiesSubmit;
 use Illuminate\Support\Facades\Log;
 
 class activitySubmitController extends Controller
@@ -29,5 +30,32 @@ class activitySubmitController extends Controller
             return redirect()->back()->with('info', 'Activity submission already exists.');
         }
     }
+
+    public function checkIn(Request $request, $activityId, $timePeriod)
+{
+    $user = getAuthenticatedUser();
+    $activitySubmit = ActivitiesSubmit::where('students_id', $user->students_id)
+                                    ->where('activity_id', $activityId)
+                                    ->first();
+
+    $activity = Activities::find($activityId);
+
+    if ($activitySubmit) {
+        if ($timePeriod == 'morning' && $request->enrollment_key == $activity->morning_enrollment_key) {
+            $activitySubmit->check_in_morning = now();
+            $activitySubmit->status = 'checked_in_morning';
+        } elseif ($timePeriod == 'afternoon' && $request->enrollment_key == $activity->afternoon_enrollment_key) {
+            $activitySubmit->check_in_afternoon = now();
+            $activitySubmit->status = 'checked_in_afternoon';
+        } else {
+            return redirect()->back()->with('error', 'Invalid enrollment key');
+        }
+
+        $activitySubmit->save();
+    }
+
+    return redirect()->back()->with('success', 'Checked in successfully for ' . $timePeriod . ' session');
+}
+
     
 }

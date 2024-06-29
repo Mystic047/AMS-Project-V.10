@@ -21,7 +21,7 @@ class Student extends Authenticatable
 
     public function area()
     {
-        return $this->belongsTo(area::class, 'area_id');
+        return $this->belongsTo(area::class, 'area_id', 'area_id');
     }
 
     public function activitySubmits()
