@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity Submits</title>
     <style>
+       @font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
+        }
         body {
-            font-family: 'Sarabun', sans-serif; /* Update this line with your font */
+            font-family: 'THSarabunNew', sans-serif;
         }
         table {
             width: 100%;
@@ -35,11 +61,11 @@
         <tbody>
             @foreach ($activitiesSubmits as $submit)
                 <tr>
-                    <td>{{ $submit->student->students_id }}</td>
-                    <td>{{ $submit->student->firstname }}</td>
-                    <td>{{ $submit->student->lastname }}</td>  
-                    <td>{{ $submit->student->area->areaName }}</td>
-                    <td>{{ $submit->status }}</td>
+                    <td>{{ $submit->student->students_id ?? 'N/A' }}</td>
+                    <td>{{ $submit->student->firstname ?? 'N/A' }}</td>
+                    <td>{{ $submit->student->lastname ?? 'N/A' }}</td>  
+                    <td>{{ $submit->student->area->areaName ?? 'N/A' }}</td>
+                    <td>{{ $submit->status ?? 'N/A' }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -1,0 +1,14 @@
+{
+    "sarabun": {
+        "normal": "G:\\AMS-Project-V.10\\storage\\fontsSarabun-Regular.ttf",
+        "bold": "G:\\AMS-Project-V.10\\storage\\fontsSarabun-Bold.ttf",
+        "italic": "G:\\AMS-Project-V.10\\storage\\fontsSarabun-Italic.ttf",
+        "bold_italic": "G:\\AMS-Project-V.10\\storage\\fontsSarabun-BoldItalic.ttf"
+    },
+    "thsarabunnew": {
+        "normal": "G:\\AMS-Project-V.10\\storage\\fonts\/thsarabunnew_normal_caa0e632646b469ceb3c9133b398b862",
+        "bold": "G:\\AMS-Project-V.10\\storage\\fonts\/thsarabunnew_bold_96d5df254a5b24dd4dfc0577dd0a5e73",
+        "italic": "G:\\AMS-Project-V.10\\storage\\fonts\/thsarabunnew_italic_294b6054bbdb25f0423fb5d938123cbc",
+        "bold_italic": "thsarabunnew_bold_italic_a298cc24ae77a5eb6cf05aa10dd88c34"
+    }
+}
