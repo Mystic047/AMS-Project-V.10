@@ -140,9 +140,9 @@
                                             </tbody>
                                         </table>
                                         <div class="text-end">
-                                            <button type="button"
-                                                class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</button>
+                                            <a href="{{ route('activity.pdf', ['id' => $activity->activity_id]) }}" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
                                         </div>
+                                        
                                     </div>
 
                                 </div>
