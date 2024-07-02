@@ -10,16 +10,19 @@ class homeController extends Controller
 {
     public function showHomeView()
     {
-        $activities = Activities::all();
+        $activities = Activities::all()->map(function($activity) {
+            $activity->registration_status = $activity->isRegistrationOpen() ? 'open' : 'closed';
+            return $activity;
+        });
         return view('/welcome' , compact('activities'));
     }
 
     public function showInfoView($id)
     {
         $activity = Activities::find($id);
-        $activitiesSubmits = ActivitiesSubmit::with(['student'])
+        $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
         ->where('activity_id', $id)
         ->get();
-        return view('/activityTest' , compact('activity' , 'activitiesSubmits'));
+        return view('/activityView' , compact('activity' , 'activitiesSubmits'));
     }
 }
