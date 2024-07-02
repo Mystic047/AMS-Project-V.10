@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Activities;
-use App\Models\ActivitiesSubmit;
-use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use App\Models\ActivitiesSubmit;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class activityController extends Controller
 {
@@ -147,18 +148,23 @@ class activityController extends Controller
     public function generatePDF($id)
     {
         $activity = Activities::find($id);
+    
+        if (!$activity) {
+            return redirect()->back()->with('error', 'Activity not found.');
+        }
+    
         $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
             ->where('activity_id', $id)
             ->get();
     
-        $dompdf = new Dompdf();
-        $html = view('pdf.activity', compact('activity', 'activitiesSubmits'))->render();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        
-        // Stream the PDF in the browser window instead of forcing a download
-        return $dompdf->stream('activity-submits.pdf', ["Attachment" => false]);
+        // Log the data for debugging
+        \Log::info('Activity:', [$activity]);
+        \Log::info('Activities Submits:', [$activitiesSubmits]);
+    
+        $html = View::make('pdf.activity', compact('activity', 'activitiesSubmits'))->render();
+        $pdf = PDF::loadHTML($html);
+    
+        return $pdf->stream('activity-submits.pdf');
     }
     
 
