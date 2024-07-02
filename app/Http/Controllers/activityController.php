@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activities;
+use App\Models\ActivitiesSubmit;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Activities;
+
 class activityController extends Controller
 {
     public function showManageView()
     {
         $activities = Activities::all();
-        return view('/admin/managementView/activityManage' , compact('activities'));
+        return view('/admin/managementView/activityManage', compact('activities'));
     }
 
     public function showCreateView()
@@ -25,7 +28,6 @@ class activityController extends Controller
         return view('/admin/editView/activityEdit', compact('activities'));
     }
 
-
     public function showInfo($id)
     {
         $activities = Activities::find($id);
@@ -33,11 +35,10 @@ class activityController extends Controller
         return view('/admin/editView/activityEdit', compact('activities'));
     }
 
-
     public function create(Request $request)
     {
         Log::info('Request received for creating activity.', $request->all());
-    
+
         $validatedData = $request->validate([
             'activity_id' => 'required|string',
             'activity_name' => 'required|string',
@@ -52,20 +53,19 @@ class activityController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsible_person' => 'required|string',
         ]);
-        
-    
+
         Log::info('Validation passed.', $validatedData);
-    
+
         $activity = new Activities();
         $activity->fill($validatedData);
-    
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/activity_pictures', $filename); 
+            $path = $file->storeAs('public/activity_pictures', $filename);
             $activity->picture = str_replace('public/', '', $path);
         }
-    
+
         // if ($request->hasFile('profile_picture')) {
         //     $file = $request->file('profile_picture');
         //     $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -73,21 +73,17 @@ class activityController extends Controller
         //     $admin->profile_picture = str_replace('public/', '', $path); // Save the path in the database
         // }
 
-
         $activity->save();
-    
+
         Log::info('Activity saved successfully.', $activity->toArray());
-    
+
         return redirect()->route('activity.manage')->with('success', 'Activity added successfully!');
     }
-    
-    
-    
 
     public function update(Request $request, $id)
     {
         $activity = Activities::findOrFail($id);
-    
+
         $validatedData = $request->validate([
             'activity_id' => 'required|string',
             'activity_name' => 'required|string',
@@ -102,12 +98,11 @@ class activityController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsible_person' => 'required|string',
         ]);
-    
+
         Log::info('Validation passed.', $validatedData);
-    
-      
+
         $activity->fill($validatedData);
-    
+
         // Handle the picture upload
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
@@ -115,15 +110,15 @@ class activityController extends Controller
             $path = $file->storeAs('public/activity_pictures', $filename);
             $activity->picture = str_replace('public/', '', $path);
         }
-    
+
         // Save the updated activity
         $activity->save();
-    
+
         return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
     }
-    
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $activity = Activities::find($id)->delete();
         return back()->with('deleted', 'Activity deleted success fully!');
     }
@@ -148,4 +143,23 @@ class activityController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function generatePDF($id)
+    {
+        $activity = Activities::find($id);
+        $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
+            ->where('activity_id', $id)
+            ->get();
+    
+        $dompdf = new Dompdf();
+        $html = view('pdf.activity', compact('activity', 'activitiesSubmits'))->render();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        
+        // Stream the PDF in the browser window instead of forcing a download
+        return $dompdf->stream('activity-submits.pdf', ["Attachment" => false]);
+    }
+    
+
 }
