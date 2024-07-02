@@ -19,13 +19,11 @@
 </style>
 @extends('layout.master')
 @section('content')
-
     <body style="background-color:#f5f5f5;">
         <br>
         <div class="container">
             <div class="row layout-top-spacing layout-spacing">
                 <div class="col-lg-9 col-md-12 layout-spacing">
-                    <!-- Card 1: Activity Information -->
                     <div class="card card-left">
                         <div class="card-body">
                             <div class="widget-heading mb-4">
@@ -194,20 +192,21 @@
                                     </div>
                                 @endif
 
-                                <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;">
+                                <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;" id="submit-form">
                                     @csrf
                                     <input type="hidden" name="students_id" value="{{ $user ? $user->students_id : '' }}">
                                     <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
                                     @if($activity->registration_status == 'open')
-                                        <button class="btn btn-success btn-sm" type="submit">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="confirmSubmit(this)">
                                             <i class="fas fa-pencil-alt"></i> Submit
                                         </button>
                                     @else
-                                        <button class="btn btn-success btn-sm" type="submit" disabled>
+                                        <button class="btn btn-success btn-sm" type="button" disabled>
                                             <i class="fas fa-pencil-alt"></i> Submit
                                         </button>
                                     @endif
                                 </form>
+                                
                                 
 
 
@@ -237,12 +236,9 @@
             </div>
         </div>
         <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var borderProfileTab = document.getElementById('border-profile-tab');
@@ -257,6 +253,23 @@
                     imageContainer.style.display = 'block';
                 });
             });
+
+            function confirmSubmit(button) {
+            Swal.fire({
+                title: 'ลงชื่อเข้าร่วมกิจกรรม?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    button.closest('form').submit();
+                }
+            });
+        }
+
         </script>
     </body>
 @endsection

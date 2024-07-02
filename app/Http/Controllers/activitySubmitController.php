@@ -12,23 +12,25 @@ class activitySubmitController extends Controller
     public function submit(Request $request)
     {
         Log::info('Received activity submission:', $request->all());
-    
+
         $validatedData = $request->validate([
             'activity_id' => 'required|exists:activities,activity_id',
             'students_id' => 'required|integer|exists:students,students_id',
         ]);
-    
+
         // Use firstOrCreate to either find an existing record or create a new one
         $activitiesSubmit = ActivitiesSubmit::firstOrCreate([
             'activity_id' => $validatedData['activity_id'],
             'students_id' => $validatedData['students_id']
         ]);
-    
+
         if ($activitiesSubmit->wasRecentlyCreated) {
-            return redirect()->back()->with('success', 'Activity submitted successfully.');
+            notify()->success('You have successfully signed up for the activity!');
         } else {
-            return redirect()->back()->with('info', 'Activity submission already exists.');
+            notify()->info('Activity submission already exists.');
         }
+
+        return redirect()->back();
     }
 
     public function checkIn(Request $request, $activityId, $timePeriod)
