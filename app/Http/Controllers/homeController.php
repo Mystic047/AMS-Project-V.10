@@ -20,9 +20,16 @@ class homeController extends Controller
     public function showInfoView($id)
     {
         $activity = Activities::find($id);
+    
+        if ($activity) {
+            $activity->registration_status = $activity->isRegistrationOpen() ? 'open' : 'closed';
+        }
+    
         $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
-        ->where('activity_id', $id)
-        ->get();
-        return view('/activityView' , compact('activity' , 'activitiesSubmits'));
+            ->where('activity_id', $id)
+            ->get();
+    
+        return view('activityView', compact('activity', 'activitiesSubmits'));
     }
+    
 }
