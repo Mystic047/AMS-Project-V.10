@@ -75,11 +75,7 @@
                                 <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->activity_register_limit }}</span>
                             </td>
                             <td class="text-center">
-                                @if($activity->registration_status == 'open')
                                     <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
-                                @else
-                                    <button class="btn btn-secondary" disabled>ดูข้อมูล</button>
-                                @endif
                             </td>
                         </tr>
                     @endforeach

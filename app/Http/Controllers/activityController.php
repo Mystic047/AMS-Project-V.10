@@ -140,4 +140,12 @@ class activityController extends Controller
 
         return view('/admin/managementView/adminManage', compact('activity'));
     }
+    public function toggleStatus($id, Request $request)
+    {
+        $activity = Activities::findOrFail($id);
+        $activity->is_open = $request->input('is_open') ? true : false;
+        $activity->save();
+
+        return response()->json(['success' => true]);
+    }
 }

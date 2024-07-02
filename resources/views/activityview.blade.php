@@ -194,16 +194,21 @@
                                     </div>
                                 @endif
 
-                                    <form action="{{ route('activity.submit') }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        <input type="hidden" name="students_id"
-                                            value="{{ $user ? $user->students_id : '' }}">
-                                        <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
+                                <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="students_id" value="{{ $user ? $user->students_id : '' }}">
+                                    <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
+                                    @if($activity->registration_status == 'open')
                                         <button class="btn btn-success btn-sm" type="submit">
                                             <i class="fas fa-pencil-alt"></i> Submit
                                         </button>
-                                    </form>
+                                    @else
+                                        <button class="btn btn-success btn-sm" type="submit" disabled>
+                                            <i class="fas fa-pencil-alt"></i> Submit
+                                        </button>
+                                    @endif
+                                </form>
+                                
 
 
 
