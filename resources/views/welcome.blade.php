@@ -22,8 +22,8 @@
         <div id="carouselExampleFade" class="carousel slide carousel-fade">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="https://science.bru.ac.th/wp-content/uploads/2022/10/slider-1-1-copy.jpg" class="d-block w-100" alt="...">
-              </div>
+                <img src="{{ asset('storage/pictures/Colosal.jpg') }}" class="d-block w-100" alt="...">
+            </div>
               <div class="carousel-item">
                 <img src="https://combu.bru.ac.th/wp-content/uploads/2024/02/422891036_825393186294436_1499709031224825189_n.jpg" class="d-block w-100" alt="...">
               </div>
@@ -81,7 +81,7 @@
                     @endforeach
                 </tbody>
             </table>
-            
+
         </body>
             </div>
           </div>

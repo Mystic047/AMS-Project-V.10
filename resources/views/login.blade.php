@@ -27,7 +27,7 @@
                                             <div class="mb-5">
                                                 <div class="text-center mb-4">
                                                     <a href="#!">
-                                                        <img src="https://img2.pic.in.th/pic/sci-logo-1-removebg-preview.png"
+                                                        <img src="{{ asset('storage/pictures/scilogo.png') }}"
                                                             alt="BootstrapBrain Logo" width="205" height="70">
                                                     </a>
                                                 </div>
