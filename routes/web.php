@@ -12,6 +12,7 @@ require base_path('routes/students.php');
 require base_path('routes/faculty-areas.php');
 require base_path('routes/activity.php');
 require base_path('routes/activitySubmit.php');
+require base_path('routes/fileForDownload.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
