@@ -30,13 +30,13 @@
           <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('area.manage') }}">จัดการข้อมูลสาขา</a></li>
               <li><a class="nav-link" href="{{ route('activity.manage') }}">จัดการข้อมูลกิจกรรม</a></li>
-              <li><a class="nav-link" href="">จัดการข้อมูลเอกสาร</a></li>
+              <li><a class="nav-link" href="{{'FileManagement'}}">จัดการข้อมูลเอกสาร</a></li>
           </ul>
       </li>
       <li class="dropdown active">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-envelope"></i><span>ข่าวสาร ประชาสัมพันธ์</span></a>
           <ul class="dropdown-menu">
-              <li><a class="nav-link" href="">จัดการข้อมูลข่าวสาร</a></li>
+              <li><a class="nav-link" href="{{'NewManage'}}">จัดการข้อมูลข่าวสาร</a></li>
           </ul>
       </li>
       <li class="dropdown active">
