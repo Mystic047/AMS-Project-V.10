@@ -17,33 +17,33 @@
       </li>
       <li class="menu-header">Starter</li>
       <li class="dropdown active">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>จัดการข้อมูลผู้ใช้</span></a>
-          <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{ route('student.manage') }}">ข้อมูลนักศึกษา</a></li>
-              <li><a class="nav-link" href="{{ route('coordinator.manage') }}">ข้อมูลฝ่ายกิจกรรม</a></li>
-              <li><a class="nav-link" href="{{ route('professor.manage') }}">ข้อมูลอาจารย์</a></li>
-              <li><a class="nav-link" href="{{ route('admin.manage') }}">ข้อมูลผู้ดูแล</a></li>
-          </ul>
-        </li>
-      <li class="dropdown active">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-table"></i><span>จัดการข้อมูลทั่วไป</span></a>
-          <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{ route('area.manage') }}">จัดการข้อมูลสาขา</a></li>
-              <li><a class="nav-link" href="{{ route('activity.manage') }}">จัดการข้อมูลกิจกรรม</a></li>
-              <li><a class="nav-link" href="{{'FileManagement'}}">จัดการข้อมูลเอกสาร</a></li>
-          </ul>
+        <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>จัดการข้อมูลผู้ใช้</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ route('student.manage') }}">ข้อมูลนักศึกษา</a></li>
+          <li><a class="nav-link" href="{{ route('coordinator.manage') }}">ข้อมูลฝ่ายกิจกรรม</a></li>
+          <li><a class="nav-link" href="{{ route('professor.manage') }}">ข้อมูลอาจารย์</a></li>
+          <li><a class="nav-link" href="{{ route('admin.manage') }}">ข้อมูลผู้ดูแล</a></li>
+        </ul>
       </li>
       <li class="dropdown active">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-envelope"></i><span>ข่าวสาร ประชาสัมพันธ์</span></a>
-          <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{'NewManage'}}">จัดการข้อมูลข่าวสาร</a></li>
-          </ul>
+        <a href="#" class="nav-link has-dropdown"><i class="fas fa-table"></i><span>จัดการข้อมูลทั่วไป</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ route('area.manage') }}">จัดการข้อมูลสาขา</a></li>
+          <li><a class="nav-link" href="{{ route('activity.manage') }}">จัดการข้อมูลกิจกรรม</a></li>
+          <li><a class="nav-link" href="{{ 'FileManagement' }}">จัดการข้อมูลเอกสาร</a></li>
+        </ul>
       </li>
       <li class="dropdown active">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-pdf"></i><span>รายงาน</span></a>
-          <ul class="dropdown-menu">
-              <li><a class="nav-link" href="">จัดการข้อมูลข่าวสาร</a></li>
-          </ul>
+        <a href="#" class="nav-link has-dropdown"><i class="fas fa-envelope"></i><span>ข่าวสาร ประชาสัมพันธ์</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ 'NewManage' }}">จัดการข้อมูลข่าวสาร</a></li>
+        </ul>
+      </li>
+      <li class="dropdown active">
+        <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-pdf"></i><span>รายงาน</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ 'NewManage' }}">จัดการข้อมูลข่าวสาร</a></li>
+        </ul>
       </li>
     </ul>
   </aside>
