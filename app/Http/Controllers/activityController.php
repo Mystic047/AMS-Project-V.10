@@ -19,7 +19,7 @@ class activityController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/activityreate');
+        return view('/admin/createView/activityCreate');
     }
 
     public function showEditView($id)
