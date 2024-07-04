@@ -30,7 +30,7 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('area.manage') }}">จัดการข้อมูลสาขา</a></li>
           <li><a class="nav-link" href="{{ route('activity.manage') }}">จัดการข้อมูลกิจกรรม</a></li>
-          <li><a class="nav-link" href="{{ 'FileManagement' }}">จัดการข้อมูลเอกสาร</a></li>
+          <li><a class="nav-link" href="{{ route('file.manage') }}">จัดการข้อมูลเอกสาร</a></li>
         </ul>
       </li>
       <li class="dropdown active">

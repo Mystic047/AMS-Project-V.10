@@ -12,5 +12,6 @@ Route::controller(fileController::class)->group(function () {
 
     Route::get('/editForm-file/{id}', 'showEditView')->name('file.edit'); // Corrected from 'editFromArea' to 'editFormArea'
     Route::put('/update-file/{id}', 'update')->name('file.update');
-    Route::delete('/delete-file/{id}', 'destroy')->name('file.delete');
+
+    Route::delete('/delete-file/{id}', 'destroy')->name('file.destroy');
 });
