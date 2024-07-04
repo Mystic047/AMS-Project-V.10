@@ -34,24 +34,36 @@
                                     <thead>
                                         <tr>
                                             <th width="70%" class="text-center">รายการ</th>
-                                            <th width="10%" class="text-center">โดย</th>
                                             <th width="10%" class="text-center">วันที่</th>
                                             <th width="10%" class="text-center">อ่านไฟล์</th>
+                                            <th width="10%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($files as $file)
                                         <tr>
-                                            <td>ไฟล์ทดสอบอัปโหลด</td>
-                                            <td class="text-center">คน</td>
-                                            <td class="text-center">23 พ.ค. 2566</td>
-                                            <td class="text-center"><i class="fa-solid fa-file-arrow-down">กก</i></td>
+                                            <td>{{ $file->fileName }}</td>
+                                            {{-- <td>{{ $file->created_by }} {{ $file->created_by_role }}</td> --}}
+                                            <td>{{ $file->created_at }} </td>
+                                            <td>
+                                                @if($file->file_path)
+                                                    <a href="{{ Storage::url($file->file_path) }}" target="_blank">
+                                                        <i class="fa-solid fa-file-pdf fa-2x" style="color: #f6420bde;"></i> <!-- Changed icon to PDF and made it larger -->
+                                                    </a>
+                                                @else
+                                                    ไม่มีไฟล์
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                <form action="{{ route('file.destroy', $file->file_id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>ไฟล์ทดสอบอัปโหลด</td>
-                                            <td class="text-center">หมา</td>
-                                            <td class="text-center">23 พ.ค. 2566</td>
-                                            <td class="text-center"><i class="fa-solid fa-file-arrow-down"></i></td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

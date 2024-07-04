@@ -65,9 +65,9 @@ Route::get('/activity', function () {
     return view('activity');
 });
 
-Route::get('/filedowload', function () {
-    return view('filedowload');
-});
+// Route::get('/filedowload', function () {
+//     return view('filedowload');
+// });
 Route::get('/dashboard', function () {
     return view('/admin/dashboard');
 });

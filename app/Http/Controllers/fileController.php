@@ -14,6 +14,11 @@ class fileController extends Controller
         $files = FileForDownload::all();
         return view('/admin/managementView/fileManage', compact('files'));
     }
+    public function showManageView2()
+    {
+        $files = FileForDownload::all();
+        return view('filedowload', compact('files'));
+    }
 
     public function showCreateView()
     {
