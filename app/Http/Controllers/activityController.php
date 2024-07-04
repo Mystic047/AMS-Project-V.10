@@ -148,24 +148,24 @@ class activityController extends Controller
     public function generatePDF($id)
     {
         $activity = Activities::find($id);
-    
+
         if (!$activity) {
             return redirect()->back()->with('error', 'Activity not found.');
         }
-    
+
         $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
             ->where('activity_id', $id)
             ->get();
-    
+
         // Log the data for debugging
-        \Log::info('Activity:', [$activity]);
-        \Log::info('Activities Submits:', [$activitiesSubmits]);
-    
+        Log::info('Activity:', [$activity]);
+        Log::info('Activities Submits:', [$activitiesSubmits]);
+
         $html = View::make('pdf.activity', compact('activity', 'activitiesSubmits'))->render();
         $pdf = PDF::loadHTML($html);
-    
+
         return $pdf->stream('activity-submits.pdf');
     }
-    
+
 
 }
