@@ -11,24 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activities', function (Blueprint $table) {
-            $table->string('activity_id')->primary();
-            $table->string('activity_name');
-            $table->string('activity_type');
-            $table->date('activity_date'); // End of registration date
-            $table->string('activity_responsible_branch');
-            $table->string('activity_hour_earned');
-            $table->string('activity_register_limit');
-            $table->string('activity_detail');
-            $table->string('assessment_link');
-            $table->string('activity_location');
+        Schema::create('activity', function (Blueprint $table) {
+            $table->string('actId')->primary();
+            $table->string('actName');
+            $table->string('actType');
+            $table->date('actDate'); 
+            $table->string('actResBranch');
+            $table->string('actHour');
+            $table->string('actRegisLimit');
+            $table->string('actDetails');
+            $table->string('assessmentLink');
+            $table->string('actLocation');
             $table->string('picture')->nullable();
-            $table->string('responsible_person')->nullable();
-            $table->integer('created_by')->nullable(); //User id
-            $table->string('created_by_role')->nullable(); // user role
-            $table->string('morning_enrollment_key')->nullable(); // For morning enrollment key
-            $table->string('afternoon_enrollment_key')->nullable(); // For afternoon enrollment key
-            $table->boolean('is_open')->default(true);
+            $table->string('responsiblePerson')->nullable();
+            $table->integer('createdBy')->nullable(); //User id
+            $table->string('createdByRole')->nullable(); // user role
+            $table->string('morningEnrollmentKey')->nullable(); // For morning enrollment key
+            $table->string('afternoonEnrollmentKey')->nullable(); // For afternoon enrollment key
+            $table->boolean('isOpen')->default(true);
             $table->timestamps();
         });
         

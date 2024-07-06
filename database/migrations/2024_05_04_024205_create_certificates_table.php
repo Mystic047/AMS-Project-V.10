@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('certificate', function (Blueprint $table) {
             $table->id('certificateId');
             $table->string('fileName');
-            $table->string('templagePath');
-            $table->string('activity_type_id'); //still not having the talble
-            $table->integer('admin_id');
+            $table->string('templatePath');
+            // $table->string('activity_type_id'); //still not having the talble
+            $table->integer('createdBy')->nullable(); //User id
+            $table->string('createdByRole')->nullable(); // user role
             $table->timestamps();
         });
     }

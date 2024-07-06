@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coordinators', function (Blueprint $table) {
+        Schema::create('coordinator', function (Blueprint $table) {
             $table->id('coordinators_id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('nickname');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->integer('area_id');
-            $table->string('profile_picture')->nullable();
+            $table->string('nickName');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->integer('areaId');
+            $table->string('profilePicture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

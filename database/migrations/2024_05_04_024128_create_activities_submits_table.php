@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activities_submits', function (Blueprint $table) {
-            $table->id('activitySubmitId');
-            $table->bigInteger('students_id');
-            $table->string('activity_id');      
-            $table->string('status_check_in_morning')->nullable();;
-            $table->string('status_check_in_afternoon')->nullable();;
+        Schema::create('activitySubmit', function (Blueprint $table) {
+            $table->id('actSubmitId');
+            $table->bigInteger('studentId');
+            $table->string('actId');      
+            $table->string('statusCheckInMorning')->nullable();;
+            $table->string('statusCheckInAfternoon')->nullable();;
             $table->string('status')->default('ยังไม่เข้าร่วมกิจกรรม');
             $table->timestamps();
         });
