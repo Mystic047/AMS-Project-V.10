@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\FileForDownload;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,37 +27,67 @@ class fileController extends Controller
 
     public function showEditView($id)
     {
-        $file = FileForDownload::find($id);
+        $files = FileForDownload::find($id);
 
-        // return view('/admin/editView/adminEdit', compact('admins'));
+         return view('/admin/editView/fileEdit', compact('files'));
     }
 
     public function create(Request $request)
     {
-        // Validate the request inputs
-        $request->validate([
-            'fileName' => 'nullable|string',
-            'file_path' => 'nullable|mimes:pdf|max:2048',
-        ]);
-
-        Log::debug($request->all());
-        $file = new FileForDownload;
-        $file->fill($request->all());
-
-        if ($request->hasFile('file_path')) {
-            $uniqueFileName = uniqid() . '.' . $request->file('file_path')->getClientOriginalExtension();
-            $pdfPath = $request->file('file_path')->storeAs('public/fileForDownload', $uniqueFileName);
-            $file->file_path = $pdfPath;
+        try {
+            $request->validate([
+                'fileName' => 'nullable|string',
+                'file_path' => 'nullable|mimes:pdf,jpeg,png|max:2048',
+            ]);
+    
+            Log::debug($request->all());
+            $file = new FileForDownload;
+            $file->fill($request->all());
+    
+            if ($request->hasFile('file_path')) {
+                $uniqueFileName = uniqid() . '.' . $request->file('file_path')->getClientOriginalExtension();
+                $pdfPath = $request->file('file_path')->storeAs('public/fileForDownload', $uniqueFileName);
+                $file->file_path = $pdfPath;
+            }
+    
+            $file->save();
+            return redirect()->route('file.manage')->with('success', 'File added successfully!');
+        } catch (\Exception $e) {
+            Log::error('File creation error: '.$e->getMessage());
+            return redirect()->back()->with('error', 'There was an error adding the file. Please try again.');
         }
-        // $authUser = getAuthenticatedUser();
-        // if ($authUser) {
-        //     $file->created_by = $authUser->id;
-        //     $file->created_by_role = $authUser->role;
-        // }
-        $file->save();
-        return redirect()->route('file.manage')->with('success', 'File added successfully!');
     }
-
+    
+    public function update(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'fileName' => 'nullable|string',
+                'file_path' => 'nullable|mimes:pdf,jpeg,png|max:2048',
+            ]);
+    
+            Log::debug($request->all());
+            $file = FileForDownload::findOrFail($id);
+            $file->fileName = $request->input('fileName');
+    
+            if ($request->hasFile('file_path')) {
+                if ($file->file_path) {
+                    Storage::delete($file->file_path);
+                }
+                $uniqueFileName = uniqid() . '.' . $request->file('file_path')->getClientOriginalExtension();
+                $pdfPath = $request->file('file_path')->storeAs('public/fileForDownload', $uniqueFileName);
+                $file->file_path = $pdfPath;
+            }
+    
+            $file->save();
+            return redirect()->route('file.manage')->with('success', 'File updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('File update error: '.$e->getMessage());
+            return redirect()->back()->with('error', 'There was an error updating the file. Please try again.');
+        }
+    }
+    
+    
     public function destroy($id)
     {
         $file = FileForDownload::findOrFail($id);

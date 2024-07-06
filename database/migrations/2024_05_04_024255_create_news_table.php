@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('details');
             $table->string('image_path');
-            $table->integer('created_by');
-            $table->string('created_by_role');
+            $table->integer('created_by')->nullable();
+            $table->string('created_by_role')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    
     public function down(): void
     {
         Schema::dropIfExists('news');
