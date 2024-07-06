@@ -11,7 +11,7 @@ Route::controller(fileController::class)->group(function () {
     Route::get('/createForm-file', 'showCreateView')->name('file.showCreate');
     Route::post('/create-file', 'create')->name('file.create');
 
-    Route::get('/editForm-file/{id}', 'showEditView')->name('file.edit'); // Corrected from 'editFromArea' to 'editFormArea'
+    Route::get('/editForm-file/{id}', 'showEditView')->name('file.edit'); 
     Route::put('/update-file/{id}', 'update')->name('file.update');
 
     Route::delete('/delete-file/{id}', 'destroy')->name('file.destroy');
