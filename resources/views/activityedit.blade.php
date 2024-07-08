@@ -70,7 +70,8 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                         <input type="text" name="responsible_person" class="form-control" id="responsible_person">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success float-end">สร้างกิจกกรม</button>
+                        <button type="submit" class="btn btn-success mx-1 float-end">ยกเลิก</button>
+                        <button type="submit" class="btn btn-danger mx-1 float-end">บันทึก</button>
                     </div>
                 </form>
             </div>

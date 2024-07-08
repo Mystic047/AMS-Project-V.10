@@ -103,7 +103,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('ActivityView') }}"><i
+                                    <li><a class="dropdown-item" href="{{ url('ActivityAll') }}"><i
                                                 class="fas fa-pen-square"></i> สมัครกิจกรรม</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
