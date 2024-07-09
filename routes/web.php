@@ -178,3 +178,6 @@ Route::get('/CreateNew', function () {
 Route::get('/EditNew', function () {
     return view('editNew');
 });
+Route::get('/ActivityHistory', function () {
+    return view('activityHistory');
+});

@@ -128,7 +128,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
                                                     class="fas fa-cog"></i> แก้ไขข้อมูล</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fas fa-pen-square"></i>
+                                        <li><a class="dropdown-item" href="{{ ('ActivityHistory') }}"><i class="fas fa-pen-square"></i>
                                                 ประวัติการเข้าร่วม</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
