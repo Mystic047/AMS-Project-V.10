@@ -31,9 +31,9 @@ class areaController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'area_id' => 'required|string',
+            'areaId' => 'required|string',
             'areaName' => 'required|string',  
-            'faculty_id' => 'required|string',
+            'facultyId' => 'required|string',
         ]
         );
 
@@ -53,9 +53,9 @@ class areaController extends Controller
         $area = Area::findOrFail($id);
 
         $request->validate([
-            'area_id' => 'required|string',
+            'areaId' => 'required|string',
             'areaName' => 'required|string',  
-            'faculty_id' => 'required|string',
+            'facultyId' => 'required|string',
         ]);
 
         Log::debug($request->all());

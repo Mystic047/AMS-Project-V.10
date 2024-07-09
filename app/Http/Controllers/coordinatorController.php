@@ -31,12 +31,11 @@ class coordinatorController extends Controller
             // 'coordinators_id' => 'required|unique:activity_coordinators,coordinators_id',
             'email' => 'nullable|string',
             'password' => 'required|min:8',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'faculty_id' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
 
         Log::debug($request->all());
@@ -46,16 +45,16 @@ class coordinatorController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $coordinator->coordinators_id = $emailPrefix;
+            $coordinator->userId = $emailPrefix;
         } else {
 
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
         }
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/coordinator_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $coordinator->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+            $coordinator->profilePicture = str_replace('public/', '', $path); // Save the path in the database
         }
         $coordinator->save();
 
@@ -68,13 +67,12 @@ class coordinatorController extends Controller
 
         $request->validate([
             'email' => 'nullable|string',
-            'password' => 'nullable|string',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'faculty_id' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'required|min:8',
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
 
         Log::debug($request->all());
@@ -88,16 +86,16 @@ class coordinatorController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $coordinator->coordinators_id = $emailPrefix;
+            $coordinator->userId = $emailPrefix;
         } else {
             return back()->withErrors(['email' => 'The coordinator ID must be numeric'])->withInput();
         }
 
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/coordinator_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $coordinator->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+            $coordinator->profilePicture = str_replace('public/', '', $path); // Save the path in the database
         }
 
         $coordinator->save();
@@ -115,9 +113,9 @@ class coordinatorController extends Controller
         $query = $request->input('query');
 
         // Search for coordinators by firstname, lastname, or faculty_id
-        $coordinators = Coordinator::where('firstname', 'LIKE', "%{$query}%")
-            ->orWhere('lastname', 'LIKE', "%{$query}%")
-            ->orWhere('coordinators_id', 'LIKE', "%{$query}%")
+        $coordinators = Coordinator::where('firstName', 'LIKE', "%{$query}%")
+            ->orWhere('lastName', 'LIKE', "%{$query}%")
+            ->orWhere('userId', 'LIKE', "%{$query}%")
             ->get();
 
 

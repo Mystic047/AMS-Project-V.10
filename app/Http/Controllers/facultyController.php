@@ -31,8 +31,8 @@ class facultyController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'faculty_id' => 'required|string',
-            'facultyName' => 'required|string',  
+            'facultyId' => 'required|string',
+            'facultyName' => 'required|string', 
         ]
         );
         Log::debug($request->all());
@@ -51,7 +51,7 @@ class facultyController extends Controller
         $facultys = Faculty::findOrFail($id);
 
         $request->validate([
-            'faculty_id' => 'required|string',
+            'facultyId' => 'required|string',
             'facultyName' => 'required|string',  
         ]);
 
