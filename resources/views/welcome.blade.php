@@ -8,6 +8,7 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         *{
             font-family: 'Noto Sans Thai', sans-serif;
@@ -21,8 +22,8 @@
         <div id="carouselExampleFade" class="carousel slide carousel-fade">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="https://science.bru.ac.th/wp-content/uploads/2022/10/slider-1-1-copy.jpg" class="d-block w-100" alt="...">
-              </div>
+                <img src="{{ asset('storage/pictures/Colosal.jpg') }}" class="d-block w-100" alt="...">
+            </div>
               <div class="carousel-item">
                 <img src="https://combu.bru.ac.th/wp-content/uploads/2024/02/422891036_825393186294436_1499709031224825189_n.jpg" class="d-block w-100" alt="...">
               </div>
@@ -39,53 +40,56 @@
     </div>
 
     <div class="row mt-5">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="card w-100 bg-white border-0">
           <div class="card-body">
-            <h5 class="card-title">สมัครเข้าร่วมกิจกรรมออนไลน์</h5>
+            <h5 class="card-title">กิจกรรมที่เปิดรับสมัคร</h5>
             <div class="table-responsive">
               <table class="table table-bordered table-hover mb-4">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 20%;">
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 15%;">
-                </colgroup>
                 <thead class="table-light">
                     <tr>
-                        <th class="text-center">ID</th>
-                        <th class="text-center">ชื่อกิจกรรม</th>
-                        <th class="text-center">ประเภทกิจกรรม</th>
-                        <th class="text-center">สถานที่</th>
+                        <th class="text-center">สถานะ</th>
+                        <th class="text-center">รายละเอียด</th>
                         <th class="text-center">การรับสมัคร</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">ดูข้อมูลเพิ่มเติม</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($activities as $activity)
                         <tr>
-                            <td class="text-center">{{ $activity->activity_id }}</td>
-                            <td class="text-center">{{ $activity->activity_name }}</td>
-                            <td class="text-center">{{ $activity->activity_type }}</td>
-                            <td class="text-center">{{ $activity->activity_location }}</td>
-                            <td class="text-center">รับสมัครวันที่: {{ $activity->activity_date }}<br>จำนวนที่รับ: {{ $activity->activity_register_limit }}</td>
                             <td class="text-center">
-                              <button class="btn btn-primary" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
+                                @if($activity->registration_status == 'open')
+                                    <span class="badge bg-success">เปิด</span>
+                                @else
+                                    <span class="badge bg-danger">ปิด</span>
+                                @endif
+                            </td>
+                            <td>
+                                <i class="fa-solid fa-house"></i> กิจกรรม: <span style="color: blue;">{{ $activity->activity_name }}</span>
+                                <br><i class="fa-solid fa-list"></i> จัดโดย: {{ $activity->activity_responsible_branch }}
+                                &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่: {{ $activity->activity_location }}
+                                <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ: {{ $activity->activity_hour_earned }} ชั่วโมง
+                            </td>
+                            <td class="text-center">
+                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->activity_date }}
+                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->activity_register_limit }}</span>
+                            </td>
+                            <td class="text-center">
+                                    <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
         </body>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-8">
         <div class="card mb-4 border-0">
-            <div class="card-header text-center bg-transparent">
+            <div class="card-header  bg-transparent">
                 <h5 class="card-title mb-0">ข่าวสาร ประชาสัมพันธ์</h5>
             </div>
             <div class="card-body d-flex flex-row-reverse justify-content-between align-items-center">
@@ -109,21 +113,20 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" style="border: none">
             <div class="card-body">
-              <h5 class="card-title">Facebook Plugin</h5><br>
               <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fscistudentsbru&tabs=timeline&width=450&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="450" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
         </div>
     </div>
-      <div class="col-md-8">
+      {{-- <div class="col-md-8">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Card 4</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
         </div>
-      </div>
+      </div> --}}
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

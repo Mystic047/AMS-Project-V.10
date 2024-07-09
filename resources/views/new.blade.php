@@ -8,7 +8,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMRzVR9SJ6p4r2pDxaLbM1K3PdHg6KFTsGE4zc" crossorigin="anonymous">
     <style>
+        *{
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
         .card-img-top {
             width: 250px;
             height: 180px;
@@ -29,7 +35,74 @@
 <body style="background-color:#f5f5f5;">
 
     <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>ข่าวสาร ประชาสัมพันธ์</h2>
+            <a href="{{ ('EditNew') }}" class="btn btn-danger">
+                 เทสไปหน้า Edit
+            </a>
+            <a href="{{ ('CreateNew') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create
+            </a>
+        </div>
         <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                            </div>
+                            <div class="col-9">
+                                <h5 class="card-title">ชื่อเรื่อง</h5>
+                                <hr> <!-- เพิ่มเส้นใต้ชื่อเรื่อง -->
+                                <p class="card-text">เนื้อเรื่อง</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center"> <!-- ใช้ text-center เพื่อย้ายข้อมูลไปตรงกลาง -->
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="card-text">ผู้เขียน: John Doe</p> <!-- เพิ่มข้อมูลผู้เขียน -->
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">วันที่: January 1, 2024</p> <!-- เพิ่มข้อมูลวันที่ -->
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">การเข้าชม: 100 views</p> <!-- เพิ่มข้อมูลการเข้าชม -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                            </div>
+                            <div class="col-9">
+                                <h5 class="card-title">ชื่อเรื่อง</h5>
+                                <hr> <!-- เพิ่มเส้นใต้ชื่อเรื่อง -->
+                                <p class="card-text">เนื้อเรื่อง</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center"> <!-- ใช้ text-center เพื่อย้ายข้อมูลไปตรงกลาง -->
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="card-text">ผู้เขียน: John Doe</p> <!-- เพิ่มข้อมูลผู้เขียน -->
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">วันที่: January 1, 2024</p> <!-- เพิ่มข้อมูลวันที่ -->
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">การเข้าชม: 100 views</p> <!-- เพิ่มข้อมูลการเข้าชม -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12 mb-2">
                 <div class="card">
                     <div class="card-body">

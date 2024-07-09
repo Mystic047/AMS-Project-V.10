@@ -23,15 +23,15 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('area.create')}}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{route('file.create')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12">
-                        <label for="area_id" class="form-label">ชื่อไฟล์</label>
-                        <input type="text" class="form-control" id="area_id" name="area_id" placeholder="">
+                        <label for="fileName" class="form-label">ชื่อไฟล์</label>
+                        <input type="text" class="form-control" id="fileName" name="fileName" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="faculty_id" class="form-label">อัปโหลดไฟล์</label>
-                        <input type="file" class="form-control" id="faculty_id" name="faculty_id">
+                        <label for="file_path" class="form-label">อัปโหลดไฟล์</label>
+                        <input type="file" class="form-control" id="file_path" name="file_path">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>

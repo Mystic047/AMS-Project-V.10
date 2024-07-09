@@ -16,6 +16,12 @@ class Area extends Model
         'areaName',
         'faculty_id',
     ];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'area_id', 'area_id');
+    }
+    
     public function faculty()
     {
         return $this->belongsTo(Faculty::class, 'faculty_id');

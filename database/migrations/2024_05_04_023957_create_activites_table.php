@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('activity_id')->primary();
             $table->string('activity_name');
             $table->string('activity_type');
-            $table->date('activity_date');
+            $table->date('activity_date'); // End of registration date
             $table->string('activity_responsible_branch');
             $table->string('activity_hour_earned');
             $table->string('activity_register_limit');
@@ -24,8 +24,11 @@ return new class extends Migration
             $table->string('activity_location');
             $table->string('picture')->nullable();
             $table->string('responsible_person')->nullable();
-            $table->integer('created_by')->nullable();
-            $table->string('created_by_role')->nullable();
+            $table->integer('created_by')->nullable(); //User id
+            $table->string('created_by_role')->nullable(); // user role
+            $table->string('morning_enrollment_key')->nullable(); // For morning enrollment key
+            $table->string('afternoon_enrollment_key')->nullable(); // For afternoon enrollment key
+            $table->boolean('is_open')->default(true);
             $table->timestamps();
         });
         

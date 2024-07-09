@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('file_id');
             $table->string('fileName');
             $table->string('file_path');
-            $table->integer('created_by');
-            $table->string('created_by_role');
+            $table->integer('created_by')->nullable();
+            $table->string('created_by_role')->nullable();
             $table->timestamps();
         });
     }
