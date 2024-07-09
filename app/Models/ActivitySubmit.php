@@ -8,7 +8,7 @@ use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ActivitiesSubmit extends Model
+class ActivitySubmit extends Model
 {
     use HasFactory;
 
