@@ -57,35 +57,35 @@
                     <tbody>
                         @foreach ($activities as $activity)
                             <tr>
-                                <td>{{ $activity->activity_id }}</td>
+                                <td>{{ $activity->actId }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img src="{{ asset('storage/' . $activity->picture) }}"
                                              class="rounded-circle me-2" alt="Avatar"
                                              style="width: 40px; height: 40px; object-fit: cover;">
-                                        <div>{{ $activity->activity_name }}</div>
+                                        <div>{{ $activity->actName }}</div>
                                     </div>
                                 </td>
-                                <td>{{ $activity->activity_type }}</td>
+                                <td>{{ $activity->actType }}</td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
-                                               id="activityStatus{{ $activity->activity_id }}"
-                                               {{ $activity->is_open ? 'checked' : '' }}
-                                               onclick="toggleStatus(this, '{{ $activity->activity_id }}')">
-                                        <label class="form-check-label" for="activityStatus{{ $activity->activity_id }}">
-                                            {{ $activity->is_open ? 'Open' : 'Closed' }}
+                                               id="activityStatus{{ $activity->actId }}"
+                                               {{ $activity->isOpen ? 'checked' : '' }}
+                                               onclick="toggleStatus(this, '{{ $activity->actId }}')">
+                                        <label class="form-check-label" for="activityStatus{{ $activity->actId }}">
+                                            {{ $activity->isOpen ? 'Open' : 'Closed' }}
                                         </label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <form action="{{ route('activity.edit', $activity->activity_id) }}" method="get" class="me-1">
+                                        <form action="{{ route('activity.edit', $activity->actId) }}" method="get" class="me-1">
                                             <button class="btn btn-warning btn-sm" type="submit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </button>
                                         </form>
-                                        <form action="{{ route('activity.delete', $activity->activity_id) }}" method="post">
+                                        <form action="{{ route('activity.delete', $activity->actId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
