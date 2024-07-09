@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FileForDownload extends Model
 {
+    protected $table = 'fileForDownload';
     protected $fillable = [
         'fileName', 
         'filePath', 

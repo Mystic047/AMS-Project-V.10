@@ -11,7 +11,7 @@ class Coordinator extends Authenticatable
 {
 
     use HasApiTokens, HasFactory, Notifiable;
-
+    protected $table = 'coordinator';
     protected $fillable = [
         'userId',
         'email',

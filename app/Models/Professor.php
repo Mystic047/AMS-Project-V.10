@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Professor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    protected $table = 'professor';
     protected $fillable = ['userId', 'email', 'password', 'nickname', 'firstname', 'lastname','areaId' ,'profilePicture'];
     protected $primaryKey = 'userId';
     

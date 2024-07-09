@@ -26,7 +26,7 @@ class homeController extends Controller
         }
     
         $activitiesSubmits = ActivitySubmit::with(['student.area'])
-            ->where('activityId', $id)
+            ->where('actId', $id)
             ->get();
     
         return view('activityView', compact('activity', 'activitiesSubmits'));
