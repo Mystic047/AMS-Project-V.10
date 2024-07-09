@@ -172,3 +172,9 @@ Route::get('/ActivityCreate', function () {
 Route::get('/ActivityEdit', function () {
     return view('admin/editView/activityEdit');
 });
+Route::get('/CreateNew', function () {
+    return view('createNew');
+});
+Route::get('/EditNew', function () {
+    return view('editNew');
+});
