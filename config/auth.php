@@ -43,20 +43,20 @@ return [
 
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'admin',
         ],
 
         'student' => [
             'driver' => 'session',
-            'provider' => 'students',
+            'provider' => 'student',
         ],
         'professor' => [
             'driver' => 'session',
-            'provider' => 'professors',
+            'provider' => 'professor',
         ],
         'coordinator' => [
             'driver' => 'session',
-            'provider' => 'coordinators',
+            'provider' => 'coordinator',
         ],
     ],
 
@@ -82,19 +82,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admins' => [
+        'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'students' => [
+        'student' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
         ],
-        'professors' => [
+        'professor' => [
             'driver' => 'eloquent',
             'model' => App\Models\Professor::class,
         ],
-        'coordinators' => [
+        'coordinator' => [
             'driver' => 'eloquent',
             'model' => App\Models\Coordinator::class,
         ],

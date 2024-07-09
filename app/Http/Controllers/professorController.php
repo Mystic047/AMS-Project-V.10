@@ -29,14 +29,13 @@ class professorController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            // 'professors_id' => 'required|unique:professors,professors_id',
             'email' => 'nullable|string',
             'password' => 'required|min:8',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
 
         Log::debug($request->all());
@@ -46,17 +45,17 @@ class professorController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $professor->professors_id = $emailPrefix;
+            $professor->userId = $emailPrefix;
         } else {
 
-            return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
+            return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
         }
 
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $professor->profile_picture = str_replace('public/', '', $path);
+            $professor->profilePicture = str_replace('public/', '', $path);
         }
         $professor->save();
 
@@ -69,12 +68,12 @@ class professorController extends Controller
 
         $request->validate([
             'email' => 'nullable|string',
-            'password' => 'nullable|string',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'required|min:8',
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
 
         Log::debug($request->all());
@@ -88,16 +87,16 @@ class professorController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $professor->professors_id = $emailPrefix;
+            $professor->userId = $emailPrefix;
         } else {
             return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
         }
 
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $professor->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); 
+            $professor->profilePicture = str_replace('public/', '', $path); 
         }
 
         $professor->save();
@@ -113,10 +112,10 @@ class professorController extends Controller
     {
         $query = $request->input('query');
 
-        // Search for coordinators by firstname, lastname, or faculty_id
-        $professors = Professor::where('firstname', 'LIKE', "%{$query}%")
-            ->orWhere('lastname', 'LIKE', "%{$query}%")
-            ->orWhere('professors_id', 'LIKE', "%{$query}%")
+        
+        $professors = Professor::where('firstName', 'LIKE', "%{$query}%")
+            ->orWhere('lastName', 'LIKE', "%{$query}%")
+            ->orWhere('userId', 'LIKE', "%{$query}%")
             ->get();
 
         return view('/admin/managementView/professorManage', compact('professors'));
