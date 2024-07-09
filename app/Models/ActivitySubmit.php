@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ActivitySubmit extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['actId', 'user_id','statusCheckInMorning','statusCheckInAfternoon','status'];
+    protected $table = 'activitySubmit';
+    protected $fillable = ['actId', 'userId','statusCheckInMorning','statusCheckInAfternoon','status'];
     protected $primaryKey = 'activitySubmitId';
 
     public function student()
