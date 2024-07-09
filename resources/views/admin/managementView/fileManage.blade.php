@@ -74,9 +74,9 @@
                                     <td>{{ $file->fileName }}</td>
                                     <td>
                                         @if ($file->file_path)
-                                            <a href="{{ Storage::url($file->file_path) }}" target="_blank">
+                                            <a href="{{ Storage::url($file->filePath) }}" target="_blank">
                                                 @php
-                                                    $extension = pathinfo($file->file_path, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo($file->filePath, PATHINFO_EXTENSION);
                                                 @endphp
                                                 @if ($extension == 'pdf')
                                                     <i class="fa-solid fa-file-pdf fa-2x" style="color: #f6420bde;"></i>
@@ -90,7 +90,7 @@
                                             ไม่มีไฟล์
                                         @endif
                                     </td>
-                                    <td>{{ $file->created_by }} {{ $file->created_by_role }}</td>
+                                    <td>{{ $file->created_by }} {{ $file->createdByRole }}</td>
                                     <td>
                                         {{-- <form action="{{ route('file.destroy', $file->file_id) }}" method="POST">
                                             @csrf
@@ -99,13 +99,13 @@
                                         </form> --}}
 
                                         <div class="d-flex">
-                                            <form action="{{ route('file.edit', $file->file_id) }}" method="get"
+                                            <form action="{{ route('file.edit', $file->fileId) }}" method="get"
                                                 class="me-1">
                                                 <button class="btn btn-warning btn-sm" type="submit">
                                                     <i class="fas fa-pencil-alt"></i> Edit
                                                 </button>
                                             </form>
-                                            <form action="{{ route('file.destroy', $file->file_id) }}" method="post">
+                                            <form action="{{ route('file.destroy', $file->fileId) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="button"

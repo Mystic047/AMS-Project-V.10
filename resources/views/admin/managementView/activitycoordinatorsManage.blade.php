@@ -117,21 +117,21 @@
                   <tbody>
                       @foreach ($coordinators as $coordinator)
                       <tr>
-                          <td class="col-3">{{ $coordinator->coordinators_id }}</td>
+                          <td class="col-3">{{ $coordinator->userId }}</td>
                           <td class="col-4">
                               <div class="d-flex align-items-center">
-                                   <img src="{{ asset('storage/'.$coordinator->profile_picture) }}" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
-                                  <div>{{ $coordinator->firstname }} {{ $coordinator->lastname }}</div>
+                                   <img src="{{ asset('storage/'.$coordinator->profilePicture) }}" class="rounded-circle me-2" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                                  <div>{{ $coordinator->firstName }} {{ $coordinator->lastName }}</div>
                               </div>
                           </td>
-                          <td class="col-3">{{ $coordinator->faculty_id }}</td> <!-- Assuming faculty relation exists -->
+                          <td class="col-3">{{ $coordinator->facultyId }}</td> <!-- Assuming faculty relation exists -->
                           <td class="col-2">
-                            <form action="{{ route('coordinator.edit', $coordinator->coordinators_id) }}" method="get" style="display: inline;">
+                            <form action="{{ route('coordinator.edit', $coordinator->userId) }}" method="get" style="display: inline;">
                                 <button class="btn btn-warning btn-sm" type="submit">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </button>
                             </form>
-                            <form action="{{ route('coordinator.delete', $coordinator->coordinators_id) }}" method="post" style="display: inline;">
+                            <form action="{{ route('coordinator.delete', $coordinator->userId) }}" method="post" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">

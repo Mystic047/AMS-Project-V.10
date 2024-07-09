@@ -120,24 +120,24 @@
                     <tbody>
                         @foreach ($admins as $admin)
                             <tr>
-                                <td class="col-3">{{ $admin->admin_id }}</td>
+                                <td class="col-3">{{ $admin->userId }}</td>
                                 <td class="col-4">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $admin->profile_picture) }}"
+                                        <img src="{{ asset('storage/' . $admin->profilePicture) }}"
                                             class="rounded-circle me-2" alt="Avatar"
                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <div>{{ $admin->firstname }} {{ $admin->lastname }}</div>
+                                        <div>{{ $admin->firstName }} {{ $admin->lastName }}</div>
                                     </div>
                                 </td>
-                                <td class="col-3">{{ $admin->faculty_id }}</td> <!-- Assuming faculty relation exists -->
+                                <td class="col-3">{{ $admin->facultyId }}</td> <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
-                                    <form action="{{ route('admin.edit', $admin->admin_id) }}" method="get"
+                                    <form action="{{ route('admin.edit', $admin->userId) }}" method="get"
                                         style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </button>
                                     </form>
-                                    <form action="{{ route('admin.delete', $admin->admin_id) }}" method="post"
+                                    <form action="{{ route('admin.delete', $admin->userId) }}" method="post"
                                         style="display: inline;">
                                         @csrf
                                         @method('DELETE')
