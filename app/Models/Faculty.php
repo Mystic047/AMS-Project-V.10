@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Faculty extends Model
 {
     use HasFactory;
-    protected $table = 'faculties';
-    protected $primaryKey = 'faculty_id';
+    protected $table = 'faculty';
+    protected $primaryKey = 'facultyId';
     protected $fillable = [
-        'faculty_id',
+        'facultyId',
         'facultyName',
     ];
     public function areas()
     {
-        return $this->hasMany(Area::class, 'faculty_id');
+        return $this->hasMany(Area::class, 'facultyId');
     }
     
 }

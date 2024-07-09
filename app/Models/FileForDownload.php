@@ -9,9 +9,9 @@ class FileForDownload extends Model
 {
     protected $fillable = [
         'fileName', 
-        'file_path', 
-        'created_by', 
-        'created_by_role'
+        'filePath', 
+        'createdBy', 
+        'createdByRole'
     ];
     protected $primaryKey = 'file_id';
     use HasFactory;

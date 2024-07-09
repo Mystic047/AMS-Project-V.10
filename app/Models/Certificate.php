@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Certificate extends Model
 {
     use HasFactory;
+    protected $table = 'certificate';
+    protected $primaryKey = 'certificateId';
+    protected $fillable = [
+        'fileName',
+        'templatePath',
+        'createdBy',
+        'createdByRole',
+    ];
+
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activitySubmit', function (Blueprint $table) {
             $table->id('actSubmitId');
-            $table->bigInteger('studentId');
+            $table->bigInteger('userId');
             $table->string('actId');      
             $table->string('statusCheckInMorning')->nullable();;
             $table->string('statusCheckInAfternoon')->nullable();;
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activities_submits');
+        Schema::dropIfExists('activitySubmit');
     }
 };
