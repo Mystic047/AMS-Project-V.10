@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_for_downloads', function (Blueprint $table) {
-            $table->id('file_id');
+        Schema::create('fileForDownload', function (Blueprint $table) {
+            $table->id('fileId');
             $table->string('fileName');
-            $table->string('file_path');
-            $table->integer('created_by')->nullable();
-            $table->string('created_by_role')->nullable();
+            $table->string('filePath');
+            $table->integer('createdBy')->nullable();
+            $table->string('createdByRole')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file_for_downloads');
+        Schema::dropIfExists('fileForDownload');
     }
 };

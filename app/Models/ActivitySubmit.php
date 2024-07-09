@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Models\Student;
-use App\Models\Activities;
+
+use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -11,17 +12,17 @@ class ActivitiesSubmit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['activity_id', 'students_id'];
+    protected $fillable = ['actId', 'user_id','statusCheckInMorning','statusCheckInAfternoon','status'];
     protected $primaryKey = 'activitySubmitId';
 
     public function student()
     {
-        return $this->belongsTo(Student::class, 'students_id', 'students_id');
+        return $this->belongsTo(Student::class, 'userId', 'userId');
     }
 
 
     public function activity()
     {
-        return $this->belongsTo(Activities::class, 'activity_id', 'activity_id');
+        return $this->belongsTo(Activity::class, 'actId', 'actId');
     }
 }

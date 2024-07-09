@@ -10,9 +10,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
 {
-    protected $fillable = ['students_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id','profile_picture'];
+    protected $fillable = ['userId', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id','profile_picture'];
     
-    protected $primaryKey = 'students_id';
+    protected $primaryKey = 'userId';
 
     public function faculty()
     {
@@ -26,7 +26,7 @@ class Student extends Authenticatable
 
     public function activitySubmits()
     {
-        return $this->hasMany(ActivitiesSubmit::class, 'students_id', 'students_id');
+        return $this->hasMany(ActivitiesSubmit::class, 'userId', 'userId');
     }
 
     use HasApiTokens, HasFactory, Notifiable;
