@@ -145,11 +145,14 @@ Route::get('/FileManagement', function () {
 Route::get('/Profile', function () {
     return view('/profiles');
 });
-Route::get('/ActivityCreate', function () {
+Route::get('/ActivityCreates', function () {
     return view('/activitycreate');
 });
-Route::get('/ActivityView', function () {
-    return view('/activityview');
+Route::get('/ActivityEdits', function () {
+    return view('/activityedit');
+});
+Route::get('/ActivityAll', function () {
+    return view('/activityAll');
 });
 Route::get('/NewManage', function () {
     return view('/admin/managementView/newManage');
@@ -168,4 +171,13 @@ Route::get('/ActivityCreate', function () {
 });
 Route::get('/ActivityEdit', function () {
     return view('admin/editView/activityEdit');
+});
+Route::get('/CreateNew', function () {
+    return view('createNew');
+});
+Route::get('/EditNew', function () {
+    return view('editNew');
+});
+Route::get('/ActivityHistory', function () {
+    return view('activityHistory');
 });

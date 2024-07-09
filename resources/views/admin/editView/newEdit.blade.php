@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CKEditor 5 CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 </head>
 
 @extends('admin.layouts.master')
@@ -17,13 +18,13 @@
 <body style="background-color:#f5f5f5;">
     <section class="section">
         <div class="section-header">
-            <h1>แก้ไขข้อมูลข่าวสาร ประชาสัมพันธ์</h1>
+            <h1>เพิ่มข้อมูลข่าวสาร ประชาสัมพันธ์</h1>
         </div>
     </section>
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('area.create')}}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('area.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12">
                         <label for="area_id" class="form-label">ชื่อหัวข้อข่าว</label>
@@ -41,7 +42,6 @@
                         <button type="submit" class="btn btn-success mx-1 float-end">Save</button>
                         <button type="submit" class="btn btn-danger mx-1 float-end">Cancel</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -50,6 +50,21 @@
     <!-- Link to Bootstrap JS and its dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+    <!-- Initialize CKEditor 5 -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#areaName'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 @endsection
 </html>
