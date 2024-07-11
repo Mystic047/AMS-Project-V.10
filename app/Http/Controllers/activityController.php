@@ -92,7 +92,7 @@ class activityController extends Controller
             'assessmentLink' => 'required|url',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsiblePerson' => 'required|string',
-
+            'isOpen' => 'nullable|boolean',
 
         ]);
 
@@ -132,14 +132,17 @@ class activityController extends Controller
 
         return view('/admin/managementView/adminManage', compact('activity'));
     }
-    public function toggleStatus($id, Request $request)
+    
+    public function toggleStatus(Request $request, $id)
     {
         $activity = Activity::findOrFail($id);
-        $activity->is_open = $request->input('is_open') ? true : false;
+        $activity->isOpen = $request->input('isOpen');
         $activity->save();
-
+    
         return response()->json(['success' => true]);
     }
+    
+    
 
     public function generatePDF($id)
     {

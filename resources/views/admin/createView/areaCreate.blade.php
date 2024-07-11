@@ -26,7 +26,7 @@
                     @csrf
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Area</label>
-                        <input type="text" class="form-control" id="area_id" name="area_id" placeholder="">
+                        <input type="text" class="form-control" id="areaId" name="areaId" placeholder="">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Area Name</label>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Faculty</label>
-                        <input type="text" class="form-control" id="faculty_id"  name="faculty_id" placeholder="">
+                        <input type="text" class="form-control" id="facultyId"  name="facultyId" placeholder="">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>

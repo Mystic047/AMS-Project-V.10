@@ -38,7 +38,7 @@ class Activity extends Model
     // Define any relationships, for example:
     public function activitySubmits()
     {
-        return $this->hasMany(ActivitiesSubmit::class, 'activity_id', 'actId');
+        return $this->hasMany(ActivitiesSubmit::class, 'actId', 'actId');
     }
     
     // Example of a custom method that checks if registration is open
@@ -47,3 +47,4 @@ class Activity extends Model
         return $this->isOpen && $this->actDate >= now()->toDateString();
     }
 }
+

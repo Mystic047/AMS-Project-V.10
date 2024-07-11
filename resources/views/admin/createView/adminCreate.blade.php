@@ -22,44 +22,45 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('admin.create')}}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('admin.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    {{-- <div class="col-12">
-                        <label for="inputAddress" class="form-label">ID</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="ถ้า Auto ก็เอาออก">
-                    </div> --}}
                     <div class="col-md-6">
-                        <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" name='email' class="form-control" id="inputEmail4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" name='password' class="form-control" id="inputPassword4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="col-md-5">
-                        <label for="inputEmail4" class="form-label">Firstname</label>
-                        <input type="text" name='firstname' class="form-control" id="inputEmail4">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" name="firstName" class="form-control" id="firstName">
                     </div>
                     <div class="col-md-5">
-                        <label for="inputPassword4" class="form-label">Lastname</label>
-                        <input type="text" name='lastname' class="form-control" id="inputPassword4">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" name="lastName" class="form-control" id="lastName">
                     </div>
                     <div class="col-md-2">
-                        <label for="inputPassword4" class="form-label">Nickname</label>
-                        <input type="text" name='nickname' class="form-control" id="inputPassword4">
+                        <label for="nickName" class="form-label">Nickname</label>
+                        <input type="text" name="nickName" class="form-control" id="nickName">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputCity" class="form-label">area id</label>
-                        <input type="text" name='area_id' class="form-control" id="inputCity">
+                        <label for="areaId" class="form-label">Area ID</label>
+                        <input type="text" name="areaId" class="form-control" id="areaId">
                     </div>
-                    <div>
-                        <label for="profile_picture">Profile Picture:</label><br>
-                        <input type="file" id="profile_picture" name="profile_picture"><br><br>
+                    <div class="col-md-6">
+                        <label for="role" class="form-label">Role</label>
+                        <input type="text" name="role" class="form-control" id="role">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" id="profilePicture" name="profilePicture" class="form-control">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>

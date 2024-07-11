@@ -36,7 +36,7 @@
                         </div>
                     @endif
 
-                    <form class="row g-3" action="{{ route('file.update', $files->file_id) }}" method="POST"
+                    <form class="row g-3" action="{{ route('file.update', $files->fileId) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-12">
                             <label for="file_path" class="form-label">อัปโหลดไฟล์</label>
-                            <input type="file" class="form-control" id="file_path" name="file_path">
+                            <input type="file" class="form-control" id="filePath" name="filePath">
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Update</button>

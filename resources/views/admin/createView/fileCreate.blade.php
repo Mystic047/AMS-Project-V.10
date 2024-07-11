@@ -30,8 +30,8 @@
                         <input type="text" class="form-control" id="fileName" name="fileName" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="file_path" class="form-label">อัปโหลดไฟล์</label>
-                        <input type="file" class="form-control" id="file_path" name="file_path">
+                        <label for="filePath" class="form-label">อัปโหลดไฟล์</label>
+                        <input type="file" class="form-control" id="filePath" name="filePath">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>
