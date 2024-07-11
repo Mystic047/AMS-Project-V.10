@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->id('news_id');
+            $table->id('newsId');
             $table->string('title');
             $table->string('details');
-            $table->string('image_path');
-            $table->integer('created_by')->nullable();
-            $table->string('created_by_role')->nullable();
+            $table->string('imagePath');
+            $table->integer('createdBy')->nullable();
+            $table->string('createdByRole')->nullable();
             $table->timestamps();
         });
     }

@@ -28,14 +28,13 @@ class studentController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            // 'students_id' => 'required|unique:students,students_id',
-            'email' => 'required|nullable|string',
-            'password' => 'nullable|min:4',  //need to change later to min 8
-            'firstname' => 'required|nullable|string',
-            'lastname' => 'required|nullable|string',
-            'nickname' => 'required|nullable|string',
-            'area_id' => 'required|nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'nullable|string',
+            'password' => 'required|min:8',
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]
         );
 
@@ -46,17 +45,17 @@ class studentController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $student->students_id = $emailPrefix;
+            $student->userId = $emailPrefix;
         } else {
 
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
         }
 
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/student_profiles', $filename);
-            $student->profile_picture = str_replace('public/', '', $path);
+            $student->profilePicture = str_replace('public/', '', $path);
         }
 
 
@@ -72,12 +71,12 @@ class studentController extends Controller
 
         $request->validate([
             'email' => 'nullable|string',
-            'password' => 'nullable|string',
-            'firstname' => 'nullable|string',
-            'lastname' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'area_id' => 'nullable|string',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'nullable|min:8',
+            'firstName' => 'nullable|string',
+            'lastName' => 'nullable|string',
+            'nickName' => 'nullable|string',
+            'areaId' => 'nullable|string',
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
 
         Log::debug($request->all());
@@ -91,16 +90,16 @@ class studentController extends Controller
 
         $emailPrefix = explode('@', $request->email)[0];
         if (ctype_digit($emailPrefix)) {
-            $student->students_id = $emailPrefix;
+            $student->userId = $emailPrefix;
         } else {
             return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
         }
 
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/student_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $student->profile_picture = str_replace('public/', '', $path); // Save the path in the database
+            $student->profilePicture = str_replace('public/', '', $path); // Save the path in the database
         }
 
         $student->save();
@@ -117,9 +116,9 @@ class studentController extends Controller
         $query = $request->input('query');
 
         // Search for coordinators by firstname, lastname, or faculty_id
-        $students = Student::where('firstname', 'LIKE', "%{$query}%")
-            ->orWhere('lastname', 'LIKE', "%{$query}%")
-            ->orWhere('students_id', 'LIKE', "%{$query}%")
+        $students = Student::where('firstName', 'LIKE', "%{$query}%")
+            ->orWhere('lastName', 'LIKE', "%{$query}%")
+            ->orWhere('userId', 'LIKE', "%{$query}%")
             ->get();
 
         return view('/admin/managementView/studentManage', compact('students'));

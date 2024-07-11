@@ -67,7 +67,7 @@
                     <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Avatar">
                 @endif
                 @if ($user)
-                    <div>{{ $user->firstname }} {{ $user->lastname }}</div>
+                    <div>{{ $user->firstName }} {{ $user->lastName }}</div>
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right">

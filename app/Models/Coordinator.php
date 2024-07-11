@@ -9,12 +9,20 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Coordinator extends Authenticatable
 {
- 
 
     use HasApiTokens, HasFactory, Notifiable;
-
-    protected $fillable = ['coordinators_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id' ,'profile_picture'];
-    protected $primaryKey = 'coordinators_id';
+    protected $table = 'coordinator';
+    protected $fillable = [
+        'userId',
+        'email',
+        'password',
+        'nickName',
+        'firstName',
+        'lastName',
+        'areaId',
+        'profilePicture',
+    ];
+    protected $primaryKey = 'userId';
 
     protected $hidden = [
         'password',

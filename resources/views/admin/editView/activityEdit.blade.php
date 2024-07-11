@@ -22,63 +22,63 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{ route('activity.update', $activities->activity_id) }}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('activity.update', $activities->actId) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     
                     <div class="mb-3">
-                        <label for="activity_id" class="form-label">Activity ID</label>
-                        <input type="text" class="form-control" id="activity_id" name="activity_id" value="{{ $activities->activity_id }}" readonly>
+                        <label for="actId" class="form-label">Activity ID</label>
+                        <input type="text" class="form-control" id="actId" name="actId" value="{{ $activities->actId }}" readonly>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_location" class="form-label">Activity Location</label>
-                        <input type="text" class="form-control" id="activity_location" name="activity_location" value="{{ $activities->activity_location }}" required>
+                        <label for="actLocation" class="form-label">Activity Location</label>
+                        <input type="text" class="form-control" id="actLocation" name="actLocation" value="{{ $activities->actLocation }}" required>
                     </div>
-
+                
                     <div class="mb-3">
-                        <label for="activity_name" class="form-label">Activity Name</label>
-                        <input type="text" class="form-control" id="activity_name" name="activity_name" value="{{ $activities->activity_name }}" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="activity_type" class="form-label">Activity Type</label>
-                        <input type="text" class="form-control" id="activity_type" name="activity_type" value="{{ $activities->activity_type }}" required>
+                        <label for="actName" class="form-label">Activity Name</label>
+                        <input type="text" class="form-control" id="actName" name="actName" value="{{ $activities->actName }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_date" class="form-label">Activity Date</label>
-                        <input type="date" class="form-control" id="activity_date" name="activity_date" value="{{ $activities->activity_date }}" required>
+                        <label for="actType" class="form-label">Activity Type</label>
+                        <input type="text" class="form-control" id="actType" name="actType" value="{{ $activities->actType }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_responsible_branch" class="form-label">Responsible Branch</label>
-                        <input type="text" class="form-control" id="activity_responsible_branch" name="activity_responsible_branch" value="{{ $activities->activity_responsible_branch }}" required>
+                        <label for="actDate" class="form-label">Activity Date</label>
+                        <input type="date" class="form-control" id="actDate" name="actDate" value="{{ $activities->actDate }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_hour_earned" class="form-label">Activity Hours Earned</label>
-                        <input type="text" class="form-control" id="activity_hour_earned" name="activity_hour_earned" value="{{ $activities->activity_hour_earned }}" required>
+                        <label for="actResBranch" class="form-label">Responsible Branch</label>
+                        <input type="text" class="form-control" id="actResBranch" name="actResBranch" value="{{ $activities->actResBranch }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_register_limit" class="form-label">Register Limit</label>
-                        <input type="text" class="form-control" id="activity_register_limit" name="activity_register_limit" value="{{ $activities->activity_register_limit }}" required>
+                        <label for="actHour" class="form-label">Activity Hours Earned</label>
+                        <input type="text" class="form-control" id="actHour" name="actHour" value="{{ $activities->actHour }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="activity_detail" class="form-label">Activity Detail</label>
-                        <textarea class="form-control" id="activity_detail" name="activity_detail" required>{{ $activities->activity_detail }}</textarea>
+                        <label for="actRegisLimit" class="form-label">Register Limit</label>
+                        <input type="text" class="form-control" id="actRegisLimit" name="actRegisLimit" value="{{ $activities->actRegisLimit }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="assessment_link" class="form-label">Assessment Link</label>
-                        <input type="url" class="form-control" id="assessment_link" name="assessment_link" value="{{ $activities->assessment_link }}" required>
+                        <label for="actDetails" class="form-label">Activity Detail</label>
+                        <textarea class="form-control" id="actDetails" name="actDetails" required>{{ $activities->actDetails }}</textarea>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="responsible_person" class="form-label">Responsible Person</label>
-                        <input type="text" class="form-control" id="responsible_person" name="responsible_person" value="{{ $activities->responsible_person }}" required>
+                        <label for="assessmentLink" class="form-label">Assessment Link</label>
+                        <input type="url" class="form-control" id="assessmentLink" name="assessmentLink" value="{{ $activities->assessmentLink }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="responsiblePerson" class="form-label">Responsible Person</label>
+                        <input type="text" class="form-control" id="responsiblePerson" name="responsiblePerson" value="{{ $activities->responsiblePerson }}" required>
                     </div>
                     
                     <div class="mb-3">
@@ -93,6 +93,7 @@
                         <button type="submit" class="btn btn-primary">Update Activity</button>
                     </div>
                 </form>
+                
                 
             </div>
         </div>

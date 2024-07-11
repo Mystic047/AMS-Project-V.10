@@ -2,31 +2,34 @@
 
 namespace App\Models;
 
-use App\Models\ActivitiesSubmit;
+use App\Models\ActivitySubmit;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
+
 {
-    protected $fillable = ['students_id', 'email', 'password', 'nickname', 'firstname', 'lastname','area_id','profile_picture'];
-    
-    protected $primaryKey = 'students_id';
+    protected $table = 'student';
+
+    protected $fillable = ['userId', 'email', 'password', 'nickname', 'firstname', 'lastname', 'area_id', 'profile_picture'];
+
+    protected $primaryKey = 'userId';
 
     public function faculty()
     {
-        return $this->belongsTo(faculty::class, 'faculty_id');
+        return $this->belongsTo(faculty::class, 'facultyId');
     }
 
     public function area()
     {
-        return $this->belongsTo(area::class, 'area_id', 'area_id');
+        return $this->belongsTo(area::class, 'areaId', 'areaId');
     }
 
     public function activitySubmits()
     {
-        return $this->hasMany(ActivitiesSubmit::class, 'students_id', 'students_id');
+        return $this->hasMany(ActivitySubmit::class, 'userId', 'userId');
     }
 
     use HasApiTokens, HasFactory, Notifiable;

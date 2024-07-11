@@ -9,22 +9,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Area extends Model
 {
     use HasFactory;
-    protected $table = 'areas';
-    protected $primaryKey = 'area_id';
+    protected $table = 'area';
+    protected $primaryKey = 'areaId';
     protected $fillable = [
-        'area_id',
+        'areaId',
         'areaName',
-        'faculty_id',
+        'facultyId',
     ];
 
     public function students()
     {
-        return $this->hasMany(Student::class, 'area_id', 'area_id');
+        return $this->hasMany(Student::class, 'areaId', 'areaId');
     }
     
     public function faculty()
     {
-        return $this->belongsTo(Faculty::class, 'faculty_id');
+        return $this->belongsTo(Faculty::class, 'facultyId');
     }
     
 }

@@ -36,7 +36,6 @@
     <div class="container">
         <div class="card mt-5">
             <div class="card-body">
-                <!-- Search bar and Create button -->
                 <div class="search-bar mb-3">
                     <div class="search-box w-75">
                         <input type="text" class="form-control" placeholder="Search...">
@@ -57,35 +56,35 @@
                     <tbody>
                         @foreach ($activities as $activity)
                             <tr>
-                                <td>{{ $activity->activity_id }}</td>
+                                <td>{{ $activity->actId }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img src="{{ asset('storage/' . $activity->picture) }}"
                                              class="rounded-circle me-2" alt="Avatar"
                                              style="width: 40px; height: 40px; object-fit: cover;">
-                                        <div>{{ $activity->activity_name }}</div>
+                                        <div>{{ $activity->actName }}</div>
                                     </div>
                                 </td>
-                                <td>{{ $activity->activity_type }}</td>
+                                <td>{{ $activity->actType }}</td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
-                                               id="activityStatus{{ $activity->activity_id }}"
-                                               {{ $activity->is_open ? 'checked' : '' }}
-                                               onclick="toggleStatus(this, '{{ $activity->activity_id }}')">
-                                        <label class="form-check-label" for="activityStatus{{ $activity->activity_id }}">
-                                            {{ $activity->is_open ? 'Open' : 'Closed' }}
+                                               id="activityStatus{{ $activity->actId }}"
+                                               {{ $activity->isOpen ? 'checked' : '' }}
+                                               onclick="toggleStatus(this, '{{ $activity->actId }}')">
+                                        <label class="form-check-label" for="activityStatus{{ $activity->actId }}">
+                                            {{ $activity->isOpen ? 'Open' : 'Closed' }}
                                         </label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <form action="{{ route('activity.edit', $activity->activity_id) }}" method="get" class="me-1">
+                                        <form action="{{ route('activity.edit', $activity->actId) }}" method="get" class="me-1">
                                             <button class="btn btn-warning btn-sm" type="submit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </button>
                                         </form>
-                                        <form action="{{ route('activity.delete', $activity->activity_id) }}" method="post">
+                                        <form action="{{ route('activity.delete', $activity->actId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
@@ -101,6 +100,8 @@
             </div>
         </div>
     </div>
+@endsection
+
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -121,7 +122,7 @@
                 }
             });
         }
-
+    
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
                 method: 'POST',
@@ -129,7 +130,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ is_open: checkbox.checked })
+                body: JSON.stringify({ isOpen: checkbox.checked })
             })
             .then(response => response.json())
             .then(data => {
@@ -149,7 +150,7 @@
                 }
             });
         }
-
+    
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
                 if (checkbox.checked) {
@@ -160,7 +161,7 @@
             });
         });
     </script>
-
+    
     <style>
         .form-check-input.switch-open {
             background-color: #198754 !important;
@@ -171,9 +172,7 @@
             border-color: #0a0a0a !important;
         }
     </style>
+    
 </body>
-@endsection
-
-
 
 </html>

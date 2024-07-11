@@ -52,39 +52,39 @@
                                             <div class="col-12 col-md-3">ชื่อกิจกรรม</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span class="text-primary">{{ $activity->activity_name }}</span>
+                                                <span class="text-primary">{{ $activity->actName }}</span>
                                             </div>
                                             <div class="col-12 col-md-3">สังกัด</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
                                                 <span
-                                                    class="text-primary">{{ $activity->activity_responsible_branch }}</span>
+                                                    class="text-primary">{{ $activity->actResBranch }}</span>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-md-3">จำนวนที่รับสมัคร</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span class="text-primary">{{ $activity->activity_register_limit }}</span>
+                                                <span class="text-primary">{{ $activity->actRegisLimit }}</span>
                                             </div>
                                             <div class="col-12 col-md-3">ค่าชั่วโมง</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span class="text-primary">{{ $activity->activity_hour_earned }}
+                                                <span class="text-primary">{{ $activity->actHour }}
                                                     ชั่วโมง</span>
                                             </div>
                                             <div class="col-12 col-md-3">เปิดรับสมัคร</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
                                                 <span
-                                                    class="text-primary">{{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }}</span>
+                                                    class="text-primary">{{ \Carbon\Carbon::parse($activity->actDate)->format('d F Y') }}</span>
                                             </div>
                                             <div class="col-12 col-md-3">สถานะ</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
                                                 <span
-                                                    class="badge {{ $activity->activity_register_limit > 0 ? 'badge-success' : 'badge-danger' }}">
-                                                    {{ $activity->activity_register_limit > 0 ? 'เปิดรับสมัคร' : 'ปิดรับสมัคร' }}
+                                                    class="badge {{ $activity->actRegisLimit > 0 ? 'badge-success' : 'badge-danger' }}">
+                                                    {{ $activity->actRegisLimit > 0 ? 'เปิดรับสมัคร' : 'ปิดรับสมัคร' }}
                                                 </span>
                                             </div>
                                         </div>
@@ -94,17 +94,17 @@
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
                                                 <span
-                                                    class="text-primary">{{ \Carbon\Carbon::parse($activity->activity_date)->format('d F Y') }}</span>
+                                                    class="text-primary">{{ \Carbon\Carbon::parse($activity->actDate)->format('d F Y') }}</span>
                                             </div>
                                             <div class="col-12 col-md-3">สถานที่</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span class="text-primary">{{ $activity->activity_location }}</span>
+                                                <span class="text-primary">{{ $activity->actLocation }}</span>
                                             </div>
                                             <div class="col-12 col-md-3">ผู้รับผิดชอบ</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span class="text-primary">{{ $activity->responsible_person }}</span>
+                                                <span class="text-primary">{{ $activity->responsiblePerson }}</span>
                                             </div>
                                         </div>
                                         @if ($activity->picture)
@@ -130,9 +130,9 @@
                                             <tbody>
                                                 @foreach ($activitiesSubmits as $submit)
                                                     <tr>
-                                                        <td>{{ $submit->student->students_id }}</td>
-                                                        <td>{{ $submit->student->firstname }}</td>
-                                                        <td>{{ $submit->student->lastname }}</td>  
+                                                        <td>{{ $submit->student->userId }}</td>
+                                                        <td>{{ $submit->student->firstName }}</td>
+                                                        <td>{{ $submit->student->lastName }}</td>  
                                                         <td>{{ $submit->student->area->areaName}}</td>
                                                         <td>{{ $submit->status }}</td>
                                                     </tr>
@@ -140,7 +140,7 @@
                                             </tbody>
                                         </table>
                                         <div class="text-end">
-                                            <a href="{{ route('activity.pdf', ['id' => $activity->activity_id]) }}" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
+                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
                                         </div>
                                         
                                     </div>
@@ -185,17 +185,17 @@
                                     {{-- for testing purposes --}}
                                     @if ($user && $activity)
                                     <div>
-                                        Student ID: {{ $user->students_id }}
+                                        Student ID: {{ $user->userId }}
                                     </div>
                                     <div>
-                                        Activity ID: {{ $activity->activity_id }}
+                                        Activity ID: {{ $activity->actId }}
                                     </div>
                                 @endif
 
                                 <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;" id="submit-form">
                                     @csrf
-                                    <input type="hidden" name="students_id" value="{{ $user ? $user->students_id : '' }}">
-                                    <input type="hidden" name="activity_id" value="{{ $activity->activity_id }}">
+                                    <input type="hidden" name="userId" value="{{ $user ? $user->userId : '' }}">
+                                    <input type="hidden" name="actId" value="{{ $activity->actId }}">
                                     @if($activity->registration_status == 'open')
                                         <button class="btn btn-success btn-sm" type="button" onclick="confirmSubmit(this)">
                                             <i class="fas fa-pencil-alt"></i> Submit
@@ -206,6 +206,7 @@
                                         </button>
                                     @endif
                                 </form>
+                                
                                 
                                 
 

@@ -120,25 +120,25 @@
                     <tbody>
                         @foreach ($professors as $professor)
                             <tr>
-                                <td class="col-3">{{ $professor->professors_id }}</td>
+                                <td class="col-3">{{ $professor->userId }}</td>
                                 <td class="col-4">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $professor->profile_picture) }}"
+                                        <img src="{{ asset('storage/' . $professor->profilePicture) }}"
                                             class="rounded-circle me-2" alt="Avatar"
                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <div>{{ $professor->firstname }} {{ $professor->lastname }}</div>
+                                        <div>{{ $professor->firstName }} {{ $professor->lastName }}</div>
                                     </div>
                                 </td>
                                 <td class="col-3">{{ $professor->faculty_id }}</td>
                                 <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
-                                    <form action="{{ route('professor.edit', $professor->professors_id) }}" method="get"
+                                    <form action="{{ route('professor.edit', $professor->userId) }}" method="get"
                                         style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </button>
                                     </form>
-                                    <form action="{{ route('professor.delete', $professor->professors_id) }}"
+                                    <form action="{{ route('professor.delete', $professor->userId) }}"
                                         method="post" style="display: inline;">
                                         @csrf
                                         @method('DELETE')

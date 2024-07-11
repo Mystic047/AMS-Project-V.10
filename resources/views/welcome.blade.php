@@ -65,17 +65,17 @@
                                 @endif
                             </td>
                             <td>
-                                <i class="fa-solid fa-house"></i> กิจกรรม: <span style="color: blue;">{{ $activity->activity_name }}</span>
-                                <br><i class="fa-solid fa-list"></i> จัดโดย: {{ $activity->activity_responsible_branch }}
-                                &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่: {{ $activity->activity_location }}
-                                <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ: {{ $activity->activity_hour_earned }} ชั่วโมง
+                                <i class="fa-solid fa-house"></i> กิจกรรม: <span style="color: blue;">{{ $activity->actName }}</span>
+                                <br><i class="fa-solid fa-list"></i> จัดโดย: {{ $activity->actResBranch }}
+                                &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่: {{ $activity->actLocation }}
+                                <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ: {{ $activity->actHour }} ชั่วโมง
                             </td>
                             <td class="text-center">
-                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->activity_date }}
-                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->activity_register_limit }}</span>
+                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->actDate }}
+                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->actRegisLimit }}</span>
                             </td>
                             <td class="text-center">
-                                    <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->activity_id) }}'">ดูข้อมูล</button>
+                                    <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->actId) }}'">ดูข้อมูล</button>
                             </td>
                         </tr>
                     @endforeach

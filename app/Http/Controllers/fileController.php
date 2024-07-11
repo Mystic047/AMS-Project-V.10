@@ -37,17 +37,17 @@ class fileController extends Controller
         try {
             $request->validate([
                 'fileName' => 'nullable|string',
-                'file_path' => 'nullable|mimes:pdf,jpeg,png|max:2048',
+                'filePath' => 'nullable|mimes:pdf,jpeg,png|max:2048',
             ]);
     
             Log::debug($request->all());
             $file = new FileForDownload;
             $file->fill($request->all());
     
-            if ($request->hasFile('file_path')) {
-                $uniqueFileName = uniqid() . '.' . $request->file('file_path')->getClientOriginalExtension();
-                $pdfPath = $request->file('file_path')->storeAs('public/fileForDownload', $uniqueFileName);
-                $file->file_path = $pdfPath;
+            if ($request->hasFile('filePath')) {
+                $uniqueFileName = uniqid() . '.' . $request->file('filePath')->getClientOriginalExtension();
+                $pdfPath = $request->file('filePath')->storeAs('public/fileForDownload', $uniqueFileName);
+                $file->filePath = $pdfPath;
             }
     
             $file->save();
@@ -63,20 +63,20 @@ class fileController extends Controller
         try {
             $request->validate([
                 'fileName' => 'nullable|string',
-                'file_path' => 'nullable|mimes:pdf,jpeg,png|max:2048',
+                'filePath' => 'nullable|mimes:pdf,jpeg,png|max:2048',
             ]);
     
             Log::debug($request->all());
             $file = FileForDownload::findOrFail($id);
             $file->fileName = $request->input('fileName');
     
-            if ($request->hasFile('file_path')) {
-                if ($file->file_path) {
-                    Storage::delete($file->file_path);
+            if ($request->hasFile('filePath')) {
+                if ($file->filePath) {
+                    Storage::delete($file->filePath);
                 }
-                $uniqueFileName = uniqid() . '.' . $request->file('file_path')->getClientOriginalExtension();
-                $pdfPath = $request->file('file_path')->storeAs('public/fileForDownload', $uniqueFileName);
-                $file->file_path = $pdfPath;
+                $uniqueFileName = uniqid() . '.' . $request->file('filePath')->getClientOriginalExtension();
+                $pdfPath = $request->file('filePath')->storeAs('public/fileForDownload', $uniqueFileName);
+                $file->filePath = $pdfPath;
             }
     
             $file->save();
@@ -92,8 +92,8 @@ class fileController extends Controller
     {
         $file = FileForDownload::findOrFail($id);
 
-        if ($file->file_path) {
-            Storage::delete($file->file_path);
+        if ($file->filePath) {
+            Storage::delete($file->filePath);
         }
 
         $file->delete();

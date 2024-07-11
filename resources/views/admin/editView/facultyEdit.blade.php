@@ -22,12 +22,12 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{ route('faculty.update', $facultys->faculty_id) }}" method="POST">
+                <form class="row g-3" action="{{ route('faculty.update', $facultys->facultyId) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Fac</label>
-                        <input type="text" class="form-control" id="faculty_id" name="faculty_id" placeholder="" value="{{$facultys->faculty_id}}">
+                        <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="" value="{{$facultys->facultyId}}">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Fac Name</label>

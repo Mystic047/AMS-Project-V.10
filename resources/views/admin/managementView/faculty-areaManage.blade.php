@@ -48,24 +48,24 @@
                     <table class="table table-bordered">
                         <thead class="table table-sm">
                             <tr>
-                                <th scope="col">faculty_id</th>
-                                <th scope="col">faculty_name</th>
+                                <th scope="col">facultyId</th>
+                                <th scope="col">facultyName</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($facultys as $faculty)
                                 <tr>
-                                    <td>{{ $faculty->faculty_id }}</td>
+                                    <td>{{ $faculty->facultyId }}</td>
                                     <td>{{ $faculty->facultyName }}</td>
                                     <td class="col-2">
                                         <div class="d-flex">
-                                            <form action="{{ route('faculty.edit', $faculty->faculty_id) }}" method="get" class="me-2">
+                                            <form action="{{ route('faculty.edit', $faculty->facultyId) }}" method="get" class="me-2">
                                                 <button class="btn btn-warning btn-sm" type="submit">
                                                     <i class="fas fa-pencil-alt"></i> Edit
                                                 </button>
                                             </form>
-                                            <form action="{{ route('faculty.delete', $faculty->faculty_id) }}" method="post">
+                                            <form action="{{ route('faculty.delete', $faculty->facultyId) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit">
@@ -96,26 +96,26 @@
                     <table class="table table-bordered">
                         <thead class="table table-sm">
                             <tr>
-                                <th scope="col">area_id</th>
-                                <th scope="col">area_name</th>
-                                <th scope="col">faculty_id</th>
+                                <th scope="col">areaId</th>
+                                <th scope="col">areaName</th>
+                                <th scope="col">facultyId</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($areas as $area)
                                 <tr>
-                                    <td>{{ $area->area_id }}</td>
+                                    <td>{{ $area->areaId }}</td>
                                     <td>{{ $area->areaName }}</td>
-                                    <td>{{ $area->faculty_id }}</td>
+                                    <td>{{ $area->facultyId }}</td>
                                     <td class="col-2">
                                         <div class="d-flex">
-                                            <form action="{{ route('area.edit', $area->area_id) }}" method="get" class="me-2">
+                                            <form action="{{ route('area.edit', $area->areaId) }}" method="get" class="me-2">
                                                 <button class="btn btn-warning btn-sm" type="submit">
                                                     <i class="fas fa-pencil-alt"></i> Edit
                                                 </button>
                                             </form>
-                                            <form action="{{ route('area.delete', $area->area_id) }}" method="post">
+                                            <form action="{{ route('area.delete', $area->areaId) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit">

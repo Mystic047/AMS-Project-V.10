@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use PDF;
-use App\Models\Activities;
+use App\Models\Activity;
 use Illuminate\Http\Request;
-use App\Models\ActivitiesSubmit;
+use App\Models\ActivitySubmit;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
@@ -13,7 +14,7 @@ class activityController extends Controller
 {
     public function showManageView()
     {
-        $activities = Activities::all();
+        $activities = Activity::all();
         return view('/admin/managementView/activityManage', compact('activities'));
     }
 
@@ -24,14 +25,14 @@ class activityController extends Controller
 
     public function showEditView($id)
     {
-        $activities = Activities::find($id);
+        $activities = Activity::find($id);
 
         return view('/admin/editView/activityEdit', compact('activities'));
     }
 
     public function showInfo($id)
     {
-        $activities = Activities::find($id);
+        $activities = Activity::find($id);
 
         return view('/admin/editView/activityEdit', compact('activities'));
     }
@@ -41,23 +42,23 @@ class activityController extends Controller
         Log::info('Request received for creating activity.', $request->all());
 
         $validatedData = $request->validate([
-            'activity_id' => 'required|string',
-            'activity_name' => 'required|string',
-            'activity_type' => 'required|string',
-            'activity_date' => 'required|date',
-            'activity_responsible_branch' => 'required|string',
-            'activity_hour_earned' => 'required|string',
-            'activity_register_limit' => 'required|string',
-            'activity_detail' => 'required|string',
-            'assessment_link' => 'required|url',
-            'activity_location' => 'required|string',
+            'actId' => 'required|string',
+            'actName' => 'required|string',
+            'actType' => 'required|string',
+            'actDate' => 'required|date',
+            'actResBranch' => 'required|string',
+            'actHour' => 'required|string',
+            'actRegisLimit' => 'required|string',
+            'actDetails' => 'required|string',
+            'assessmentLink' => 'required|url',
+            'actLocation' => 'required|string',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'responsible_person' => 'required|string',
+            'responsiblePerson' => 'required|string',
         ]);
 
         Log::info('Validation passed.', $validatedData);
 
-        $activity = new Activities();
+        $activity = new Activity();
         $activity->fill($validatedData);
 
         if ($request->hasFile('picture')) {
@@ -67,12 +68,6 @@ class activityController extends Controller
             $activity->picture = str_replace('public/', '', $path);
         }
 
-        // if ($request->hasFile('profile_picture')) {
-        //     $file = $request->file('profile_picture');
-        //     $filename = time() . '.' . $file->getClientOriginalExtension();
-        //     $path = $file->storeAs('public/profile_pictures/admin_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-        //     $admin->profile_picture = str_replace('public/', '', $path); // Save the path in the database
-        // }
 
         $activity->save();
 
@@ -83,28 +78,29 @@ class activityController extends Controller
 
     public function update(Request $request, $id)
     {
-        $activity = Activities::findOrFail($id);
+        $activity = Activity::findOrFail($id);
 
         $validatedData = $request->validate([
-            'activity_id' => 'required|string',
-            'activity_name' => 'required|string',
-            'activity_type' => 'required|string',
-            'activity_date' => 'required|date',
-            'activity_responsible_branch' => 'required|string',
-            'activity_hour_earned' => 'required|string',
-            'activity_register_limit' => 'required|string',
-            'activity_detail' => 'required|string',
-            'activity_location' => 'required|string',
-            'assessment_link' => 'required|url',
+            'actName' => 'required|string',
+            'actType' => 'required|string',
+            'actDate' => 'required|date',
+            'actResBranch' => 'required|string',
+            'actHour' => 'required|string',
+            'actRegisLimit' => 'required|string',
+            'actDetails' => 'required|string',
+            'actLocation' => 'required|string',
+            'assessmentLink' => 'required|url',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'responsible_person' => 'required|string',
+            'responsiblePerson' => 'required|string',
+            'isOpen' => 'nullable|boolean',
+
         ]);
 
         Log::info('Validation passed.', $validatedData);
 
         $activity->fill($validatedData);
 
-        // Handle the picture upload
+     
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -112,7 +108,7 @@ class activityController extends Controller
             $activity->picture = str_replace('public/', '', $path);
         }
 
-        // Save the updated activity
+
         $activity->save();
 
         return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
@@ -120,7 +116,7 @@ class activityController extends Controller
 
     public function destroy($id)
     {
-        $activity = Activities::find($id)->delete();
+        $activity = Activity::find($id)->delete();
         return back()->with('deleted', 'Activity deleted success fully!');
     }
 
@@ -129,32 +125,35 @@ class activityController extends Controller
         $query = $request->input('query');
 
         // Search for coordinators by firstname, lastname, or faculty_id
-        $activity = Activities::where('firstname', 'LIKE', "%{$query}%")
-            ->orWhere('lastname', 'LIKE', "%{$query}%")
-            ->orWhere('admin_id', 'LIKE', "%{$query}%")
+        $activity = Activity::where('firstName', 'LIKE', "%{$query}%")
+            ->orWhere('lastName', 'LIKE', "%{$query}%")
+            ->orWhere('adminId', 'LIKE', "%{$query}%")
             ->get();
 
         return view('/admin/managementView/adminManage', compact('activity'));
     }
-    public function toggleStatus($id, Request $request)
+    
+    public function toggleStatus(Request $request, $id)
     {
-        $activity = Activities::findOrFail($id);
-        $activity->is_open = $request->input('is_open') ? true : false;
+        $activity = Activity::findOrFail($id);
+        $activity->isOpen = $request->input('isOpen');
         $activity->save();
-
+    
         return response()->json(['success' => true]);
     }
+    
+    
 
     public function generatePDF($id)
     {
-        $activity = Activities::find($id);
+        $activity = Activity::find($id);
 
         if (!$activity) {
             return redirect()->back()->with('error', 'Activity not found.');
         }
 
-        $activitiesSubmits = ActivitiesSubmit::with(['student.area'])
-            ->where('activity_id', $id)
+        $activitiesSubmits = ActivitySubmit::with(['student.area'])
+            ->where('actId', $id)
             ->get();
 
         // Log the data for debugging

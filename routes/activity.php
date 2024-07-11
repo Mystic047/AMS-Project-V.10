@@ -14,7 +14,8 @@ Route::controller(activityController::class)->group(function () {
     Route::put('/update-activity/{id}', 'update')->name('activity.update');
     Route::delete('/delete-activity/{id}', 'destroy')->name('activity.delete');
     Route::get('/search-activity', 'search')->name('activity.search');
-    Route::post('/activity/toggle/{id}', 'toggleStatus')->name('activity.toggle');
+
+    Route::post('/activity/toggle/{id}', 'toggleStatus')->name('activity.toggleStatus');
 
     Route::get('/activity/{id}/pdf', 'generatePDF')->name('activity.pdf');
 });
