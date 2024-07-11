@@ -22,12 +22,12 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{ route('area.update', $areas->area_id) }}" method="POST">
+                <form class="row g-3" action="{{ route('area.update', $areas->areaId) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">ID Area</label>
-                        <input type="text" class="form-control" id="area_id" name="area_id" placeholder="" value="{{ $areas->area_id }}">
+                        <input type="text" class="form-control" id="areaId" name="areaId" placeholder="" value="{{ $areas->areaId }}">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Area Name</label>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Faculty</label>
-                        <input type="text" class="form-control" id="faculty_id"  name="faculty_id" placeholder="" value="{{ $areas->faculty_id }}">
+                        <input type="text" class="form-control" id="facultyId"  name="facultyId" placeholder="" value="{{ $areas->facultyId }}">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Update</button>

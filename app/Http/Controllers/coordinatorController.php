@@ -67,7 +67,7 @@ class coordinatorController extends Controller
 
         $request->validate([
             'email' => 'nullable|string',
-            'password' => 'required|min:8',
+            'password' => 'nullable|min:8',
             'firstName' => 'nullable|string',
             'lastName' => 'nullable|string',
             'nickName' => 'nullable|string',

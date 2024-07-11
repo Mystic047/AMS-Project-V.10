@@ -25,58 +25,58 @@
                 <form class="row g-3" action="{{ route('activity.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-6">
-                        <label for="activity_id" class="form-label">รหัสกิจกรรม</label>
-                        <input type="text" name="activity_id" class="form-control" id="activity_id">
+                        <label for="actId" class="form-label">รหัสกิจกรรม</label>
+                        <input type="text" name="actId" class="form-control" id="actId">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_name" class="form-label">ชื่อกิจกรรม</label>
-                        <input type="text" name="activity_name" class="form-control" id="activity_name">
+                        <label for="actName" class="form-label">ชื่อกิจกรรม</label>
+                        <input type="text" name="actName" class="form-control" id="actName">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_location" class="form-label">สถานที่</label>
-                        <input type="text" name="activity_location" class="form-control" id="activity_location">
+                        <label for="actLocation" class="form-label">สถานที่</label>
+                        <input type="text" name="actLocation" class="form-control" id="actLocation">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_type" class="form-label">ประเภทกิจกรรม</label>
-                        <input type="text" name="activity_type" class="form-control" id="activity_type">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="activity_date" class="form-label">วันที่จัด</label>
-                        <input type="date" name="activity_date" class="form-control" id="activity_date">
+                        <label for="actType" class="form-label">ประเภทกิจกรรม</label>
+                        <input type="text" name="actType" class="form-control" id="actType">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_responsible_branch" class="form-label">สาขาที่รับผิดชอบ</label>
-                        <input type="text" name="activity_responsible_branch" class="form-control" id="activity_responsible_branch">
+                        <label for="actDate" class="form-label">วันที่จัด</label>
+                        <input type="date" name="actDate" class="form-control" id="actDate">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_hour_earned" class="form-label">ชั่วโมงที่ได้รับ</label>
-                        <input type="text" name="activity_hour_earned" class="form-control" id="activity_hour_earned">
+                        <label for="actResBranch" class="form-label">สาขาที่รับผิดชอบ</label>
+                        <input type="text" name="actResBranch" class="form-control" id="actResBranch">
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_register_limit" class="form-label">จำนวนที่รับ</label>
-                        <input type="text" name="activity_register_limit" class="form-control" id="activity_register_limit">
+                        <label for="actHour" class="form-label">ชั่วโมงที่ได้รับ</label>
+                        <input type="text" name="actHour" class="form-control" id="actHour">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="actRegisLimit" class="form-label">จำนวนที่รับ</label>
+                        <input type="text" name="actRegisLimit" class="form-control" id="actRegisLimit">
                     </div>
                     <div class="col-md-12">
-                        <label for="activity_detail" class="form-label">รายละเอียดกิจกรรม</label>
-                        <textarea name="activity_detail" class="form-control" id="activity_detail"></textarea>
+                        <label for="actDetails" class="form-label">รายละเอียดกิจกรรม</label>
+                        <textarea name="actDetails" class="form-control" id="actDetails"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label for="assessment_link" class="form-label">ลิงค์ประเมินกิจกรรม</label>
-                        <input type="text" name="assessment_link" class="form-control" id="assessment_link">
+                        <label for="assessmentLink" class="form-label">ลิงค์ประเมินกิจกรรม</label>
+                        <input type="text" name="assessmentLink" class="form-control" id="assessmentLink">
                     </div>
                     <div class="col-md-6">
                         <label for="picture" class="form-label">รูปภาพ</label>
                         <input type="file" id="picture" name="picture" class="form-control">
                     </div>
-                    <div class="col-md-6"> 
-                        <label for="responsible_person" class="form-label">ผู้รับผิดชอบ</label>
-                        <input type="text" name="responsible_person" class="form-control" id="responsible_person">
+                    <div class="col-md-6">
+                        <label for="responsiblePerson" class="form-label">ผู้รับผิดชอบ</label>
+                        <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary float-end">Create</button>
                     </div>
                 </form>
+                
                 
                 
             </div>

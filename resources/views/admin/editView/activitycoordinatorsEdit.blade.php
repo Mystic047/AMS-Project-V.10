@@ -23,49 +23,46 @@
         <div class="container">
             <div class="card my-5">
                 <div class="card-body">
-                    <form class="row g-3" action="{{ route('coordinator.update', $coordinators->coordinators_id) }}" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" action="{{ route('coordinator.update', $coordinators->userId) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="col-12">
-                            <label for="inputAddress" class="form-label">ID</label>
-                            <input type="text" class="form-control" id="inputAddress" name="coordinators_id" placeholder="ถ้า Auto ก็เอาออก" value="{{ $coordinators->coordinators_id }}">
+                            <label for="userId" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="userId" name="userId" placeholder="ถ้า Auto ก็เอาออก" value="{{ $coordinators->userId }}" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4"  name="email"value="{{ $coordinators->email }}">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $coordinators->email }}">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" name="password"value="">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" value="">
                         </div>
                         <div class="col-md-5">
-                            <label for="inputEmail4" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="inputEmail4" name="firstname" value="{{ $coordinators->firstname }}">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" value="{{ $coordinators->firstName }}">
                         </div>
                         <div class="col-md-5">
-                            <label for="inputPassword4" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="inputPassword4" name="lastname"  value="{{ $coordinators->lastname }}">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" value="{{ $coordinators->lastName }}">
                         </div>
                         <div class="col-md-2">
-                            <label for="inputPassword4" class="form-label">Nickname</label>
-                            <input type="text" class="form-control" id="inputPassword4"  name="nickname" value="{{ $coordinators->nickname }}">
-                        </div>
-                        {{-- <div class="col-12">
-                            <label for="inputAddress" class="form-label">faculty_id</label>
-                            <input type="text" class="form-control" id="inputAddress" name="faculty_id" value="{{ $coordinators->faculty_id }}">
-                        </div> --}}
-                        <div class="col-md-6">
-                            <label for="inputCity" class="form-label">area_id</label>
-                            <input type="text" class="form-control" id="inputCity"  name="area_id" value="{{ $coordinators->area_id }}">
+                            <label for="nickName" class="form-label">Nickname</label>
+                            <input type="text" class="form-control" id="nickName" name="nickName" value="{{ $coordinators->nickName }}">
                         </div>
                         <div class="col-md-6">
-                            <label for="profile_picture">Profile Picture:</label><br>
-                            <input type="file" name='profile_picture' id="profile_picture">
+                            <label for="areaId" class="form-label">Area ID</label>
+                            <input type="text" class="form-control" id="areaId" name="areaId" value="{{ $coordinators->areaId }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="profilePicture" class="form-label">Profile Picture</label><br>
+                            <input type="file" name="profilePicture" id="profilePicture">
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary mx-1 float-end">Save</button>
                         </div>
                     </form>
+                    
                     
                 </div>
             </div>

@@ -36,7 +36,6 @@
     <div class="container">
         <div class="card mt-5">
             <div class="card-body">
-                <!-- Search bar and Create button -->
                 <div class="search-bar mb-3">
                     <div class="search-box w-75">
                         <input type="text" class="form-control" placeholder="Search...">
@@ -101,6 +100,8 @@
             </div>
         </div>
     </div>
+@endsection
+
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -121,7 +122,7 @@
                 }
             });
         }
-
+    
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
                 method: 'POST',
@@ -129,7 +130,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ is_open: checkbox.checked })
+                body: JSON.stringify({ isOpen: checkbox.checked })
             })
             .then(response => response.json())
             .then(data => {
@@ -149,7 +150,7 @@
                 }
             });
         }
-
+    
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
                 if (checkbox.checked) {
@@ -160,7 +161,7 @@
             });
         });
     </script>
-
+    
     <style>
         .form-check-input.switch-open {
             background-color: #198754 !important;
@@ -171,9 +172,7 @@
             border-color: #0a0a0a !important;
         }
     </style>
+    
 </body>
-@endsection
-
-
 
 </html>
