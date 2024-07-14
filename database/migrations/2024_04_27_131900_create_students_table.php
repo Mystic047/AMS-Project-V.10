@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('lastName');
             $table->integer('areaId');
             $table->string('accumulatedHours')->nullable();
-            $table->string('role')->nullable();
+            $table->string('role')->default('student');
             $table->string('profilePicture')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -39,14 +39,15 @@
                 <div class="upload-header mb-3">
                     <h4>อัปโหลดเอกสาร</h4>
                 </div>
-                <form>
+                <form class="row g-3" action="{{route('file.upload')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="documentTitle" class="form-label">ชื่อเอกสาร</label>
-                        <input type="text" class="form-control" id="documentTitle" placeholder="พิมพ์ชื่อเอกสาร">
+                        <input type="text" class="form-control" id="fileName" name="fileName" placeholder="พิมพ์ชื่อเอกสาร">
                     </div>
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">เลือกไฟล์</label>
-                        <input type="file" class="form-control" id="fileUpload">
+                        <input type="file" class="form-control" id="filePath" name="filePath">
                     </div>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary" type="submit">อัปโหลด</button>

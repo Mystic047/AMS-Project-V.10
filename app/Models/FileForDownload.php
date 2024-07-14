@@ -14,6 +14,6 @@ class FileForDownload extends Model
         'createdBy', 
         'createdByRole'
     ];
-    protected $primaryKey = 'file_id';
+    protected $primaryKey = 'fileId';
     use HasFactory;
 }
