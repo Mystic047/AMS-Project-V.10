@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->integer('areaId');
-            $table->string('role')->nullable();
+            $table->string('role')->default('coordinator');
             $table->string('profilePicture')->nullable();
             $table->rememberToken();
             $table->timestamps();

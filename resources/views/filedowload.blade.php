@@ -46,8 +46,8 @@
                                             {{-- <td>{{ $file->created_by }} {{ $file->created_by_role }}</td> --}}
                                             <td>{{ $file->created_at }} </td>
                                             <td>
-                                                @if($file->file_path)
-                                                    <a href="{{ Storage::url($file->file_path) }}" target="_blank">
+                                                @if($file->filePath)
+                                                    <a href="{{ Storage::url($file->filePath) }}" target="_blank">
                                                         <i class="fa-solid fa-file-pdf fa-2x" style="color: #f6420bde;"></i> <!-- Changed icon to PDF and made it larger -->
                                                     </a>
                                                 @else
@@ -56,7 +56,7 @@
                                             </td>
 
                                             <td>
-                                                <form action="{{ route('file.destroy', $file->file_id) }}" method="POST">
+                                                <form action="{{ route('file.destroy', $file->fileId) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <a href="{{ ('fileupload') }}" class="btn btn-primary">อัปโหลดไฟล์</a>
+                            <a href="{{route('file.showUpload')}}" class="btn btn-primary">อัปโหลดไฟล์</a>
                         </div>
                     </div>
                 </div>

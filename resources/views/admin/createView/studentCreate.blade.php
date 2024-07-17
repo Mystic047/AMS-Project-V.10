@@ -34,23 +34,23 @@
                     </div>
                     <div class="col-md-5">
                         <label for="firstname" class="form-label">First Name</label>
-                        <input type="text" name="firstname" class="form-control" id="firstname">
+                        <input type="text" name="firstName" class="form-control" id="firstname">
                     </div>
                     <div class="col-md-5">
                         <label for="lastname" class="form-label">Last Name</label>
-                        <input type="text" name="lastname" class="form-control" id="lastname">
+                        <input type="text" name="lastName" class="form-control" id="lastname">
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">Nickname</label>
-                        <input type="text" name="nickname" class="form-control" id="nickname">
+                        <input type="text" name="nickName" class="form-control" id="nickname">
                     </div>
                     <div class="col-md-6">
-                        <label for="area_id" class="form-label">Area ID</label>
-                        <input type="text" name="area_id" class="form-control" id="area_id">
+                        <label for="areaId" class="form-label">Area ID</label>
+                        <input type="text" name="areaId" class="form-control" id="areaId">
                     </div>
                     <div class="col-md-6">
-                        <label for="profile_picture" class="form-label">Profile Picture</label>
-                        <input type="file" id="profile_picture" name="profile_picture" class="form-control">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" id="profilePicture" name="profilePicture" class="form-control">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>

@@ -73,7 +73,7 @@
                                 <tr>
                                     <td>{{ $file->fileName }}</td>
                                     <td>
-                                        @if ($file->file_path)
+                                        @if ($file->filePath)
                                             <a href="{{ Storage::url($file->filePath) }}" target="_blank">
                                                 @php
                                                     $extension = pathinfo($file->filePath, PATHINFO_EXTENSION);

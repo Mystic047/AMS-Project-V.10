@@ -34,15 +34,15 @@
                     </div>
                     <div class="col-md-5">
                         <label for="firstname" class="form-label">First Name</label>
-                        <input type="text" name="firstname" class="form-control" id="firstname">
+                        <input type="text" name="firstName" class="form-control" id="firstName">
                     </div>
                     <div class="col-md-5">
                         <label for="lastname" class="form-label">Last Name</label>
-                        <input type="text" name="lastname" class="form-control" id="lastname">
+                        <input type="text" name="lastName" class="form-control" id="lastName">
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">Nickname</label>
-                        <input type="text" name="nickname" class="form-control" id="nickname">
+                        <input type="text" name="nickName" class="form-control" id="nickName">
                     </div>
                     <div class="col-md-6">
                         <label for="areaId" class="form-label">Area ID</label>

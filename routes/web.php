@@ -57,9 +57,6 @@ Route::get('/activity-info/{id}', [homeController::class , 'showInfoView'])->nam
 Route::get('/profile', function () {
     return view('profile');
 });
-Route::get('/fileupload', function () {
-    return view('fileupload');
-});
 
 Route::get('/activity', function () {
     return view('activity');

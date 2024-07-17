@@ -13,7 +13,7 @@ class Student extends Authenticatable
 {
     protected $table = 'student';
 
-    protected $fillable = ['userId', 'email', 'password', 'nickname', 'firstname', 'lastname', 'area_id', 'profile_picture'];
+    protected $fillable = ['userId', 'email', 'password', 'nickName', 'firstName', 'lastName', 'areaId', 'profilePicture'];
 
     protected $primaryKey = 'userId';
 

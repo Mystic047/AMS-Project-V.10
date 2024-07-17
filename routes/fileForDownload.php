@@ -15,4 +15,8 @@ Route::controller(fileController::class)->group(function () {
     Route::put('/update-file/{id}', 'update')->name('file.update');
 
     Route::delete('/delete-file/{id}', 'destroy')->name('file.destroy');
+
+    //secondary upload
+    Route::get('/uploadForm-file', 'showUploadView')->name('file.showUpload');
+    Route::post('/upload-file', 'upload')->name('file.upload');
 });
