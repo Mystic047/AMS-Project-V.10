@@ -73,7 +73,8 @@ class activityController extends Controller
 
         Log::info('Activity saved successfully.', $activity->toArray());
 
-        return redirect()->route('activity.manage')->with('success', 'Activity added successfully!');
+        // return redirect()->route('activity.manage')->with('success', 'Activity added successfully!');
+        return back()->with('success', 'Activity added success fully!');
     }
 
     public function update(Request $request, $id)
@@ -111,7 +112,8 @@ class activityController extends Controller
 
         $activity->save();
 
-        return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
+        // return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
+        return back()->with('success', 'Activity edited success fully!');
     }
 
     public function destroy($id)
