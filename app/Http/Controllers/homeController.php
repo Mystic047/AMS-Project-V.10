@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Activity;
 use App\Models\ActivitySubmit;
 
@@ -10,11 +11,12 @@ class homeController extends Controller
 {
     public function showHomeView()
     {
+        $news = News::all();
         $activities = Activity::all()->map(function($activity) {
             $activity->registration_status = $activity->isRegistrationOpen() ? 'open' : 'closed';
             return $activity;
         });
-        return view('/welcome' , compact('activities'));
+        return view('/welcome' , compact('activities' , 'news'));
     }
 
     public function showInfoView($id)

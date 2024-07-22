@@ -15,4 +15,7 @@ Route::controller(newsController::class)->group(function () {
     Route::put('/update-News/{id}', 'update')->name('news.update');
     Route::delete('/delete-News/{id}', 'destroy')->name('news.delete');
     Route::get('/search-News', 'search')->name('news.search');
+
+
+    Route::get('/list-News', 'showInfoView')->name('news.list');
 });
