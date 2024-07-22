@@ -14,6 +14,13 @@ class newsController extends Controller
         return view('/admin/managementView/newsManage', compact('news'));
     }
 
+    public function showInfoView()
+    {
+        $news = News::all();
+        return view('news' , compact('news'));
+    }
+
+
     public function showCreateView()
     {
         return view('/admin/createView/newsCreate');

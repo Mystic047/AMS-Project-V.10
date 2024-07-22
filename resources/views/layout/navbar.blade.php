@@ -84,7 +84,7 @@
                                         class="fas fa-home"></i> หน้าแรก</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('New') }}"><i class="fas fa-newspaper"></i>
+                                <a class="nav-link" href="{{ route('news.list') }}"><i class="fas fa-newspaper"></i>
                                     ข่าวสาร</a>
                             </li>
                             <li class="nav-item">
