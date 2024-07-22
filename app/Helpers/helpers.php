@@ -6,7 +6,7 @@ if (!function_exists('getAuthenticatedUser')) {
         $guards = ['admin', 'student', 'professor', 'coordinator'];
         foreach ($guards as $guard) {
             if (auth()->guard($guard)->check()) {
-                return auth()->guard($guard)->user();
+                return auth()->guard($guard)->user()->load('area');
             }
         }
         return null;
