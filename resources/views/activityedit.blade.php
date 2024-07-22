@@ -18,60 +18,59 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{ route('activity.create') }}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('activity.update', $activities->actId) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="col-md-6">
-                        <label for="activity_id" class="form-label"><i class="fas fa-id-badge"></i> รหัสกิจกรรม</label>
-                        <input type="text" name="activity_id" class="form-control" id="activity_id">
+                        <label for="actId" class="form-label"><i class="fas fa-id-badge"></i> รหัสกิจกรรม</label>
+                        <input type="text" name="actId" class="form-control" id="actId" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_name" class="form-label"><i class="fas fa-signature"></i> ชื่อกิจกรรม</label>
-                        <input type="text" name="activity_name" class="form-control" id="activity_name">
+                        <label for="actName" class="form-label"><i class="fas fa-signature"></i> ชื่อกิจกรรม</label>
+                        <input type="text" name="actName" class="form-control" id="actName" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_location" class="form-label"><i class="fas fa-map-marker-alt"></i> สถานที่</label>
-                        <input type="text" name="activity_location" class="form-control" id="activity_location">
+                        <label for="actLocation" class="form-label"><i class="fas fa-map-marker-alt"></i> สถานที่</label>
+                        <input type="text" name="actLocation" class="form-control" id="actLocation" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_type" class="form-label"><i class="fas fa-list-alt"></i> ประเภทกิจกรรม</label>
-                        <input type="text" name="activity_type" class="form-control" id="activity_type">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="activity_date" class="form-label"><i class="fas fa-calendar-alt"></i> วันที่จัด</label>
-                        <input type="date" name="activity_date" class="form-control" id="activity_date">
+                        <label for="actType" class="form-label"><i class="fas fa-list-alt"></i> ประเภทกิจกรรม</label>
+                        <input type="text" name="actType" class="form-control" id="actType" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_responsible_branch" class="form-label"><i class="fas fa-building"></i> สาขาที่รับผิดชอบ</label>
-                        <input type="text" name="activity_responsible_branch" class="form-control" id="activity_responsible_branch">
+                        <label for="actDate" class="form-label"><i class="fas fa-calendar-alt"></i> วันที่จัด</label>
+                        <input type="date" name="actDate" class="form-control" id="actDate" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_hour_earned" class="form-label"><i class="fas fa-hourglass-half"></i> ชั่วโมงที่ได้รับ</label>
-                        <input type="text" name="activity_hour_earned" class="form-control" id="activity_hour_earned">
+                        <label for="actResBranch" class="form-label"><i class="fas fa-building"></i> สาขาที่รับผิดชอบ</label>
+                        <input type="text" name="actResBranch" class="form-control" id="actResBranch" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="activity_register_limit" class="form-label"><i class="fas fa-users"></i> จำนวนที่รับ</label>
-                        <input type="text" name="activity_register_limit" class="form-control" id="activity_register_limit">
+                        <label for="actHour" class="form-label"><i class="fas fa-hourglass-half"></i> ชั่วโมงที่ได้รับ</label>
+                        <input type="text" name="actHour" class="form-control" id="actHour" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="actRegisLimit" class="form-label"><i class="fas fa-users"></i> จำนวนที่รับ</label>
+                        <input type="text" name="actRegisLimit" class="form-control" id="actRegisLimit" required>
                     </div>
                     <div class="col-md-12">
-                        <label for="activity_detail" class="form-label"><i class="fas fa-info-circle"></i> รายละเอียดกิจกรรม</label>
-                        <textarea name="activity_detail" class="form-control" id="activity_detail"></textarea>
+                        <label for="actDetails" class="form-label"><i class="fas fa-info-circle"></i> รายละเอียดกิจกรรม</label>
+                        <textarea name="actDetails" class="form-control" id="actDetails" required></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label for="assessment_link" class="form-label"><i class="fas fa-link"></i> ลิงค์ประเมินกิจกรรม</label>
-                        <input type="text" name="assessment_link" class="form-control" id="assessment_link">
+                        <label for="assessmentLink" class="form-label"><i class="fas fa-link"></i> ลิงค์ประเมินกิจกรรม</label>
+                        <input type="url" name="assessmentLink" class="form-control" id="assessmentLink" required>
                     </div>
                     <div class="col-md-6">
                         <label for="picture" class="form-label"><i class="fas fa-image"></i> รูปภาพ</label>
-                        <input type="file" id="picture" name="picture" class="form-control">
+                        <input type="file" id="picture" name="picture" class="form-control" accept="image/*">
                     </div>
                     <div class="col-md-6">
-                        <label for="responsible_person" class="form-label"><i class="fas fa-user"></i> ผู้รับผิดชอบ</label>
-                        <input type="text" name="responsible_person" class="form-control" id="responsible_person">
+                        <label for="responsiblePerson" class="form-label"><i class="fas fa-user"></i> ผู้รับผิดชอบ</label>
+                        <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson" required>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success mx-1 float-end">ยกเลิก</button>
-                        <button type="submit" class="btn btn-danger mx-1 float-end">บันทึก</button>
+                        <button type="submit" class="btn btn-success float-end">สร้างกิจกกรม</button>
                     </div>
                 </form>
             </div>
