@@ -14,6 +14,7 @@ require base_path('routes/activity.php');
 require base_path('routes/activitySubmit.php');
 require base_path('routes/fileForDownload.php');
 require base_path('routes/news.php');
+require base_path('routes/profiles.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,45 +28,19 @@ require base_path('routes/news.php');
 
  Route::get('/testRelation', [testRelationController::class , 'indexAction'])->name('testRelation');
 
-
-// Faculty Management
-
-
-
-
 Route::middleware(['role:student'])->group(function () {
     Route::get('/TESTM', function () {
         return view('TESTM');
     });
 });
 
-
-// Route::get('/login', function () {
-//     return view('login');
-// });
-
-// Route::get('/testlogin', [customAuthController::class, 'showLoginForm'])->name('login.show');
-
-// Route::get('/admin/dashboard', [customAuthController::class,'showAdminDashboard'])->name('admin.dashboard');
-// Route::get('/admin/login', [customAuthController::class,'showAdminLoginForm'])->name('admin.login');
-// Route::get('/admin/login', [customAuthController::class,'loginAdmin']);
-
 Route::get('/', [homeController::class , 'showHomeView'])->name('welcome.home');
 Route::get('/activity-info/{id}', [homeController::class , 'showInfoView'])->name('activity.info');
-
-
-
-Route::get('/profile', function () {
-    return view('profile');
-});
 
 Route::get('/activity', function () {
     return view('activity');
 });
 
-// Route::get('/filedowload', function () {
-//     return view('filedowload');
-// });
 Route::get('/dashboard', function () {
     return view('/admin/dashboard');
 });
@@ -140,9 +115,9 @@ Route::get('/FileManagement', function () {
 
 
 ///เทสเล่น
-Route::get('/Profile', function () {
-    return view('/profiles');
-});
+
+
+
 Route::get('/ActivityCreates', function () {
     return view('/activitycreate');
 });
@@ -158,11 +133,6 @@ Route::get('/NewManage', function () {
 Route::get('/New', function () {
     return view('new');
 });
-
-
-// Route::get('/ActivityManagement', function () {
-//     return view('admin/managementView/activityManage');
-// });
 
 Route::get('/ActivityCreate', function () {
     return view('admin/createView/activityCreate');

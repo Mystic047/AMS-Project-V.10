@@ -46,13 +46,22 @@
                                             {{-- <td>{{ $file->created_by }} {{ $file->created_by_role }}</td> --}}
                                             <td>{{ $file->created_at }} </td>
                                             <td>
-                                                @if($file->filePath)
-                                                    <a href="{{ Storage::url($file->filePath) }}" target="_blank">
-                                                        <i class="fa-solid fa-file-pdf fa-2x" style="color: #f6420bde;"></i> <!-- Changed icon to PDF and made it larger -->
-                                                    </a>
-                                                @else
-                                                    ไม่มีไฟล์
-                                                @endif
+                                                @if ($file->filePath)
+                                                <a href="{{ Storage::url($file->filePath) }}" target="_blank">
+                                                    @php
+                                                        $extension = pathinfo($file->filePath, PATHINFO_EXTENSION);
+                                                    @endphp
+                                                    @if ($extension == 'pdf')
+                                                        <i class="fa-solid fa-file-pdf fa-2x" style="color: #f6420bde;"></i>
+                                                    @elseif(in_array($extension, ['jpeg', 'jpg', 'png']))
+                                                        <i class="fa-solid fa-file-image fa-2x" style="color: #4caf50;"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-file fa-2x" style="color: #6c757d;"></i>
+                                                    @endif
+                                                </a>
+                                            @else
+                                                ไม่มีไฟล์
+                                            @endif
                                             </td>
 
                                             <td>

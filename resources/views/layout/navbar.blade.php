@@ -88,16 +88,17 @@
                                     ข่าวสาร</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('filedowload') }}"><i
-                                        class="fas fa-file-download"></i> เอกสารดาวน์โหลด</a>
+                                <a class="nav-link" href="{{ url('filedowload') }}"><i class="fas fa-file-download"></i>
+                                    เอกสารดาวน์โหลด</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                <a class="nav-link" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#notificationModal">
                                     <i class="fas fa-bell"></i> รับการแจ้งเตือนกิจกรรมใหม่</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-calendar"></i> งานกิจกรรม
                                 </a>
                                 <ul class="dropdown-menu">
@@ -121,14 +122,15 @@
                         @if ($user)
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-user"></i> {{ $user->firstName }}'s Profile
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
                                                     class="fas fa-cog"></i> แก้ไขข้อมูล</a></li>
-                                        <li><a class="dropdown-item" href="{{ ('ActivityHistory') }}"><i class="fas fa-pen-square"></i>
+                                        <li><a class="dropdown-item" href="{{ 'ActivityHistory' }}"><i
+                                                    class="fas fa-pen-square"></i>
                                                 ประวัติการเข้าร่วม</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -167,7 +169,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="{{ asset('storage/pictures/Qrcode.png') }}" class="img-fluid mx-auto d-block" alt="กิจกรรมใหม่" style="width: 200px; height: 200px;">                    <p class="mt-2">ชื่อกลุ่มไลน์</p>
+                    <img src="{{ asset('storage/pictures/Qrcode.png') }}" class="img-fluid mx-auto d-block"
+                        alt="กิจกรรมใหม่" style="width: 200px; height: 200px;">
+                    <p class="mt-2">ชื่อกลุ่มไลน์</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
