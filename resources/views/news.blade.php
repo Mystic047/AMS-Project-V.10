@@ -54,6 +54,13 @@
                                 <h5 class="card-title">{{ $item->title }}</h5>
                                 <hr>
                                 <p class="card-text">{!! $item->details !!}</p>
+                            
+                                <form action="{{ route('news.details', $item->newsId) }}" method="get"
+                                    style="display: inline;">
+                                    <button class="btn btn-warning btn-sm" type="submit">
+                                        <i class=""></i> readmore
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -74,9 +81,10 @@
             </div>
             @endforeach
         </div>
+        
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous">

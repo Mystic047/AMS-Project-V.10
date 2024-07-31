@@ -116,7 +116,12 @@
                         <div>
                             <h5 class="card-title">{{ $article->title }}</h5>
                             <p class="card-text">{!! $article->details !!}</p>
-                            <a href="#" class="btn btn-primary">อ่านต่อ</a>
+                            <form action="{{ route('news.details', $article->newsId) }}" method="get"
+                                style="display: inline;">
+                                <button class="btn btn-warning btn-sm" type="submit">
+                                    <i class=""></i> readmore
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
