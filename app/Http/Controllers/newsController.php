@@ -20,6 +20,12 @@ class newsController extends Controller
         return view('news' , compact('news'));
     }
 
+    public function showDetailsView($id)
+    {
+        $news = News::find($id);
+        return view('newsdetails' , compact('news'));
+    }
+
 
     public function showCreateView()
     {

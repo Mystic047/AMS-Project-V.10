@@ -57,14 +57,14 @@
 <body>
     <div class="container">
         <div class="news-card">
-            <img src="https://www.bru.ac.th/wp-content/uploads/2018/10/bru-idtech-facculty.png" alt="ข่าวสาร">
-            <div class="news-title">โครงการประกวด NEU Activity Ambassador 2022</div>
-            <div class="news-details">โครงการประกวด NEU Activity Ambassador 2022</div>
+            <img src="{{ asset('storage/' . $news->imagePath) }}" class="card-img-top" alt="...">
+            <div class="news-title">{{ $news->title }}</div>
+            <div class="news-details">{!! $news->details !!}</div>
             <br><br>
             <div class="news-footer">
-                <span><i class="fas fa-user"></i> จารุวัฒน์ ภานิงจิต</span>
-                <span><i class="fas fa-calendar-alt"></i> 10 ตุลาคม 2565 เวลา 19:52</span>
-                <span><i class="fas fa-eye"></i> 693</span>
+                <span><i class="fas fa-user"></i> {{ $news->author }}</span>
+                <span><i class="fas fa-calendar-alt"></i> {{ $news->created_at->format('F d, Y') }}</span>
+                <span><i class="fas fa-eye"></i> {{ $news->views }}</span>
             </div>
         </div>
     </div>

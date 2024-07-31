@@ -18,4 +18,5 @@ Route::controller(newsController::class)->group(function () {
 
 
     Route::get('/list-News', 'showInfoView')->name('news.list');
+    Route::get('/details-News/{id}', 'showDetailsView')->name('news.details');
 });
