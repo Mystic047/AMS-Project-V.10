@@ -42,19 +42,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>ยังไม่เข้าร่วมกิจกรรม</td>
-                                    <td>ชื่อกิจกรรมจัดโดย .... <br>
-                                    </td>
-                                    <td>
-                                        8 ชั่วโมง
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#enterCodeModal">ใส่รหัส</button>
-                                        <button class="btn btn-success">รับใบประกาศ</button>
-                                    </td>
-                                </tr>
-                                <!-- ตารางที่เหลือ -->
+                                @foreach($history as $submit)
+                                    <tr>
+                                        <td class="text-center">
+                                            {{ $submit->status ?? 'ไม่มีข้อมูล' }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $submit->activity->actName ?? 'ไม่มีข้อมูล' }}<br>
+                                            จัดโดย {{ $submit->activity->responsiblePerson ?? 'ไม่มีข้อมูล' }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $submit->activity->actHour ?? 'ไม่มีข้อมูล' }} ชั่วโมง
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#enterCodeModal">ใส่รหัส</button>
+                                            <button class="btn btn-success">รับใบประกาศ</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                @if($history->isEmpty())
+                                    <tr>
+                                        <td colspan="4" class="text-center">ไม่มีข้อมูลการเข้าร่วมกิจกรรม</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -62,6 +72,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- Modal เพื่อใส่รหัส -->
     <!-- Modal เพื่อใส่รหัส -->
