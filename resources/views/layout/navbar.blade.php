@@ -129,7 +129,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
                                                     class="fas fa-cog"></i> แก้ไขข้อมูล</a></li>
-                                        <li><a class="dropdown-item" href="{{ 'ActivityHistory' }}"><i
+                                        <li><a class="dropdown-item" href="{{ route("activity.submit.history" , $user->userId) }}"><i
                                                     class="fas fa-pen-square"></i>
                                                 ประวัติการเข้าร่วม</a></li>
                                         <li>
