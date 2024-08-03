@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\testRelationController;
-use App\Http\Controllers\Auth\customAuthController;
+
 
 require base_path('routes/auth.php');
 require base_path('routes/admins.php');
@@ -15,6 +15,7 @@ require base_path('routes/activitySubmit.php');
 require base_path('routes/fileForDownload.php');
 require base_path('routes/news.php');
 require base_path('routes/profiles.php');
+require base_path('routes/activityCalendar.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes

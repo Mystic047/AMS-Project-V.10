@@ -102,7 +102,7 @@
                                     <i class="fas fa-calendar"></i> งานกิจกรรม
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-calendar"></i>
+                                    <li><a class="dropdown-item" href="{{route('activity.calendar')}}"><i class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
                                     <li><a class="dropdown-item" href="{{ url('ActivityAll') }}"><i
                                                 class="fas fa-pen-square"></i> สมัครกิจกรรม</a></li>
