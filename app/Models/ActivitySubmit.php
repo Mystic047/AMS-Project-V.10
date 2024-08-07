@@ -13,7 +13,7 @@ class ActivitySubmit extends Model
     use HasFactory;
     protected $table = 'activitySubmit';
     protected $fillable = ['actId', 'userId','statusCheckInMorning','statusCheckInAfternoon','status'];
-    protected $primaryKey = 'activitySubmitId';
+    protected $primaryKey = 'actSubmitId';
 
     public function student()
     {
@@ -24,5 +24,25 @@ class ActivitySubmit extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'actId', 'actId');
+    }
+
+    public function checkIn($key, $session)
+    {
+        $activity = $this->activity;
+
+        if ($session == 'morning' && $key == $activity->morningEnrollmentKey) {
+            $this->statusCheckInMorning = true;
+        } elseif ($session == 'afternoon' && $key == $activity->afternoonEnrollmentKey) {
+            $this->statusCheckInAfternoon = true;
+        } else {
+            return false; // Invalid key or session
+        }
+
+        if ($this->statusCheckInMorning && $this->statusCheckInAfternoon) {
+            $this->status = 'เข้าร่วมกิจกรรมแล้ว';
+        }
+
+        $this->save();
+        return true; // Successfully checked in
     }
 }
