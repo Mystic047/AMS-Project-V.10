@@ -150,7 +150,6 @@
                                 </li>
                             </ul>
                         @else
-                            <p>Welcome, Guest</p>
                         @endif
 
                     </div>
