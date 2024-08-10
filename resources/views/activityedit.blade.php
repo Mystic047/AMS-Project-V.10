@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Activity</title>
+<title>Edit Activity</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
 integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- Font Awesome CSS -->
@@ -23,43 +23,43 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                     @method('PUT')
                     <div class="col-md-6">
                         <label for="actId" class="form-label"><i class="fas fa-id-badge"></i> รหัสกิจกรรม</label>
-                        <input type="text" name="actId" class="form-control" id="actId" required>
+                        <input type="text" name="actId" class="form-control" id="actId" value="{{ $activities->actId }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actName" class="form-label"><i class="fas fa-signature"></i> ชื่อกิจกรรม</label>
-                        <input type="text" name="actName" class="form-control" id="actName" required>
+                        <input type="text" name="actName" class="form-control" id="actName" value="{{ $activities->actName }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actLocation" class="form-label"><i class="fas fa-map-marker-alt"></i> สถานที่</label>
-                        <input type="text" name="actLocation" class="form-control" id="actLocation" required>
+                        <input type="text" name="actLocation" class="form-control" id="actLocation" value="{{ $activities->actLocation }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actType" class="form-label"><i class="fas fa-list-alt"></i> ประเภทกิจกรรม</label>
-                        <input type="text" name="actType" class="form-control" id="actType" required>
+                        <input type="text" name="actType" class="form-control" id="actType" value="{{ $activities->actType }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actDate" class="form-label"><i class="fas fa-calendar-alt"></i> วันที่จัด</label>
-                        <input type="date" name="actDate" class="form-control" id="actDate" required>
+                        <input type="date" name="actDate" class="form-control" id="actDate" value="{{ $activities->actDate }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actResBranch" class="form-label"><i class="fas fa-building"></i> สาขาที่รับผิดชอบ</label>
-                        <input type="text" name="actResBranch" class="form-control" id="actResBranch" required>
+                        <input type="text" name="actResBranch" class="form-control" id="actResBranch" value="{{ $activities->actResBranch }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actHour" class="form-label"><i class="fas fa-hourglass-half"></i> ชั่วโมงที่ได้รับ</label>
-                        <input type="text" name="actHour" class="form-control" id="actHour" required>
+                        <input type="text" name="actHour" class="form-control" id="actHour" value="{{ $activities->actHour }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="actRegisLimit" class="form-label"><i class="fas fa-users"></i> จำนวนที่รับ</label>
-                        <input type="text" name="actRegisLimit" class="form-control" id="actRegisLimit" required>
+                        <input type="text" name="actRegisLimit" class="form-control" id="actRegisLimit" value="{{ $activities->actRegisLimit }}" required>
                     </div>
                     <div class="col-md-12">
                         <label for="actDetails" class="form-label"><i class="fas fa-info-circle"></i> รายละเอียดกิจกรรม</label>
-                        <textarea name="actDetails" class="form-control" id="actDetails" required></textarea>
+                        <textarea name="actDetails" class="form-control" id="actDetails" required>{{ $activities->actDetails }}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label for="assessmentLink" class="form-label"><i class="fas fa-link"></i> ลิงค์ประเมินกิจกรรม</label>
-                        <input type="url" name="assessmentLink" class="form-control" id="assessmentLink" required>
+                        <input type="url" name="assessmentLink" class="form-control" id="assessmentLink" value="{{ $activities->assessmentLink }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="picture" class="form-label"><i class="fas fa-image"></i> รูปภาพ</label>
@@ -67,10 +67,10 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                     </div>
                     <div class="col-md-6">
                         <label for="responsiblePerson" class="form-label"><i class="fas fa-user"></i> ผู้รับผิดชอบ</label>
-                        <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson" required>
+                        <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson" value="{{ $activities->responsiblePerson }}" required>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success float-end">สร้างกิจกกรม</button>
+                        <button type="submit" class="btn btn-success float-end">อัปเดตกิจกรรม</button>
                     </div>
                 </form>
             </div>

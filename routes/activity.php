@@ -18,4 +18,9 @@ Route::controller(activityController::class)->group(function () {
     Route::post('/activity/toggle/{id}', 'toggleStatus')->name('activity.toggleStatus');
 
     Route::get('/activity/{id}/pdf', 'generatePDF')->name('activity.pdf');
+
+    Route::get('/activity-manage-front', 'showManageViewFront')->name('activity.manageFront');
+    Route::get('/activity-create-front', 'showCreateViewFront')->name('activity.createFront');
+    Route::get('/edit-form-activity-front/{id}', 'showEditViewFront')->name('activity.editFront');
+
 });

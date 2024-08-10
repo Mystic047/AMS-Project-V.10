@@ -104,8 +104,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('activity.calendar')}}"><i class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
-                                    <li><a class="dropdown-item" href="{{ url('ActivityAll') }}"><i
-                                                class="fas fa-pen-square"></i> สมัครกิจกรรม</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('activity.manageFront') }}"><i
+                                                class="fas fa-pen-square"></i> จัดการกิจกรรม</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

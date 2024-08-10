@@ -18,9 +18,21 @@ class activityController extends Controller
         return view('/admin/managementView/activityManage', compact('activities'));
     }
 
+    public function showManageViewFront()
+    {
+        $activities = Activity::all();
+        return view('activityManage', compact('activities'));
+    }
+
     public function showCreateView()
     {
         return view('/admin/createView/activityCreate');
+    }
+
+
+    public function showCreateViewFront()
+    {
+        return view('activityCreate');
     }
 
     public function showEditView($id)
@@ -30,6 +42,13 @@ class activityController extends Controller
         return view('/admin/editView/activityEdit', compact('activities'));
     }
 
+    public function showEditViewFront($id)
+    {
+        $activities = Activity::find($id);
+
+        return view('activityEdit', compact('activities'));
+    }
+    
     public function showInfo($id)
     {
         $activities = Activity::find($id);

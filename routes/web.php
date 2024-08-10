@@ -115,18 +115,16 @@ Route::get('/FileManagement', function () {
 });
 
 
-///เทสเล่น
-
-
 
 Route::get('/ActivityCreates', function () {
-    return view('/activitycreate');
+    return view('/activityCreate');
 });
+
 Route::get('/ActivityEdits', function () {
     return view('/activityedit');
 });
 Route::get('/ActivityAll', function () {
-    return view('/activityAll');
+    return view('/activityManage');
 });
 Route::get('/NewManage', function () {
     return view('/admin/managementView/newManage');
