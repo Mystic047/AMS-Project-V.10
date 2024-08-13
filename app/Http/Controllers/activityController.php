@@ -9,6 +9,7 @@ use App\Models\ActivitySubmit;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
+use GuzzleHttp\Client;
 
 class activityController extends Controller
 {
@@ -59,7 +60,7 @@ class activityController extends Controller
     public function create(Request $request)
     {
         Log::info('Request received for creating activity.', $request->all());
-
+    
         $validatedData = $request->validate([
             'actId' => 'required|string',
             'actName' => 'required|string',
@@ -74,27 +75,56 @@ class activityController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsiblePerson' => 'required|string',
         ]);
-
+    
         Log::info('Validation passed.', $validatedData);
-
+    
         $activity = new Activity();
         $activity->fill($validatedData);
-
+    
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/activity_pictures', $filename);
             $activity->picture = str_replace('public/', '', $path);
         }
-
-
+    
         $activity->save();
-
+    
         Log::info('Activity saved successfully.', $activity->toArray());
-
-        // return redirect()->route('activity.manage')->with('success', 'Activity added successfully!');
-        return back()->with('success', 'Activity added success fully!');
+        $message = "🎉 *New Activity Created!* 🎉\n\n"
+                 . "🆔 รหัสกิจกรรม: " . $activity->actId . "\n"
+                 . "🏷️ ชื่อ กิจกรรม: " . $activity->actName . "\n"
+                 . "📅 วันที่: " . $activity->actDate . "\n"
+                 . "⏰ ชั่วโมงที่ได้: " . $activity->actHour . "\n"
+                 . "📍  สถานที่:" . $activity->actLocation . "\n"
+                 . "👥 อาจารย์ ที่รับผิดชอบ: " . $activity->responsiblePerson . "\n"
+                 . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n";
+        $this->sendLineNotify($message);
+    
+        return back()->with('success', 'Activity added successfully!');
     }
+    
+    private function sendLineNotify($message)
+    {
+        $client = new \GuzzleHttp\Client();
+    
+        $response = $client->post('https://notify-api.line.me/api/notify', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . env('LINE_NOTIFY_TOKEN'),
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'message' => $message,
+            ],
+        ]);
+    
+        if ($response->getStatusCode() !== 200) {
+            Log::error('Failed to send notification to LINE Notify.', ['response' => $response->getBody()->getContents()]);
+        }
+    }
+    
+    
+    
 
     public function update(Request $request, $id)
     {
