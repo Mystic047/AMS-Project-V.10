@@ -107,9 +107,9 @@
             @foreach ($activitiesSubmits as $submit)
                 <tr>
                     <td class="order-column">{{ $loop->iteration }}</td>
-                    <td class="id-column">{{ $submit->student->students_id ?? 'N/A' }}</td>
-                    <td class="name-column">{{ $submit->student->firstname ?? 'N/A' }}</td>
-                    <td class="lastname-column">{{ $submit->student->lastname ?? 'N/A' }}</td>
+                    <td class="id-column">{{ $submit->student->userId ?? 'N/A' }}</td>
+                    <td class="name-column">{{ $submit->student->firstName ?? 'N/A' }}</td>
+                    <td class="lastname-column">{{ $submit->student->lastName ?? 'N/A' }}</td>
                     <td class="area-column">{{ $submit->student->area->areaName ?? 'N/A' }}</td>
                 </tr>
             @endforeach
