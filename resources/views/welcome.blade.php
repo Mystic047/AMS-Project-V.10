@@ -34,10 +34,6 @@
                 <div class="carousel-item active">
                     <img src="{{ asset('storage/pictures/Colosal.jpg') }}" class="d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item">
-                    <img src="https://combu.bru.ac.th/wp-content/uploads/2024/02/422891036_825393186294436_1499709031224825189_n.jpg"
-                        class="d-block w-100" alt="...">
-                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
                 data-bs-slide="prev">

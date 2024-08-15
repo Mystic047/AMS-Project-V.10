@@ -16,6 +16,7 @@ require base_path('routes/fileForDownload.php');
 require base_path('routes/news.php');
 require base_path('routes/profiles.php');
 require base_path('routes/activityCalendar.php');
+require base_path('routes/certificate.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
