@@ -170,7 +170,7 @@
                 <div class="modal-body text-center">
                     <img src="{{ asset('storage/pictures/Qrcode.png') }}" class="img-fluid mx-auto d-block"
                         alt="กิจกรรมใหม่" style="width: 200px; height: 200px;">
-                    <p class="mt-2">ชื่อกลุ่มไลน์</p>
+                    <p class="mt-2">แจ้งเตือนกิจกรรมใหม่ คณะวิทยาศาสตร์</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>

@@ -42,11 +42,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-4">
                                 <colgroup>
+                                    <col style="width: 10%;">
+                                    <col style="width: 30%;">
+                                    <col style="width: 10%;">
+                                    <col style="width: 20%;">
                                     <col style="width: 20%;">
                                     <col style="width: 30%;">
-                                    <col style="width: 10%;">
-                                    <col style="width: 30%;">
-                                    <col style="width: 10%;">
                                 </colgroup>
                                 <thead class="table-light">
                                     <tr>
@@ -55,6 +56,7 @@
                                         <th class="text-center">ชั่วโมงกิจกรรม</th>
                                         <th class="text-center">ดูข้อมูลเพิ่มเติม</th>
                                         <th class="text-center">ยกเลิกลงทะเบียน</th>
+                                        <th class="text-center">รับใบประกาศ</th> <!-- New column for the certificate button -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +78,6 @@
                                                         data-bs-target="#enterCodeModal"
                                                         data-id="{{ $submit->actSubmitId }}">ใส่รหัส</button>
                                                 @endif
-                                                <button class="btn btn-success">รับใบประกาศ</button>
                                             </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -85,15 +86,25 @@
                                                     ยกเลิกการสมัคร
                                                 </button>
                                             </td>
+                                            <td class="text-center">
+                                                @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
+                                                    <a href="{{ route('certificate', ['id' => $submit->actSubmitId]) }}" class="btn btn-success">
+                                                        รับใบประกาศ
+                                                    </a>
+                                                @else
+                                                    <span class="text-muted">ยังไม่สามารถรับใบประกาศได้</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                     @if ($history->isEmpty())
                                         <tr>
-                                            <td colspan="5" class="text-center">ไม่มีข้อมูลการเข้าร่วมกิจกรรม</td>
+                                            <td colspan="6" class="text-center">ไม่มีข้อมูลการเข้าร่วมกิจกรรม</td>
                                         </tr>
                                     @endif
                                 </tbody>
                             </table>
+                            
 
                         </div>
                     </div>
