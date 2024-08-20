@@ -13,7 +13,7 @@
             padding: 0 15px;
         }
 
-      
+
         .fc-toolbar-title,
         .fc-daygrid-day-number,
         .fc-event-title,
@@ -23,46 +23,46 @@
         .fc-col-header-cell-cushion a {
             text-decoration: none !important;
         }
-   
- 
+
+
         .fc-event:hover {
-            background-color: #007bff !important; 
+            background-color: #007bff !important;
             cursor: pointer;
-            transform: scale(1.05); 
-            transition: transform .2s, background-color .2s; 
+            transform: scale(1.05);
+            transition: transform .2s, background-color .2s;
         }
 
-   
+
         .fc-daygrid-day:hover {
-            background-color: #f8f9fa; 
-            transition: background-color .2s; 
+            background-color: #f8f9fa;
+            transition: background-color .2s;
         }
 
-     
+
         .fc-col-header-cell {
-            background-color: #f0f0f0; 
-            color: #333; 
+            background-color: #f0f0f0;
+            color: #333;
             padding: 10px;
         }
 
         .fc-col-header-cell.fc-day-sun {
-            background-color: #ffdddd; 
+            background-color: #ffdddd;
         }
 
         .fc-col-header-cell.fc-day-mon {
-            background-color: #ffebcc; 
+            background-color: #ffebcc;
         }
 
         .fc-col-header-cell.fc-day-tue {
-            background-color: #fff0b3; 
+            background-color: #fff0b3;
         }
 
         .fc-col-header-cell.fc-day-wed {
-            background-color: #e6ffcc; 
+            background-color: #e6ffcc;
         }
 
         .fc-col-header-cell.fc-day-thu {
-            background-color: #ccffcc; 
+            background-color: #ccffcc;
         }
 
         .fc-col-header-cell.fc-day-fri {
@@ -70,8 +70,11 @@
         }
 
         .fc-col-header-cell.fc-day-sat {
-            background-color: #cce0ff; 
+            background-color: #cce0ff;
         }
+        * {
+           font-family: 'Noto Sans Thai', sans-serif;
+       }
     </style>
 </head>
 

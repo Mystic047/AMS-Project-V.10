@@ -183,22 +183,22 @@
                                     @endphp
 
                                     {{-- for testing purposes --}}
-                                    @if ($user && $activity)
+                                    {{-- @if ($user && $activity)
                                     <div>
                                         Student ID: {{ $user->userId }}
                                     </div>
                                     <div>
                                         Activity ID: {{ $activity->actId }}
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;" id="submit-form">
                                     @csrf
                                     <input type="hidden" name="userId" value="{{ $user ? $user->userId : '' }}">
                                     <input type="hidden" name="actId" value="{{ $activity->actId }}">
                                     @if($activity->registration_status == 'open')
-                                        <button class="btn btn-success btn-sm" type="button" onclick="confirmSubmit(this)">
-                                            <i class="fas fa-pencil-alt"></i> Submit
+                                        <button class="btn btn-success btn-sm" type="button" onclick="confirmSubmit(this)" style="width: 100%; height: 40px;">
+                                            <i class="fas fa-pencil-alt"></i> ลงชื่อเข้าร่วมกิจกรรม
                                         </button>
                                     @else
                                         <button class="btn btn-success btn-sm" type="button" disabled>

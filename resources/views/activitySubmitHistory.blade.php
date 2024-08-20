@@ -18,7 +18,7 @@
 @extends('layout.master')
 @section('content')
 
-    <body>
+<body style="background-color:#f5f5f5;">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -104,7 +104,7 @@
                                     @endif
                                 </tbody>
                             </table>
-                            
+
 
                         </div>
                     </div>
