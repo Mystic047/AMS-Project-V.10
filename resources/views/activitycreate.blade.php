@@ -10,10 +10,15 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
+<style>
+    * {
+           font-family: 'Noto Sans Thai', sans-serif;
+       }
+</style>
 @extends('layout.master')
 @section('content')
 
-<body>
+<body style="background-color:#f5f5f5;">
 
     <div class="container">
         <div class="card my-5">
@@ -72,7 +77,7 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                         <button type="submit" class="btn btn-success float-end">สร้างกิจกกรม</button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>

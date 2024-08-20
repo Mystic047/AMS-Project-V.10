@@ -22,7 +22,7 @@
 
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card w-100 bg-white">
                     <div class="card-body">
                         <h5 class="card-title d-flex justify-content-between align-items-center">
@@ -37,7 +37,7 @@
                                     <tr>
                                         <th scope="col">รหัส</th>
                                         <th scope="col">กิจกรรม</th>
-                                        <th scope="col">ประเภท</th>
+                                        <th scope="col">รหัสเข้าร่วม</th>
                                         <th scope="col">สถานะ</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -51,7 +51,11 @@
                                                     <div>{{ $activity->actName }}</div>
                                                 </div>
                                             </td>
-                                            <td>{{ $activity->actType }}</td>
+                                            <td class="d-flex justify-content-center align-items-center">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#participationCodeModal{{ $activity->actId }}">
+                                                    ดูรหัส
+                                                </button>
+                                            </td>
                                             <td>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" role="switch"
@@ -59,7 +63,7 @@
                                                            {{ $activity->isOpen ? 'checked' : '' }}
                                                            onclick="toggleStatus(this, '{{ $activity->actId }}')">
                                                     <label class="form-check-label" for="activityStatus{{ $activity->actId }}">
-                                                        {{ $activity->isOpen ? 'Open' : 'Closed' }}
+                                                        {{ $activity->isOpen ? 'เปิด' : 'ปิด' }}
                                                     </label>
                                                 </div>
                                             </td>
@@ -74,12 +78,34 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                                            <i class="fas fa-trash"></i> 
+                                                            <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="participationCodeModal{{ $activity->actId }}" tabindex="-1" aria-labelledby="participationCodeModalLabel{{ $activity->actId }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="participationCodeModalLabel{{ $activity->actId }}">รหัสเข้าร่วมกิจกรรม</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        รหัสเข้าร่วมของกิจกรรมช่วงเช้า: <br>{{ $activity->participationCode ?? 'ไม่มีรหัส' }}
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        รหัสเข้าร่วมของกิจกรรมช่วงบ่าย: <br>{{ $activity->participationCode ?? 'ไม่มีรหัส' }}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     @endforeach
                                 </tbody>
                             </table>
@@ -97,10 +123,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
- <!-- Bootstrap JS Bundle with Popper -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- <script>
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
      function confirmDelete(button) {
          Swal.fire({
              title: 'ต้องการลบข้อมูลนี้?',

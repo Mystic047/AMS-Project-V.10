@@ -20,6 +20,20 @@
         .hidden {
             display: none;
         }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        .card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -31,7 +45,7 @@
 
     <div class="container mt-3">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-3">
                 <div class="card">
                     <img id="profilePicturePreview"
                         src="{{ $user->profilePicture ? asset('storage/' . $user->profilePicture) : 'https://via.placeholder.com/200' }}"
@@ -62,17 +76,13 @@
                             <li class="list-group-item">รหัสนักศึกษา: {{ $user->userId }}</li>
                             <li class="list-group-item">Email: {{ $user->email }}</li>
                             <li class="list-group-item">สาขาวิชา: {{ $user->area->areaName }}</li>
+                            <li class="list-group-item">ชั่วโมงสะสม: ใส่ชั่วโมงกิจสะสม</li>
                         </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="card-link"><i class="fab fa-google"></i></a>
-                            <a href="#" class="card-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="card-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 mb-3">
                 <div class="card">
                     <div class="card-header">
                         <h5>โปรไฟล์ส่วนตัว</h5>

@@ -121,7 +121,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-user"></i> {{ $user->firstName }}'s Profile
+                                        <i class="fas fa-user"></i> {{ $user->firstName }} {{ $user->lastName }}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
