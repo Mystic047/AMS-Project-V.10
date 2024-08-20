@@ -18,10 +18,20 @@
         }
 
         .card-body img {
-            width: 200px;
+            width: 280px;
             height: 200px;
             object-fit: cover;
         }
+        .text-truncate-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+
     </style>
 </head>
 
@@ -101,28 +111,34 @@
             </div>
         </div>
         <div class="col-md-8">
-            @foreach ($news as $article)
-                <div class="card mb-4 border-0">
-                    <div class="card-header bg-transparent">
-                        <h5 class="card-title mb-0">ข่าวสาร ประชาสัมพันธ์</h5>
-                    </div>
+            <div class="card mb-4 border-0">
+                <div class="card-header bg-transparent">
+                    <!-- Added an icon before the title -->
+                    <h5 class="card-title mb-0">
+                        <i class="fa-solid fa-newspaper"></i> ข่าวสาร ประชาสัมพันธ์
+                    </h5>
+                </div>
+                @foreach ($news as $article)
                     <div class="card-body d-flex flex-row-reverse justify-content-between align-items-center">
                         <img src="{{ $article->imagePath ? asset('storage/' . $article->imagePath) : 'https://via.placeholder.com/200' }}"
                             class="img-fluid" alt="...">
                         <div>
-                            <h5 class="card-title">{{ $article->title }}</h5>
-                            <p class="card-text">{!! $article->details !!}</p>
-                            <form action="{{ route('news.details', $article->newsId) }}" method="get"
-                                style="display: inline;">
-                                <button class="btn btn-warning btn-sm" type="submit">
-                                    <i class=""></i> readmore
-                                </button>
-                            </form>
+                            <h5 class="card-title">
+                                <a href="{{ route('news.details', $article->newsId) }}" class="text-decoration-none">{{ $article->title }}</a>
+                            </h5>
+                            <!-- Use CSS to limit the number of lines shown -->
+                            <p class="card-text text-truncate-3">
+                                {{ Str::limit(strip_tags($article->details), 300, '...') }}
+                            </p>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                    <hr> <!-- Line divider between news items -->
+                @endforeach
+            </div>
         </div>
+
+
+
         <div class="col-md-4">
             <div class="card" style="border: none">
                 <div class="card-body">

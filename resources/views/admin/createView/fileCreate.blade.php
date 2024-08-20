@@ -17,7 +17,7 @@
 <body style="background-color:#f5f5f5;">
     <section class="section">
         <div class="section-header">
-            <h1>เพิ่มข้อมูลข่าวสาร ประชาสัมพันธ์</h1>
+            <h1>เพิ่มเอกสาร ไฟล์ดาวโหลด</h1>
         </div>
     </section>
     <div class="container">
@@ -34,7 +34,7 @@
                         <input type="file" class="form-control" id="filePath" name="filePath">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">เพิ่ม</button>
                     </div>
                 </form>
             </div>

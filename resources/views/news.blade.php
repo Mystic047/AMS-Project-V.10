@@ -27,6 +27,15 @@
             padding-top: 10px;
             margin-top: 10px;
         }
+
+        .card-text-truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
     </style>
 </head>
 
@@ -38,42 +47,33 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>ข่าวสาร ประชาสัมพันธ์</h2>
-            {{-- <a href="" class="btn btn-danger">เทสไปหน้า Edit</a> --}}
             <a href="{{ route('news.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
         </div>
         <div class="row">
             @foreach ($news as $item)
-            <div class="col-md-12 mb-2">
+            <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-md-3">
                                 <img src="{{ asset('storage/' . $item->imagePath) }}" class="card-img-top" alt="...">
                             </div>
-                            <div class="col-9">
-                                <h5 class="card-title">{{ $item->title }}</h5>
+                            <div class="col-md-9">
+                                <a href="{{ route('news.details', $item->newsId) }}" class="card-title">
+                                    <h5>{{ $item->title }}</h5>
+                                </a>
                                 <hr>
-                                <p class="card-text">{!! $item->details !!}</p>
-                            
-                                <form action="{{ route('news.details', $item->newsId) }}" method="get"
-                                    style="display: inline;">
-                                    <button class="btn btn-warning btn-sm" type="submit">
-                                        <i class=""></i> readmore
-                                    </button>
-                                </form>
+                                <p class="card-text card-text-truncate">{!! strip_tags($item->details) !!}</p>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-center">
                         <div class="row">
-                            <div class="col-4">
-                                <p class="card-text">ผู้เขียน: {{ $item->author }}</p>
+                            <div class="col-6">
+                                <p class="card-text"><i class="fas fa-user"></i> ผู้เขียน: {{ $item->author }}</p>
                             </div>
-                            <div class="col-4">
-                                <p class="card-text">วันที่: {{ $item->created_at->format('F d, Y') }}</p>
-                            </div>
-                            <div class="col-4">
-                                <p class="card-text">การเข้าชม: {{ $item->views }} views</p>
+                            <div class="col-6">
+                                <p class="card-text"><i class="fas fa-calendar-alt"></i> วันที่: {{ $item->created_at->format('F d, Y') }}</p>
                             </div>
                         </div>
                     </div>
@@ -81,10 +81,8 @@
             </div>
             @endforeach
         </div>
-        
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous">
