@@ -10,9 +10,15 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
 </head>
+
+<style>
+     * {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+</style>
 @extends('layout.master')
 @section('content')
-<body>
+<body style="background-color:#f5f5f5;">
 
     <div class="container">
         <div class="row mt-5">
@@ -61,14 +67,14 @@
                                                 <div class="d-flex">
                                                     <form action="{{ route('activity.editFront', $activity->actId) }}" method="get" class="me-1">
                                                         <button class="btn btn-warning btn-sm" type="submit">
-                                                            <i class="fas fa-pencil-alt"></i> Edit
+                                                            <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     </form>
                                                     <form action="{{ route('activity.delete', $activity->actId) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                                            <i class="fas fa-trash"></i> Delete
+                                                            <i class="fas fa-trash"></i> 
                                                         </button>
                                                     </form>
                                                 </div>
@@ -110,7 +116,7 @@
              }
          });
      }
- 
+
      function toggleStatus(checkbox, activityId) {
          fetch(`/activity/toggle/${activityId}`, {
              method: 'POST',
@@ -138,7 +144,7 @@
              }
          });
      }
- 
+
      document.addEventListener('DOMContentLoaded', function() {
          document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
              if (checkbox.checked) {
@@ -149,7 +155,7 @@
          });
      });
  </script>
- 
+
  <style>
      .form-check-input.switch-open {
          background-color: #198754 !important;

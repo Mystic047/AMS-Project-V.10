@@ -27,7 +27,7 @@
                     <div class="card card-left">
                         <div class="card-body">
                             <div class="widget-heading mb-4">
-                                <h3 class="">โครงการปัจฉิมนิเทศนักศึกษา ประจำปีการศึกษา 2566 <span
+                                <h3 class="">{{ $activity->actName }} <span
                                         class="badge badge-warning">95 View</span></h3>
                             </div>
                             <div class="widget-content border-tab">
@@ -122,9 +122,9 @@
                                                 <tr>
                                                     <th>รหัส</th>
                                                     <th>ชื่อ</th>
-                                                    <th>นามสกุล</th>      
+                                                    <th>นามสกุล</th>
                                                     <th>สาขา</th>
-                                                    <th>สถานะ</th>                                             
+                                                    <th>สถานะ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -132,7 +132,7 @@
                                                     <tr>
                                                         <td>{{ $submit->student->userId }}</td>
                                                         <td>{{ $submit->student->firstName }}</td>
-                                                        <td>{{ $submit->student->lastName }}</td>  
+                                                        <td>{{ $submit->student->lastName }}</td>
                                                         <td>{{ $submit->student->area->areaName}}</td>
                                                         <td>{{ $submit->status }}</td>
                                                     </tr>
@@ -142,7 +142,7 @@
                                         <div class="text-end">
                                             <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -206,9 +206,9 @@
                                         </button>
                                     @endif
                                 </form>
-                                
-                                
-                                
+
+
+
 
 
 

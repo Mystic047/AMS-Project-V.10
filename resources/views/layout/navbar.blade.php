@@ -106,11 +106,8 @@
                                             ปฏิทินกิจกรรม</a></li>
                                     <li><a class="dropdown-item" href="{{ route('activity.manageFront') }}"><i
                                                 class="fas fa-pen-square"></i> จัดการกิจกรรม</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle"></i>
-                                            Something else here</a></li>
+                                    <li><a class="dropdown-item" href=#><i
+                                                class="fas fa-pen-square"></i> กิจกรรมทั้งหมด</a></li>
                                 </ul>
                             </li>
                         </ul>
