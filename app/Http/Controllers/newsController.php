@@ -32,6 +32,11 @@ class newsController extends Controller
         return view('/admin/createView/newsCreate');
     }
 
+    public function showCreateViewFront()
+    {
+        return view('newsCreate');
+    }
+
     public function showEditView($id)
     {
         $news = News::find($id);

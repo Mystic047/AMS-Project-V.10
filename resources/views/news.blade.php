@@ -47,7 +47,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>ข่าวสาร ประชาสัมพันธ์</h2>
-            <a href="{{ route('news.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
+            <a href="{{ route('news.showCreateFront') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
         </div>
         <div class="row">
             @foreach ($news as $item)

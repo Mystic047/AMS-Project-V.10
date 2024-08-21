@@ -45,23 +45,24 @@
                 <div class="upload-header mb-3">
                     <h4>เขียนข่าวสาร ประชาสัมพันธ์</h4>
                 </div>
-                <form>
-                    <div class="mb-3">
-                        <label for="documentTitle" class="form-label">หัวข้อเรื่อง</label>
-                        <input type="text" class="form-control" id="documentTitle" placeholder="พิมพ์ชื่อเอกสาร">
-                    </div>
-                    <div class="mb-3">
-                        <label for="documentDetails" class="form-label">รายละเอียดข่าว</label>
-                        <textarea class="form-control" id="documentDetails" rows="4" placeholder="พิมพ์รายละเอียดข่าว"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label">เลือกรูปภาพ</label>
-                        <input type="file" class="form-control" id="fileUpload">
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary" type="submit">อัปโหลด</button>
-                    </div>
-                </form>
+                    <form class="row g-3" action="{{ route('news.create') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-12">
+                            <label for="title" class="form-label">ชื่อหัวข้อข่าว</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="">
+                        </div>
+                        <div class="col-12">
+                            <label for="details" class="form-label">รายละเอียด</label>
+                            <textarea class="form-control" id="details" name="details" rows="5"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="imagePath" class="form-label">รูปภาพ</label>
+                            <input type="file" class="form-control" id="imagePath" name="imagePath">
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-primary" type="submit">อัปโหลด</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -69,7 +70,7 @@
     <!-- Initialize CKEditor -->
     <script>
         ClassicEditor
-            .create(document.querySelector('#documentDetails'), {
+            .create(document.querySelector('#details'), {
                 toolbar: [
                     'heading', '|',
                     'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',

@@ -9,6 +9,7 @@ Route::controller(newsController::class)->group(function () {
 
     //Create news
     Route::get('/createForm-News', 'showCreateView')->name('news.showCreate');
+    Route::get('/createForm-News-Front', 'showCreateViewFront')->name('news.showCreateFront');
     Route::post('/create-News', 'create')->name('news.create');
 
     Route::get('/editFrom-News/{id}', 'showEditView')->name('news.edit');
