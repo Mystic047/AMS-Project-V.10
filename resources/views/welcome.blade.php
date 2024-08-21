@@ -84,28 +84,29 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <i class="fa-solid fa-house"></i> กิจกรรม: <span
-                                                style="color: blue;">{{ $activity->actName }}</span>
+                                            <i class="fa-solid fa-house"></i> กิจกรรม: <span style="color: blue;">{{ $activity->actName }}</span>
                                             <br><i class="fa-solid fa-list"></i> จัดโดย: {{ $activity->actResBranch }}
-                                            &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่:
-                                            {{ $activity->actLocation }}
-                                            <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ:
-                                            {{ $activity->actHour }} ชั่วโมง
+                                            &nbsp;&nbsp; <i class="fa-solid fa-location-dot"></i> สถานที่: {{ $activity->actLocation }}
+                                            <br><i class="fa-solid fa-clock"></i> ชั่วโมงกิจกรรมที่ได้รับ: {{ $activity->actHour }} ชั่วโมง
                                         </td>
                                         <td class="text-center">
-                                            <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่:
-                                            {{ $activity->actDate }}
-                                            <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span
-                                                style="color: red;">{{ $activity->actRegisLimit }}</span>
+                                            <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->actDate }}
+                                            <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span style="color: red;">{{ $activity->actRegisLimit }}</span>
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-success"
-                                                onclick="location.href='{{ route('activity.info', $activity->actId) }}'">ดูข้อมูล</button>
+                                            <button class="btn btn-success" onclick="location.href='{{ route('activity.info', $activity->actId) }}'">ดูข้อมูล</button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                            </table>
+
+                            <!-- Add this block to create the "View All Activities" button -->
+                            <div class="text-end mt-3">
+                                <a href="{{ 'AllActivity' }}" class="btn btn-primary">
+                                    <i class="fa-solid fa-list-ul"></i> ดูกิจกรรมทั้งหมด
+                                </a>
+                            </div>
                     </div>
                 </div>
             </div>
