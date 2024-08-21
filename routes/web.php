@@ -153,3 +153,7 @@ Route::get('/ActivityHistory', function () {
 Route::get('/NewDetail', function () {
     return view('newsdetail');
 });
+
+Route::get('/AllActivity', function () {
+    return view('/activityAll');
+});
