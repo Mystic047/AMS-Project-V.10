@@ -6,7 +6,7 @@ use PDF;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use App\Models\ActivitySubmit;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use GuzzleHttp\Client;
@@ -49,7 +49,7 @@ class activityController extends Controller
 
         return view('activityEdit', compact('activities'));
     }
-    
+
     public function showInfo($id)
     {
         $activities = Activity::find($id);
@@ -60,7 +60,7 @@ class activityController extends Controller
     public function create(Request $request)
     {
         Log::info('Request received for creating activity.', $request->all());
-    
+
         $validatedData = $request->validate([
             'actId' => 'required|string',
             'actName' => 'required|string',
@@ -75,39 +75,44 @@ class activityController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsiblePerson' => 'required|string',
         ]);
-    
+
         Log::info('Validation passed.', $validatedData);
-    
+
         $activity = new Activity();
         $activity->fill($validatedData);
-    
+
+        // Generate random enrollment keys
+        $activity->morningEnrollmentKey = $this->generateEnrollmentKey();
+        $activity->afternoonEnrollmentKey = $this->generateEnrollmentKey();
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/activity_pictures', $filename);
             $activity->picture = str_replace('public/', '', $path);
         }
-    
+
         $activity->save();
-    
+
         Log::info('Activity saved successfully.', $activity->toArray());
         $message = "🎉 *New Activity Created!* 🎉\n\n"
-                 . "🆔 รหัสกิจกรรม: " . $activity->actId . "\n"
-                 . "🏷️ ชื่อ กิจกรรม: " . $activity->actName . "\n"
-                 . "📅 วันที่: " . $activity->actDate . "\n"
-                 . "⏰ ชั่วโมงที่ได้: " . $activity->actHour . "\n"
-                 . "📍  สถานที่:" . $activity->actLocation . "\n"
-                 . "👥 อาจารย์ ที่รับผิดชอบ: " . $activity->responsiblePerson . "\n"
-                 . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n";
+            . "🆔 รหัสกิจกรรม: " . $activity->actId . "\n"
+            . "🏷️ ชื่อ กิจกรรม: " . $activity->actName . "\n"
+            . "📅 วันที่: " . $activity->actDate . "\n"
+            . "⏰ ชั่วโมงที่ได้: " . $activity->actHour . "\n"
+            . "📍  สถานที่:" . $activity->actLocation . "\n"
+            . "👥 อาจารย์ ที่รับผิดชอบ: " . $activity->responsiblePerson . "\n"
+            . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n";
         $this->sendLineNotify($message);
-    
+
         return back()->with('success', 'Activity added successfully!');
     }
-    
+
+
     private function sendLineNotify($message)
     {
-        $client = new \GuzzleHttp\Client();
-    
+        $client = new Client();
+
         $response = $client->post('https://notify-api.line.me/api/notify', [
             'headers' => [
                 'Authorization' => 'Bearer ' . env('LINE_NOTIFY_TOKEN'),
@@ -117,14 +122,14 @@ class activityController extends Controller
                 'message' => $message,
             ],
         ]);
-    
+
         if ($response->getStatusCode() !== 200) {
             Log::error('Failed to send notification to LINE Notify.', ['response' => $response->getBody()->getContents()]);
         }
     }
-    
-    
-    
+
+
+
 
     public function update(Request $request, $id)
     {
@@ -150,7 +155,7 @@ class activityController extends Controller
 
         $activity->fill($validatedData);
 
-     
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -183,17 +188,17 @@ class activityController extends Controller
 
         return view('/admin/managementView/adminManage', compact('activity'));
     }
-    
+
     public function toggleStatus(Request $request, $id)
     {
         $activity = Activity::findOrFail($id);
         $activity->isOpen = $request->input('isOpen');
         $activity->save();
-    
+
         return response()->json(['success' => true]);
     }
-    
-    
+
+
 
     public function generatePDF($id)
     {
@@ -216,6 +221,9 @@ class activityController extends Controller
 
         return $pdf->stream('activity-submits.pdf');
     }
-
+    public function generateEnrollmentKey($length = 6)
+    {
+        return Str::random($length);
+    }
 
 }
