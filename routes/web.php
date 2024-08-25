@@ -157,3 +157,7 @@ Route::get('/NewDetail', function () {
 Route::get('/AllActivity', function () {
     return view('/activityAll');
 });
+
+Route::get('/new-manage-front', function () {
+    return view('/newManage');
+});

@@ -83,10 +83,22 @@
                                 <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i
                                         class="fas fa-home"></i> หน้าแรก</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-newspaper"></i> ข่าวสาร
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{route('news.list')}}"><i class="fas fa-newspaper"></i>
+                                        ดูข่าวสาร ประชาสัมพันธ์</a></li>
+                                    <li><a class="dropdown-item" href="{{ ('new-manage-front') }}"><i
+                                                class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสันธ์</a></li>
+                                </ul>
+                            </li>
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('news.list') }}"><i class="fas fa-newspaper"></i>
                                     ข่าวสาร</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('filedowload') }}"><i class="fas fa-file-download"></i>
                                     เอกสารดาวน์โหลด</a>
