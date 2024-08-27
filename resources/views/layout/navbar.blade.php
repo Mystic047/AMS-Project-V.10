@@ -91,7 +91,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('news.list')}}"><i class="fas fa-newspaper"></i>
                                         ดูข่าวสาร ประชาสัมพันธ์</a></li>
-                                    <li><a class="dropdown-item" href="{{ ('new-manage-front') }}"><i
+                                    <li><a class="dropdown-item" href="{{route('news.manageFront')}}"><i
                                                 class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสันธ์</a></li>
                                 </ul>
                             </li>
