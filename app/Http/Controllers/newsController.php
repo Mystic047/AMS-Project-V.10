@@ -13,7 +13,11 @@ class newsController extends Controller
         $news = News::all();
         return view('/admin/managementView/newsManage', compact('news'));
     }
-
+    public function showManageViewFront()
+    {
+        $news = News::paginate(5);
+        return view('newsManage', compact('news'));
+    }
     public function showInfoView()
     {
         // Paginate the news articles, displaying 5 per page
@@ -45,7 +49,12 @@ class newsController extends Controller
 
         return view('/admin/editView/newsEdit', compact('news'));
     }
+    public function showEditViewFront($id)
+    {
+        $news = News::find($id);
 
+        return view('newsEdit', compact('news'));
+    }
     public function create(Request $request)
     {
         Log::info('Request received for creating news.', $request->all());
