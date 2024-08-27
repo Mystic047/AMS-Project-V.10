@@ -22,5 +22,8 @@ Route::controller(activityController::class)->group(function () {
     Route::get('/activity-manage-front', 'showManageViewFront')->name('activity.manageFront');
     Route::get('/activity-create-front', 'showCreateViewFront')->name('activity.createFront');
     Route::get('/edit-form-activity-front/{id}', 'showEditViewFront')->name('activity.editFront');
+    
+    Route::get('/activity-all-front', 'showActivityAllViewFront')->name('activity.showFront');
+
 
 });

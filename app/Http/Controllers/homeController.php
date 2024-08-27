@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
 use App\Models\Activity;
 use App\Models\ActivitySubmit;
-
+use App\Models\News;
 
 class homeController extends Controller
 {
     public function showHomeView()
     {
-        $news = News::all();
+        // Paginate the news articles
+        $news = News::paginate(2);
+
+        // Paginate the activities
         $activities = Activity::paginate(5);
 
         // Transform the activities without losing the paginator
@@ -22,7 +24,6 @@ class homeController extends Controller
 
         return view('welcome', compact('activities', 'news'));
     }
-
 
     public function showInfoView($id)
     {
