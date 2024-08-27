@@ -16,9 +16,11 @@ class newsController extends Controller
 
     public function showInfoView()
     {
-        $news = News::all();
-        return view('news' , compact('news'));
+        // Paginate the news articles, displaying 5 per page
+        $news = News::paginate(5);
+        return view('news', compact('news'));
     }
+    
 
     public function showDetailsView($id)
     {

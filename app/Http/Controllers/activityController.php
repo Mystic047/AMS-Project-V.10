@@ -25,6 +25,12 @@ class activityController extends Controller
         return view('activityManage', compact('activities'));
     }
 
+    public function showActivityAllViewFront()
+    {
+        $activities = Activity::paginate(10);;
+        return view('activityAll', compact('activities'));
+    }
+
     public function showCreateView()
     {
         return view('/admin/createView/activityCreate');

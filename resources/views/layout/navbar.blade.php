@@ -118,7 +118,7 @@
                                             ปฏิทินกิจกรรม</a></li>
                                     <li><a class="dropdown-item" href="{{ route('activity.manageFront') }}"><i
                                                 class="fas fa-pen-square"></i> จัดการกิจกรรม</a></li>
-                                    <li><a class="dropdown-item" href="{{ 'AllActivity'}}"><i
+                                    <li><a class="dropdown-item" href="{{ route('activity.showFront') }}"><i
                                                 class="fas fa-pen-square"></i> กิจกรรมทั้งหมด</a></li>
                                 </ul>
                             </li>
@@ -187,7 +187,12 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>

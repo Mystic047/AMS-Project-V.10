@@ -26,20 +26,8 @@
             </ul>
         </div>
 
-        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
-            <div>
-                <p class="small text-muted">
-                    {!! __('กิจกรรมทั้งหมด') !!}
-                    <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
-                    {!! __('ถึง') !!}
-                    <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
-                    {!! __('จาก') !!}
-                    <span class="fw-semibold">{{ $paginator->total() }}</span>
-                    {!! __('ทั้งหมด  ') !!}
-                </p>
-            </div>
-
-            <div>
+        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between flex-column">
+            <div class="d-flex justify-content-center">
                 <ul class="pagination">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
@@ -82,6 +70,19 @@
                         </li>
                     @endif
                 </ul>
+            </div>
+            
+            <!-- Move the text below the pagination buttons -->
+            <div class="mt-2">
+                <p class="small text-muted text-center">
+                    {!! __('ทั้งหมด') !!}
+                    <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
+                    {!! __('ถึง') !!}
+                    <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
+                    {!! __('จาก') !!}
+                    <span class="fw-semibold">{{ $paginator->total() }}</span>
+                    {!! __('ทั้งหมด ') !!}
+                </p>
             </div>
         </div>
     </nav>
