@@ -25,10 +25,10 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
             <div class="card-body">
                 <form class="row g-3" action="{{ route('activity.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label for="actId" class="form-label"><i class="fas fa-id-badge"></i> รหัสกิจกรรม</label>
                         <input type="text" name="actId" class="form-control" id="actId" required>
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <label for="actName" class="form-label"><i class="fas fa-signature"></i> ชื่อกิจกรรม</label>
                         <input type="text" name="actName" class="form-control" id="actName" required>
@@ -83,12 +83,6 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
     </div>
 
 <!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
-</script>
 <!-- Font Awesome JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>

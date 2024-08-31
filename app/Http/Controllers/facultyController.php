@@ -19,7 +19,8 @@ class facultyController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/facultyCreate' );
+     
+        return view('/admin/createView/facultyCreate');
     }
 
     public function showEditView($id)

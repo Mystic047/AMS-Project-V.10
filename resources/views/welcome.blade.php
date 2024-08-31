@@ -113,9 +113,9 @@
                                     <i class="fa-solid fa-list-ul"></i> ดูกิจกรรมทั้งหมด
                                 </a>
                             </div>
-                            <!-- Pagination Links using the custom pagination template -->
+                            <!-- Activities Pagination -->
                             <div class="d-flex justify-content-center">
-                                {{ $activities->links('vendor.pagination.bootstrap-5') }}
+                                {{ $activities->appends(['newsPage' => Request::input('newsPage')])->links('vendor.pagination.bootstrap-5') }}
                             </div>
 
 
@@ -150,14 +150,14 @@
                         </div>
                         <hr> <!-- Line divider between news items -->
                     @endforeach
-            
-                    <!-- Pagination Links for News -->
+
+                    <!-- News Pagination -->
                     <div class="d-flex justify-content-center">
-                        {{ $news->links('vendor.pagination.bootstrap-5') }}
+                        {{ $news->appends(['activitiesPage' => Request::input('activitiesPage')])->links('vendor.pagination.bootstrap-5') }}
                     </div>
                 </div>
             </div>
-            
+
 
 
 
@@ -175,12 +175,6 @@
         </div>
     @endsection
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
-    </script> --}}
 </body>
 
 </html>

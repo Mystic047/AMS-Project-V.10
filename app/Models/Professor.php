@@ -11,12 +11,19 @@ class Professor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'professor';
-    protected $fillable = ['userId', 'email', 'password', 'nickname', 'firstname', 'lastname','areaId' ,'profilePicture'];
+    protected $fillable = ['userId', 'email', 'password', 'nickName', 'firstName', 'lastName','areaId' ,'profilePicture'];
     protected $primaryKey = 'userId';
     
     public function faculty()
     {
-        return $this->belongsTo(faculty::class, 'facultyId');
+        return $this->hasOneThrough(
+            Faculty::class, 
+            Area::class, 
+            'areaId', // Foreign key on Area table...
+            'facultyId', // Foreign key on Faculty table...
+            'areaId', // Local key on Professor table...
+            'facultyId' // Local key on Area table...
+        );
     }
 
     public function area()

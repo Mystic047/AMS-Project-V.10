@@ -24,10 +24,10 @@
             <div class="card-body">
                 <form class="row g-3" action="{{ route('activity.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label for="actId" class="form-label">รหัสกิจกรรม</label>
                         <input type="text" name="actId" class="form-control" id="actId">
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <label for="actName" class="form-label">ชื่อกิจกรรม</label>
                         <input type="text" name="actName" class="form-control" id="actName">
@@ -73,7 +73,7 @@
                         <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary float-end">Create</button>
+                        <button type="submit" class="btn btn-primary float-end">สร้าง</button>
                     </div>
                 </form>
                 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Coordinator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,8 @@ class coordinatorController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/activitycoordinatorsCreate');
+        $area = Area::all();
+        return view('/admin/createView/activitycoordinatorsCreate',compact('area'));
     }
 
     public function showEditView($id)

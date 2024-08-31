@@ -124,7 +124,7 @@
                                   <div>{{ $coordinator->firstName }} {{ $coordinator->lastName }}</div>
                               </div>
                           </td>
-                          <td class="col-3">{{ $coordinator->facultyId }}</td> <!-- Assuming faculty relation exists -->
+                          <td class="col-3">{{ $coordinator->area->areaName }}</td> <!-- Assuming faculty relation exists -->
                           <td class="col-2">
                             <form action="{{ route('coordinator.edit', $coordinator->userId) }}" method="get" style="display: inline;">
                                 <button class="btn btn-warning btn-sm" type="submit">

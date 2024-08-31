@@ -25,41 +25,43 @@
                 <form class="row g-3" action="{{ route('admin.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">อีเมล</label>
                         <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="col-md-6">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">รหัสผ่าน</label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="col-md-5">
-                        <label for="firstName" class="form-label">First Name</label>
+                        <label for="firstName" class="form-label">ชื่อ</label>
                         <input type="text" name="firstName" class="form-control" id="firstName">
                     </div>
                     <div class="col-md-5">
-                        <label for="lastName" class="form-label">Last Name</label>
+                        <label for="lastName" class="form-label">นามสกุล</label>
                         <input type="text" name="lastName" class="form-control" id="lastName">
                     </div>
                     <div class="col-md-2">
-                        <label for="nickName" class="form-label">Nickname</label>
+                        <label for="nickName" class="form-label">ชื่อเล่น</label>
                         <input type="text" name="nickName" class="form-control" id="nickName">
                     </div>
                     <div class="col-md-6">
-                        <label for="areaId" class="form-label">Area ID</label>
-                        <input type="text" name="areaId" class="form-control" id="areaId">
+                        <label for="areaId" class="form-label">สาขาที่สังกัด</label>
+                        <select class="form-control" id="areaId" name="areaId">
+                            <option value="">เลือกสาขาที่สังกัด</option>
+                            @foreach($area as $areas)
+                                <option value="{{ $areas->areaId }}">{{ $areas->areaName }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="role" class="form-label">Role</label>
-                        <input type="text" name="role" class="form-control" id="role">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <label for="profilePicture" class="form-label">รูปโปรไฟล์</label>
                         <input type="file" id="profilePicture" name="profilePicture" class="form-control">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">สร้าง</button>
                     </div>
                 </form>
+                
                 
             </div>
         </div>

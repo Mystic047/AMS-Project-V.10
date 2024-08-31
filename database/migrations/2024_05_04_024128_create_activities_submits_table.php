@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('activitySubmit', function (Blueprint $table) {
             $table->id('actSubmitId');
             $table->bigInteger('userId');
-            $table->string('actId');      
+            $table->bigInteger('actId');      
             $table->string('statusCheckInMorning')->nullable();;
             $table->string('statusCheckInAfternoon')->nullable();;
             $table->string('status')->default('ยังไม่เข้าร่วมกิจกรรม');

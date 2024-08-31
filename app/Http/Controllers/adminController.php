@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Area;
 use App\Models\Admin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class adminController extends Controller
@@ -16,7 +17,8 @@ class adminController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/adminCreate');
+        $area = Area::all();
+        return view('/admin/createView/adminCreate' , compact('area'));
     }
 
     public function showEditView($id)

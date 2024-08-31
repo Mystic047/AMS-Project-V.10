@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Student;
 
 class studentController extends Controller
 {
@@ -16,7 +17,8 @@ class studentController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/studentCreate' );
+        $area = Area::all();
+        return view('/admin/createView/studentCreate', compact('area')); 
     }
 
     public function showEditView($id)
