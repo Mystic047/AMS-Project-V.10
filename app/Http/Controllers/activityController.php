@@ -139,47 +139,55 @@ class activityController extends Controller
 
     public function update(Request $request, $id)
     {
-        $activity = Activity::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'actName' => 'required|string',
-            'actType' => 'required|string',
-            'actDate' => 'required|date',
-            'actResBranch' => 'required|string',
-            'actHour' => 'required|string',
-            'actRegisLimit' => 'required|string',
-            'actDetails' => 'required|string',
-            'actLocation' => 'required|string',
-            'assessmentLink' => 'required|url',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'responsiblePerson' => 'required|string',
-            'isOpen' => 'nullable|boolean',
-
-        ]);
-
-        Log::info('Validation passed.', $validatedData);
-
-        $activity->fill($validatedData);
-
-
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/activity_pictures', $filename);
-            $activity->picture = str_replace('public/', '', $path);
+        try {
+            $activity = Activity::findOrFail($id);
+    
+            $validatedData = $request->validate([
+                'actName' => 'required|string',
+                'actType' => 'required|string',
+                'actDate' => 'required|date',
+                'actResBranch' => 'required|string',
+                'actHour' => 'required|string',
+                'actRegisLimit' => 'required|string',
+                'actDetails' => 'required|string',
+                'actLocation' => 'required|string',
+                'assessmentLink' => 'required|url',
+                'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'responsiblePerson' => 'required|string',
+                'isOpen' => 'nullable|boolean',
+            ]);
+    
+            Log::info('Validation passed.', $validatedData);
+    
+            $activity->fill($validatedData);
+    
+            if ($request->hasFile('picture')) {
+                // Delete the old picture if it exists
+                if ($activity->picture && Storage::exists('public/' . $activity->picture)) {
+                    Storage::delete('public/' . $activity->picture);
+                }
+    
+                $file = $request->file('picture');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/activity_pictures', $filename);
+                $activity->picture = str_replace('public/', '', $path);
+            }
+    
+            $activity->save();
+    
+            return back()->with('success', 'Activity edited successfully!');
+            
+        } catch (\Exception $e) {
+            Log::error('Failed to update activity: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while editing the activity. Please try again later.')->withInput();
         }
-
-
-        $activity->save();
-
-        // return redirect()->route('activity.manage')->with('success', 'Activity edited successfully!');
-        return back()->with('success', 'Activity edited success fully!');
     }
+    
 
     public function destroy($id)
     {
         $activity = Activity::find($id)->delete();
-        return back()->with('deleted', 'Activity deleted success fully!');
+        return back()->with('success', 'Activity deleted success fully!');
     }
 
     public function search(Request $request)

@@ -56,7 +56,7 @@ std
                     </div>
                     <div class="col-md-6">
                         <label for="profilePicture" class="form-label">Profile Picture</label><br>
-                        <input type="file" name="profilePicture" id="profilePicture">
+                        <input type="file" class="form-control" name="profilePicture" id="profilePicture">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mx-1 float-end">Save</button>

@@ -7,37 +7,38 @@
     <title>Bootstrap 5 Table</title>
     <!-- Link to Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 @extends('admin.layouts.master')
 @section('content')
-    <body style="background-color:#f5f5f5;">
+<body style="background-color:#f5f5f5;">
     <section class="section">
         <div class="section-header">
-          <h1>เพิ่มข้อมูลสาขา</h1>
+            <h1>เพิ่มข้อมูลสาขา</h1>
         </div>
     </section>
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('faculty.create')}}" method="POST">
+                <form class="row g-3" action="{{ route('area.create') }}" method="POST">
                     @csrf
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">รหัส สาขา</label>
-                        <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="">
+                        <label for="areaId" class="form-label">รหัส สาขา</label>
+                        <input type="text" class="form-control" id="areaId" name="areaId" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">ชื่อสาขา</label>
-                        <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="">
+                        <label for="areaName" class="form-label">ชื่อสาขา</label>
+                        <input type="text" class="form-control" id="areaName" name="areaName" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="selectArea" class="form-label">คณะ</label>
+                        <label for="selectFaculty" class="form-label">คณะ</label>
                         <select class="form-control" id="selectFaculty" name="facultyId">
                             <option value="">เลือก คณะที่สังกัด</option>
-                            @foreach($facultys as $faculties)
-                                <option value="{{ $faculties->facultyId }}">{{ $faculties->facultyName }}</option>
+                            @foreach($facultys as $faculty)
+                                <option value="{{ $faculty->facultyId }}">{{ $faculty->facultyName }}</option>
                             @endforeach
                         </select>
                     </div>

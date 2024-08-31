@@ -82,7 +82,7 @@ class fileController extends Controller
             }
     
             $file->save();
-            return redirect()->route('file.manage')->with('success', 'File added successfully!');
+            return back()->with('success', 'File added successfully!');
         } catch (\Exception $e) {
             Log::error('File creation error: '.$e->getMessage());
             return redirect()->back()->with('error', 'There was an error adding the file. Please try again.');
@@ -111,7 +111,7 @@ class fileController extends Controller
             }
     
             $file->save();
-            return redirect()->route('file.manage')->with('success', 'File updated successfully!');
+            return back()->with('success', 'File updated successfully!');
         } catch (\Exception $e) {
             Log::error('File update error: '.$e->getMessage());
             return redirect()->back()->with('error', 'There was an error updating the file. Please try again.');

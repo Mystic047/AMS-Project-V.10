@@ -57,67 +57,77 @@ class newsController extends Controller
     }
     public function create(Request $request)
     {
-        Log::info('Request received for creating news.', $request->all());
-
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'details' => 'required|string',
-            'imagePath' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        Log::info('Validation passed.', $validatedData);
-
-        $news = new News();
-        $news->fill($validatedData);
-
-        if ($request->hasFile('imagePath')) {
-            $file = $request->file('imagePath');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/newsPicture/', $filename);
-            $news->imagePath = str_replace('public/', '', $path);
+        try {
+            Log::info('Request received for creating news.', $request->all());
+    
+            $validatedData = $request->validate([
+                'title' => 'required|string',
+                'details' => 'required|string',
+                'imagePath' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            Log::info('Validation passed.', $validatedData);
+    
+            $news = new News();
+            $news->fill($validatedData);
+    
+            if ($request->hasFile('imagePath')) {
+                $file = $request->file('imagePath');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/newsPicture/', $filename);
+                $news->imagePath = str_replace('public/', '', $path);
+                Log::info('File stored at path: ' . $path);
+            }
+    
+            $news->save();
+            Log::info('News saved successfully.', $news->toArray());
+    
+            return back()->with('success', 'News added successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to create news: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while creating the news. Please try again later.')->withInput();
         }
-
-
-        $news->save();
-        Log::info('File stored at path: ' . $path);
-        Log::info('news saved successfully.', $news->toArray());
-
-        return redirect()->route('news.manage')->with('success', 'Activity added successfully!');
     }
+    
 
     public function update(Request $request, $id)
     {
-        $news = News::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'details' => 'required|string',
-            'imagePath' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        Log::info('Validation passed.', $validatedData);
-
-        $news->fill($validatedData);
-
-     
-        if ($request->hasFile('imagePath')) {
-            $file = $request->file('imagePath');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/newsPicture/', $filename);
-            $news->imagePath = str_replace('public/', '', $path);
-        }
-
-
-
-        $news->save();
-        return redirect()->route('news.manage')->with('success', 'Activity added successfully!');
+        try {
+            $news = News::findOrFail($id);
     
+            $validatedData = $request->validate([
+                'title' => 'required|string',
+                'details' => 'required|string',
+                'imagePath' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            Log::info('Validation passed.', $validatedData);
+    
+            $news->fill($validatedData);
+    
+            if ($request->hasFile('imagePath')) {
+                $file = $request->file('imagePath');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/newsPicture/', $filename);
+                $news->imagePath = str_replace('public/', '', $path);
+                Log::info('File stored at path: ' . $path);
+            }
+    
+            $news->save();
+            Log::info('News updated successfully.', $news->toArray());
+    
+            return back()->with('success', 'News updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to update news: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while updating the news. Please try again later.')->withInput();
+        }
     }
+    
 
     public function destroy($id)
     {
         $news = News::find($id)->delete();
-        return back()->with('deleted', 'news deleted success fully!');
+        return back()->with('success', 'news deleted success fully!');
     }
 
     public function search(Request $request)

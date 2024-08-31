@@ -27,115 +27,115 @@
 @extends('admin.layouts.master')
 @section('content')
 
-    <body style="background-color:#f5f5f5;">
-        <section class="section">
-            <div class="section-header">
-                <h1>จัดการข้อมูลคณะและสาขา</h1>
-            </div>
-        </section>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-body">
-                    <p>จัดการข้อมูลคณะ</p>
-                    <!-- Search bar and Create button -->
-                    <div class="search-bar">
-                        <div class="search-box">
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </div>
-                        <a href="{{ route('faculty.showCreate') }}" class="btn btn-primary">Create</a>
+<body style="background-color:#f5f5f5;">
+    <section class="section">
+        <div class="section-header">
+            <h1>จัดการข้อมูลคณะและสาขา</h1>
+        </div>
+    </section>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-body">
+                <p>จัดการข้อมูลคณะ</p>
+                <!-- Search bar and Create button -->
+                <div class="search-bar">
+                    <div class="search-box">
+                        <input type="text" class="form-control" placeholder="Search...">
                     </div>
-
-                    <table class="table table-bordered">
-                        <thead class="table table-sm">
-                            <tr>
-                                <th scope="col">facultyId</th>
-                                <th scope="col">facultyName</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($facultys as $faculty)
-                                <tr>
-                                    <td>{{ $faculty->facultyId }}</td>
-                                    <td>{{ $faculty->facultyName }}</td>
-                                    <td class="col-2">
-                                        <div class="d-flex">
-                                            <form action="{{ route('faculty.edit', $faculty->facultyId) }}" method="get" class="me-2">
-                                                <button class="btn btn-warning btn-sm" type="submit">
-                                                    <i class="fas fa-pencil-alt"></i> Edit
-                                                </button>
-                                            </form>
-                                            <form action="{{ route('faculty.delete', $faculty->facultyId) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" type="submit">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                    <a href="{{ route('faculty.showCreate') }}" class="btn btn-primary">Create</a>
                 </div>
-            </div>
-            <div class="card mt-5">
-                <div class="card-body">
-                    <!-- Search bar and Create button -->
-                    <p>จัดการข้อมูลสาขา</p>
-                    <div class="search-bar">
-                        <div class="search-box">
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </div>
-                        <a href="{{ route('area.showCreate') }}" class="btn btn-primary">Create</a>
-                    </div>
 
-                    <!-- User table -->
-                    <table class="table table-bordered">
-                        <thead class="table table-sm">
+                <table class="table table-bordered">
+                    <thead class="table table-sm">
+                        <tr>
+                            <th scope="col">facultyId</th>
+                            <th scope="col">facultyName</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($facultys as $faculty)
                             <tr>
-                                <th scope="col">areaId</th>
-                                <th scope="col">areaName</th>
-                                <th scope="col">facultyId</th>
-                                <th scope="col">Action</th>
+                                <td>{{ $faculty->facultyId }}</td>
+                                <td>{{ $faculty->facultyName }}</td>
+                                <td class="col-2">
+                                    <div class="d-flex">
+                                        <form action="{{ route('faculty.edit', $faculty->facultyId) }}" method="get" class="me-2">
+                                            <button class="btn btn-warning btn-sm" type="submit">
+                                                <i class="fas fa-pencil-alt"></i> Edit
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('faculty.delete', $faculty->facultyId) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($areas as $area)
-                                <tr>
-                                    <td>{{ $area->areaId }}</td>
-                                    <td>{{ $area->areaName }}</td>
-                                    <td>{{ $area->facultyId }}</td>
-                                    <td class="col-2">
-                                        <div class="d-flex">
-                                            <form action="{{ route('area.edit', $area->areaId) }}" method="get" class="me-2">
-                                                <button class="btn btn-warning btn-sm" type="submit">
-                                                    <i class="fas fa-pencil-alt"></i> Edit
-                                                </button>
-                                            </form>
-                                            <form action="{{ route('area.delete', $area->areaId) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" type="submit">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                        
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
+
             </div>
         </div>
+        <div class="card mt-5">
+            <div class="card-body">
+                <!-- Search bar and Create button -->
+                <p>จัดการข้อมูลสาขา</p>
+                <div class="search-bar">
+                    <div class="search-box">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+                    <a href="{{ route('area.showCreate') }}" class="btn btn-primary">Create</a>
+                </div>
 
-        <!-- Bootstrap JS Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+                <!-- User table -->
+                <table class="table table-bordered">
+                    <thead class="table table-sm">
+                        <tr>
+                            <th scope="col">areaId</th>
+                            <th scope="col">areaName</th>
+                            <th scope="col">facultyId</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($areas as $area)
+                            <tr>
+                                <td>{{ $area->areaId }}</td>
+                                <td>{{ $area->areaName }}</td>
+                                <td>{{ $area->facultyId }}</td>
+                                <td class="col-2">
+                                    <div class="d-flex">
+                                        <form action="{{ route('area.edit', $area->areaId) }}" method="get" class="me-2">
+                                            <button class="btn btn-warning btn-sm" type="submit">
+                                                <i class="fas fa-pencil-alt"></i> Edit
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('area.delete', $area->areaId) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 @endsection
 
 </html>
