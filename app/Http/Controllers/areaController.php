@@ -19,7 +19,8 @@ class areaController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/areaCreate' );
+           $facultys = Faculty::all();
+        return view('/admin/createView/areaCreate' , compact('facultys'));
     }
 
     public function showEditView($id)
@@ -53,7 +54,7 @@ class areaController extends Controller
         $area = Area::findOrFail($id);
 
         $request->validate([
-            'areaId' => 'required|string',
+            'areaId' => 'nullable|string',
             'areaName' => 'required|string',  
             'facultyId' => 'required|string',
         ]);

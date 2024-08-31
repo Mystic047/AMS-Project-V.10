@@ -129,7 +129,7 @@
                                         <div>{{ $professor->firstName }} {{ $professor->lastName }}</div>
                                     </div>
                                 </td>
-                                <td class="col-3">{{ $professor->faculty_id }}</td>
+                                <td class="col-3">{{ $professor->area->areaName }}</td>
                                 <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
                                     <form action="{{ route('professor.edit', $professor->userId) }}" method="get"

@@ -22,8 +22,25 @@ class Coordinator extends Authenticatable
         'areaId',
         'profilePicture',
     ];
+
     protected $primaryKey = 'userId';
 
+    public function faculty()
+    {
+        return $this->hasOneThrough(
+            Faculty::class,
+            Area::class,
+            'areaId', // Foreign key on Area table...
+            'facultyId', // Foreign key on Faculty table...
+            'areaId', // Local key on Professor table...
+            'facultyId' // Local key on Area table...
+        );
+    }
+    
+    public function area()
+    {
+        return $this->belongsTo(area::class, 'areaId');
+    }
     protected $hidden = [
         'password',
         'remember_token',

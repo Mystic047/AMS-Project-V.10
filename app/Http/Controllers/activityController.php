@@ -68,7 +68,7 @@ class activityController extends Controller
         Log::info('Request received for creating activity.', $request->all());
 
         $validatedData = $request->validate([
-            'actId' => 'required|string',
+            // 'actId' => 'required|string',
             'actName' => 'required|string',
             'actType' => 'required|string',
             'actDate' => 'required|date',

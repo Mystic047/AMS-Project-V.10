@@ -22,19 +22,24 @@
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
-                <form class="row g-3" action="{{route('area.create')}}" method="POST">
+                <form class="row g-3" action="{{route('faculty.create')}}" method="POST">
                     @csrf
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">ID Area</label>
-                        <input type="text" class="form-control" id="areaId" name="areaId" placeholder="">
+                        <label for="inputAddress" class="form-label">รหัส สาขา</label>
+                        <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Area Name</label>
-                        <input type="text" class="form-control" id="areaName" name="areaName" placeholder="">
+                        <label for="inputAddress" class="form-label">ชื่อสาขา</label>
+                        <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Faculty</label>
-                        <input type="text" class="form-control" id="facultyId"  name="facultyId" placeholder="">
+                        <label for="selectArea" class="form-label">คณะ</label>
+                        <select class="form-control" id="selectFaculty" name="facultyId">
+                            <option value="">เลือก คณะที่สังกัด</option>
+                            @foreach($facultys as $faculties)
+                                <option value="{{ $faculties->facultyId }}">{{ $faculties->facultyName }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Create</button>

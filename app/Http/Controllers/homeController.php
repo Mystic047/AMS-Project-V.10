@@ -10,20 +10,21 @@ class homeController extends Controller
 {
     public function showHomeView()
     {
-        // Paginate the news articles
-        $news = News::paginate(2);
-
-        // Paginate the activities
-        $activities = Activity::paginate(5);
-
-        // Transform the activities without losing the paginator
+        $news = News::paginate(2, ['*'], 'newsPage');
+        $activities = Activity::paginate(5, ['*'], 'activitiesPage');
+    
         $activities->getCollection()->transform(function ($activity) {
             $activity->registration_status = $activity->isRegistrationOpen() ? 'open' : 'closed';
             return $activity;
         });
+    
 
+        $news->appends(['activitiesPage' => request('activitiesPage')]);
+        $activities->appends(['newsPage' => request('newsPage')]);
+    
         return view('welcome', compact('activities', 'news'));
     }
+    
 
     public function showInfoView($id)
     {

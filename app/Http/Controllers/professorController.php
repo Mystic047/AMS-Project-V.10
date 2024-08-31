@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Professor;
 
 class professorController extends Controller
 {
@@ -16,7 +17,8 @@ class professorController extends Controller
 
     public function showCreateView()
     {
-        return view('/admin/createView/professorCreate');
+        $area = Area::all();
+        return view('/admin/createView/professorCreate' , compact('area'));
     }
 
 

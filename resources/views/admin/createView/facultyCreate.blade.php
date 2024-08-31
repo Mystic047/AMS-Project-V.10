@@ -25,11 +25,11 @@
                 <form class="row g-3" action="{{route('faculty.create')}}" method="POST">
                     @csrf
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">ID Fac</label>
+                        <label for="inputAddress" class="form-label">รหัส คณะ</label>
                         <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Fac Name</label>
+                        <label for="inputAddress" class="form-label">ชื่อคณะ</label>
                         <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="">
                     </div>
                     <div class="col-12">
