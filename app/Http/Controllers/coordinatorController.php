@@ -18,7 +18,7 @@ class coordinatorController extends Controller
     public function showCreateView()
     {
         $area = Area::all();
-        return view('/admin/createView/activitycoordinatorsCreate',compact('area'));
+        return view('/admin/createView/activitycoordinatorsCreate', compact('area'));
     }
 
     public function showEditView($id)
@@ -30,7 +30,6 @@ class coordinatorController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            // 'coordinators_id' => 'required|unique:activity_coordinators,coordinators_id',
             'email' => 'nullable|string',
             'password' => 'required|min:8',
             'firstName' => 'nullable|string',
@@ -49,67 +48,87 @@ class coordinatorController extends Controller
         if (ctype_digit($emailPrefix)) {
             $coordinator->userId = $emailPrefix;
         } else {
-
-            return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
+            return back()->with(['error' => 'The coordinator ID must be numeric'])->withInput();
         }
+
         if ($request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/profile_pictures/coordinator_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
             $coordinator->profilePicture = str_replace('public/', '', $path); // Save the path in the database
         }
+
         $coordinator->save();
 
-        return redirect()->route('coordinator.manage')->with('success', 'coordinator added successfully!');
+        return back()->with('success', 'Coordinator added successfully!');
     }
 
     public function update(Request $request, $id)
     {
-        $coordinator = Coordinator::findOrFail($id);
+        try {
+            $coordinator = Coordinator::findOrFail($id);
 
-        $request->validate([
-            'email' => 'nullable|string',
-            'password' => 'nullable|min:8',
-            'firstName' => 'nullable|string',
-            'lastName' => 'nullable|string',
-            'nickName' => 'nullable|string',
-            'areaId' => 'nullable|string',
-            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
-        ]);
+            $validatedData = $request->validate([
+                'email' => 'nullable|string|email',
+                'password' => 'nullable|min:8',
+                'firstName' => 'nullable|string',
+                'lastName' => 'nullable|string',
+                'nickName' => 'nullable|string',
+                'areaId' => 'nullable|string',
+                'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
-        Log::debug($request->all());
+            Log::debug($request->all());
 
-        if (empty($request->password)) {
-            $coordinator->fill($request->except(['password']));
-        } else {
-            $coordinator->fill($request->all());
-            $coordinator->password = $request->password;
+            if (empty($request->password)) {
+                $coordinator->fill($request->except(['password']));
+            } else {
+                $coordinator->fill($validatedData);
+                $coordinator->password = $request->password;
+            }
+
+            $emailPrefix = explode('@', $request->email)[0];
+            if (ctype_digit($emailPrefix)) {
+                $coordinator->userId = $emailPrefix;
+            } else {
+                return back()->withErrors(['email' => 'The coordinator ID must be numeric'])->withInput();
+            }
+
+            if ($request->hasFile('profilePicture')) {
+                // Delete the old profile picture if it exists
+                if ($coordinator->profilePicture && Storage::exists('public/' . $coordinator->profilePicture)) {
+                    Storage::delete('public/' . $coordinator->profilePicture);
+                }
+
+                $file = $request->file('profilePicture');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/profile_pictures/coordinator_profiles', $filename);
+                $coordinator->profilePicture = str_replace('public/', '', $path);
+            }
+
+            $coordinator->save();
+
+            return redirect()->route('coordinator.edit', ['id' => $coordinator->userId])
+                ->with('success', 'Coordinator updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to update coordinator: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while updating the coordinator. Please try again later.')->withInput();
         }
-
-        $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) {
-            $coordinator->userId = $emailPrefix;
-        } else {
-            return back()->withErrors(['email' => 'The coordinator ID must be numeric'])->withInput();
-        }
-
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/coordinator_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $coordinator->profilePicture = str_replace('public/', '', $path); // Save the path in the database
-        }
-
-        $coordinator->save();
-        return redirect()->route('coordinator.manage')->with('success', 'Coordinator updated successfully!');
     }
 
     public function destroy($id)
     {
-        $coordinator = Coordinator::find($id)->delete();
-        return back()->with('deleted', 'Coordinator deleted successfully!');
-    }
+        $coordinator = Coordinator::findOrFail($id);
 
+        // Delete the profile picture if it exists
+        if ($coordinator->profilePicture && Storage::exists('public/' . $coordinator->profilePicture)) {
+            Storage::delete('public/' . $coordinator->profilePicture);
+        }
+
+        $coordinator->delete();
+
+        return back()->with('success', 'Coordinator deleted successfully!');
+    }
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -119,7 +138,6 @@ class coordinatorController extends Controller
             ->orWhere('lastName', 'LIKE', "%{$query}%")
             ->orWhere('userId', 'LIKE', "%{$query}%")
             ->get();
-
 
         return view('/admin/managementView/activitycoordinatorsManage', compact('coordinators'));
     }

@@ -32,22 +32,21 @@ class areaController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'areaId' => 'required|string',
-            'areaName' => 'required|string',  
+            'areaId' => 'required|string|unique:area,areaId',
+            'areaName' => 'required|string',
             'facultyId' => 'required|string',
-        ]
-        );
-
+        ]);
+    
         Log::debug($request->all());
-
+    
         $area = new Area;
         $area->fill($request->all());
-
-    
+        
         $area->save();
-
-        return redirect()->route('area.manage')->with('success', 'Areas added successfully!');
+    
+        return redirect()->route('area.manage')->with('success', 'Area added successfully!');
     }
+    
 
     public function update(Request $request, $id)
     {

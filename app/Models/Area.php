@@ -24,7 +24,7 @@ class Area extends Model
     
     public function faculty()
     {
-        return $this->belongsTo(Faculty::class, 'facultyId');
+        return $this->belongsTo(Faculty::class, 'facultyId','facultyId');
     }
     
 }

@@ -155,6 +155,10 @@ Route::get('/NewDetail', function () {
 });
 
 
+Route::get('/toast', function () {
+    return view('/Test/toast');
+});
+
 
 Route::get('/new-manage-front', function () {
     return view('/newManage');

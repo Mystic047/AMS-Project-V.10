@@ -23,6 +23,8 @@
             border-radius: 50%;
         }
     </style>
+
+
 </head>
 @extends('admin.layouts.master')
 @section('content')
@@ -103,7 +105,8 @@
 
                 <div class="search-bar">
                     <form action="{{ route('student.search') }}" method="GET" class="d-flex w-100 me-3">
-                        <input type="text" name="query" class="form-control me-2" placeholder="Search..." value="{{ request()->input('query') }}">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search..."
+                            value="{{ request()->input('query') }}">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
                     <a href="{{ route('student.showCreate') }}" class="btn btn-primary ms-3">Create</a>
@@ -131,10 +134,11 @@
                                         <div>{{ $student->firstName }} {{ $student->lastName }}</div>
                                     </div>
                                 </td>
-                                <td class="col-3">{{ $student->area->areaName }}</td> <!-- Assuming faculty relation exists -->
+                                <td class="col-3">{{ $student->area->areaName }}</td>
+                                <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
-                                    <form action="{{ route('student.edit', $student->userId) }}"
-                                        method="get" style="display: inline;">
+                                    <form action="{{ route('student.edit', $student->userId) }}" method="get"
+                                        style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </button>
@@ -156,27 +160,10 @@
             </div>
         </div>
         </div>
-
-        <!-- Bootstrap JS Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            function confirmDelete(button) {
-                Swal.fire({
-                    title: 'ต้องการลบข้อมูลนี้?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        button.closest('form').submit();
-                    }
-                });
-            }
-        </script>
+
+ 
+
     </body>
 @endsection
 

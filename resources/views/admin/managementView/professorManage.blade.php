@@ -7,6 +7,7 @@
     <title>User Management Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         .search-bar {
             display: flex;
@@ -33,76 +34,15 @@
                 <h1>จัดการข้อมูลอาจารย์</h1>
             </div>
         </section>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="far fa-user"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total User</h4>
-                        </div>
-                        <div class="card-body">
-                            10
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="far fa-file"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            1,201
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-circle"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            47
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-newspaper"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            42
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="card mt-5">
             <div class="card-body">
                 <!-- Search bar and Create button -->
                 <div class="search-bar">
                     <form action="{{ route('professor.search') }}" method="GET" class="d-flex w-100 me-3">
-                        <input type="text" name="query" class="form-control me-2" placeholder="Search..." value="{{ request()->input('query') }}">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search..."
+                            value="{{ request()->input('query') }}">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
                     <a href="{{ route('professor.showCreate') }}" class="btn btn-primary ms-3">Create</a>
@@ -138,8 +78,8 @@
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </button>
                                     </form>
-                                    <form action="{{ route('professor.delete', $professor->userId) }}"
-                                        method="post" style="display: inline;">
+                                    <form action="{{ route('professor.delete', $professor->userId) }}" method="post"
+                                        style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
@@ -157,24 +97,10 @@
 
         <!-- Bootstrap JS Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            function confirmDelete(button) {
-                Swal.fire({
-                    title: 'ต้องการลบข้อมูลนี้?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        button.closest('form').submit();
-                    }
-                });
-            }
-        </script>
+
+ 
+
+
     </body>
 @endsection
 

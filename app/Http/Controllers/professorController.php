@@ -6,21 +6,21 @@ use App\Models\Area;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class professorController extends Controller
 {
     public function showManageView()
     {
         $professors = Professor::all();
-        return view('/admin/managementView/professorManage' , compact('professors'));
+        return view('/admin/managementView/professorManage', compact('professors'));
     }
 
     public function showCreateView()
     {
         $area = Area::all();
-        return view('/admin/createView/professorCreate' , compact('area'));
+        return view('/admin/createView/professorCreate', compact('area'));
     }
-
 
     public function showEditView($id)
     {
@@ -30,91 +30,120 @@ class professorController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
-            'email' => 'nullable|string',
+        // Validate the request
+        $validatedData = $request->validate([
+            'email' => 'nullable|string|email',
             'password' => 'required|min:8',
             'firstName' => 'nullable|string',
             'lastName' => 'nullable|string',
             'nickName' => 'nullable|string',
             'areaId' => 'nullable|string',
-            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
+            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Log::debug($request->all());
+        try {
+            $professor = new Professor;
+            $professor->fill($validatedData);
 
-        $professor = new Professor;
-        $professor->fill($request->all());
+            $emailPrefix = explode('@', $request->email)[0];
+            if (ctype_digit($emailPrefix)) {
+                $professor->userId = $emailPrefix;
+            } else {
+                return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
+            }
 
-        $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) {
-            $professor->userId = $emailPrefix;
-        } else {
+            if ($request->hasFile('profilePicture')) {
+                $file = $request->file('profilePicture');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename);
+                $professor->profilePicture = str_replace('public/', '', $path);
+            }
 
-            return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
+            $professor->save();
+
+            return back()->with('success', 'Professor added successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to add professor: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while adding the professor. Please try again later.')->withInput();
         }
-
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); // Save the file in the storage/app/public/profile_pictures directory
-            $professor->profilePicture = str_replace('public/', '', $path);
-        }
-        $professor->save();
-
-        return redirect()->route('professor.manage')->with('success', 'Professor added successfully!');
     }
 
     public function update(Request $request, $id)
     {
-        $professor = Professor::findOrFail($id);
+        try {
+            $professors = Professor::findOrFail($id);
 
-        $request->validate([
-            'email' => 'nullable|string',
-           'password' => 'nullable|min:8',
-            'firstName' => 'nullable|string',
-            'lastName' => 'nullable|string',
-            'nickName' => 'nullable|string',
-            'areaId' => 'nullable|string',
-            'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
-        ]);
+            $validatedData = $request->validate([
+                'email' => 'nullable|string|email',
+                'password' => 'nullable|min:8',
+                'firstName' => 'nullable|string',
+                'lastName' => 'nullable|string',
+                'nickName' => 'nullable|string',
+                'areaId' => 'nullable|string',
+                'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
-        Log::debug($request->all());
+            Log::debug($request->all());
 
-        if (empty($request->password)) {
-            $professor->fill($request->except(['password']));
-        } else {
-            $professor->fill($request->all());
-            $professor->password = $request->password;
+            if (empty($request->password)) {
+                $professors->fill($request->except(['password']));
+            } else {
+                $professors->fill($validatedData);
+                $professors->password = $request->password;
+            }
+
+            $emailPrefix = explode('@', $request->email)[0];
+            if (ctype_digit($emailPrefix)) {
+                $professors->userId = $emailPrefix;
+            } else {
+                return back()->with(['error' => 'The professor ID must be numeric'])->withInput();
+            }
+
+            if ($request->hasFile('profilePicture')) {
+                // Delete the old profile picture if it exists
+                if ($professors->profilePicture && Storage::exists('public/' . $professors->profilePicture)) {
+                    Storage::delete('public/' . $professors->profilePicture);
+                }
+
+                $file = $request->file('profilePicture');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename);
+                $professors->profilePicture = str_replace('public/', '', $path);
+            }
+
+            $professors->save();
+
+            return redirect()->route('professor.edit', ['id' => $professors->userId])
+                             ->with('success', 'Professor updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to update professor: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while updating the professor. Please try again later.')->withInput();
         }
-
-        $emailPrefix = explode('@', $request->email)[0];
-        if (ctype_digit($emailPrefix)) {
-            $professor->userId = $emailPrefix;
-        } else {
-            return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
-        }
-
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures/professor_profiles', $filename); 
-            $professor->profilePicture = str_replace('public/', '', $path); 
-        }
-
-        $professor->save();
-        return redirect()->route('professor.manage')->with('success', 'professor updated successfully!');
     }
 
-    public function destroy($id){
-        $professor = Professor::find($id)->delete();
-        return back()->with('deleted', 'Professor deleted successfully!');
+    public function destroy($id)
+    {
+        try {
+            $professors = Professor::findOrFail($id);
+
+            // Delete the profile picture if it exists
+            if ($professors->profilePicture && Storage::exists('public/' . $professors->profilePicture)) {
+                Storage::delete('public/' . $professors->profilePicture);
+            }
+
+            $professors->delete();
+
+            return back()->with('success', 'Professor deleted successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to delete professor: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while deleting the professor. Please try again later.');
+        }
     }
 
     public function search(Request $request)
     {
         $query = $request->input('query');
 
-        
         $professors = Professor::where('firstName', 'LIKE', "%{$query}%")
             ->orWhere('lastName', 'LIKE', "%{$query}%")
             ->orWhere('userId', 'LIKE', "%{$query}%")

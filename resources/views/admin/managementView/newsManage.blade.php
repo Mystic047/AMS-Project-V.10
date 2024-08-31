@@ -76,8 +76,9 @@
                                         <form action="{{ route('news.delete', $item->newsId) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(this)">ลบ</button>
                                         </form>
+                                        
                                     </td>
                                 </tr>
                             @endforeach
