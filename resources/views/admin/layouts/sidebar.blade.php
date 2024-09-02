@@ -15,7 +15,7 @@
           <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
         </ul>
       </li>
-      <li class="menu-header">Starter</li>
+      <li class="menu-header">จัดการข้อมูล</li>
       <li class="dropdown active">
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>จัดการข้อมูลผู้ใช้</span></a>
         <ul class="dropdown-menu">
@@ -30,6 +30,7 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('area.manage') }}">จัดการข้อมูลสาขา</a></li>
           <li><a class="nav-link" href="{{ route('activity.manage') }}">จัดการข้อมูลกิจกรรม</a></li>
+          <li><a class="nav-link" href="{{ route('activity.submitList') }}">จัดการข้อมูลลงทะเบียนกิจกรรม</a></li>
           <li><a class="nav-link" href="{{ route('file.manage') }}">จัดการข้อมูลเอกสาร</a></li>
         </ul>
       </li>
