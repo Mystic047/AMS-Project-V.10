@@ -10,9 +10,10 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+<!-- Font Awesome CSS -->
 </head>
 
 <style>
@@ -139,25 +140,9 @@
     </body>
     <!-- Bootstrap JS Bundle with Popper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
-        function confirmDelete(button) {
-            Swal.fire({
-                title: 'ต้องการลบข้อมูลนี้?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    button.closest('form').submit();
-                }
-            });
-        }
 
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
@@ -175,11 +160,11 @@
                     if (data.success) {
                         const label = checkbox.nextElementSibling;
                         if (checkbox.checked) {
-                            label.textContent = 'Open';
+                            label.textContent = 'เปิด';
                             checkbox.classList.add('switch-open');
                             checkbox.classList.remove('switch-closed');
                         } else {
-                            label.textContent = 'Closed';
+                            label.textContent = 'ปิด';
                             checkbox.classList.add('switch-closed');
                             checkbox.classList.remove('switch-open');
                         }

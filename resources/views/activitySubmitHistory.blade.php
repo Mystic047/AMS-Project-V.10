@@ -116,18 +116,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">ยืนยันการยกเลิก</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to cancel this submission?
+                        แน่ใจใช่หรือไม่ที่จะทำการยกเลิกการลงทะเบียนกิจกรรม?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
                         <form id="deleteForm" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Yes, Cancel</button>
+                            <button type="submit" class="btn btn-danger">ยืนยัน</button>
                         </form>
                     </div>
                 </div>

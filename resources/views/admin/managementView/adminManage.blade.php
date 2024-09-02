@@ -102,7 +102,8 @@
                 <!-- Search bar and Create button -->
                 <div class="search-bar">
                     <form action="{{ route('admin.search') }}" method="GET" class="d-flex w-100 me-3">
-                        <input type="text" name="query" class="form-control me-2" placeholder="Search..." value="{{ request()->input('query') }}">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Search..."
+                            value="{{ request()->input('query') }}">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
                     <a href="{{ route('admin.showCreate') }}" class="btn btn-primary ms-3">Create</a>
@@ -129,7 +130,8 @@
                                         <div>{{ $admin->firstName }} {{ $admin->lastName }}</div>
                                     </div>
                                 </td>
-                                <td class="col-3">{{ $admin->area->areaName }}</td> <!-- Assuming faculty relation exists -->
+                                <td class="col-3">{{ $admin->area->areaName }}</td>
+                                <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
                                     <form action="{{ route('admin.edit', $admin->userId) }}" method="get"
                                         style="display: inline;">
@@ -152,12 +154,12 @@
                 </table>
             </div>
         </div>
-        </div>
+        
 
         <!-- Bootstrap JS Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    
+
     </body>
 @endsection
 

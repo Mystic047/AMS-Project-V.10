@@ -42,27 +42,34 @@ class profileController extends Controller
     
     public function updateProfilePicture(Request $request)
     {
-        $request->validate([
-            'profilePicture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        Log::debug($request->all());
-        $user = getAuthenticatedUser();
-        
-        if (!$user) {
-            return response()->json(['error' => 'User not authenticated'], 401);
+        try {
+            $request->validate([
+                'profilePicture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            Log::debug($request->all());
+    
+            $user = getAuthenticatedUser();
+            
+            if (!$user) {
+                return back()->with('error', 'User not authenticated');
+            }
+    
+            if ($request->hasFile('profilePicture')) {
+                $file = $request->file('profilePicture');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('public/profile_pictures', $filename);
+                $user->profilePicture = str_replace('public/', '', $path);
+                $user->save();
+    
+                return back()->with('success', 'Profile picture updated successfully!');
+            }
+    
+            return back()->with('error', 'No file uploaded');
+        } catch (\Exception $e) {
+            Log::error('Failed to update profile picture: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while updating the profile picture. Please try again later.');
         }
-    
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profile_pictures', $filename);
-            $user->profilePicture = str_replace('public/', '', $path);
-            $user->save();
-    
-            return response()->json(['success' => 'Profile picture updated successfully!']);
-        }
-    
-        return response()->json(['error' => 'No file uploaded'], 400);
     }
+    
     
 }
