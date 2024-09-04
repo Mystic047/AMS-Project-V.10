@@ -70,7 +70,7 @@
                                         <img src="{{ asset('storage/' . $item->imagePath) }}" alt="News Image" class="news-image">
                                     </td>
                                     <td>{{ $item->title }}</td>
-                                    <td class="truncate">{{ $item->details }}</td>
+                                    <td class="truncate">{{ Str::limit(strip_tags($item->details), 300, '...') }}</td>
                                     <td>
                                         <a href="{{ route('news.edit', $item->newsId) }}" class="btn btn-warning btn-sm">แก้ไข</a>
                                         <form action="{{ route('news.delete', $item->newsId) }}" method="POST" style="display:inline;">

@@ -201,17 +201,11 @@
                                             <i class="fas fa-pencil-alt"></i> ลงชื่อเข้าร่วมกิจกรรม
                                         </button>
                                     @else
-                                        <button class="btn btn-success btn-sm" type="button" disabled>
-                                            <i class="fas fa-pencil-alt"></i> Submit
+                                        <button class="btn btn-danger btn-sm" type="button" disabled style="width: 100%; height: 40px;">
+                                         ปิดรับสมัคร
                                         </button>
                                     @endif
                                 </form>
-
-
-
-
-
-
                                 </div>
                             </div>
                         </div>
