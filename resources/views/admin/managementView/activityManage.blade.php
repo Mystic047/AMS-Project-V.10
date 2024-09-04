@@ -59,9 +59,6 @@
                                 <td>{{ $activity->actId }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $activity->picture) }}"
-                                             class="rounded-circle me-2" alt="Avatar"
-                                             style="width: 40px; height: 40px; object-fit: cover;">
                                         <div>{{ $activity->actName }}</div>
                                     </div>
                                 </td>
