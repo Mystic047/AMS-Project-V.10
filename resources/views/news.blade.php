@@ -42,60 +42,64 @@
 @extends('layout.master')
 @section('content')
 
-<body style="background-color:#f5f5f5;">
-    <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>ข่าวสาร ประชาสัมพันธ์</h2>
-            <a href="{{ route('news.showCreateFront') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Create
-            </a>
-        </div>
-        <div class="row">
-            @foreach ($news as $item)
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="{{ asset('storage/' . $item->imagePath) }}" class="card-img-top" alt="...">
-                                </div>
-                                <div class="col-md-9">
-                                    <a href="{{ route('news.details', $item->newsId) }}" class="card-title">
-                                        <h5>{{ $item->title }}</h5>
-                                    </a>
-                                    <hr>
-                                    <p class="card-text card-text-truncate">
-                                        {!! Str::limit(strip_tags($item->details), 200) !!} <!-- Limit content to 200 characters -->
-                                    </p>
+    <body style="background-color:#f5f5f5;">
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>ข่าวสาร ประชาสัมพันธ์</h2>
+                <a href="{{ route('news.showCreateFront') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create
+                </a>
+            </div>
+            <div class="row">
+                @foreach ($news as $item)
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="{{ asset('storage/' . $item->imagePath) }}" class="card-img-top"
+                                            alt="...">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <a href="{{ route('news.details', $item->newsId) }}" class="card-title">
+                                            <h5>{{ $item->title }}</h5>
+                                        </a>
+                                        <hr>
+                                        <p class="card-text card-text-truncate">
+                                            {!! Str::limit(strip_tags($item->details), 200) !!} <!-- Limit content to 200 characters -->
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="card-text">
-                                        <i class="fas fa-user"></i> ผู้เขียน: {{ $item->author }}
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text">
-                                        <i class="fas fa-calendar-alt"></i> วันที่: {{ $item->created_at->format('F d, Y') }}
-                                    </p>
+                            <div class="card-footer text-center">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="card-text">
+                                            <i class="fas fa-user"></i> ผู้เขียน: @foreach ($news as $item)
+                                                {{ $writers[$item->id]->firstName ?? 'Unknown writer' }}
+                                                {{ $writers[$item->id]->lastName ?? '' }}
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text">
+                                            <i class="fas fa-calendar-alt"></i> วันที่:
+                                            {{ $item->created_at->format('F d, Y') }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    
-        <!-- Pagination Links for News -->
-        <div class="d-flex justify-content-center mt-4">
-            {{ $news->links('vendor.pagination.bootstrap-5') }}
-        </div>
-    </div>
-</body>
+                @endforeach
+            </div>
 
+            <!-- Pagination Links for News -->
+            <div class="d-flex justify-content-center mt-4">
+                {{ $news->links('vendor.pagination.bootstrap-5') }}
+            </div>
+        </div>
+    </body>
 @endsection
 
 </html>
