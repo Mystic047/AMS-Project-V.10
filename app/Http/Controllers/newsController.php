@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\Admin;
+use App\Models\Student;
+use App\Models\Professor;
+use App\Models\Coordinator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -20,9 +24,27 @@ class newsController extends Controller
     }
     public function showInfoView()
     {
-        // Paginate the news articles, displaying 5 per page
         $news = News::paginate(5);
-        return view('news', compact('news'));
+        $writers = [];
+    
+        foreach ($news as $item) {
+            switch ($item->createdByRole) {
+                case 'admin':
+                    $writers[$item->id] = Admin::find($item->createdBy); 
+                    break;
+                case 'student':
+                    $writers[$item->id] = Student::find($item->createdBy);
+                    break;
+                case 'coordinator':
+                    $writers[$item->id] = Coordinator::find($item->createdBy);
+                    break;
+                case 'professor':
+                    $writers[$item->id] = Professor::find($item->createdBy);
+                    break;
+            }
+        }
+    
+        return view('news', compact('news', 'writers'));
     }
     
 
@@ -57,6 +79,8 @@ class newsController extends Controller
     }
     public function create(Request $request)
     {
+        $user = getAuthenticatedUser();
+    
         try {
             Log::info('Request received for creating news.', $request->all());
     
@@ -79,13 +103,22 @@ class newsController extends Controller
                 Log::info('File stored at path: ' . $path);
             }
     
+            $news->createdBy = $user->userId;
+            $news->createdByRole = $user->role;
+    
             $news->save();
             Log::info('News saved successfully.', $news->toArray());
     
             return back()->with('success', 'News added successfully!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed: ' . $e->getMessage());
+            return back()->with('error', 'Validation failed. Please check your input.')->withInput();
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::error('Database error: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while saving the news. Please try again later.')->withInput();
         } catch (\Exception $e) {
-            Log::error('Failed to create news: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while creating the news. Please try again later.')->withInput();
+            Log::error('Unknown error: ' . $e->getMessage());
+            return back()->with('error', 'An unknown error occurred. Please try again later.')->withInput();
         }
     }
     

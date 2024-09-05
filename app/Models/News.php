@@ -18,4 +18,5 @@ class News extends Model
     ];
 
     protected $primaryKey = 'newsId';
+
 }

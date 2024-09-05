@@ -15,10 +15,89 @@
     <link rel="stylesheet" href="{{ asset('css/activity.css') }}">
 </head>
 <style>
-    /* Add any custom styles here */
+    .card-square {
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .widget {
+        padding: 20px;
+    }
+
+    .widget-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .counters {
+        margin-top: 20px;
+    }
+
+    .counter {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .counter-number {
+        font-size: 36px;
+        font-weight: bold;
+    }
+
+    .counter-text {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .bg-register-limit {
+        background-color: #EE4E4E;
+        color: #fff;
+    }
+
+    .bg-submitted {
+        background-color: #A1DD70;
+        color: #fff;
+    }
+
+    .widget-heading {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .widget-content {
+        padding: 20px;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+
+    .col-9 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .col-3 {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+    }
+    .spacer {
+    width: 20px;
+}
 </style>
 @extends('layout.master')
 @section('content')
+
     <body style="background-color:#f5f5f5;">
         <br>
         <div class="container">
@@ -27,8 +106,8 @@
                     <div class="card card-left">
                         <div class="card-body">
                             <div class="widget-heading mb-4">
-                                <h3 class="">{{ $activity->actName }} <span
-                                        class="badge badge-warning">95 View</span></h3>
+                                <h3 class="">{{ $activity->actName }} <span class="badge badge-warning">95 View</span>
+                                </h3>
                             </div>
                             <div class="widget-content border-tab">
                                 <ul class="nav nav-tabs mt-3" id="border-tabs" role="tablist">
@@ -57,8 +136,7 @@
                                             <div class="col-12 col-md-3">สังกัด</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span
-                                                    class="text-primary">{{ $activity->actResBranch }}</span>
+                                                <span class="text-primary">{{ $activity->actResBranch }}</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -133,14 +211,15 @@
                                                         <td>{{ $submit->student->userId }}</td>
                                                         <td>{{ $submit->student->firstName }}</td>
                                                         <td>{{ $submit->student->lastName }}</td>
-                                                        <td>{{ $submit->student->area->areaName}}</td>
+                                                        <td>{{ $submit->student->area->areaName }}</td>
                                                         <td>{{ $submit->status }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                         <div class="text-end">
-                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
+                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}"
+                                                class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
                                         </div>
 
                                     </div>
@@ -153,80 +232,49 @@
                 </div>
                 <div class="col-lg-3 col-md-12 layout-spacing">
                     <!-- Card 2: Number of Applicants -->
-                    <div class="card card-right">
+                    <br />
+                    <!-- Card 1: Number of Applicants -->
+                    <div class="card card-square">
                         <div class="card-body">
                             <div class="widget widget-one text-center">
-                                <div class="widget-heading mb-4">
-                                    <i class="fa-solid fa-users"></i>จำนวนผู้สมัครเข้าร่วม
-                                </div>
-                                <div class="widget-content">
-                                    <div class="simple-counter-container d-flex justify-content-around">
-                                        <div class="counter-container mx-2">
-                                            <div class="counter-content border rounded shadow-sm p-3 mb-2 bg-body">
-                                                <h1 class="s-counter">12</h1>
-                                            </div>
-                                            <p class="s-counter-text">สมัครแล้ว</p>
-                                        </div>
-                                        <div class="counter-container mx-2">
-                                            <div class="counter-content border rounded shadow-sm p-3 mb-2 bg-body">
-                                                <h1 class="s-counter">250</h1>
-                                            </div>
-                                            <p class="s-counter-text">จำนวนที่รับ</p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    {{-- <button type="button"
-                                        class="btn btn-outline-info">เช็คลงให้ล๊อคอินก่อนลงชื่อใช้งาน
-                                    </button> --}}
-                                    @php
-                                        $user = getAuthenticatedUser();
-                                    @endphp
-
-                                    {{-- for testing purposes --}}
-                                    {{-- @if ($user && $activity)
-                                    <div>
-                                        Student ID: {{ $user->userId }}
-                                    </div>
-                                    <div>
-                                        Activity ID: {{ $activity->actId }}
-                                    </div>
-                                @endif --}}
-
-                                <form action="{{ route('activity.submit') }}" method="POST" style="display: inline;" id="submit-form">
-                                    @csrf
-                                    <input type="hidden" name="userId" value="{{ $user ? $user->userId : '' }}">
-                                    <input type="hidden" name="actId" value="{{ $activity->actId }}">
-                                    @if($activity->registration_status == 'open')
-                                        <button class="btn btn-success btn-sm" type="button" onclick="confirmSubmit(this)" style="width: 100%; height: 40px;">
-                                            <i class="fas fa-pencil-alt"></i> ลงชื่อเข้าร่วมกิจกรรม
-                                        </button>
-                                    @else
-                                        <button class="btn btn-danger btn-sm" type="button" disabled style="width: 100%; height: 40px;">
-                                         ปิดรับสมัคร
-                                        </button>
-                                    @endif
-                                </form>
-                                </div>
+                                <h3 class="widget-title">
+                                    <i class="fa-solid fa-users"></i>
+                                    จำนวนผู้สมัครเข้าร่วม
+                                </h3>
+                              <div class="widget-content">
+                                  <div class="counters d-flex justify-content-around">
+                                      <div class="counter bg-register-limit">
+                                          <h2 class="counter-number">{{ $activity->actRegisLimit }}</h2>
+                                          <p class="counter-text">จำนวนที่รับ</p>
+                                      </div>
+                                      <div class="spacer"></div>
+                                      <div class="counter bg-submitted">
+                                          <h2 class="counter-number">{{ $activitiesSubmits->count() }}</h2>
+                                          <p class="counter-text">สมัครแล้ว</p>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
                         </div>
                     </div>
-                    <br />
-                    <!-- Card 3: Summary of Application Data -->
-                    <div class="card card-right">
+<br>
+                    <!-- Card 2: Summary of Application Data -->
+                    <div class="card card-square">
                         <div class="card-body">
                             <div class="widget-heading mb-4" style="justify-content: space-around !important;">
                                 <h5 class="">สรุปข้อมูลการสมัคร</h5>
                             </div>
                             <div class="widget-content">
                                 <div class="row">
-                                    <div class="col-9"><i class="tio caret_right"></i> สังคมศาสตร์และมนุษยศาสตร์</div>
-                                    <div class="col-3 text-right">0</div>
-                                    <div class="col-9"><i class="tio caret_right"></i> ส่วนกลาง(STAFF)</div>
-                                    <div class="col-3 text-right">0</div>
+                                    @foreach ($activitiesSubmits->groupBy('student.area.areaName') as $areaName => $submissions)
+                                        <div class="col-6"><i class="tio caret_right"></i> {{ $areaName }}</div>
+                                        <div class="col-6 text-end">จำนวน {{ $submissions->count() }} คน</div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -248,21 +296,20 @@
             });
 
             function confirmSubmit(button) {
-            Swal.fire({
-                title: 'ลงชื่อเข้าร่วมกิจกรรม?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    button.closest('form').submit();
-                }
-            });
-        }
-
+                Swal.fire({
+                    title: 'ลงชื่อเข้าร่วมกิจกรรม?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        button.closest('form').submit();
+                    }
+                });
+            }
         </script>
     </body>
 @endsection
