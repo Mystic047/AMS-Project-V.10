@@ -40,7 +40,7 @@
                         <input type="file" class="form-control" id="imagePath" name="imagePath">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success mx-1 float-end">Save</button>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Save</button>
                         <a href="{{ route('news.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
                     </div>
                 </form>

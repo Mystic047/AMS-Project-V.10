@@ -204,6 +204,31 @@
             // Prevent the form from submitting by default
             return false;
         }
+        function confirmUpdate(button) {
+            alertify.confirm(
+                'ยืนยันการเปลี่ยนแปลง', // Title in Thai
+                'คุณแน่ใจหรือว่าต้องการเปลี่ยนแปลงรายการนี้? การกระทำนี้ไม่สามารถยกเลิกได้.', // Message in Thai
+                function() {
+                    // On confirm
+                    button.closest('form').submit();
+                },
+                function() {
+                    // On cancel, do nothing
+                    alertify.error('ยกเลิกการกระทำ');
+                }
+            ).set({
+                labels: {
+                    ok: 'ใช่, เปลี่ยนเลย!',
+                    cancel: 'ยกเลิก'
+                },
+                transition: 'zoom', // Smooth zoom transition
+                movable: false, // Prevent the dialog from being moved
+                closableByDimmer: false, // Prevent closing the dialog by clicking outside
+            });
+
+            // Prevent the form from submitting by default
+            return false;
+        }
     </script>
 
     @yield('scripts') <!-- Section for page-specific scripts -->

@@ -70,7 +70,7 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                         <input type="text" name="responsiblePerson" class="form-control" id="responsiblePerson" value="{{ $activities->responsiblePerson }}" required>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success float-end">อัปเดตกิจกรรม</button>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success float-end">อัปเดตกิจกรรม</button>
                     </div>
                 </form>
             </div>

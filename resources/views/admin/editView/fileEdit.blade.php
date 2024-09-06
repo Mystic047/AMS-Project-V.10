@@ -50,7 +50,8 @@
                             <input type="file" class="form-control" id="filePath" name="filePath">
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Update</button>
+                            <a href="{{ route('file.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
                         </div>
                     </form>
 

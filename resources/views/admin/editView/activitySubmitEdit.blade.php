@@ -40,7 +40,8 @@
                         <input type="text" class="form-control" id="status" name="status" value="{{ $activitySubmit->status }}">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Update Submission</button>
+                    <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Update Submission</button>
+                    <a href="{{ route('activity.submitList') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
                 </form>
             </div>
         </div>
