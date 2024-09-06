@@ -34,7 +34,8 @@
                         <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="" value="{{$facultys->facultyName}}">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary mx-1 float-end">Update</button>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-primary mx-1 float-end">Update</button>
+                        <a href="{{ route('faculty.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
                     </div>
                 </form>
             </div>
