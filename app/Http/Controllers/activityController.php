@@ -233,6 +233,7 @@ class activityController extends Controller
 
         return $pdf->stream('activity-submits.pdf');
     }
+    
     public function generateEnrollmentKey($length = 6)
     {
         return Str::random($length);

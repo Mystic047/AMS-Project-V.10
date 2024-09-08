@@ -36,9 +36,14 @@
             <div class="col-md-10 mx-auto">
                 <div class="card w-100 bg-white">
                     <div class="card-body">
+                        <br>
                         <h5>
                             <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
-                        </h5><br>
+                        </h5>
+                        <a href="{{ route('activity.history.pdf') }}" class="btn btn-secondary" target="_blank">
+                        <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                    </a>
+                        <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-4">
                                 <colgroup>

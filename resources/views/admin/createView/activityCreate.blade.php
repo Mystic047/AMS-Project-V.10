@@ -41,7 +41,7 @@
                         <input type="text" name="actType" class="form-control" id="actType">
                     </div>
                     <div class="col-md-6">
-                        <label for="actDate" class="form-label">วันที่จัด</label>
+                        <label for="actDate" class="form-label">วันที่ปิดรับสมัคร</label>
                         <input type="date" name="actDate" class="form-control" id="actDate">
                     </div>
                     <div class="col-md-6">

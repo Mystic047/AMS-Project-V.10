@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 
-<!-- Font Awesome CSS -->
+    <!-- Font Awesome CSS -->
 </head>
 
 <style>
@@ -33,8 +33,12 @@
                         <div class="card-body">
                             <h5 class="card-title d-flex justify-content-between align-items-center">
                                 <span><i class="bi bi-plus-circle"></i> จัดการกิจกรรม</span>
-                                <a href="{{ route('activity.createFront') }}" class="btn btn-light">
+                                <a href="{{ route('activity.createFront') }}" class="btn btn-secondary">
                                     <i class="bi bi-plus-circle"></i> สร้างกิจกรรม
+                                </a>
+                                <a href="" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#reportModal">
+                                    <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
                                 </a>
                             </h5>
                             <div class="table-responsive">
@@ -98,7 +102,6 @@
                                             </tr>
 
                                             <!-- Modal -->
-                                            <!-- Modal -->
                                             <div class="modal fade" id="participationCodeModal{{ $activity->actId }}"
                                                 tabindex="-1"
                                                 aria-labelledby="participationCodeModalLabel{{ $activity->actId }}"
@@ -136,14 +139,40 @@
                 </div>
             </div>
         </div>
-
+        <!-- Report Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">เลือกวันที่สำหรับรายงาน</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('activity.report.pdf')}}" method="GET" target="_blank">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">วันที่เริ่มต้น</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">วันที่สิ้นสุด</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <!-- Bootstrap JS Bundle with Popper -->
 
 
 
     <script>
-
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
                     method: 'POST',

@@ -34,7 +34,7 @@ integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG
                         <input type="text" name="actLocation" class="form-control" id="actLocation" value="{{ $activities->actLocation }}" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="actDate" class="form-label"><i class="fas fa-calendar-alt"></i> วันที่จัด</label>
+                        <label for="actDate" class="form-label"><i class="fas fa-calendar-alt"></i> วันที่ปิดรับสมัคร</label>
                         <input type="date" name="actDate" class="form-control" id="actDate" value="{{ $activities->actDate }}" required>
                     </div>
                     <div class="col-md-6">

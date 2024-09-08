@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actDate" class="form-label">Activity Date</label>
+                        <label for="actDate" class="form-label">วันที่ปิดรับสมัคร</label>
                         <input type="date" class="form-control" id="actDate" name="actDate" value="{{ $activities->actDate }}" required>
                     </div>
                     

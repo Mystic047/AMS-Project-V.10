@@ -91,9 +91,10 @@
         font-weight: bold;
         text-align: right;
     }
+
     .spacer {
-    width: 20px;
-}
+        width: 20px;
+    }
 </style>
 @extends('layout.master')
 @section('content')
@@ -230,54 +231,59 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-12 layout-spacing">
-                    <!-- Card 2: Number of Applicants -->
-                    <br />
+                <div class="col-lg-3 col-md-12">
                     <!-- Card 1: Number of Applicants -->
-                    <div class="card card-square">
-                        <div class="card-body">
-                            <div class="widget widget-one text-center">
-                                <h3 class="widget-title">
-                                    <i class="fa-solid fa-users"></i>
-                                    จำนวนผู้สมัครเข้าร่วม
-                                </h3>
-                              <div class="widget-content">
-                                  <div class="counters d-flex justify-content-around">
-                                      <div class="counter bg-register-limit">
-                                          <h2 class="counter-number">{{ $activity->actRegisLimit }}</h2>
-                                          <p class="counter-text">จำนวนที่รับ</p>
-                                      </div>
-                                      <div class="spacer"></div>
-                                      <div class="counter bg-submitted">
-                                          <h2 class="counter-number">{{ $activitiesSubmits->count() }}</h2>
-                                          <p class="counter-text">สมัครแล้ว</p>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-<br>
-                    <!-- Card 2: Summary of Application Data -->
-                    <div class="card card-square">
-                        <div class="card-body">
-                            <div class="widget-heading mb-4" style="justify-content: space-around !important;">
-                                <h5 class="">สรุปข้อมูลการสมัคร</h5>
-                            </div>
-                            <div class="widget-content">
-                                <div class="row">
-                                    @foreach ($activitiesSubmits->groupBy('student.area.areaName') as $areaName => $submissions)
-                                        <div class="col-6"><i class="tio caret_right"></i> {{ $areaName }}</div>
-                                        <div class="col-6 text-end">จำนวน {{ $submissions->count() }} คน</div>
-                                    @endforeach
+                    <div class="card bg-white  rounded-lg overflow-hidden">
+                        <div class="card-body text-center">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">
+                                <i class="fa-solid fa-users mr-2"></i> จำนวนผู้สมัคร
+                            </h3>
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="bg-blue-100 p-4 rounded-lg w-full mx-1">
+                                    <h2 class="text-2xl font-semibold text-blue-600">{{ $activity->actRegisLimit }}</h2>
+                                    <p class="text-gray-500">จำนวนที่รับสมัคร</p>
+                                </div>
+                                <div class="bg-green-100 p-4 rounded-lg w-full mx-1">
+                                    <h2 class="text-2xl font-semibold text-green-600">{{ $activitiesSubmits->count() }}</h2>
+                                    <p class="text-gray-500">สมัครแล้ว</p>
                                 </div>
                             </div>
+                            @php
+                                $user = getAuthenticatedUser();
+                            @endphp
+                            <form method="post" action="{{ route('activity.submit') }}" class="mt-4">
+                                @csrf
+                                <input type="hidden" name="userId" value="{{ $user->userId }}">
+                                <input type="hidden" name="actId" value="{{ $activity->actId }}">
+                                <button type="button" onclick="confirmSubmit(this)" class="bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+                                    Apply
+                                </button>
+                            </form>
                         </div>
                     </div>
-
+                
+                    <br>
+                
+                    <!-- Card 2: Summary of Application Data -->
+                    <div class="card bg-white  rounded-lg overflow-hidden">
+                        <div class="card-body">
+                            <h5 class="text-xl font-bold text-gray-800 mb-4">Application Summary</h5>
+                            <div class="space-y-2">
+                                @foreach ($activitiesSubmits->groupBy('student.area.areaName') as $areaName => $submissions)
+                                    <div class="flex justify-between items-center text-sm text-gray-600">
+                                        <span><i class="fas fa-map-marker-alt text-gray-500 mr-1"></i> {{ $areaName }}</span>
+                                        <span class="text-gray-700 font-semibold">จำนวน: {{ $submissions->count() }} คน</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
+
+
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
@@ -311,6 +317,8 @@
                 });
             }
         </script>
+
+
     </body>
 @endsection
 

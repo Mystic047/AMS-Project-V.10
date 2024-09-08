@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\Student;
-
 use App\Models\Activity;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ActivitySubmit extends Model
 {
     use HasFactory;
     protected $table = 'activitySubmit';
-    protected $fillable = ['actId', 'userId','statusCheckInMorning','statusCheckInAfternoon','status'];
+    protected $fillable = ['actId', 'userId', 'statusCheckInMorning', 'statusCheckInAfternoon', 'status'];
     protected $primaryKey = 'actSubmitId';
 
     public function student()
     {
         return $this->belongsTo(Student::class, 'userId', 'userId');
     }
-
 
     public function activity()
     {
@@ -45,4 +43,11 @@ class ActivitySubmit extends Model
         $this->save();
         return true; // Successfully checked in
     }
+
+    // In ActivitySubmit.php
+    public function scopeCompleted($query)
+    {
+        return $query->where('status', 'เข้าร่วมกิจกรรมแล้ว');
+    }
+
 }

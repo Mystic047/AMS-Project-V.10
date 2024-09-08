@@ -17,6 +17,7 @@ require base_path('routes/news.php');
 require base_path('routes/profiles.php');
 require base_path('routes/activityCalendar.php');
 require base_path('routes/certificate.php');
+require base_path('routes/genPDF.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -154,7 +155,9 @@ Route::get('/NewDetail', function () {
     return view('newsdetail');
 });
 
-
+Route::get('/reportcenter', function () {
+    return view('/reports/index');
+})->name('reportcenter');
 Route::get('/toast', function () {
     return view('/Test/toast');
 });

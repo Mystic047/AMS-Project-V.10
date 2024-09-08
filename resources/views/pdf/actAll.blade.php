@@ -87,7 +87,7 @@
         <img class="image-container" src="{{ public_path('storage/pictures/scilogo.png') }}" width="205" height="70">
     </span>
     <div class="header">
-        <h3>ข้อมูลสรุปจำนวนคนลงทะเบียนแต่ละโครงการ</h3>
+        <h3>ข้อมูลสรุปจำนวนคนลงทะเบียนแต่ละโครงการระหว่างวันที่ : {{ \Carbon\Carbon::parse($startDate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($endDate)->format('d/m/Y') }}</h3>
     </div>
     <table>
         <thead>
@@ -98,6 +98,13 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($activities as $activity)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $activity->actName }}</td>
+                <td>{{ $activity->activity_submits_count }}</td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </body>

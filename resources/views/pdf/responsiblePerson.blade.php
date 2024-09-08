@@ -98,6 +98,13 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($activities as $index => $activity)
+            <tr>
+                <td>{{ $index + 1 }}</td> <!-- Display the order number -->
+                <td>{{ $activity->actName }}</td> <!-- Display the activity name -->
+                <td>{{ $activity->responsiblePerson }}</td> <!-- Display the responsible person -->
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </body>
