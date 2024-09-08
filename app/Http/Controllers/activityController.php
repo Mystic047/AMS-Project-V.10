@@ -70,7 +70,6 @@ class activityController extends Controller
         $validatedData = $request->validate([
             // 'actId' => 'required|string',
             'actName' => 'required|string',
-            'actType' => 'required|string',
             'actDate' => 'required|date',
             'actResBranch' => 'required|string',
             'actHour' => 'required|string',
@@ -144,7 +143,6 @@ class activityController extends Controller
     
             $validatedData = $request->validate([
                 'actName' => 'required|string',
-                'actType' => 'required|string',
                 'actDate' => 'required|date',
                 'actResBranch' => 'required|string',
                 'actHour' => 'required|string',

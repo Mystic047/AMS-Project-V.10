@@ -42,11 +42,6 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actType" class="form-label">Activity Type</label>
-                        <input type="text" class="form-control" id="actType" name="actType" value="{{ $activities->actType }}" required>
-                    </div>
-                    
-                    <div class="mb-3">
                         <label for="actDate" class="form-label">Activity Date</label>
                         <input type="date" class="form-control" id="actDate" name="actDate" value="{{ $activities->actDate }}" required>
                     </div>

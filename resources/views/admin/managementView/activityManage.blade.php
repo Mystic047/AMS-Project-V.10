@@ -48,7 +48,7 @@
                         <tr>
                             <th scope="col">รหัส</th>
                             <th scope="col">กิจกรรม</th>
-                            <th scope="col">ประเภท</th>
+                            <th scope="col">รหัสเข้าร่วม</th>
                             <th scope="col">สถานะ</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -62,7 +62,13 @@
                                         <div>{{ $activity->actName }}</div>
                                     </div>
                                 </td>
-                                <td>{{ $activity->actType }}</td>
+                                <td class="d-flex justify-content-center align-items-center">
+                                    <button type="button" class="btn btn-info btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#participationCodeModal{{ $activity->actId }}">
+                                        ดูรหัส
+                                    </button>
+                                </td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
@@ -91,6 +97,34 @@
                                     </div>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="participationCodeModal{{ $activity->actId }}"
+                                tabindex="-1"
+                                aria-labelledby="participationCodeModalLabel{{ $activity->actId }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"
+                                                id="participationCodeModalLabel{{ $activity->actId }}">
+                                                รหัสเข้าร่วมกิจกรรม</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            รหัสเข้าร่วมของกิจกรรมช่วงเช้า:
+                                            <br>{{ $activity->morningEnrollmentKey ?? 'ไม่มีรหัส' }}
+                                        </div>
+                                        <div class="modal-body">
+                                            รหัสเข้าร่วมของกิจกรรมช่วงบ่าย:
+                                            <br>{{ $activity->afternoonEnrollmentKey ?? 'ไม่มีรหัส' }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">ปิด</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
