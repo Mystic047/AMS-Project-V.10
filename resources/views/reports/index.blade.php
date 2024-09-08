@@ -44,11 +44,12 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title">รายงาน 2</h5>
+                            <h5 class="card-title">รายงาน ผู้รับผิดชอบ</h5>
                             <i class="fas fa-chart-bar fa-3x text-success"></i>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-success">ออกรายงาน</a>
+                            <a href="{{route('responsible.person.pdf')}}"  target="_blank" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#reportModal2">ออกรายงาน</a>
                         </div>
                     </div>
                 </div>
@@ -99,6 +100,35 @@
             </div>
         </div>
     </div>
+
+         <!-- Report Modal2 -->
+         <div class="modal fade" id="reportModal2" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">เลือกวันที่สำหรับรายงาน</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('responsible.person.pdf')}}" method="GET" target="_blank">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">วันที่เริ่มต้น</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">วันที่สิ้นสุด</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

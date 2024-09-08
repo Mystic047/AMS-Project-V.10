@@ -74,17 +74,27 @@ class generatePDFController extends Controller
         return $pdf->stream('user-activity-history.pdf', ["Attachment" => false]);
     }
     
-    public function generateResponsiblePersonPDF()
+    public function generateResponsiblePersonPDF(Request $request)
     {
-        // Fetch all activities ordered by activity date or any other criteria
-        $activities = Activity::orderBy('actDate', 'asc')->get();
+        // Validate the date input
+        $request->validate([
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
+        ]);
+    
+        // Fetch activities between the selected start and end dates
+        $activities = Activity::whereBetween('actDate', [$request->startDate, $request->endDate])
+            ->orderBy('actDate', 'asc')
+            ->get();
     
         // Log the data for debugging
-        \Log::info('Activities and responsible persons:', [$activities]);
+        \Log::info('Filtered activities with responsible persons:', [$activities]);
     
         // Render the view to HTML
         $html = View::make('pdf.responsiblePerson', [
             'activities' => $activities,
+            'startDate' => $request->startDate,
+            'endDate' => $request->endDate,
         ])->render();
     
         // Properly instantiate the PDF wrapper and load the HTML
@@ -94,5 +104,6 @@ class generatePDFController extends Controller
         // Return the generated PDF as a stream to the browser (inline)
         return $pdf->stream('responsible-persons.pdf', ["Attachment" => false]);
     }
+    
     
 }

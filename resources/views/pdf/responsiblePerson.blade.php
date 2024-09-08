@@ -88,7 +88,9 @@
     </span>
     <div class="header">
         <h3>รายชื่อผู้รับผิดชอบของแต่ละโครงการ</h3>
+        <p>กิจกรรมระหว่างวันที่ {{ \Carbon\Carbon::parse($startDate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($endDate)->format('d/m/Y') }}</p>
     </div>
+
     <table>
         <thead>
             <tr>
@@ -100,9 +102,9 @@
         <tbody>
             @foreach ($activities as $index => $activity)
             <tr>
-                <td>{{ $index + 1 }}</td> <!-- Display the order number -->
-                <td>{{ $activity->actName }}</td> <!-- Display the activity name -->
-                <td>{{ $activity->responsiblePerson }}</td> <!-- Display the responsible person -->
+                <td>{{ $index + 1 }}</td> <!-- Order number -->
+                <td>{{ $activity->actName }}</td> <!-- Activity name -->
+                <td>{{ $activity->responsiblePerson }}</td> <!-- Responsible person -->
             </tr>
             @endforeach
         </tbody>
