@@ -49,7 +49,7 @@ class studentController extends Controller
             if (ctype_digit($emailPrefix)) {
                 $student->userId = $emailPrefix;
             } else {
-                return back()->withErrors(['email' => 'The student ID must be numeric'])->withInput();
+                return back()->withErrors(['email' => 'รหัสนักศึกษาต้องเป็นตัวเลข'])->withInput();
             }
 
             if ($request->hasFile('profilePicture')) {
@@ -61,12 +61,12 @@ class studentController extends Controller
 
             $student->save();
 
-            return back()->with('success', 'Student added successfully!');
+            return back()->with('success', 'เพิ่มนักศึกษาสําเร็จ!');
         } catch (\Exception $e) {
             // Log the error
             Log::error('Failed to add student: ' . $e->getMessage());
 
-            return back()->with('error', 'An error occurred while adding the student. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการเพิ่มนักศึกษา')->withInput();
         }
     }
 
@@ -98,7 +98,7 @@ class studentController extends Controller
             if (ctype_digit($emailPrefix)) {
                 $student->userId = $emailPrefix;
             } else {
-                return back()->with('error', 'The student ID must be numeric!')->withInput();
+                return back()->with('error', 'รหัสนักศึกษาต้องเป็นตัวเลข')->withInput();
             }
     
             if ($request->hasFile('profilePicture')) {
@@ -116,10 +116,10 @@ class studentController extends Controller
             $student->save();
     
             return redirect()->route('student.edit', ['id' => $student->userId])
-                             ->with('success', 'Student updated successfully!');
+                             ->with('success', 'อัพเดทข้อมูลนักศึกษาสําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to update student: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while updating the student. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการอัพเดทข้อมูลนักศึกษา')->withInput();
         }
     }
     
@@ -136,10 +136,10 @@ class studentController extends Controller
 
             $student->delete();
 
-            return back()->with('success', 'Student deleted successfully!');
+            return back()->with('success', 'ลบข้อมูลนักศึกษาสําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to delete student: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while deleting the student. Please try again later.');
+            return back()->with('error', 'เกิดข้อผิดพลาดในการลบข้อมูลนักศึกษา')->withInput();
         }
     }
 

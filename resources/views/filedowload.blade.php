@@ -47,7 +47,7 @@
                                     @foreach ($files as $file)
                                     <tr>
                                         <td>{{ $file->fileName }}</td>
-                                        <td>{{ $file->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $file->created_at->format('d-m-Y') }}</td>
                                         <td class="text-center">
                                             @if ($file->filePath)
                                             <a href="{{ Storage::url($file->filePath) }}" target="_blank">

@@ -21,7 +21,7 @@ class profileController extends Controller
         $user = getAuthenticatedUser();
         
         if (!$user) {
-            return back()->withErrors(['error' => 'User not authenticated']);
+            return back()->withErrors(['error' => 'ผู้ใช้ที่ไม่ได้ล็อกอิน']);
         }
     
         $user->firstName = $request->input('firstName', $user->firstName);
@@ -37,7 +37,7 @@ class profileController extends Controller
     
         $user->save();
     
-        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+        return redirect()->route('profile')->with('success', 'อัพเดทข้อมูลส่วนตัวสําเร็จ!');
     }
     
     public function updateProfilePicture(Request $request)
@@ -61,13 +61,13 @@ class profileController extends Controller
                 $user->profilePicture = str_replace('public/', '', $path);
                 $user->save();
     
-                return back()->with('success', 'Profile picture updated successfully!');
+                return back()->with('success', 'อัพเดทรูปภาพสําเร็จ!');
             }
     
-            return back()->with('error', 'No file uploaded');
+            return back()->with('error', 'ไฟล์รูปภาพไม่ถูกต้อง');
         } catch (\Exception $e) {
             Log::error('Failed to update profile picture: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while updating the profile picture. Please try again later.');
+            return back()->with('error', 'มีปัญหาในการอัพเดทรูปภาพ กรุณาลองใหม่อีกครั้ง');
         }
     }
     

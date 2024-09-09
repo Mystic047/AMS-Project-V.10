@@ -52,7 +52,7 @@ class adminController extends Controller
             $admin->userId = $emailPrefix;
         } else {
 
-            return back()->with(['error' => 'The student ID must be numeric'])->withInput();
+            return back()->with(['error' => 'รหัสนักศึกษาต้องเป็นตัวเลข'])->withInput();
         }
 
         if ($request->hasFile('profilePicture')) {
@@ -63,7 +63,7 @@ class adminController extends Controller
         }
         $admin->save();
 
-        return back()->with('success', 'Admin added successfully!');
+        return back()->with('success', 'เพิ่มผู้ดูแลระบบสําเร็จ!');
     }
 
     public function update(Request $request, $id)
@@ -93,7 +93,7 @@ class adminController extends Controller
         if (ctype_digit($emailPrefix)) {
             $admin->userId = $emailPrefix;
         } else {
-            return back()->with(['error' => 'The admin ID must be numeric'])->withInput();
+            return back()->with(['error' => 'รหัสผู้ดูแลระบบต้องเป็นตัวเลข'])->withInput();
         }
 
         if ($request->hasFile('profilePicture')) {
@@ -105,13 +105,13 @@ class adminController extends Controller
 
         $admin->save();
         return redirect()->route('admin.edit', ['id' => $admin->userId])
-        ->with('success', 'admin updated successfully!');
+        ->with('success', 'แก้ไขผู้ดูแลระบบสําเร็จ!');
     }
 
     public function destroy($id){
         $admin = Admin::find($id)->delete();
 
-        return back()->with('success', 'Admin deleted success fully!');
+        return back()->with('success', 'ลบข้อมูลผู้ดูแลระบบสําเร็จ!');
     }
 
     public function search(Request $request)

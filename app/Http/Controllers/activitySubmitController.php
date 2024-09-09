@@ -22,38 +22,39 @@ class activitySubmitController extends Controller
         // Fetch the activity to check the registration limit
         $activity = Activity::find($request->input('actId'));
         if (!$activity) {
-            return redirect()->back()->with('error', 'Activity not found.');
+            return redirect()->back()->with('error', 'ไม่พบกิจกรรมนี้');
         }
 
         // Count the current submissions for the activity
         $currentSubmissionsCount = ActivitySubmit::where('actId', $request->input('actId'))->count();
 
-        // Check if the submission count exceeds the limit
         if ($currentSubmissionsCount >= $activity->actRegisLimit) {
-            return redirect()->back()->with('error', 'The registration limit for this activity has been reached.');
+            return redirect()->back()->with('error', 'จำนวนการลงทะเบียนสำหรับกิจกรรมนี้เต็มแล้ว');
         }
+        
 
         // Check if the record already exists
         $existingSubmission = ActivitySubmit::where('userId', $request->input('userId'))
             ->where('actId', $request->input('actId'))
             ->first();
 
-        if ($existingSubmission) {
-            return redirect()->back()->with('error', 'This activity has already been submitted.');
-        }
+            if ($existingSubmission) {
+                return redirect()->back()->with('error', 'กิจกรรมนี้ได้รับการส่งแล้ว');
+            }
 
         // Create the new submission using fill method
         $activitySubmit = new ActivitySubmit();
         $activitySubmit->fill($request->all());
         $activitySubmit->save();
 
-        return redirect()->back()->with('success', 'Activity submitted successfully.');
+        return redirect()->back()->with('success', 'สมัครกิจกรรมเรียบร้อยแล้ว');
     }
 
     public function cancelSubmit($id)
     {
         $actSubmit = ActivitySubmit::find($id)->delete();
-        return back()->with('deleted', 'Submit deleted successfully!');
+        return back()->with('success', 'การลงทะเบียนถูกลบเรียบร้อยแล้ว!');
+
     }
 
     public function confirmSubmit(Request $request)
@@ -67,10 +68,11 @@ class activitySubmitController extends Controller
         $actSubmit = ActivitySubmit::find($request->actSubmitId);
 
         if ($actSubmit->checkIn($request->code, $request->session)) {
-            return back()->with('success', 'Checked in successfully!');
+            return back()->with('success', 'เช็คอินสำเร็จ!');
         } else {
-            return back()->with('error', 'Invalid enrollment key or session.');
+            return back()->with('error', 'รหัสการเข้าร่วมหรือเซสชันไม่ถูกต้อง.');
         }
+        
     }
 
     public function activityList()
@@ -112,7 +114,8 @@ class activitySubmitController extends Controller
     
         // Save the updated submission
         $activitySubmit->save();
-        return back()->with('success', 'Submission updated successfully!');
+        return back()->with('success', 'อัปเดตการส่งเรียบร้อยแล้ว!');
+
     }
     
 }
