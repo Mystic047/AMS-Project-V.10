@@ -77,7 +77,9 @@
                             <li class="list-group-item">รหัสนักศึกษา: {{ $user->userId }}</li>
                             <li class="list-group-item">Email: {{ $user->email }}</li>
                             <li class="list-group-item">สาขาวิชา: {{ $user->area->areaName }}</li>
-                            <li class="list-group-item">ชั่วโมงสะสม: ใส่ชั่วโมงกิจสะสม</li>
+                            <li class="list-group-item">ชั่วโมงสะสม: {{ getTotalCompletedActivityHours() }}</li>
+        
+
                         </ul>
 
                     </div>

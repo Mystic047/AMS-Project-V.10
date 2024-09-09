@@ -87,20 +87,29 @@
         <img class="image-container" src="{{ public_path('storage/pictures/scilogo.png') }}" width="205" height="70">
     </span>
     <div class="header">
-        <h3>ประวัตการเข้าร่วมกิจกรรม : ใส่ชื่อ</h3>
-        <h3>รหัสนักศึกษา : รหัส</h3>
-        <h3>สาขาวิชา (ใส่สาขา)</h3>
+        <h3>ประวัตการเข้าร่วมกิจกรรม : {{ $user->firstName }} {{ $user->lastName }}</h3>
+        <h3>รหัสนักศึกษา : {{ $user->userId }}</h3>
+        <h3>สาขาวิชา : {{ $user->area->areaName }}</h3>
+        <h3>ชั่วโมงกิจกรรมทั้งหมด : {{ getTotalCompletedActivityHours() }}</h3>
     </div>
     <table>
         <thead>
             <tr>
                 <th class="order-column">ลำดับที่</th>
                 <th class="id-column">ชื่อกิจกรรม</th>
+                <th class="hour-column">จำนวนชั่วโมง </th>
                 <th class="status-column">สถานะการเข้าร่วม</th>
             </tr>
         </thead>
         <tbody>
-
+            @foreach ($activitySubmits as $index => $activitySubmit)
+            <tr>
+                <td>{{ $index + 1 }}</td> <!-- Displaying the order number -->
+                <td>{{ $activitySubmit->activity->actName }}</td> <!-- Displaying the activity name -->
+                <td>{{ $activitySubmit->activity->actHour }}</td>
+                <td>{{ $activitySubmit->status }}</td> <!-- Displaying the participation status -->
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </body>

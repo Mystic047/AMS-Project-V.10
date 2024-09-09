@@ -7,10 +7,16 @@
             <h1>Submissions for Activity</h1>
         </div>
     </section>
-
     <div class="container">
         <div class="card mt-5">
             <div class="card-body">
+                <!-- Report Button at the top right of the table -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div></div> <!-- Placeholder for future left-side content -->
+                    <a href=" {{route('admin.activity.history.pdf' , $actId)}}" class="btn btn-info" target="_blank">Report</a>
+                </div>
+                
+                <!-- Table -->
                 <table class="table table-bordered">
                     <thead>
                         <tr>

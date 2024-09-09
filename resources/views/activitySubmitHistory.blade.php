@@ -36,9 +36,20 @@
             <div class="col-md-10 mx-auto">
                 <div class="card w-100 bg-white">
                     <div class="card-body">
+                        <br>
                         <h5>
                             <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
-                        </h5><br>
+                        </h5>
+                        <form action="{{ route('activity.history.pdf') }}" method="GET" target="_blank">
+                            <input type="date" name="start_date" required>
+                            <input type="date" name="end_date" required>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                            </button>
+                        </form>
+                        
+                    </a>
+                        <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-4">
                                 <colgroup>

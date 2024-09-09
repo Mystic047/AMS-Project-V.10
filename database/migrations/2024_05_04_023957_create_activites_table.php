@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('activity', function (Blueprint $table) {
             $table->id('actId');
             $table->string('actName');
-            $table->string('actType');
             $table->date('actDate'); 
             $table->string('actResBranch');
             $table->string('actHour');
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->string('actLocation');
             $table->string('picture')->nullable();
             $table->string('responsiblePerson')->nullable();
-            $table->integer('createdBy')->nullable(); //User id
+            $table->BigInteger('createdBy')->nullable(); //User id
             $table->string('createdByRole')->nullable(); // user role
             $table->string('morningEnrollmentKey')->nullable(); // For morning enrollment key
             $table->string('afternoonEnrollmentKey')->nullable(); // For afternoon enrollment key

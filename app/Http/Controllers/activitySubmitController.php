@@ -82,8 +82,9 @@ class activitySubmitController extends Controller
 
     public function viewSubmissions($actId)
     {
+        
         $activitySubmits = ActivitySubmit::where('actId', $actId)->get();
-        return view('/admin/activitySubmit/activitySubmissions', compact('activitySubmits'));
+        return view('/admin/activitySubmit/activitySubmissions', compact('activitySubmits' , 'actId'));
     }
     public function editSubmit($id)
     {

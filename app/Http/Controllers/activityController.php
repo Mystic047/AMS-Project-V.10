@@ -70,7 +70,6 @@ class activityController extends Controller
         $validatedData = $request->validate([
             // 'actId' => 'required|string',
             'actName' => 'required|string',
-            'actType' => 'required|string',
             'actDate' => 'required|date',
             'actResBranch' => 'required|string',
             'actHour' => 'required|string',
@@ -144,7 +143,6 @@ class activityController extends Controller
     
             $validatedData = $request->validate([
                 'actName' => 'required|string',
-                'actType' => 'required|string',
                 'actDate' => 'required|date',
                 'actResBranch' => 'required|string',
                 'actHour' => 'required|string',
@@ -235,9 +233,12 @@ class activityController extends Controller
 
         return $pdf->stream('activity-submits.pdf');
     }
+    
     public function generateEnrollmentKey($length = 6)
     {
         return Str::random($length);
     }
-
+    protected $casts = [
+        'actDate' => 'date',  // Ensuring 'actDate' is treated as a date
+    ];
 }

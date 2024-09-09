@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 
-<!-- Font Awesome CSS -->
+    <!-- Font Awesome CSS -->
 </head>
 
 <style>
@@ -33,10 +33,19 @@
                         <div class="card-body">
                             <h5 class="card-title d-flex justify-content-between align-items-center">
                                 <span><i class="bi bi-plus-circle"></i> จัดการกิจกรรม</span>
-                                <a href="{{ route('activity.createFront') }}" class="btn btn-light">
-                                    <i class="bi bi-plus-circle"></i> สร้างกิจกรรม
-                                </a>
                             </h5>
+                            <div class="row mb-3">
+                                <div class="col-auto">
+                                    <a href="{{ route('activity.createFront') }}" class="btn btn-secondary">
+                                        <i class="bi bi-plus-circle"></i> สร้างกิจกรรม
+                                    </a>
+                                    <a href="" class="btn btn-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#reportModal">
+                                        <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                                    </a>
+                                </div>
+                            </div>
+                                                  
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-light">
@@ -96,54 +105,51 @@
                                                     </div>
                                                 </td>
                                             </tr>
-
-                                            <!-- Modal -->
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="participationCodeModal{{ $activity->actId }}"
-                                                tabindex="-1"
-                                                aria-labelledby="participationCodeModalLabel{{ $activity->actId }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="participationCodeModalLabel{{ $activity->actId }}">
-                                                                รหัสเข้าร่วมกิจกรรม</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            รหัสเข้าร่วมของกิจกรรมช่วงเช้า:
-                                                            <br>{{ $activity->morningEnrollmentKey ?? 'ไม่มีรหัส' }}
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            รหัสเข้าร่วมของกิจกรรมช่วงบ่าย:
-                                                            <br>{{ $activity->afternoonEnrollmentKey ?? 'ไม่มีรหัส' }}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger"
-                                                                data-bs-dismiss="modal">ปิด</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
-
+        <!-- Report Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">เลือกวันที่สำหรับรายงาน</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('activity.report.pdf') }}" method="GET" target="_blank">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">วันที่เริ่มต้น</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">วันที่สิ้นสุด</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <!-- Bootstrap JS Bundle with Popper -->
 
 
 
     <script>
-
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
                     method: 'POST',

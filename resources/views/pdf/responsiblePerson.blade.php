@@ -69,10 +69,10 @@
             width: 10%;
         }
         .id-column {
-            width: 60%;
+            width: 50%;
         }
         .status-column {
-            width: 30%;
+            width: 40%;
         }
 
         .image-container {
@@ -87,22 +87,24 @@
         <img class="image-container" src="{{ public_path('storage/pictures/scilogo.png') }}" width="205" height="70">
     </span>
     <div class="header">
-        <h3>ข้อมูลสรุปจำนวนคนลงทะเบียนแต่ละโครงการระหว่างวันที่ : {{ \Carbon\Carbon::parse($startDate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($endDate)->format('d/m/Y') }}</h3>
+        <h3>รายชื่อผู้รับผิดชอบของแต่ละโครงการ</h3>
+        <p>กิจกรรมระหว่างวันที่ {{ \Carbon\Carbon::parse($startDate)->format('d/m/Y') }} ถึง {{ \Carbon\Carbon::parse($endDate)->format('d/m/Y') }}</p>
     </div>
+
     <table>
         <thead>
             <tr>
                 <th class="order-column">ลำดับที่</th>
                 <th class="id-column">ชื่อกิจกรรม</th>
-                <th class="status-column">จำนวนคนลงทะเบียน</th>
+                <th class="status-column">ผู้รับผิดชอบ</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($activities as $activity)
+            @foreach ($activities as $index => $activity)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $activity->actName }}</td>
-                <td>{{ $activity->activity_submits_count }}</td>
+                <td>{{ $index + 1 }}</td> <!-- Order number -->
+                <td>{{ $activity->actName }}</td> <!-- Activity name -->
+                <td>{{ $activity->responsiblePerson }}</td> <!-- Responsible person -->
             </tr>
             @endforeach
         </tbody>
