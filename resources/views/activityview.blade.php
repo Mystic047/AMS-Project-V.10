@@ -233,19 +233,19 @@
                 </div>
                 <div class="col-lg-3 col-md-12">
                     <!-- Card 1: Number of Applicants -->
-                    <div class="card bg-white  rounded-lg overflow-hidden">
+                    <div class="card bg-white rounded-lg overflow-hidden">
                         <div class="card-body text-center">
                             <h3 class="text-xl font-bold text-gray-800 mb-4">
                                 <i class="fa-solid fa-users mr-2"></i> จำนวนผู้สมัคร
                             </h3>
-                            <div class="flex justify-between items-center mb-6">
-                                <div class="bg-blue-100 p-4 rounded-lg w-full mx-1">
-                                    <h2 class="text-2xl font-semibold text-blue-600">{{ $activity->actRegisLimit }}</h2>
-                                    <p class="text-gray-500">จำนวนที่รับสมัคร</p>
+                            <div class="d-flex justify-content-between align-items-stretch mb-4">
+                                <div class="bg-light border border-danger p-4 rounded w-100 mx-1 d-flex flex-column justify-content-center">
+                                    <h2 class="text-danger font-weight-bold">{{ $activity->actRegisLimit }}</h2>
+                                    <p class="text-muted">จำนวนที่รับสมัคร</p>
                                 </div>
-                                <div class="bg-green-100 p-4 rounded-lg w-full mx-1">
-                                    <h2 class="text-2xl font-semibold text-green-600">{{ $activitiesSubmits->count() }}</h2>
-                                    <p class="text-gray-500">สมัครแล้ว</p>
+                                <div class="bg-light border border-success p-4 rounded w-100 mx-1 d-flex flex-column justify-content-center">
+                                    <h2 class="text-success font-weight-bold">{{ $activitiesSubmits->count() }}</h2>
+                                    <p class="text-muted">สมัครแล้ว</p>
                                 </div>
                             </div>
                             @php
@@ -255,31 +255,34 @@
                                 @csrf
                                 <input type="hidden" name="userId" value="{{ $user->userId }}">
                                 <input type="hidden" name="actId" value="{{ $activity->actId }}">
-                                <button type="button" onclick="confirmSubmit(this)" class="bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
-                                    Apply
+                                <button type="button" onclick="confirmSubmit(this)" class="btn btn-primary font-weight-bold">
+                                    ลงชื่อเข้าร่วมกิจกรรม
                                 </button>
                             </form>
                         </div>
                     </div>
-                
+
                     <br>
-                
+
                     <!-- Card 2: Summary of Application Data -->
-                    <div class="card bg-white  rounded-lg overflow-hidden">
+                    <div class="card bg-white rounded-lg overflow-hidden">
                         <div class="card-body">
                             <h5 class="text-xl font-bold text-gray-800 mb-4">Application Summary</h5>
                             <div class="space-y-2">
                                 @foreach ($activitiesSubmits->groupBy('student.area.areaName') as $areaName => $submissions)
-                                    <div class="flex justify-between items-center text-sm text-gray-600">
-                                        <span><i class="fas fa-map-marker-alt text-gray-500 mr-1"></i> {{ $areaName }}</span>
-                                        <span class="text-gray-700 font-semibold">จำนวน: {{ $submissions->count() }} คน</span>
+                                    <div class="d-flex justify-content-between align-items-center text-muted">
+                                        <span><i class="fas fa-map-marker-alt text-secondary mr-1"></i> {{ $areaName }}</span>
+                                        <span class="font-weight-bold">
+                                            จำนวน: <span class="text-danger">{{ $submissions->count() }}</span> คน
+                                        </span>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
+
             </div>
         </div>
 
