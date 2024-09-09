@@ -109,8 +109,8 @@ class activityController extends Controller
             . "👥 อาจารย์ ที่รับผิดชอบ: " . $activity->responsiblePerson . "\n"
             . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n";
         $this->sendLineNotify($message);
+        return back()->with('success', 'กิจกรรมถูกเพิ่มเรียบร้อยแล้ว!');
 
-        return back()->with('success', 'Activity added successfully!');
     }
 
 
@@ -173,11 +173,14 @@ class activityController extends Controller
     
             $activity->save();
     
-            return back()->with('success', 'Activity edited successfully!');
+            return back()->with('success', 'กิจกรรมได้รับการแก้ไขเรียบร้อยแล้ว!');
+
+
             
         } catch (\Exception $e) {
             Log::error('Failed to update activity: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while editing the activity. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการแก้ไขกิจกรรม กรุณาลองใหม่อีกครั้ง.')->withInput();
+
         }
     }
     
@@ -185,7 +188,8 @@ class activityController extends Controller
     public function destroy($id)
     {
         $activity = Activity::find($id)->delete();
-        return back()->with('success', 'Activity deleted success fully!');
+        return back()->with('success', 'กิจกรรมถูกลบออกเรียบร้อยแล้ว!');
+
     }
 
     public function search(Request $request)
@@ -217,7 +221,7 @@ class activityController extends Controller
         $activity = Activity::find($id);
 
         if (!$activity) {
-            return redirect()->back()->with('error', 'Activity not found.');
+            return redirect()->back()->with('error', 'ไม่พบกิจกรรม.');
         }
 
         $activitiesSubmits = ActivitySubmit::with(['student.area'])

@@ -44,7 +44,7 @@ class facultyController extends Controller
     
         $facultys->save();
 
-        return redirect()->route('faculty.manage')->with('success', 'faculty added successfully!');
+        return redirect()->route('faculty.manage')->with('success', 'เพิ่มข้อมูลคณะสําเร็จ!');
     }
 
     public function update(Request $request, $id)
@@ -62,11 +62,11 @@ class facultyController extends Controller
 
 
         $facultys->save();
-        return redirect()->route('faculty.manage')->with('success', 'faculty updated successfully!');
+        return redirect()->route('faculty.manage')->with('success', 'อัพเดทข้อมูลคณะสําเร็จ!');
     }
 
     public function destroy($id){
         $request = Faculty::find($id)->delete();
-        return back()->with('deleted', 'faculty deleted successfully!');
+        return back()->with('deleted', 'ลบข้อมูลคณะสําเร็จ!');
     }
 }

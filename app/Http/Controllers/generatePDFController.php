@@ -41,7 +41,7 @@ class generatePDFController extends Controller
         $user = $userId ? User::find($userId) : getAuthenticatedUser();
     
         if (!$user) {
-            return redirect()->back()->with('error', 'User not found.');
+            return redirect()->back()->with('error', 'ไม่พบผู้ใช้นี้');
         }
     
         $startDate = $request->input('start_date');
@@ -80,7 +80,7 @@ class generatePDFController extends Controller
             ->get();
     
         if ($activitySubmits->isEmpty()) {
-            return redirect()->back()->with('error', 'Activity not found or no submissions available.');
+            return redirect()->back()->with('error', 'ไม่พบการลงทะเบียนสำหรับกิจกรรมนี้');
         }
     
         \Log::info('Activity History for Activity ID ' . $actId . ':', ['Total Submissions' => $activitySubmits->count()]);

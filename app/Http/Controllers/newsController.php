@@ -107,18 +107,18 @@ class newsController extends Controller
             $news->createdByRole = $user->role;
     
             $news->save();
-            Log::info('News saved successfully.', $news->toArray());
+            Log::info('เพิ่มข้อมูลข่าวสารสําเร็จ', $news->toArray());
     
-            return back()->with('success', 'News added successfully!');
+            return back()->with('success', 'เพิ่มข่าวสารสําเร็จ!');
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Validation failed: ' . $e->getMessage());
-            return back()->with('error', 'Validation failed. Please check your input.')->withInput();
+            return back()->with('error', 'ข้อมูลไม่ถูกต้อง ตามประเภทที่กําหนด')->withInput();
         } catch (\Illuminate\Database\QueryException $e) {
             Log::error('Database error: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while saving the news. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองอีกครั้ง')->withInput();
         } catch (\Exception $e) {
             Log::error('Unknown error: ' . $e->getMessage());
-            return back()->with('error', 'An unknown error occurred. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองอีกครั้ง')->withInput();
         }
     }
     
@@ -147,12 +147,12 @@ class newsController extends Controller
             }
     
             $news->save();
-            Log::info('News updated successfully.', $news->toArray());
+            Log::info('อัพเดทข้อมูลข่าวสารสําเร็จ', $news->toArray());
     
-            return back()->with('success', 'News updated successfully!');
+            return back()->with('success', 'อัพเดทข้อมูลข่าวสารสําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to update news: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while updating the news. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการอัพเดทข้อมูล กรุณาลองอีกครั้ง')->withInput();
         }
     }
     
@@ -160,7 +160,7 @@ class newsController extends Controller
     public function destroy($id)
     {
         $news = News::find($id)->delete();
-        return back()->with('success', 'news deleted success fully!');
+        return back()->with('success', 'ลบข้อมูลข่าวสารสําเร็จ!');
     }
 
     public function search(Request $request)

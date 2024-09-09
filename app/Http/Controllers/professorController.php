@@ -49,7 +49,7 @@ class professorController extends Controller
             if (ctype_digit($emailPrefix)) {
                 $professor->userId = $emailPrefix;
             } else {
-                return back()->withErrors(['email' => 'The professor ID must be numeric'])->withInput();
+                return back()->withErrors(['email' => 'รหัสอาจารย์ต้องเป็นตัวเลข'])->withInput();
             }
 
             if ($request->hasFile('profilePicture')) {
@@ -61,10 +61,10 @@ class professorController extends Controller
 
             $professor->save();
 
-            return back()->with('success', 'Professor added successfully!');
+            return back()->with('success', 'เพิ่มข้อมูลอาจารย์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to add professor: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while adding the professor. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการเพิ่มข้อมูลอาจารย์')->withInput();
         }
     }
 
@@ -96,7 +96,7 @@ class professorController extends Controller
             if (ctype_digit($emailPrefix)) {
                 $professors->userId = $emailPrefix;
             } else {
-                return back()->with(['error' => 'The professor ID must be numeric'])->withInput();
+                return back()->with(['error' => 'รหัสอาจารย์ต้องเป็นตัวเลข'])->withInput();
             }
 
             if ($request->hasFile('profilePicture')) {
@@ -114,10 +114,10 @@ class professorController extends Controller
             $professors->save();
 
             return redirect()->route('professor.edit', ['id' => $professors->userId])
-                             ->with('success', 'Professor updated successfully!');
+                             ->with('success', 'อัพเดทข้อมูลอาจารย์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to update professor: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while updating the professor. Please try again later.')->withInput();
+            return back()->with('error', 'เกิดข้อผิดพลาดในการอัพเดทข้อมูลอาจารย์')->withInput();
         }
     }
 
@@ -133,10 +133,10 @@ class professorController extends Controller
 
             $professors->delete();
 
-            return back()->with('success', 'Professor deleted successfully!');
+            return back()->with('success', 'ลบข้อมูลอาจารย์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to delete professor: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while deleting the professor. Please try again later.');
+            return back()->with('error', 'เกิดข้อผิดพลาดในการลบข้อมูลอาจารย์')->withInput();
         }
     }
 

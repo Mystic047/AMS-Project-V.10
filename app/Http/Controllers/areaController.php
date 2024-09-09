@@ -44,7 +44,7 @@ class areaController extends Controller
         
         $area->save();
     
-        return redirect()->route('area.manage')->with('success', 'Area added successfully!');
+        return redirect()->route('area.manage')->with('success', 'เพิ่มสาขาวิชาสําเร็จ!');
     }
     
 
@@ -62,11 +62,11 @@ class areaController extends Controller
         $area->fill($request->all());
 
         $area->save();
-        return redirect()->route('area.manage')->with('success', 'Areas updated successfully!');
+        return redirect()->route('area.manage')->with('success', 'อัพเดทสาขาวิชาสําเร็จ!');
     }
 
     public function destroy($id){
         $area = Area::find($id)->delete();
-        return back()->with('deleted', 'Area deleted successfully!');
+        return back()->with('deleted', 'ลบข้อมูลสาขาสําเร็จ!');
     }
 }

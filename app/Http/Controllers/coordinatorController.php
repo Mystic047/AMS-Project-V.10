@@ -48,7 +48,7 @@ class coordinatorController extends Controller
         if (ctype_digit($emailPrefix)) {
             $coordinator->userId = $emailPrefix;
         } else {
-            return back()->with(['error' => 'The coordinator ID must be numeric'])->withInput();
+            return back()->with(['error' => 'รหัสฝ่ายกิจกรรมต้องเป็นตัวเลข'])->withInput();
         }
 
         if ($request->hasFile('profilePicture')) {
@@ -60,7 +60,7 @@ class coordinatorController extends Controller
 
         $coordinator->save();
 
-        return back()->with('success', 'Coordinator added successfully!');
+        return back()->with('success', 'ข้อมูลฝ่ายกิจกรรมเพิ่มเรียบร้อย!');
     }
 
     public function update(Request $request, $id)
@@ -91,7 +91,7 @@ class coordinatorController extends Controller
             if (ctype_digit($emailPrefix)) {
                 $coordinator->userId = $emailPrefix;
             } else {
-                return back()->withErrors(['email' => 'The coordinator ID must be numeric'])->withInput();
+                return back()->withErrors(['email' => 'รหัสฝ่ายกิจกรรมต้องเป็นตัวเลข'])->withInput();
             }
 
             if ($request->hasFile('profilePicture')) {
@@ -109,10 +109,10 @@ class coordinatorController extends Controller
             $coordinator->save();
 
             return redirect()->route('coordinator.edit', ['id' => $coordinator->userId])
-                ->with('success', 'Coordinator updated successfully!');
+                ->with('success', 'อัพเดทข้อมูลฝ่ายกิจกรรมสําเร็จ!');
         } catch (\Exception $e) {
             Log::error('Failed to update coordinator: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while updating the coordinator. Please try again later.')->withInput();
+            return back()->with('error', 'ไม่สามารถอัพเดทข้อมูลฝ่ายกิจกรรมได้ โปรดลองอีกครั้ง')->withInput();
         }
     }
 
@@ -127,7 +127,7 @@ class coordinatorController extends Controller
 
         $coordinator->delete();
 
-        return back()->with('success', 'Coordinator deleted successfully!');
+        return back()->with('success', 'ลบข้อมูลฝ่ายกิจกรรมสําเร็จ!');
     }
     public function search(Request $request)
     {

@@ -70,6 +70,32 @@
         border-radius: 8px !important;
     }
 </style>
+
+<style>
+    .footer {
+        background-color: #343a40; /* Dark background */
+        color: #fff; /* White text color */
+        padding: 10px 0; /* Some padding */
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px; /* Set the fixed height of the footer here */
+    }
+</style>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .main-wrapper {
+        min-height: 100%;
+        padding-bottom: 60px; /* same height as your footer */
+        box-sizing: border-box;
+        position: relative;
+    }
+</style>
+
+
 <script>
     // Initialize Notyf
     var notyf = new Notyf({
@@ -150,7 +176,18 @@
             return false;
         }
 </script>
-@yield('scripts')
 @yield('content')
+
+<!-- Footer -->
+{{-- <footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container text-center">
+        <span>Copyright &copy; 2024 All rights reserved.</span>
+    </div>
+</footer> --}}
+
+@yield('scripts')
+
+<!-- Bootstrap JS and other scripts-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 

@@ -56,10 +56,10 @@ class fileController extends Controller
             }
     
             $file->save();
-            return redirect()->route('file.manage2')->with('success', 'File added successfully!');
+            return redirect()->route('file.manage2')->with('success', 'เพิ่มไฟล์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('File creation error: '.$e->getMessage());
-            return redirect()->back()->with('error', 'There was an error adding the file. Please try again.');
+            return redirect()->back()->with('error', 'มีปัญหาในการเพิ่มไฟล์ กรุณาลองใหม่อีกครั้ง');
         }
     }
 
@@ -82,10 +82,10 @@ class fileController extends Controller
             }
     
             $file->save();
-            return back()->with('success', 'File added successfully!');
+            return back()->with('success', 'เพิ่มไฟล์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('File creation error: '.$e->getMessage());
-            return redirect()->back()->with('error', 'There was an error adding the file. Please try again.');
+            return redirect()->back()->with('error', 'มีปัญหาในการเพิ่มไฟล์ กรุณาลองใหม่อีกครั้ง');
         }
     }
     
@@ -111,10 +111,10 @@ class fileController extends Controller
             }
     
             $file->save();
-            return back()->with('success', 'File updated successfully!');
+            return back()->with('success', 'อัพเดทไฟล์สําเร็จ!');
         } catch (\Exception $e) {
             Log::error('File update error: '.$e->getMessage());
-            return redirect()->back()->with('error', 'There was an error updating the file. Please try again.');
+            return redirect()->back()->with('error', 'มีปัญหาในการอัพเดทไฟล์ กรุณาลองใหม่อีกครั้ง');
         }
     }
     
@@ -129,6 +129,6 @@ class fileController extends Controller
 
         $file->delete();
 
-        return redirect()->back()->with('success', 'File deleted successfully!');
+        return redirect()->back()->with('success', 'ลบไฟล์สําเร็จ!');
     }
 }
