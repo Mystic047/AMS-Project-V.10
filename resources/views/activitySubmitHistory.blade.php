@@ -40,8 +40,14 @@
                         <h5>
                             <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
                         </h5>
-                        <a href="{{ route('activity.history.pdf') }}" class="btn btn-secondary" target="_blank">
-                        <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                        <form action="{{ route('activity.history.pdf') }}" method="GET" target="_blank">
+                            <input type="date" name="start_date" required>
+                            <input type="date" name="end_date" required>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                            </button>
+                        </form>
+                        
                     </a>
                         <br>
                         <div class="table-responsive">

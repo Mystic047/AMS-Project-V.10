@@ -11,99 +11,115 @@ class generatePDFController extends Controller
 {
     public function generateActivitiesPDFByDate(Request $request)
     {
-        // Validate the date input
+
         $request->validate([
             'startDate' => 'required|date',
             'endDate' => 'required|date|after_or_equal:startDate',
         ]);
 
-        // Fetch activities between the selected start and end dates
         $activities = Activity::withCount('activitySubmits')
             ->whereBetween('actDate', [$request->startDate, $request->endDate])
             ->orderBy('actDate', 'asc')
             ->get();
 
-        // Log the data for debugging
         \Log::info('Filtered activities with submission counts:', [$activities]);
 
-        // Render the view to HTML
         $html = View::make('pdf.actAll', [
             'activities' => $activities,
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
         ])->render();
 
-        // Properly instantiate the PDF wrapper and load the HTML
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($html);
 
-        // Return the generated PDF as a stream to the browser (inline)
         return $pdf->stream('activities-summary.pdf', ["Attachment" => false]);
     }
 
     public function generateUserActivityHistoryPDF(Request $request, $userId = null)
     {
-        // If no userId is passed, default to the authenticated user
         $user = $userId ? User::find($userId) : getAuthenticatedUser();
     
-        // If the user is not found, return with an error
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
     
-        // Fetch the activity submission history for the user
-        $activitySubmits = ActivitySubmit::with('activity') // Load related activities
-            ->where('userId', $user->userId)
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
     
-        // Log the data for debugging
+        $query = ActivitySubmit::with('activity')
+            ->where('userId', $user->userId);
+    
+        if ($startDate && $endDate) {
+            $query->whereHas('activity', function ($q) use ($startDate, $endDate) {
+                $q->whereBetween('actDate', [$startDate, $endDate]);
+            });
+        }
+    
+        $activitySubmits = $query->orderBy('created_at', 'asc')->get();
+    
         \Log::info('User Activity History:', [$user, $activitySubmits]);
     
-        // Render the view to HTML
         $html = View::make('pdf.actHistory', [
             'user' => $user,
             'activitySubmits' => $activitySubmits,
         ])->render();
     
-        // Properly instantiate the PDF wrapper and load the HTML
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($html);
     
-        // Return the generated PDF as a stream to the browser (inline)
         return $pdf->stream('user-activity-history.pdf', ["Attachment" => false]);
     }
     
+    public function generateUserActivityHistoryPDF2(Request $request, $actId = null)
+    {
+        // Retrieve all submissions for the given activity ID
+        $activitySubmits = ActivitySubmit::with('activity')
+            ->where('actId', $actId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    
+        if ($activitySubmits->isEmpty()) {
+            return redirect()->back()->with('error', 'Activity not found or no submissions available.');
+        }
+    
+        \Log::info('Activity History for Activity ID ' . $actId . ':', ['Total Submissions' => $activitySubmits->count()]);
+    
+        $html = View::make('pdf.actHistoryByActId', [
+            'activitySubmits' => $activitySubmits,
+        ])->render();
+    
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadHTML($html);
+    
+        return $pdf->stream('activity-history-' . $actId . '.pdf', ["Attachment" => false]);
+    }
+    
+
     public function generateResponsiblePersonPDF(Request $request)
     {
-        // Validate the date input
+
         $request->validate([
             'startDate' => 'required|date',
             'endDate' => 'required|date|after_or_equal:startDate',
         ]);
-    
-        // Fetch activities between the selected start and end dates
+
         $activities = Activity::whereBetween('actDate', [$request->startDate, $request->endDate])
             ->orderBy('actDate', 'asc')
             ->get();
-    
-        // Log the data for debugging
+
         \Log::info('Filtered activities with responsible persons:', [$activities]);
-    
-        // Render the view to HTML
+
         $html = View::make('pdf.responsiblePerson', [
             'activities' => $activities,
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
         ])->render();
-    
-        // Properly instantiate the PDF wrapper and load the HTML
+
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($html);
-    
-        // Return the generated PDF as a stream to the browser (inline)
+
         return $pdf->stream('responsible-persons.pdf', ["Attachment" => false]);
     }
-    
-    
+
 }

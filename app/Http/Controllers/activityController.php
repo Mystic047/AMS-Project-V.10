@@ -238,5 +238,7 @@ class activityController extends Controller
     {
         return Str::random($length);
     }
-
+    protected $casts = [
+        'actDate' => 'date',  // Ensuring 'actDate' is treated as a date
+    ];
 }
