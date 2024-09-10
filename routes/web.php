@@ -44,6 +44,11 @@ Route::get('/activity-info/{id}', [homeController::class , 'showInfoView'])->nam
 Route::get('/activity', function () {
     return view('activity');
 });
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/dashboard2', function () {
+        return view('/admin/dashboard');
+    });
+});
 
 Route::get('/dashboard', function () {
     return view('/admin/dashboard');

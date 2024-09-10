@@ -40,13 +40,10 @@
                         <h5>
                             <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
                         </h5>
-                        <form action="{{ route('activity.history.pdf') }}" method="GET" target="_blank">
-                            <input type="date" name="start_date" required>
-                            <input type="date" name="end_date" required>
-                            <button type="submit" class="btn btn-secondary">
-                                <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
-                            </button>
-                        </form>
+                        <a href="" class="btn btn-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#reportModal">
+                                        <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                                    </a>
                         
                     </a>
                         <br>
@@ -99,7 +96,7 @@
                                             </td>
                                             <td class="text-center">
                                                 @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
-                                                    <a href="{{ route('certificate', ['id' => $submit->actSubmitId]) }}" class="btn btn-success">
+                                                    <a href="{{ route('certificate', ['id' => $submit->actSubmitId]) }}" class="btn btn-success" target="_blank">
                                                         รับใบประกาศ
                                                     </a>
                                                 @else
@@ -173,7 +170,33 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">เลือกวันที่สำหรับรายงาน</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('activity.history.pdf') }}" method="GET" target="_blank">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">วันที่เริ่มต้น</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">วันที่สิ้นสุด</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 

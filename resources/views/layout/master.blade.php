@@ -187,6 +187,6 @@
 
 @yield('scripts')
 
-
+@include('layout.footer')
 
 

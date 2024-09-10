@@ -82,17 +82,17 @@ function thaiDate($date) {
             font-size: 36px;
             margin: 5px 0;
         }
+
     </style>
 </head>
 <body>
     <div class="certificate-content">
         <img src="{{ public_path('storage/certificate/Green Gold Elegant Certificate .png') }}" alt="Certificate Image" class="certificate-image">
         <div class="text-content">
-            <br>
             <h2>{{ $data->student->firstName }} {{ $data->student->lastName }}</h2>
             <br>
             <h2>{{ $data->activity->actName }}</h2>
-            <h2><?php echo thaiDate($data->activity->actDate); ?></h2>
+            <h2> ณ วันที่ <?php echo thaiDate($data->activity->actDate); ?></h2>
             <h2>รวมระยะเวลา {{ $data->activity->actHour }}  ชั่วโมง</h2>
         </div>
     </div>
