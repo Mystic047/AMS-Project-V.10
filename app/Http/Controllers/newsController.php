@@ -49,10 +49,28 @@ class newsController extends Controller
     
 
     public function showDetailsView($id)
-    {
-        $news = News::find($id);
-        return view('newsdetails' , compact('news'));
+{
+    $news = News::find($id); // Assuming $news is a single news item, not a collection
+    $writers = [];
+    
+    switch ($news->createdByRole) {
+        case 'admin':
+            $writers[$news->id] = Admin::find($news->createdBy); 
+            break;
+        case 'student':
+            $writers[$news->id] = Student::find($news->createdBy);
+            break;
+        case 'coordinator':
+            $writers[$news->id] = Coordinator::find($news->createdBy);
+            break;
+        case 'professor':
+            $writers[$news->id] = Professor::find($news->createdBy);
+            break;
     }
+
+    return view('newsdetails', compact('news', 'writers'));
+}
+
 
 
     public function showCreateView()

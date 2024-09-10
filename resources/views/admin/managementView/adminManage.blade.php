@@ -124,12 +124,12 @@
                                 <td class="col-3">{{ $admin->userId }}</td>
                                 <td class="col-4">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('storage/' . $admin->profilePicture) }}"
+                                        <img src="{{ asset('storage/' . ($admin->profilePicture ?? 'profile_pictures/default/default.jpg')) }}"
                                             class="rounded-circle me-2" alt="Avatar"
                                             style="width: 40px; height: 40px; object-fit: cover;">
                                         <div>{{ $admin->firstName }} {{ $admin->lastName }}</div>
                                     </div>
-                                </td>
+                                </td>                                
                                 <td class="col-3">{{ $admin->area->areaName }}</td>
                                 <!-- Assuming faculty relation exists -->
                                 <td class="col-2">
