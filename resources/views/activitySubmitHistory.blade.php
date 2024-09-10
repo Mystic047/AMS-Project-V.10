@@ -18,7 +18,7 @@
 @extends('layout.master')
 @section('content')
 
-<body style="background-color:#f5f5f5;">
+    <body style="background-color:#f5f5f5;">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -40,12 +40,11 @@
                         <h5>
                             <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
                         </h5>
-                        <a href="" class="btn btn-secondary" data-bs-toggle="modal"
-                                        data-bs-target="#reportModal">
-                                        <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
-                                    </a>
-                        
-                    </a>
+                        <a href="" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#reportModal">
+                            <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
+                        </a>
+
+                        </a>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-4">
@@ -64,7 +63,8 @@
                                         <th class="text-center">ชั่วโมงกิจกรรม</th>
                                         <th class="text-center">ดูข้อมูลเพิ่มเติม</th>
                                         <th class="text-center">ยกเลิกลงทะเบียน</th>
-                                        <th class="text-center">รับใบประกาศ</th> <!-- New column for the certificate button -->
+                                        <th class="text-center">รับใบประกาศ</th>
+                                        <!-- New column for the certificate button -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,17 +86,31 @@
                                                         data-bs-target="#enterCodeModal"
                                                         data-id="{{ $submit->actSubmitId }}">ใส่รหัส</button>
                                                 @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#confirmDeleteModal"
-                                                    data-id="{{ $submit->actSubmitId }}">
-                                                    ยกเลิกการสมัคร
-                                                </button>
+
+                                                @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
+                                                    <a href="{{ $submit->activity->assessmentLink }}" class=""
+                                                        target="_blank">
+                                                        ประเมิณกิจกรรม
+                                                    </a>
+                                                @endif
+
                                             </td>
                                             <td class="text-center">
                                                 @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
-                                                    <a href="{{ route('certificate', ['id' => $submit->actSubmitId]) }}" class="btn btn-success" target="_blank">
+                                                <span class="text-muted">ไม่สามารถยกเลิกการสมัครได้</span>
+                                                @else
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#confirmDeleteModal"
+                                                        data-id="{{ $submit->actSubmitId }}">
+                                                        ยกเลิกการสมัคร
+                                                    </button>
+                                                @endif
+
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
+                                                    <a href="{{ route('certificate', ['id' => $submit->actSubmitId]) }}"
+                                                        class="btn btn-success" target="_blank">
                                                         รับใบประกาศ
                                                     </a>
                                                 @else
@@ -142,7 +156,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="enterCodeModal" tabindex="-1" aria-labelledby="enterCodeModalLabel" aria-hidden="true">
+        <div class="modal fade" id="enterCodeModal" tabindex="-1" aria-labelledby="enterCodeModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -153,23 +168,28 @@
                         <form id="confirmForm" method="POST" action="{{ route('activity.confirmSubmit') }}">
                             @csrf
                             <input type="hidden" name="actSubmitId" id="actSubmitId">
+
                             <div class="mb-3">
                                 <label for="codeInput" class="form-label">รหัส:</label>
-                                <input type="text" class="form-control" id="codeInput" name="code">
+                                <input type="text" class="form-control" id="codeInput" name="code" required>
                             </div>
+
                             <div class="mb-3">
                                 <label for="sessionSelect" class="form-label">เลือกช่วงเวลา:</label>
-                                <select class="form-select" id="sessionSelect" name="session">
+                                <select class="form-select" id="sessionSelect" name="session" required>
                                     <option value="morning">เช้า</option>
                                     <option value="afternoon">บ่าย</option>
                                 </select>
                             </div>
+
                             <button type="submit" class="btn btn-primary">ยืนยัน</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
         <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

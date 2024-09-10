@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Activity;
-use App\Models\ActivitySubmit;
 use Illuminate\Http\Request;
+use App\Models\ActivitySubmit;
 use Illuminate\Support\Facades\View;
 
 class generatePDFController extends Controller
@@ -38,7 +39,7 @@ class generatePDFController extends Controller
 
     public function generateUserActivityHistoryPDF(Request $request, $userId = null)
     {
-        $user = $userId ? User::find($userId) : getAuthenticatedUser();
+        $user = $userId ? Student::find($userId) : getAuthenticatedUser();
     
         if (!$user) {
             return redirect()->back()->with('error', 'ไม่พบผู้ใช้นี้');
@@ -71,28 +72,39 @@ class generatePDFController extends Controller
         return $pdf->stream('user-activity-history.pdf', ["Attachment" => false]);
     }
     
-    public function generateUserActivityHistoryPDF2(Request $request, $actId = null)
+    public function generateUserActivityHistoryPDF2(Request $request, $userId = null)
     {
-        // Retrieve all submissions for the given activity ID
-        $activitySubmits = ActivitySubmit::with('activity')
-            ->where('actId', $actId)
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $user = $userId ? Student::find($userId) : getAuthenticatedUser();
     
-        if ($activitySubmits->isEmpty()) {
-            return redirect()->back()->with('error', 'ไม่พบการลงทะเบียนสำหรับกิจกรรมนี้');
+        if (!$user) {
+            return redirect()->back()->with('error', 'ไม่พบผู้ใช้นี้');
         }
     
-        \Log::info('Activity History for Activity ID ' . $actId . ':', ['Total Submissions' => $activitySubmits->count()]);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
     
-        $html = View::make('pdf.actHistoryByActId', [
+        $query = ActivitySubmit::with('activity')
+            ->where('userId', $user->userId);
+    
+        if ($startDate && $endDate) {
+            $query->whereHas('activity', function ($q) use ($startDate, $endDate) {
+                $q->whereBetween('actDate', [$startDate, $endDate]);
+            });
+        }
+    
+        $activitySubmits = $query->orderBy('created_at', 'asc')->get();
+    
+        \Log::info('User Activity History:', [$user, $activitySubmits]);
+    
+        $html = View::make('pdf.actHistory', [
+            'user' => $user,
             'activitySubmits' => $activitySubmits,
         ])->render();
     
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($html);
     
-        return $pdf->stream('activity-history-' . $actId . '.pdf', ["Attachment" => false]);
+        return $pdf->stream('user-activity-history.pdf', ["Attachment" => false]);
     }
     
 

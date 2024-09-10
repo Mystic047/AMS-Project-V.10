@@ -40,35 +40,37 @@ class studentController extends Controller
             'areaId' => 'nullable|string',
             'profilePicture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation rule for the image
         ]);
-
+    
         try {
             $student = new Student;
             $student->fill($validatedData);
-
+    
             $emailPrefix = explode('@', $request->email)[0];
             if (ctype_digit($emailPrefix)) {
                 $student->userId = $emailPrefix;
             } else {
                 return back()->withErrors(['email' => 'รหัสนักศึกษาต้องเป็นตัวเลข'])->withInput();
             }
-
+    
+            // Handle profile picture upload or use default
             if ($request->hasFile('profilePicture')) {
                 $file = $request->file('profilePicture');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('public/profile_pictures/student_profiles', $filename);
                 $student->profilePicture = str_replace('public/', '', $path);
             }
-
+    
             $student->save();
-
+    
             return back()->with('success', 'เพิ่มนักศึกษาสําเร็จ!');
         } catch (\Exception $e) {
             // Log the error
             Log::error('Failed to add student: ' . $e->getMessage());
-
+    
             return back()->with('error', 'เกิดข้อผิดพลาดในการเพิ่มนักศึกษา')->withInput();
         }
     }
+    
 
     public function update(Request $request, $id)
     {

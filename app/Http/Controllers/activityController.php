@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use GuzzleHttp\Client;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class activityController extends Controller
 {
@@ -18,12 +19,28 @@ class activityController extends Controller
         $activities = Activity::all();
         return view('/admin/managementView/activityManage', compact('activities'));
     }
-
     public function showManageViewFront()
     {
         $activities = Activity::all();
+        
+        foreach ($activities as $activity) {
+            // Generate URLs for morning and afternoon sessions with actId and enrollment key
+            $activity->morningQrCodeUrl = route('activity.confirmSubmitQR', [
+                'actId' => $activity->actId,
+                'code' => $activity->morningEnrollmentKey,
+                'session' => 'morning'
+            ]);
+            
+            $activity->afternoonQrCodeUrl = route('activity.confirmSubmitQR', [
+                'actId' => $activity->actId,
+                'code' => $activity->afternoonEnrollmentKey,
+                'session' => 'afternoon'
+            ]);
+        }
+    
         return view('activityManage', compact('activities'));
     }
+    
 
     public function showActivityAllViewFront()
     {

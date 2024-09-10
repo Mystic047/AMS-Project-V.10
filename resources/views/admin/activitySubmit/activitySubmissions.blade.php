@@ -13,7 +13,10 @@
                 <!-- Report Button at the top right of the table -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div></div> <!-- Placeholder for future left-side content -->
-                    <a href=" {{route('admin.activity.history.pdf' , $actId)}}" class="btn btn-info" target="_blank">Report</a>
+                    <div>
+                        <a href="{{ route('activity.createSubmissions', $actId) }}" class="btn btn-primary">Create Submission</a>
+                        <a href="{{ route('admin.activity.history.pdf', $actId) }}" class="btn btn-info" target="_blank">Report</a>
+                    </div>
                 </div>
                 
                 <!-- Table -->

@@ -57,18 +57,26 @@
 <body>
     <div class="container">
         <div class="news-card">
-            <img src="{{ asset('storage/' . $news->imagePath) }}" class="card-img-top" alt="...">
+            <img src="{{ asset('storage/' . $news->imagePath) }}" class="card-img-top" alt="News Image">
             <div class="news-title">{{ $news->title }}</div>
             <div class="news-details">{!! $news->details !!}</div>
             <br><br>
             <div class="news-footer">
-                <span><i class="fas fa-user"></i> {{ $news->author }}</span>
+                <!-- Display the writer's name based on the role -->
+                @if(isset($writers[$news->id]))
+                    <span><i class="fas fa-user"></i> {{ $writers[$news->id]->firstName }} {{ $writers[$news->id]->lastName }}</span>
+                @else
+                    <span><i class="fas fa-user"></i> Unknown Author</span>
+                @endif
+
+                <!-- Display the news creation date -->
                 <span><i class="fas fa-calendar-alt"></i> {{ $news->created_at->format('F d, Y') }}</span>
-                <span><i class="fas fa-eye"></i> {{ $news->views }}</span>
+
             </div>
         </div>
     </div>
 </body>
+
 @endsection
 
 </html>

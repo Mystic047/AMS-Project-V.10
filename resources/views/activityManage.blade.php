@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
-
-    <!-- Font Awesome CSS -->
 </head>
 
 <style>
@@ -21,6 +18,7 @@
         font-family: 'Noto Sans Thai', sans-serif;
     }
 </style>
+
 @extends('layout.master')
 @section('content')
 
@@ -45,7 +43,7 @@
                                     </a>
                                 </div>
                             </div>
-                                                  
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-light">
@@ -105,17 +103,17 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                        
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Report Modal -->
         <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -144,11 +142,67 @@
                 </div>
             </div>
         </div>
+
+        {{-- Enroll Modal --}}
+        @foreach ($activities as $activity)
+            <div class="modal fade" id="participationCodeModal{{ $activity->actId }}" tabindex="-1"
+                aria-labelledby="participationCodeModalLabel{{ $activity->actId }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="participationCodeModalLabel{{ $activity->actId }}">
+                                รหัสเข้าร่วมกิจกรรม
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            รหัสเข้าร่วมของกิจกรรมช่วงเช้า:
+                            <br>{{ $activity->morningEnrollmentKey ?? 'ไม่มีรหัส' }}
+                            <br><br>
+                            <h5>QR Code สำหรับช่วงเช้า:</h5>
+                            @php
+                                $morningQrCodeUrl = route('activity.confirmSubmitQR', [
+                                    'actId' => $activity->actId,
+                                    'code' => $activity->morningEnrollmentKey,
+                                    'session' => 'morning',
+                                ]);
+                            @endphp
+                            {!! QrCode::size(200)->generate($morningQrCodeUrl) !!}
+                            <br>
+                            <a href="data:image/svg+xml;base64,{{ base64_encode(QrCode::format('svg')->size(200)->generate($morningQrCodeUrl)) }}"
+                                download="morning_qrcode_{{ $activity->actId }}.svg" class="btn btn-primary mt-2">
+                                ดาวน์โหลด QR Code สำหรับช่วงเช้า
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            รหัสเข้าร่วมของกิจกรรมช่วงบ่าย:
+                            <br>{{ $activity->afternoonEnrollmentKey ?? 'ไม่มีรหัส' }}
+                            <br><br>
+                            <h5>QR Code สำหรับช่วงบ่าย:</h5>
+                            @php
+                                $afternoonQrCodeUrl = route('activity.confirmSubmitQR', [
+                                    'actId' => $activity->actId,
+                                    'code' => $activity->afternoonEnrollmentKey,
+                                    'session' => 'afternoon',
+                                ]);
+                            @endphp
+                            {!! QrCode::size(200)->generate($afternoonQrCodeUrl) !!}
+                            <br>
+                            <a href="data:image/svg+xml;base64,{{ base64_encode(QrCode::format('svg')->size(200)->generate($afternoonQrCodeUrl)) }}"
+                                download="afternoon_qrcode_{{ $activity->actId }}.svg" class="btn btn-primary mt-2">
+                                ดาวน์โหลด QR Code สำหรับช่วงบ่าย
+                            </a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
     </body>
     <!-- Bootstrap JS Bundle with Popper -->
-
-
-
     <script>
         function toggleStatus(checkbox, activityId) {
             fetch(`/activity/toggle/${activityId}`, {
