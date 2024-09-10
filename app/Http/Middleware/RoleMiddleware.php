@@ -4,32 +4,29 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-// use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 class RoleMiddleware
 {
-    public function handle( Request $request, Closure $next, ...$roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = null;
-        $guards = ['admin', 'student', 'professor', 'coordinator'];
-        
-        foreach ($guards as $guard) {
+        foreach (config('auth.guards', []) as $guard => $config) {
             if (auth()->guard($guard)->check()) {
                 $user = auth()->guard($guard)->user();
-                break;  // Break the loop as soon as we find an authenticated user
+                break;
             }
         }
 
-        // If no user is authenticated across any guards, redirect to login
         if (!$user) {
             return redirect('login');
         }
 
-        // Check if the authenticated user has any of the required roles
-        if (in_array($user->role, $roles)) {
-            return $next($request);
+        if (!in_array($user->role, $roles)) {
+            Log::warning('Unauthorized access attempt by user: ' . $user->userId);
+            return redirect()->back()->with('error', 'ไม่มีสิทธิในการเข้าถึงข้อมูล');
         }
 
-        abort(403, 'Unauthorized action.');
+        return $next($request);
     }
 }

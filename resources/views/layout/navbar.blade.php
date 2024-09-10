@@ -50,7 +50,9 @@
         }
     </style>
 </head>
-
+@php
+$user = getAuthenticatedUser();
+@endphp
 <body>
     <nav class="sticky-top">
         <nav class="navbar navbar-expand-lg top-navbar">
@@ -65,10 +67,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <!-- Login Buttons -->
+                        @if (is_null($user))
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{{ route('login.show') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
                             <a href="{{ route('adminlogin.show') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
                         </div>
+                    @endif
+                    
                     </ul>
                 </div>
             </div>
@@ -124,9 +129,7 @@
                             </li>
                         </ul>
 
-                        @php
-                            $user = getAuthenticatedUser();
-                        @endphp
+                     
 
                         @if ($user)
                             <ul class="navbar-nav mb-2 mb-lg-0">

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class ActivitySubmit extends Model
 {
     use HasFactory;
-    protected $table = 'activitySubmit';
+    protected $table = 'activitysubmit';
     protected $fillable = ['actId', 'userId', 'statusCheckInMorning', 'statusCheckInAfternoon', 'status'];
     protected $primaryKey = 'actSubmitId';
 
