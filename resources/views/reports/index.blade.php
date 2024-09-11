@@ -31,9 +31,10 @@
                             <h5 class="card-title">รายงาน กิจกรรมทั้งหมด</h5>
                             <i class="fas fa-file-alt fa-3x text-primary"></i>
                         </div>
+                    <p>แสดงจำนวนคนลงทะเบียนของแต่ละกิจกรรม ในช่วงเวลาที่กำหมด</p>
                         <div class="d-flex justify-content-end">
                             <a href="{{route('activity.report.pdf')}}"  target="_blank" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#reportModal">>ออกรายงาน</a>
+                            data-bs-target="#reportModal">ออกรายงาน</a>
                         </div>
                     </div>
                 </div>
@@ -47,6 +48,7 @@
                             <h5 class="card-title">รายงาน ผู้รับผิดชอบ</h5>
                             <i class="fas fa-chart-bar fa-3x text-success"></i>
                         </div>
+                        <p>แสดงรายชื่อผู้รับผิดชอบของกิจกรรม ในช่วงเวลาที่กำหมด</p>
                         <div class="d-flex justify-content-end">
                             <a href="{{route('responsible.person.pdf')}}"  target="_blank" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#reportModal2">ออกรายงาน</a>
@@ -55,20 +57,6 @@
                 </div>
             </div>
 
-            <!-- Card 3 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">รายงาน 3</h5>
-                            <i class="fas fa-chart-pie fa-3x text-danger"></i>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-danger">ออกรายงาน</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
