@@ -1,27 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+    <style>
+        * {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+
+        .btn-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 24px;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 0;
+        }
+
+        /* .btn-save {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+        } */
+
+        .btn-icon:hover {
+            opacity: 0.8;
+        }
+
+        .float-end {
+            float: right;
+        }
+    </style>
 </head>
+
 @extends('layout.master')
 @section('content')
 <body style="background-color:#f5f5f5;">
-
-
     <div class="container">
         <div class="card my-5">
             <div class="card-body">
                 <form class="row g-3" action="{{ route('news.update', $news->newsId) }}" method="POST" enctype="multipart/form-data">
-                    @csrf    
+                    @csrf
                     @method('PUT')
                     <div class="col-12">
                         <label for="title" class="form-label">ชื่อหัวข้อข่าว</label>
@@ -36,19 +71,21 @@
                         <input type="file" class="form-control" id="imagePath" name="imagePath">
                     </div>
                     <div class="col-12">
-                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Save</button>
-                        <a href="{{ route('news.manageFront') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-warning btn-icon btn-save mx-1 float-end" title="Save">
+                            <i class="fa-solid fa-save"></i>
+                        </button>
+                        <a href="{{ route('news.manageFront') }}" class="btn btn-icon  btn-warning btn-cancel mx-1 float-end" title="Cancel">
+                            <i class="fa-solid fa-times"></i>
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
- 
-
     <!-- Initialize CKEditor 5 -->
     <script>
-           ClassicEditor
+        ClassicEditor
             .create(document.querySelector('#details'), {
                 toolbar: [
                     'heading', '|',

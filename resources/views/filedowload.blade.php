@@ -15,8 +15,50 @@
         * {
             font-family: 'Noto Sans Thai', sans-serif;
         }
+
         .text-center-col {
             text-align: center;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 0;
+        }
+
+        .btn-icon:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-upload {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 18px;
+            background-color: #fbbd08;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 0;
+        }
+
+        .btn-upload:hover {
+            background-color: #fca311;
+        }
+
+        .btn-danger {
+            line-height: 0;
+            padding: 0;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -29,18 +71,21 @@
         <div class="row layout-top-spacing layout-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">เอกสารดาวโหลด</h5>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">เอกสารดาวโหลด</h5>
+                        <a href="{{route('file.showUpload')}}" class="btn btn-upload" title="อัปโหลดไฟล์">
+                            <i class="fa-solid fa-upload"></i>
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive bg-white">
                             <table class="table table-bordered table-hover mb-4">
                                 <thead>
                                     <tr>
-                                        <th width="70%" class="text-center">รายการ</th>
+                                        <th width="75%" class="text-center">รายการ</th>
                                         <th width="10%" class="text-center">วันที่</th>
                                         <th width="10%" class="text-center text-center-col">อ่านไฟล์</th>
-                                        <th width="10%" class="text-center text-center-col">Action</th>
+                                        <th width="5%" class="text-center text-center-col">จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,10 +112,12 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <form action="{{ route('file.destroy', $file->fileId) }}" method="POST">
+                                            <form action="{{ route('file.destroy', $file->fileId) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
+                                                <button type="submit" class="btn btn-icon btn-warning" title="ลบ">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -79,14 +126,10 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer text-muted">
-                        <a href="{{route('file.showUpload')}}" class="btn btn-primary">อัปโหลดไฟล์</a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 @endsection
 

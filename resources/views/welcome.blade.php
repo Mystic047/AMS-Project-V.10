@@ -109,7 +109,7 @@
                                 </tbody>
                             </table>
                             <div class="text-end mt-3">
-                                <a href="{{ route('activity.showFront') }}" class="btn btn-primary">
+                                <a href="{{ route('activity.showFront') }}" class="btn btn-warning">
                                     <i class="fa-solid fa-list-ul"></i> ดูกิจกรรมทั้งหมด
                                 </a>
                             </div>

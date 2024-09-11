@@ -73,7 +73,7 @@ $user = getAuthenticatedUser();
                             <a href="{{ route('adminlogin.show') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
                         </div>
                     @endif
-                    
+
                     </ul>
                 </div>
             </div>
@@ -97,7 +97,7 @@ $user = getAuthenticatedUser();
                                     <li><a class="dropdown-item" href="{{route('news.list')}}"><i class="fas fa-newspaper"></i>
                                         ดูข่าวสาร ประชาสัมพันธ์</a></li>
                                     <li><a class="dropdown-item" href="{{route('news.manageFront')}}"><i
-                                                class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสันธ์</a></li>
+                                                class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสัมพันธ์</a></li>
                                 </ul>
                             </li>
                             {{-- <li class="nav-item">
@@ -129,7 +129,7 @@ $user = getAuthenticatedUser();
                             </li>
                         </ul>
 
-                     
+
 
                         @if ($user)
                             <ul class="navbar-nav mb-2 mb-lg-0">

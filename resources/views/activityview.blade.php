@@ -95,6 +95,25 @@
     .spacer {
         width: 20px;
     }
+    .btn-icon {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-icon i {
+        font-size: 20px;
+    }
+
+    .btn-report:hover {
+        background-color: #161a08;
+        color: white;
+    }
 </style>
 @extends('layout.master')
 @section('content')
@@ -193,9 +212,17 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="tab-pane fade" id="border-profile" role="tabpanel"
-                                        aria-labelledby="border-profile-tab">
+                                    <div class="tab-pane fade" id="border-profile" role="tabpanel" aria-labelledby="border-profile-tab">
                                         <h4 class="mb-4"><i class="fas fa-user"></i> รายชื่อผู้สมัคร</h4>
+                                        <!-- แถบค้นหาและปุ่มรายงาน -->
+                                        <div class="d-flex mb-3">
+                                            <!-- แถบค้นหา -->
+                                            <input type="text" class="form-control me-2" placeholder="ค้นหา..." aria-label="ค้นหา">
+                                            <!-- ปุ่มรายงาน -->
+                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-warning btn-icon btn-report" title="รายงานกิจกรรม">
+                                                <i class="fas fa-file-alt"></i> 
+                                            </a>
+                                        </div>
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -218,12 +245,8 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <div class="text-end">
-                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}"
-                                                class="btn btn-primary btn-sm">พิมพ์รายชื่อผู้เข้าร่วม</a>
-                                        </div>
-
                                     </div>
+
 
                                 </div>
 
@@ -255,7 +278,7 @@
                                 @csrf
                                 <input type="hidden" name="userId" value="{{ $user->userId }}">
                                 <input type="hidden" name="actId" value="{{ $activity->actId }}">
-                                <button type="button" onclick="confirmSubmit(this)" class="btn btn-primary font-weight-bold">
+                                <button type="button" onclick="confirmSubmit(this)" class="btn btn-warning font-weight-bold">
                                     ลงชื่อเข้าร่วมกิจกรรม
                                 </button>
                             </form>
