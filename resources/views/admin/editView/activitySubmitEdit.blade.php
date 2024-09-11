@@ -16,22 +16,22 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="userId" class="form-label">User ID</label>
+                        <label for="userId" class="form-label">รหัสนักศึกษา</label>
                         <input type="text" class="form-control" id="userId" name="userId" value="{{ $activitySubmit->userId }}" disabled>
                     </div>
 
                     <div class="mb-3">
-                        <label for="actId" class="form-label">Activity ID</label>
+                        <label for="actId" class="form-label">รหัสกิจกรรม</label>
                         <input type="text" class="form-control" id="actId" name="actId" value="{{ $activitySubmit->actId }}" disabled>
                     </div>
 
                     <div class="mb-3">
-                        <label for="statusCheckInMorning" class="form-label">Status Check-In Morning</label>
+                        <label for="statusCheckInMorning" class="form-label">สถานะการลงทะเบียนช่วงเช้า</label>
                         <input type="checkbox" id="statusCheckInMorning" name="statusCheckInMorning" value="1" {{ $activitySubmit->statusCheckInMorning ? 'checked' : '' }}>
                     </div>
 
                     <div class="mb-3">
-                        <label for="statusCheckInAfternoon" class="form-label">Status Check-In Afternoon</label>
+                        <label for="statusCheckInAfternoon" class="form-label">สถานะการลงทะเบียนช่วงบ่าย</label>
                         <input type="checkbox" id="statusCheckInAfternoon" name="statusCheckInAfternoon" value="1" {{ $activitySubmit->statusCheckInAfternoon ? 'checked' : '' }}>
                     </div>
 
@@ -40,8 +40,8 @@
                         <input type="text" class="form-control" id="status" name="status" value="{{ $activitySubmit->status }}">
                     </div>
 
-                    <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Update Submission</button>
-                    <a href="{{ route('activity.submitList') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
+                    <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">บันทึก</button>
+                    <a href="{{ route('activity.submitList') }}" class="btn btn-danger mx-1 float-end">ยกเลิก</a>
                 </form>
             </div>
         </div>

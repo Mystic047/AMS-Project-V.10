@@ -40,17 +40,17 @@
                 <!-- Search bar and Create button -->
                 <div class="search-bar">
                     <div class="search-box">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" placeholder="ค้นหา...">
                     </div>
-                    <a href="{{ route('faculty.showCreate') }}" class="btn btn-primary">Create</a>
+                    <a href="{{ route('faculty.showCreate') }}" class="btn btn-primary">สร้าง</a>
                 </div>
 
                 <table class="table table-bordered">
                     <thead class="table table-sm">
                         <tr>
-                            <th scope="col">facultyId</th>
-                            <th scope="col">facultyName</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">รหัสคณะ</th>
+                            <th scope="col">ชื่อคณะ</th>
+                            <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,14 +62,14 @@
                                     <div class="d-flex">
                                         <form action="{{ route('faculty.edit', $faculty->facultyId) }}" method="get" class="me-2">
                                             <button class="btn btn-warning btn-sm" type="submit">
-                                                <i class="fas fa-pencil-alt"></i> Edit
+                                                <i class="fas fa-pencil-alt"></i> แก้ไข
                                             </button>
                                         </form>
                                         <form action="{{ route('faculty.delete', $faculty->facultyId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                                <i class="fas fa-trash"></i> Delete
+                                                <i class="fas fa-trash"></i> ลบ
                                             </button>
                                         </form>
                                     </div>
@@ -89,17 +89,17 @@
                     <div class="search-box">
                         <input type="text" class="form-control" placeholder="Search...">
                     </div>
-                    <a href="{{ route('area.showCreate') }}" class="btn btn-primary">Create</a>
+                    <a href="{{ route('area.showCreate') }}" class="btn btn-primary">สร้าง</a>
                 </div>
 
                 <!-- User table -->
                 <table class="table table-bordered">
                     <thead class="table table-sm">
                         <tr>
-                            <th scope="col">areaId</th>
-                            <th scope="col">areaName</th>
-                            <th scope="col">facultyId</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">รหัสสาขา</th>
+                            <th scope="col">ชื่อสาขา</th>
+                            <th scope="col">รหัสคณะ</th>
+                            <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,14 +112,14 @@
                                     <div class="d-flex">
                                         <form action="{{ route('area.edit', $area->areaId) }}" method="get" class="me-2">
                                             <button class="btn btn-warning btn-sm" type="submit">
-                                                <i class="fas fa-pencil-alt"></i> Edit
+                                                <i class="fas fa-pencil-alt"></i> แก้ไข
                                             </button>
                                         </form>
                                         <form action="{{ route('area.delete', $area->areaId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                                <i class="fas fa-trash"></i> Delete
+                                                <i class="fas fa-trash"></i> ลบ
                                             </button>
                                         </form>
                                     </div>

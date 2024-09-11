@@ -26,16 +26,16 @@
                     @csrf
                     @method('PUT')
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">ID Fac</label>
+                        <label for="inputAddress" class="form-label">รหัสคณะ</label>
                         <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="" value="{{$facultys->facultyId}}">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Fac Name</label>
+                        <label for="inputAddress" class="form-label">ชื่อคณะ</label>
                         <input type="text" class="form-control" id="facultyName" name="facultyName" placeholder="" value="{{$facultys->facultyName}}">
                     </div>
                     <div class="col-12">
-                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-primary mx-1 float-end">Update</button>
-                        <a href="{{ route('faculty.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-primary mx-1 float-end">บันทึก</button>
+                        <a href="{{ route('faculty.manage') }}" class="btn btn-danger mx-1 float-end">ยกเลิก</a>
                     </div>
                 </form>
             </div>

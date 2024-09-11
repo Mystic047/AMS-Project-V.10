@@ -65,12 +65,12 @@
                                 onclick="document.getElementById('profilePictureInput').click();">อัปโหลดรูปภาพ</button>
                         </form>
                         <div id="profilePictureButtons" class="hidden mt-2">
-                            <button type="button" class="btn btn-primary" onclick="saveProfilePicture()">Save</button>
+                            <button type="button" class="btn btn-primary" onclick="saveProfilePicture()">บันทึก</button>
                             <button type="button" class="btn btn-secondary"
-                                onclick="cancelProfilePicture()">Cancel</button>
+                                onclick="cancelProfilePicture()">ยกเลิก</button>
                         </div>
                         <div class="mt-4">
-                            <h6>ABOUT ME:</h6>
+                            <h6>เกี่ยวกับฉัน</h6>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">รหัสนักศึกษา: {{ $user->userId }}</li>
@@ -126,7 +126,7 @@
                                     value="{{ $user->area->areaName }}" disabled>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Update Info</button>
+                                <button type="submit" class="btn btn-primary">อัปเดต</button>
                             </div>
                         </form>
                     </div>
@@ -143,27 +143,8 @@
         }
 
         function saveProfilePicture() {
-            var fileInput = document.getElementById('profilePictureInput');
-            var formData = new FormData();
-            formData.append('profilePicture', fileInput.files[0]);
-            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-
-            fetch("{{ route('profile.updatePicture') }}", {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('profilePictureButtons').classList.add('hidden');
-                        // Optionally, you can show a success message or update the profile picture display
-                    } else {
-                        console.error('Error:', data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            // Submit the form directly
+            document.getElementById('profilePictureForm').submit();
         }
 
         function cancelProfilePicture() {

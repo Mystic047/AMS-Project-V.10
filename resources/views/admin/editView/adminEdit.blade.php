@@ -26,40 +26,40 @@
                     @csrf
                     @method('PUT')
                     <div class="col-12">
-                        <label for="userId" class="form-label">ID</label>
+                        <label for="userId" class="form-label">รหัสแอดมิน</label>
                         <input type="text" class="form-control" id="userId" name="userId" placeholder="ถ้า Auto ก็เอาออก" value="{{ $admins->userId }}" readonly>
                     </div>
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">อีเมล</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{ $admins->email }}">
                     </div>
                     <div class="col-md-6">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">รหัสผ่าน</label>
                         <input type="password" class="form-control" id="password" name="password" value="">
                     </div>
                     <div class="col-md-5">
-                        <label for="firstName" class="form-label">First Name</label>
+                        <label for="firstName" class="form-label">ชื่อ </label>
                         <input type="text" class="form-control" id="firstName" name="firstName" value="{{ $admins->firstName }}">
                     </div>
                     <div class="col-md-5">
-                        <label for="lastName" class="form-label">Last Name</label>
+                        <label for="lastName" class="form-label">นามสกุล</label>
                         <input type="text" class="form-control" id="lastName" name="lastName" value="{{ $admins->lastName }}">
                     </div>
                     <div class="col-md-2">
-                        <label for="nickName" class="form-label">Nickname</label>
+                        <label for="nickName" class="form-label">ชื่อเล่น</label>
                         <input type="text" class="form-control" id="nickName" name="nickName" value="{{ $admins->nickName }}">
                     </div>
                     <div class="col-md-6">
-                        <label for="areaId" class="form-label">Area ID</label>
+                        <label for="areaId" class="form-label">รหัสสาขา</label>
                         <input type="text" class="form-control" id="areaId" name="areaId" value="{{ $admins->areaId }}">
                     </div>
                     <div class="col-md-6">
-                        <label for="profilePicture" class="form-label">Profile Picture</label><br>
+                        <label for="profilePicture" class="form-label">รูปโปรไฟล์</label><br>
                         <input type="file" class="form-control" name="profilePicture" id="profilePicture">
                     </div>
                     <div class="col-12">
-                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-primary mx-1 float-end">Save</button>
-                        <a href="{{ route('admin.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-primary mx-1 float-end">บันทึก</button>
+                        <a href="{{ route('admin.manage') }}" class="btn btn-danger mx-1 float-end">ยกเลิก</a>
                     </div>
                 </form>
                 

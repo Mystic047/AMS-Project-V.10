@@ -14,8 +14,8 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div></div> <!-- Placeholder for future left-side content -->
                     <div>
-                        <a href="{{ route('activity.createSubmissions', $actId) }}" class="btn btn-primary">Create Submission</a>
-                        <a href="{{ route('admin.activity.history.pdf', $actId) }}" class="btn btn-info" target="_blank">Report</a>
+                        <a href="{{ route('activity.createSubmissions', $actId) }}" class="btn btn-primary">เพิ่มคนลงทะเบียน</a>
+                        <a href="{{ route('admin.activity.history.pdf', $actId) }}" class="btn btn-info" target="_blank">รายงาน</a>
                     </div>
                 </div>
                 
@@ -23,10 +23,10 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Submission ID</th>
-                            <th scope="col">Activity ID</th>
-                            <th scope="col">User ID</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">รหัสลงทะเบียน</th>
+                            <th scope="col">รหัสกิจกรรม</th>
+                            <th scope="col">รหัสนักศึกษา</th>
+                            <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,11 +36,11 @@
                                 <td>{{ $submit->actId }}</td>
                                 <td>{{ $submit->userId }}</td>
                                 <td>
-                                    <a href="{{ route('activity.editSubmit', $submit->actSubmitId) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ route('activity.editSubmit', $submit->actSubmitId) }}" class="btn btn-warning btn-sm">แก้ไข</a>
                                     <form action="{{ route('activity.cancelSubmit', $submit->actSubmitId) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onclick="confirmDelete(this)" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="button" onclick="confirmDelete(this)" class="btn btn-danger btn-sm">ลบ</button>
                                     </form>
                                 </td>
                             </tr>

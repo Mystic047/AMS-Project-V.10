@@ -24,28 +24,33 @@ class newsController extends Controller
     }
     public function showInfoView()
     {
-        $news = News::paginate(5);
+        $news = News::paginate(5); // Paginate the news items
         $writers = [];
-    
+        
         foreach ($news as $item) {
             switch ($item->createdByRole) {
                 case 'admin':
-                    $writers[$item->id] = Admin::find($item->createdBy); 
+                    $writers[$item->newsId] = Admin::find($item->createdBy); 
                     break;
                 case 'student':
-                    $writers[$item->id] = Student::find($item->createdBy);
+                    $writers[$item->newsId] = Student::find($item->createdBy);
                     break;
                 case 'coordinator':
-                    $writers[$item->id] = Coordinator::find($item->createdBy);
+                    $writers[$item->newsId] = Coordinator::find($item->createdBy);
                     break;
                 case 'professor':
-                    $writers[$item->id] = Professor::find($item->createdBy);
+                    $writers[$item->newsId] = Professor::find($item->createdBy);
+                    break;
+                default:
+                    $writers[$item->newsId] = null; // Handle unknown writer roles
                     break;
             }
         }
-    
+        
         return view('news', compact('news', 'writers'));
     }
+    
+    
     
 
     public function showDetailsView($id)

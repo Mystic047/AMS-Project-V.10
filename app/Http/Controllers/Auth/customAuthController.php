@@ -194,7 +194,7 @@ public function loginGeneric(Request $request)
       $request->session()->regenerateToken();
      
       // Redirect to login page with success message
-      return redirect()->route('login.show')->with('success', 'You have been logged out successfully.');
+      return redirect()->route('welcome.home')->with('success', 'You have been logged out successfully.');
   }
   
 }

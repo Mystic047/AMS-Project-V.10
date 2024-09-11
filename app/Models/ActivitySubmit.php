@@ -10,20 +10,24 @@ use Illuminate\Database\Eloquent\Model;
 class ActivitySubmit extends Model
 {
     use HasFactory;
+
     protected $table = 'activitysubmit';
     protected $fillable = ['actId', 'userId', 'statusCheckInMorning', 'statusCheckInAfternoon', 'status'];
     protected $primaryKey = 'actSubmitId';
 
+    // Relationship to Student
     public function student()
     {
         return $this->belongsTo(Student::class, 'userId', 'userId');
     }
 
+    // Relationship to Activity
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'actId', 'actId');
     }
 
+    // Check-in function for morning or afternoon session
     public function checkIn($key, $session)
     {
         $activity = $this->activity;
@@ -31,8 +35,8 @@ class ActivitySubmit extends Model
         // Check the session and key for morning or afternoon
         if ($session == 'morning' && $key == $activity->morningEnrollmentKey) {
             $this->statusCheckInMorning = true;
-    
-            // If only morning session is checked in, update the status accordingly
+
+            // Update status if only morning session is checked in
             if (!$this->statusCheckInAfternoon) {
                 $this->status = 'ยังไม่เข้าร่วมกิจกรรมช่วงบ่าย';
             }
@@ -41,21 +45,19 @@ class ActivitySubmit extends Model
         } else {
             return false; // Invalid key or session
         }
-    
-        // If both morning and afternoon are checked in, update the status
+
+        // Update status if both sessions are checked in
         if ($this->statusCheckInMorning && $this->statusCheckInAfternoon) {
             $this->status = 'เข้าร่วมกิจกรรมแล้ว';
         }
-    
+
         $this->save();
         return true; // Successfully checked in
     }
-    
 
-    // In ActivitySubmit.php
+    // Scope for completed activities
     public function scopeCompleted($query)
     {
         return $query->where('status', 'เข้าร่วมกิจกรรมแล้ว');
     }
-
 }

@@ -37,7 +37,7 @@ class profileController extends Controller
     
         $user->save();
     
-        return redirect()->route('profile')->with('success', 'อัพเดทข้อมูลส่วนตัวสําเร็จ!');
+        return back()->with('success', 'อัพเดทข้อมูลส่วนตัวสําเร็จ!');
     }
     
     public function updateProfilePicture(Request $request)

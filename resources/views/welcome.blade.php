@@ -94,11 +94,13 @@
                                                 {{ $activity->actHour }} ชั่วโมง
                                             </td>
                                             <td class="text-center">
-                                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่:
-                                                {{ $activity->actDate }}
-                                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: <span
-                                                    style="color: red;">{{ $activity->actRegisLimit }}</span>
+                                                <i class="fa-solid fa-calendar-days"></i> รับสมัครถึงวันที่: {{ $activity->actDate }}
+                                                <br><i class="fa-solid fa-user"></i> จำนวนที่รับ: 
+                                                <span style="color: green;">{{ $activity->submitted_students }}</span> / 
+                                                <span style="color: red;">{{ $activity->actRegisLimit }}</span>
                                             </td>
+                                            
+                                            
                                             <td class="text-center">
                                                 <button class="btn btn-success"
                                                     onclick="location.href='{{ route('activity.info', $activity->actId) }}'">ดูข้อมูล</button>

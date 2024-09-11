@@ -36,10 +36,10 @@
                         <label for="actLocation" class="form-label">สถานที่</label>
                         <input type="text" name="actLocation" class="form-control" id="actLocation">
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label for="actType" class="form-label">ประเภทกิจกรรม</label>
                         <input type="text" name="actType" class="form-control" id="actType">
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <label for="actDate" class="form-label">วันที่ปิดรับสมัคร</label>
                         <input type="date" name="actDate" class="form-control" id="actDate">

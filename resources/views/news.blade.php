@@ -45,9 +45,6 @@
         <div class="container mt-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2>ข่าวสาร ประชาสัมพันธ์</h2>
-                {{-- <a href="{{ route('news.showCreateFront') }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Create
-                </a> --}}
             </div>
             <div class="row">
                 @foreach ($news as $item)
@@ -65,7 +62,7 @@
                                         </a>
                                         <hr>
                                         <p class="card-text card-text-truncate">
-                                            {!! Str::limit(strip_tags($item->details), 200) !!} <!-- Limit content to 200 characters -->
+                                            {!! Str::limit(strip_tags($item->details), 200) !!}
                                         </p>
                                     </div>
                                 </div>
@@ -74,16 +71,14 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="card-text">
-                                            <i class="fas fa-user"></i> ผู้เขียน: @foreach ($news as $item)
-                                                {{ $writers[$item->id]->firstName ?? 'Unknown writer' }}
-                                                {{ $writers[$item->id]->lastName ?? '' }}
-                                            @endforeach
+                                            <i class="fas fa-user"></i> ผู้เขียน: 
+                                            {{ $writers[$item->newsId]->firstName ?? 'Unknown writer' }} 
+                                            {{ $writers[$item->newsId]->lastName ?? '' }}
                                         </p>
                                     </div>
                                     <div class="col-6">
                                         <p class="card-text">
-                                            <i class="fas fa-calendar-alt"></i> วันที่:
-                                            {{ $item->created_at->format('F d, Y') }}
+                                            <i class="fas fa-calendar-alt"></i> วันที่: {{ $item->created_at->format('F d, Y') }}
                                         </p>
                                     </div>
                                 </div>

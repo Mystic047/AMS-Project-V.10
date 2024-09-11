@@ -55,7 +55,7 @@
                         <div class="search-box">
                             <input type="text" class="form-control" placeholder="Search...">
                         </div>
-                        <a href="{{ route('file.showCreate') }}" class="btn btn-primary">Create</a>
+                        <a href="{{ route('file.showCreate') }}" class="btn btn-primary">สร้าง</a>
                     </div>
 
                     <!-- User table -->
@@ -64,7 +64,7 @@
                             <tr>
                                 <th class="col-3">ชื่อไฟล์</th>
                                 <th class="col-3">ไฟล์</th>
-                                <th class="col-3">ผู้อัปโหลด</th>
+                                {{-- <th class="col-3">ผู้อัปโหลด</th> --}}
                                 <th class="col-2">Action</th>
                             </tr>
                         </thead>
@@ -90,7 +90,7 @@
                                             ไม่มีไฟล์
                                         @endif
                                     </td>
-                                    <td>{{ $file->created_by }} {{ $file->createdByRole }}</td>
+                                    {{-- <td>{{ $file->created_by }} {{ $file->createdByRole }}</td> --}}
                                     <td>
                                         {{-- <form action="{{ route('file.destroy', $file->file_id) }}" method="POST">
                                             @csrf
@@ -102,7 +102,7 @@
                                             <form action="{{ route('file.edit', $file->fileId) }}" method="get"
                                                 class="me-1">
                                                 <button class="btn btn-warning btn-sm" type="submit">
-                                                    <i class="fas fa-pencil-alt"></i> Edit
+                                                    <i class="fas fa-pencil-alt"></i> แก้ไข
                                                 </button>
                                             </form>
                                             <form action="{{ route('file.destroy', $file->fileId) }}" method="post">
@@ -110,7 +110,7 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="button"
                                                     onclick="confirmDelete(this)">
-                                                    <i class="fas fa-trash"></i> Delete
+                                                    <i class="fas fa-trash"></i>ลบ
                                                 </button>
                                             </form>
                                         </div>

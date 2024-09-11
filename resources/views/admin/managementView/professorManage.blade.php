@@ -43,9 +43,9 @@
                     <form action="{{ route('professor.search') }}" method="GET" class="d-flex w-100 me-3">
                         <input type="text" name="query" class="form-control me-2" placeholder="Search..."
                             value="{{ request()->input('query') }}">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <button class="btn btn-outline-secondary" type="submit">ค้นหา</button>
                     </form>
-                    <a href="{{ route('professor.showCreate') }}" class="btn btn-primary ms-3">Create</a>
+                    <a href="{{ route('professor.showCreate') }}" class="btn btn-primary ms-3">สร้าง</a>
                 </div>
                 <!-- User table -->
                 <table class="table table-bordered">
@@ -54,7 +54,7 @@
                             <th scope="col" class="col-3">รหัส</th>
                             <th scope="col" class="col-4">ชื่อ</th>
                             <th scope="col" class="col-3">สาขา</th>
-                            <th scope="col" class="col-2">Action</th>
+                            <th scope="col" class="col-2">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +76,7 @@
                                     <form action="{{ route('professor.edit', $professor->userId) }}" method="get"
                                         style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
-                                            <i class="fas fa-pencil-alt"></i> Edit
+                                            <i class="fas fa-pencil-alt"></i> แก้ไข
                                         </button>
                                     </form>
                                     <form action="{{ route('professor.delete', $professor->userId) }}" method="post"
@@ -84,7 +84,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i> ลบ
                                         </button>
                                     </form>
                                 </td>

@@ -47,9 +47,9 @@
             <div class="card-body">
                 <div class="search-bar">
                     <div class="search-box">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" placeholder="ค้นหา...">
                     </div>
-                    <a href="{{ route('news.showCreate') }}" class="btn btn-primary">Create</a>
+                    <a href="{{ route('news.showCreate') }}" class="btn btn-primary">สร้าง</a>
                 </div>
 
                 <!-- News table -->
@@ -60,7 +60,7 @@
                                 <th class="col-3">รูปภาพ</th>
                                 <th class="col-3">ชื่อเรื่อง</th>
                                 <th class="col-4">เนื้อข่าว</th>
-                                <th class="col-2">Action</th>
+                                <th class="col-2">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>

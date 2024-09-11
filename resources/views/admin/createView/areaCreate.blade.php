@@ -43,7 +43,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">สร้าง</button>
                     </div>
                 </form>
             </div>
