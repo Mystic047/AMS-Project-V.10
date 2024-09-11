@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use GuzzleHttp\Client;
 use App\Models\Activity;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ActivitySubmit;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class activityController extends Controller
