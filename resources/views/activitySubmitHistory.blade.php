@@ -13,6 +13,25 @@
         * {
             font-family: 'Noto Sans Thai', sans-serif;
         }
+        .btn-icon {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-report:hover {
+        background-color: #281987;
+        color: white;
+    }
+
+    .btn-report i {
+        font-size: 18px;
+    }
     </style>
 </head>
 @extends('layout.master')
@@ -37,14 +56,15 @@
                 <div class="card w-100 bg-white">
                     <div class="card-body">
                         <br>
-                        <h5>
-                            <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
-                        </h5>
-                        <a href="" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#reportModal">
-                            <i class="bi bi-plus-circle"></i> รายงานกิจกรรม
-                        </a>
-
-                        </a>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">
+                                <i class="bi bi-plus-circle"></i> ประวัติการเข้าร่วมกิจกรรม
+                            </h5>
+                            <a href="#" class="btn btn-warning btn-icon btn-report" title="รายงานประวิตการเข้าร่วม"
+                                data-bs-toggle="modal" data-bs-target="#reportModal">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </div>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover mb-4">
@@ -97,7 +117,7 @@
                                             </td>
                                             <td class="text-center">
                                                 @if ($submit->status === 'เข้าร่วมกิจกรรมแล้ว')
-                                                <span class="text-muted">ไม่สามารถยกเลิกการสมัครได้</span>
+                                                    <span class="text-muted">ไม่สามารถยกเลิกการสมัครได้</span>
                                                 @else
                                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                         data-bs-target="#confirmDeleteModal"
@@ -126,10 +146,9 @@
                                     @endif
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

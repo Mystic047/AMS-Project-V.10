@@ -13,38 +13,75 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .news-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0%;
+        }
+
+        .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Number of lines to show */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+
+        .btn-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-icon i {
+            font-size: 20px;
+        }
+
+        .btn-icon:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-report:hover {
+            background-color: #198754;
+            color: white;
+        }
+
+        .btn-secondary i {
+            font-size: 18px;
+        }
+
+        .btn-report i {
+            font-size: 18px;
+        }
+
+        .btn-icon:hover {
+            background-color: #f8f9fa;
+            color: #0d6efd;
+        }
+    </style>
 </head>
 
-<style>
-    * {
-        font-family: 'Noto Sans Thai', sans-serif;
-    }
-</style>
-<style>
-    .search-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .news-image {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 0%;
-    }
-
-    .truncate {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        /* Number of lines to show */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-    }
-</style>
 @extends('layout.master')
 @section('content')
 
@@ -57,35 +94,40 @@
                     <div class="card-body">
                         <h5 class="card-title d-flex justify-content-between align-items-center">
                             <span><i class="bi bi-plus-circle"></i> จัดการข่าวสาร</span>
-                            <a href="{{ route('news.showCreateFront') }}" class="btn btn-light">
-                                <i class="bi bi-plus-circle"></i> เขียนข่าวสาร ประชาสัมพันธ์
+                            <a href="{{ route('news.showCreateFront') }}" class="btn btn-warning btn-icon me-2" title="เขียนข่าวสาร ประชาสัมพันธ์">
+                                <i class="fas fa-plus-circle"></i>
                             </a>
                         </h5>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="table table-sm">
                                     <tr>
-                                        <th class="col-3">รูปภาพ</th>
-                                        <th class="col-3">ชื่อเรื่อง</th>
-                                        <th class="col-4">เนื้อข่าว</th>
-                                        <th class="col-2">Action</th>
+                                        <th class="col-5">ชื่อเรื่อง</th>
+                                        <th class="col-6">เนื้อข่าว</th>
+                                        <th class="col-1">จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($news as $item)
                                         <tr>
-                                            <td>
-                                                <img src="{{ asset('storage/' . $item->imagePath) }}" alt="News Image" class="news-image">
-                                            </td>
                                             <td>{{ $item->title }}</td>
-                                            <td class="truncate">{{ Str::limit(strip_tags($item->details), 300, '...') }}</td>
+                                            <td class="truncate">{{ Str::limit(strip_tags($item->details), 150, '...') }}</td>
                                             <td>
-                                                <a href="{{ route('news.editFront', $item->newsId) }}" class="btn btn-warning btn-sm">แก้ไข</a>
-                                                <form action="{{ route('news.delete', $item->newsId) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)" type="button">ลบ</button>
-                                                </form>
+                                                <div class="d-flex justify-content-start">
+                                                    <!-- Edit Button -->
+                                                    <a href="{{ route('news.editFront', $item->newsId) }}" class="btn btn-warning btn-sm btn-icon rounded-circle me-2" title="แก้ไข">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+
+                                                    <!-- Delete Button -->
+                                                    <form action="{{ route('news.delete', $item->newsId) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-warning btn-sm btn-icon rounded-circle" onclick="confirmDelete(this)" type="button" title="ลบ">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
