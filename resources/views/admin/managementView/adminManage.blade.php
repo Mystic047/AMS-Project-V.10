@@ -33,69 +33,7 @@
                 <h1>จัดการข้อมูลแอดมิน</h1>
             </div>
         </section>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="far fa-user"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total User</h4>
-                        </div>
-                        <div class="card-body">
-                            10
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="far fa-file"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            1,201
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-circle"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            47
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-newspaper"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            42
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
 
         <div class="card mt-5">
             <div class="card-body">
@@ -104,9 +42,9 @@
                     <form action="{{ route('admin.search') }}" method="GET" class="d-flex w-100 me-3">
                         <input type="text" name="query" class="form-control me-2" placeholder="Search..."
                             value="{{ request()->input('query') }}">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <button class="btn btn-outline-secondary" type="submit">ค้นห้า</button>
                     </form>
-                    <a href="{{ route('admin.showCreate') }}" class="btn btn-primary ms-3">Create</a>
+                    <a href="{{ route('admin.showCreate') }}" class="btn btn-primary ms-3">สร้าง</a>
                 </div>
                 <!-- User table -->
                 <table class="table table-bordered">
@@ -115,7 +53,7 @@
                             <th scope="col" class="col-3">รหัส</th>
                             <th scope="col" class="col-4">ชื่อ</th>
                             <th scope="col" class="col-3">สาขา</th>
-                            <th scope="col" class="col-2">Action</th>
+                            <th scope="col" class="col-2">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,7 +74,7 @@
                                     <form action="{{ route('admin.edit', $admin->userId) }}" method="get"
                                         style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
-                                            <i class="fas fa-pencil-alt"></i> Edit
+                                            <i class="fas fa-pencil-alt"></i> แก้ไข
                                         </button>
                                     </form>
                                     <form action="{{ route('admin.delete', $admin->userId) }}" method="post"
@@ -144,7 +82,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i> ลบ
                                         </button>
                                     </form>
                                 </td>

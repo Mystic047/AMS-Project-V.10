@@ -128,7 +128,7 @@
                                     value="{{ $user->area->areaName }}" disabled>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Update Info</button>
+                                <button type="submit" class="btn btn-primary">อัปเดต</button>
                             </div>
                         </form>
                     </div>

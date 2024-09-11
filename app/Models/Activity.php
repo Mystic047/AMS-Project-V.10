@@ -13,7 +13,7 @@ class Activity extends Model
     protected $table = 'activity';
 
     protected $primaryKey = 'actId';
-    public $incrementing = false;
+    public $incrementing = true;
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -36,25 +36,31 @@ class Activity extends Model
         'isOpen',
     ];
 
-    // Define any relationships, for example:
+    // Define relationships
     public function activitySubmits()
     {
         return $this->hasMany(ActivitySubmit::class, 'actId', 'actId');
     }
     
-    // Example of a custom method that checks if registration is open
+    // Check if registration is open based on date and isOpen field
     public function isRegistrationOpen()
     {
         return $this->isOpen && $this->actDate >= now()->toDateString();
     }
 
+    // Calculate total hours of completed activities
     public function totalCompletedHours()
+    {
+        return $this->activitySubmits()
+                    ->completed()
+                    ->join('activity', 'activitySubmit.actId', '=', 'activity.actId')
+                    ->sum('activity.actHour');
+    }
+
+    public function submissions()
 {
-    // Sum the hours of all activities where the status is 'เข้าร่วมกิจกรรมแล้ว'
-    return $this->activitySubmits()
-                ->completed()
-                ->join('activity', 'activitySubmit.actId', '=', 'activity.actId')
-                ->sum('activity.actHour');
+    return $this->hasMany(ActivitySubmit::class, 'actId', 'actId');
 }
+
 }
 

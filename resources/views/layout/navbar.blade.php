@@ -51,8 +51,9 @@
     </style>
 </head>
 @php
-$user = getAuthenticatedUser();
+    $user = getAuthenticatedUser();
 @endphp
+
 <body>
     <nav class="sticky-top">
         <nav class="navbar navbar-expand-lg top-navbar">
@@ -68,11 +69,11 @@ $user = getAuthenticatedUser();
                     <ul class="navbar-nav ms-auto">
                         <!-- Login Buttons -->
                         @if (is_null($user))
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{{ route('login.show') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
-                            <a href="{{ route('adminlogin.show') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
-                        </div>
-                    @endif
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ route('login.show') }}" class="btn btn-outline-primary">ลงชื่อเข้าใช้</a>
+                                <a href="{{ route('adminlogin.show') }}" class="btn btn-outline-success">เจ้าหน้าที่</a>
+                            </div>
+                        @endif
 
                     </ul>
                 </div>
@@ -94,10 +95,13 @@ $user = getAuthenticatedUser();
                                     <i class="fas fa-newspaper"></i> ข่าวสาร
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('news.list')}}"><i class="fas fa-newspaper"></i>
-                                        ดูข่าวสาร ประชาสัมพันธ์</a></li>
-                                    <li><a class="dropdown-item" href="{{route('news.manageFront')}}"><i
-                                                class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสัมพันธ์</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('news.list') }}"><i
+                                                class="fas fa-newspaper"></i>
+                                            ดูข่าวสาร ประชาสัมพันธ์</a></li>
+                                    @if ($user && in_array($user->role, ['admin', 'coordinator']))
+                                        <li><a class="dropdown-item" href="{{ route('news.manageFront') }}"><i
+                                                    class="fas fa-pen-square"></i> จัดการข่าวสาร ประชาสัมพันธ์</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             {{-- <li class="nav-item">
@@ -119,10 +123,13 @@ $user = getAuthenticatedUser();
                                     <i class="fas fa-calendar"></i> งานกิจกรรม
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('activity.calendar')}}"><i class="fas fa-calendar"></i>
+                                    <li><a class="dropdown-item" href="{{ route('activity.calendar') }}"><i
+                                                class="fas fa-calendar"></i>
                                             ปฏิทินกิจกรรม</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('activity.manageFront') }}"><i
-                                                class="fas fa-pen-square"></i> จัดการกิจกรรม</a></li>
+                                    @if ($user && in_array($user->role, ['admin', 'coordinator' ,'professor']))
+                                        <li><a class="dropdown-item" href="{{ route('activity.manageFront') }}"><i
+                                                    class="fas fa-pen-square"></i> จัดการกิจกรรม</a></li>
+                                    @endif
                                     <li><a class="dropdown-item" href="{{ route('activity.showFront') }}"><i
                                                 class="fas fa-pen-square"></i> กิจกรรมทั้งหมด</a></li>
                                 </ul>
@@ -134,14 +141,15 @@ $user = getAuthenticatedUser();
                         @if ($user)
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
                                         <i class="fas fa-user"></i> {{ $user->firstName }} {{ $user->lastName }}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ url('Profile') }}"><i
                                                     class="fas fa-cog"></i> แก้ไขข้อมูล</a></li>
-                                        <li><a class="dropdown-item" href="{{ route("activity.submit.history" , $user->userId) }}"><i
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('activity.submit.history', $user->userId) }}"><i
                                                     class="fas fa-pen-square"></i>
                                                 ประวัติการเข้าร่วม</a></li>
                                         <li>

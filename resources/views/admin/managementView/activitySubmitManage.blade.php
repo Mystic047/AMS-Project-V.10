@@ -33,9 +33,9 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Activity ID</th>
-                            <th scope="col">Activity Name</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">รหัสกิจกรรม</th>
+                            <th scope="col">ชื่อกิจกรรม</th>
+                            <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@
                                 <td>{{ $activity->actId }}</td>
                                 <td>{{ $activity->actName }}</td>
                                 <td>
-                                    <a href="{{ route('activity.viewSubmissions', $activity->actId) }}" class="btn btn-primary btn-sm">View Submissions</a>
+                                    <a href="{{ route('activity.viewSubmissions', $activity->actId) }}" class="btn btn-primary btn-sm">ดู การลงทะเบียน</a>
                                 </td>
                             </tr>
                         @endforeach

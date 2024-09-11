@@ -38,9 +38,9 @@
             <div class="card-body">
                 <div class="search-bar mb-3">
                     <div class="search-box w-75">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" placeholder="ค้นหา...">
                     </div>
-                    <a href="{{ route('activity.showCreate') }}" class="btn btn-primary ms-3">Create</a>
+                    <a href="{{ route('activity.showCreate') }}" class="btn btn-primary ms-3">สร้าง</a>
                 </div>
 
                 <table class="table table-bordered table-hover">
@@ -50,7 +50,7 @@
                             <th scope="col">กิจกรรม</th>
                             <th scope="col">รหัสเข้าร่วม</th>
                             <th scope="col">สถานะ</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,14 +84,14 @@
                                     <div class="d-flex">
                                         <form action="{{ route('activity.edit', $activity->actId) }}" method="get" class="me-1">
                                             <button class="btn btn-warning btn-sm" type="submit">
-                                                <i class="fas fa-pencil-alt"></i> Edit
+                                                <i class="fas fa-pencil-alt"></i> แก้ไข
                                             </button>
                                         </form>
                                         <form action="{{ route('activity.delete', $activity->actId) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                                <i class="fas fa-trash"></i> Delete
+                                                <i class="fas fa-trash"></i> ลบ
                                             </button>
                                         </form>
                                     </div>

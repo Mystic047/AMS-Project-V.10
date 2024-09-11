@@ -35,69 +35,7 @@
                 <h1>จัดการข้อมูลนักศึกษา</h1>
             </div>
         </section>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="far fa-user"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total User</h4>
-                        </div>
-                        <div class="card-body">
-                            10
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="far fa-file"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            1,201
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-circle"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            47
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-newspaper"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Test</h4>
-                        </div>
-                        <div class="card-body">
-                            42
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="card mt-5">
             <div class="card-body">
@@ -107,9 +45,9 @@
                     <form action="{{ route('student.search') }}" method="GET" class="d-flex w-100 me-3">
                         <input type="text" name="query" class="form-control me-2" placeholder="Search..."
                             value="{{ request()->input('query') }}">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <button class="btn btn-outline-secondary" type="submit">ค้นหา</button>
                     </form>
-                    <a href="{{ route('student.showCreate') }}" class="btn btn-primary ms-3">Create</a>
+                    <a href="{{ route('student.showCreate') }}" class="btn btn-primary ms-3">สร้าง</a>
                 </div>
 
                 <!-- User table -->
@@ -119,7 +57,7 @@
                             <th scope="col" class="col-3">รหัส</th>
                             <th scope="col" class="col-4">ชื่อ</th>
                             <th scope="col" class="col-3">สาขา</th>
-                            <th scope="col" class="col-2">Action</th>
+                            <th scope="col" class="col-2">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,7 +76,7 @@
                                     <!-- Edit button -->
                                     <form action="{{ route('student.edit', $student->userId) }}" method="get" style="display: inline;">
                                         <button class="btn btn-warning btn-sm" type="submit">
-                                            <i class="fas fa-pencil-alt"></i> Edit
+                                            <i class="fas fa-pencil-alt"></i> แก้ไข
                                         </button>
                                     </form>
                 
@@ -147,7 +85,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete(this)">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i> ลบ
                                         </button>
                                     </form>
                 
@@ -169,24 +107,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="pdfModalLabel{{ $student->userId }}">Select Date Range</h5>
+                <h5 class="modal-title" id="pdfModalLabel{{ $student->userId }}">เลือกช่วงวันที่</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.activity.history.pdf', $student->userId) }}" method="get" target="_blank">
                     <div class="mb-3">
-                        <label for="start_date_{{ $student->userId }}" class="form-label">Start Date</label>
+                        <label for="start_date_{{ $student->userId }}" class="form-label">วันที่เริ่ม</label>
                         <input type="date" class="form-control" id="start_date_{{ $student->userId }}" name="start_date"
                             required>
                     </div>
                     <div class="mb-3">
-                        <label for="end_date_{{ $student->userId }}" class="form-label">End Date</label>
+                        <label for="end_date_{{ $student->userId }}" class="form-label">วันที่สิ้นสุด</label>
                         <input type="date" class="form-control" id="end_date_{{ $student->userId }}" name="end_date"
                             required>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Generate PDF</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">ออก PDF</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
                     </div>
                 </form>
             </div>

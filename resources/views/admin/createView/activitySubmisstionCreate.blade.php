@@ -18,10 +18,10 @@
                         <input type="hidden" name="actId" value="{{ $activity->actId }}">
 
                         <div class="mb-3">
-                            <label for="userId" class="form-label">Select User</label>
+                            <label for="userId" class="form-label">เลือกนักศึกษา</label>
                             <!-- Make the select searchable using Select2 -->
                             <select name="userId" class="form-select" id="userId" required>
-                                <option value="">Select a user</option>
+                                <option value="">เลือกนักศึกษา</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->userId }}">{{ $user->firstName }} {{ $user->lastName }}</option>
                                 @endforeach
@@ -29,11 +29,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="actName" class="form-label">Activity</label>
+                            <label for="actName" class="form-label">ชื่อกิจกรรม</label>
                             <input type="text" class="form-control" id="actName" value="{{ $activity->actName }}" disabled>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create Submission</button>
+                        <button type="submit" class="btn btn-primary">เพิ่มคนลงทะเบียน</button>
                     </form>
                 </div>
             </div>

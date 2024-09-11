@@ -220,7 +220,7 @@
                                             <!-- แถบค้นหา -->
                                             <input type="text" class="form-control me-2" placeholder="ค้นหา..." aria-label="ค้นหา">
                                             <!-- ปุ่มรายงาน -->
-                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-warning btn-icon btn-report" title="รายงานกิจกรรม">
+                                            <a href="{{ route('activity.pdf', ['id' => $activity->actId]) }}" class="btn btn-warning btn-icon btn-report" target="_blank" title="รายงานกิจกรรม">
                                                 <i class="fas fa-file-alt"></i> 
                                             </a>
                                         </div>
@@ -273,12 +273,13 @@
                                 </div>
                             </div>
                     
-                            @php
+                        @php
                             $user = getAuthenticatedUser(); // Check the authenticated user with multiple guards
                         @endphp
                         
                         @if ($user)
-                            <!-- Show the form if the user is authenticated -->
+                        @if ($user->role == 'student')
+                            <!-- Show the form if the user is a student -->
                             <form method="post" action="{{ route('activity.submit') }}" class="mt-4">
                                 @csrf
                                 <input type="hidden" name="userId" value="{{ $user->userId }}">
@@ -291,11 +292,18 @@
                                 </button>
                             </form>
                         @else
-                            <!-- Display a message or alternative content for unauthenticated users -->
-                            <div class="alert alert-info mt-4">
-                                กรุณาเข้าสู่ระบบเพื่อทำการลงชื่อเข้าร่วมกิจกรรม
+                            <!-- Show message for non-student roles -->
+                            <div class="alert alert-danger mt-4">
+                                ลงชื่อเข้าร่วมได้เฉพาะนักศึกษาเท่านั้น
                             </div>
                         @endif
+                    @else
+                        <!-- Display a message or alternative content for unauthenticated users -->
+                        <div class="alert alert-danger mt-4">
+                            กรุณาเข้าสู่ระบบเพื่อทำการลงชื่อเข้าร่วมกิจกรรม
+                        </div>
+                    @endif
+                    
                         
                         </div>
                     </div>
@@ -306,7 +314,7 @@
                     <!-- Card 2: Summary of Application Data -->
                     <div class="card bg-white rounded-lg overflow-hidden">
                         <div class="card-body">
-                            <h5 class="text-xl font-bold text-gray-800 mb-4">Application Summary</h5>
+                            <h5 class="text-xl font-bold text-gray-800 mb-4">สรุปผลการสมัคร</h5>
                             <div class="space-y-2">
                                 @foreach ($activitiesSubmits->groupBy('student.area.areaName') as $areaName => $submissions)
                                     <div class="d-flex justify-content-between align-items-center text-muted">

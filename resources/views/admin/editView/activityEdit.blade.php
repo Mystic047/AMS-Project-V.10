@@ -27,17 +27,17 @@
                     @method('PUT')
                     
                     <div class="mb-3">
-                        <label for="actId" class="form-label">Activity ID</label>
+                        <label for="actId" class="form-label">รหัสกิจกรรม</label>
                         <input type="text" class="form-control" id="actId" name="actId" value="{{ $activities->actId }}" readonly>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actLocation" class="form-label">Activity Location</label>
+                        <label for="actLocation" class="form-label">สถานที่</label>
                         <input type="text" class="form-control" id="actLocation" name="actLocation" value="{{ $activities->actLocation }}" required>
                     </div>
                 
                     <div class="mb-3">
-                        <label for="actName" class="form-label">Activity Name</label>
+                        <label for="actName" class="form-label">ชื่อกิจกรรม</label>
                         <input type="text" class="form-control" id="actName" name="actName" value="{{ $activities->actName }}" required>
                     </div>
                     
@@ -47,37 +47,37 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actResBranch" class="form-label">Responsible Branch</label>
+                        <label for="actResBranch" class="form-label">สาขาที่่รับผิดชอบ</label>
                         <input type="text" class="form-control" id="actResBranch" name="actResBranch" value="{{ $activities->actResBranch }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actHour" class="form-label">Activity Hours Earned</label>
+                        <label for="actHour" class="form-label">จํานวนชั่วโมง</label>
                         <input type="text" class="form-control" id="actHour" name="actHour" value="{{ $activities->actHour }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actRegisLimit" class="form-label">Register Limit</label>
+                        <label for="actRegisLimit" class="form-label">จำนวนที่รับสมัคร</label>
                         <input type="text" class="form-control" id="actRegisLimit" name="actRegisLimit" value="{{ $activities->actRegisLimit }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="actDetails" class="form-label">Activity Detail</label>
+                        <label for="actDetails" class="form-label">รายละเอียดกิจกรรม</label>
                         <textarea class="form-control" id="actDetails" name="actDetails" required>{{ $activities->actDetails }}</textarea>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="assessmentLink" class="form-label">Assessment Link</label>
+                        <label for="assessmentLink" class="form-label">ลื้งแบบประเมิณ</label>
                         <input type="url" class="form-control" id="assessmentLink" name="assessmentLink" value="{{ $activities->assessmentLink }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="responsiblePerson" class="form-label">Responsible Person</label>
+                        <label for="responsiblePerson" class="form-label">ผู้รับผิดชอบ</label>
                         <input type="text" class="form-control" id="responsiblePerson" name="responsiblePerson" value="{{ $activities->responsiblePerson }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="picture" class="form-label">Picture</label>
+                        <label for="picture" class="form-label">รูปภาพ</label>
                         <input type="file" class="form-control" id="picture" name="picture">
                         @if ($activities->picture)
                             <img src="{{ asset('storage/' . $activities->picture) }}" alt="Activity Picture" class="img-thumbnail mt-2" width="150">
@@ -85,8 +85,8 @@
                     </div>
                     
                     <div class="col-12">
-                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">Update Activity</button>
-                        <a href="{{ route('activity.manage') }}" class="btn btn-danger mx-1 float-end">Cancel</a>
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success mx-1 float-end">บันทึก</button>
+                        <a href="{{ route('activity.manage') }}" class="btn btn-danger mx-1 float-end">ยกเลิก</a>
                     </div>
                 </form>
                 

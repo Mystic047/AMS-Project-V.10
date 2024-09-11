@@ -17,12 +17,12 @@ class activityController extends Controller
 {
     public function showManageView()
     {
-        $activities = Activity::all();
+        $activities = Activity::orderBy('created_at', 'desc')->get();
         return view('/admin/managementView/activityManage', compact('activities'));
     }
     public function showManageViewFront()
     {
-        $activities = Activity::all();
+        $activities = Activity::orderBy('created_at', 'desc')->get();
         
         foreach ($activities as $activity) {
             // Generate URLs for morning and afternoon sessions with actId and enrollment key
@@ -45,9 +45,12 @@ class activityController extends Controller
 
     public function showActivityAllViewFront()
     {
-        $activities = Activity::paginate(10);;
+        // Fetch activities ordered by creation date (latest first) and paginate
+        $activities = Activity::orderBy('created_at', 'desc')->paginate(10);
+        
         return view('activityAll', compact('activities'));
     }
+    
 
     public function showCreateView()
     {
@@ -84,9 +87,8 @@ class activityController extends Controller
     public function create(Request $request)
     {
         Log::info('Request received for creating activity.', $request->all());
-
+    
         $validatedData = $request->validate([
-            // 'actId' => 'required|string',
             'actName' => 'required|string',
             'actDate' => 'required|date',
             'actResBranch' => 'required|string',
@@ -98,38 +100,49 @@ class activityController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'responsiblePerson' => 'required|string',
         ]);
-
+    
         Log::info('Validation passed.', $validatedData);
-
+    
         $activity = new Activity();
         $activity->fill($validatedData);
-
+    
         // Generate random enrollment keys
         $activity->morningEnrollmentKey = $this->generateEnrollmentKey();
         $activity->afternoonEnrollmentKey = $this->generateEnrollmentKey();
-
+    
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/activity_pictures', $filename);
             $activity->picture = str_replace('public/', '', $path);
         }
-
+    
         $activity->save();
+    
+        $activityId = $activity->getKey(); // This retrieves the primary key (actId)
 
-        Log::info('Activity saved successfully.', $activity->toArray());
-        $message = "🎉 *New Activity Created!* 🎉\n\n"
+        Log::info('Activity saved successfully with ID: ' . $activityId); // Log the primary key
+    
+        // Generate the link to the activity with its ID
+        $activityLink = url("/activity-info/{$activity->actId}");
+    
+        $message = "BRU SC Activity noti: 🎉 *New Activity Created!* 🎉\n\n"
             . "🆔 รหัสกิจกรรม: " . $activity->actId . "\n"
             . "🏷️ ชื่อ กิจกรรม: " . $activity->actName . "\n"
             . "📅 วันที่: " . $activity->actDate . "\n"
             . "⏰ ชั่วโมงที่ได้: " . $activity->actHour . "\n"
-            . "📍  สถานที่:" . $activity->actLocation . "\n"
+            . "📍 สถานที่: " . $activity->actLocation . "\n"
             . "👥 อาจารย์ ที่รับผิดชอบ: " . $activity->responsiblePerson . "\n"
-            . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n";
+            . "🔗 รายละเอียด: " . $activity->actDetails . "\n\n"
+            . "🔗 คลิกเพื่อดูรายละเอียดกิจกรรม: [Activity Link]($activityLink)";
+    
+        // Send notification to Line
         $this->sendLineNotify($message);
+    
         return back()->with('success', 'กิจกรรมถูกเพิ่มเรียบร้อยแล้ว!');
-
     }
+    
+    
 
 
     private function sendLineNotify($message)

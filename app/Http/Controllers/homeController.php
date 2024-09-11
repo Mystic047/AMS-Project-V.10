@@ -11,19 +11,22 @@ class homeController extends Controller
     public function showHomeView()
     {
         $news = News::paginate(2, ['*'], 'newsPage');
-        $activities = Activity::paginate(5, ['*'], 'activitiesPage');
+        $activities = Activity::orderBy('created_at', 'desc')->paginate(5, ['*'], 'activitiesPage');
     
+        // Count the number of registered students for each activity
         $activities->getCollection()->transform(function ($activity) {
+            // Assuming ActivitySubmit is the model that holds student submissions
             $activity->registration_status = $activity->isRegistrationOpen() ? 'open' : 'closed';
+            $activity->submitted_students = $activity->submissions()->count(); // Count the number of submissions
             return $activity;
         });
     
-
         $news->appends(['activitiesPage' => request('activitiesPage')]);
         $activities->appends(['newsPage' => request('newsPage')]);
     
         return view('welcome', compact('activities', 'news'));
     }
+    
     
 
     public function showInfoView($id)

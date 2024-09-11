@@ -39,7 +39,7 @@
                         <input type="file" class="form-control" id="imagePath" name="imagePath">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary float-end">Create</button>
+                        <button type="submit" class="btn btn-primary float-end">สร้าง</button>
                     </div>
                 </form>
             </div>
