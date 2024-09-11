@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 5 Cards Layout</title>
+    
     <!-- Link to Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -180,11 +180,12 @@
                                             <div class="col-12 col-md-3">สถานะ</div>
                                             <div class="col-12 col-md-9">
                                                 <i class="fa-solid fa-play"></i>
-                                                <span
-                                                    class="badge {{ $activity->actRegisLimit > 0 ? 'badge-success' : 'badge-danger' }}">
-                                                    {{ $activity->actRegisLimit > 0 ? 'เปิดรับสมัคร' : 'ปิดรับสมัคร' }}
+                                                <span class="badge {{ $activity->registration_status == 'open' ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $activity->registration_status == 'open' ? 'เปิดรับสมัคร' : 'ปิดรับสมัคร' }}
                                                 </span>
                                             </div>
+                                            
+                                            
                                         </div>
                                         <h4 class="mb-4 mt-4"><i class="fas fa-calendar-alt"></i> กำหนดการจัดกิจกรรม</h4>
                                         <div class="row">
@@ -271,19 +272,34 @@
                                     <p class="text-muted">สมัครแล้ว</p>
                                 </div>
                             </div>
+                    
                             @php
-                                $user = getAuthenticatedUser();
-                            @endphp
+                            $user = getAuthenticatedUser(); // Check the authenticated user with multiple guards
+                        @endphp
+                        
+                        @if ($user)
+                            <!-- Show the form if the user is authenticated -->
                             <form method="post" action="{{ route('activity.submit') }}" class="mt-4">
                                 @csrf
                                 <input type="hidden" name="userId" value="{{ $user->userId }}">
                                 <input type="hidden" name="actId" value="{{ $activity->actId }}">
-                                <button type="button" onclick="confirmSubmit(this)" class="btn btn-warning font-weight-bold">
-                                    ลงชื่อเข้าร่วมกิจกรรม
+                                <button type="button" 
+                                        onclick="confirmSubmit(this)" 
+                                        class="btn btn-warning font-weight-bold" 
+                                        {{ $activity->registration_status != 'open' ? 'disabled' : '' }}>
+                                    {{ $activity->registration_status == 'open' ? 'ลงชื่อเข้าร่วมกิจกรรม' : 'กิจกรรมปิดรับสมัคร' }}
                                 </button>
                             </form>
+                        @else
+                            <!-- Display a message or alternative content for unauthenticated users -->
+                            <div class="alert alert-info mt-4">
+                                กรุณาเข้าสู่ระบบเพื่อทำการลงชื่อเข้าร่วมกิจกรรม
+                            </div>
+                        @endif
+                        
                         </div>
                     </div>
+                    
 
                     <br>
 

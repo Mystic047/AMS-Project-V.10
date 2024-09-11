@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -17,34 +16,66 @@
             font-family: 'Noto Sans Thai', sans-serif;
         }
 
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .news-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0%;
+        }
+
+        .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Number of lines to show */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+
         .btn-icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 20px;
             transition: background-color 0.3s, color 0.3s;
-            line-height: 0;
         }
 
-        /* .btn-save {
-            background-color: #28a745;
-            color: white;
+        .btn-icon i {
+            font-size: 20px;
         }
-
-        .btn-cancel {
-            background-color: #dc3545;
-            color: white;
-        } */
 
         .btn-icon:hover {
-            opacity: 0.8;
+            background-color: #0d6efd;
+            color: white;
         }
 
-        .float-end {
-            float: right;
+        .btn-report:hover {
+            background-color: #198754;
+            color: white;
+        }
+
+        .btn-secondary i {
+            font-size: 18px;
+        }
+
+        .btn-report i {
+            font-size: 18px;
+        }
+
+        .btn-icon:hover {
+            background-color: #faf9f8;
+            color: #181818;
         }
     </style>
 </head>
@@ -71,10 +102,10 @@
                         <input type="file" class="form-control" id="imagePath" name="imagePath">
                     </div>
                     <div class="col-12">
-                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-warning btn-icon btn-save mx-1 float-end" title="Save">
+                        <button onclick="confirmUpdate(this)" type="button" class="btn btn-success btn-icon btn-save mx-1 float-end" title="Save">
                             <i class="fa-solid fa-save"></i>
                         </button>
-                        <a href="{{ route('news.manageFront') }}" class="btn btn-icon  btn-warning btn-cancel mx-1 float-end" title="Cancel">
+                        <a href="{{ route('news.manageFront') }}" class="btn btn-icon  btn-danger btn-cancel mx-1 float-end" title="Cancel">
                             <i class="fa-solid fa-times"></i>
                         </a>
                     </div>
