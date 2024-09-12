@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity Submits</title>
+    <link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
     <style>
         @font-face {
             font-family: 'THSarabunNew';

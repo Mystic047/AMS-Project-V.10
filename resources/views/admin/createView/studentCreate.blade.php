@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title', 'เพิ่มข้อมูลนักศึกษา')
-
+<link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
 @section('content')
 <section class="section">
     <div class="section-header">

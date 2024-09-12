@@ -5,6 +5,7 @@
     <section class="section">
         <div class="section-header">
             <h1>Submissions for Activity</h1>
+            <link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
         </div>
     </section>
     <div class="container">

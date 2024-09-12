@@ -9,6 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Custom CSS for background image -->
     <link rel="stylesheet"  href="{{ asset('css/login.css') }}">>
+    <link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
 </head>
 
 <body>

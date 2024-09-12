@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
 <style>
     .ajs-header {
         font-weight: bold !important;
@@ -177,7 +178,7 @@
         }
 </script>
 @yield('content')
-
+<link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
 <!-- Footer -->
 {{-- <footer class="footer mt-auto py-3 bg-dark text-white">
     <div class="container text-center">
