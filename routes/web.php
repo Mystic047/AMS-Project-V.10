@@ -30,18 +30,22 @@ require base_path('routes/genPDF.php');
 |
  */
 
- Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
- Route::get('/dashboard/get-activities', [DashboardController::class, 'getActivities']);
- Route::get('/dashboard/get-activity-submissions/{actId}', [DashboardController::class, 'getActivitySubmissions']);
- 
+ Route::middleware(['role:admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/get-activities', [DashboardController::class, 'getActivities']);
+    Route::get('/dashboard/get-activity-submissions/{actId}', [DashboardController::class, 'getActivitySubmissions']);
+});
+
 
  Route::get('/testRelation', [testRelationController::class , 'indexAction'])->name('testRelation');
 
-Route::middleware(['role:student'])->group(function () {
+ Route::middleware(['role:student,professor'])->group(function () {
     Route::get('/TESTM', function () {
         return view('TESTM');
     });
 });
+
+
 
 Route::get('/', [homeController::class , 'showHomeView'])->name('welcome.home');
 Route::get('/activity-info/{id}', [homeController::class , 'showInfoView'])->name('activity.info');

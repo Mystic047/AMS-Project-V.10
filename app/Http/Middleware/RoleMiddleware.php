@@ -21,13 +21,14 @@ class RoleMiddleware
 
         // If no user is authenticated, redirect to login
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Please login to access this resource.');
+            return redirect()->route('welcome.home')->with('error', 'Please login to access this resource.');
         }
 
         // Check if the user's role matches any of the allowed roles
         if (!in_array($user->role, $roles)) {
             Log::warning('Unauthorized access attempt by user: ' . $user->userId);
-            return response()->view('errors.403', [], 403); // Return a 403 Forbidden view
+            abort(403);
+            // Return a 403 Forbidden view
         }
 
         // Allow the request to proceed

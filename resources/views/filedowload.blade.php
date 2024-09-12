@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Link to Bootstrap CSS -->
+    <link rel="icon" href="{{ asset('storage/pictures/clicirclelogo.png') }}" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -93,7 +94,7 @@
                                             @php
                                                 $user = getAuthenticatedUser();
                                             @endphp
-                                            @if ($user && in_array($user->role, ['admin', 'coordinator', 'professor']))
+                                            @if ($user && in_array($user->role, ['admin']))
                                                 <th width="5%" class="text-center text-center-col">จัดการ</th>
                                             @endif
                                         </tr>
@@ -129,7 +130,7 @@
                                                 </td>
 
                                                 <!-- Show delete option only for authorized users -->
-                                                @if ($user && in_array($user->role, ['admin', 'coordinator', 'professor']))
+                                                @if ($user && in_array($user->role, ['admin']))
                                                     <td class="text-center">
                                                         <form action="{{ route('file.destroy', $file->fileId) }}"
                                                             method="POST" style="display:inline;">

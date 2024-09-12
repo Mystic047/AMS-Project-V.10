@@ -41,7 +41,17 @@ class Activity extends Model
     {
         return $this->hasMany(ActivitySubmit::class, 'actId', 'actId');
     }
-    
+
+    // Ensure that when an activity is deleted, its associated submissions are also deleted
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($activity) {
+            $activity->activitySubmits()->delete();
+        });
+    }
+
     // Check if registration is open based on date and isOpen field
     public function isRegistrationOpen()
     {
@@ -58,9 +68,9 @@ class Activity extends Model
     }
 
     public function submissions()
-{
-    return $this->hasMany(ActivitySubmit::class, 'actId', 'actId');
+    {
+        return $this->hasMany(ActivitySubmit::class, 'actId', 'actId');
+    }
 }
 
-}
 

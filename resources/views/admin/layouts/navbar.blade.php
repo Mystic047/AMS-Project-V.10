@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
@@ -20,21 +21,18 @@
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="{{route('dashboard.profile')}}" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> Profile
-                </a>
-                <a href="features-activities.html" class="dropdown-item has-icon">
-                    <i class="fas fa-bolt"></i> Activities
-                </a>
-                <a href="features-settings.html" class="dropdown-item has-icon">
-                    <i class="fas fa-cog"></i> Settings
+                <a href="{{ route('dashboard.profile') }}" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> โปรไฟล์
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                <form id="logout-form" action="{{ route('login.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i> ล็อกเอ้าท์
                 </a>
             </div>
+            
         </li>
     </ul>
 </nav>
